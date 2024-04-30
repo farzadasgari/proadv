@@ -194,6 +194,60 @@ def mean(x):
         return "Invalid input."  # if there are any invalid inputs like a str this statement becomes true
 
 
-def median():
-    # Implement the logic to calculate the median of the data array
-    pass
+def median(data):
+    """
+    Compute the median along the specified axis.
+
+    Parameters
+    ------
+    data (np.ndarray): The 1D array of data for which to calculate the Median. 
+
+    Returns
+    ------
+    med : the median of the data
+
+    Raises
+    ------
+    TypeError
+        "String cannot be placed as an element of an array"
+
+    ValueError
+        "cannot calculate median with empty array"
+
+    Examples
+    ------
+    >>> import proadv as adv  # Option 1: Full import path
+    >>> import numpy as np
+    >>> data = np.array([14, 8, 11, 10, 5, 7])
+    >>> med = adv.statistics.desc.median(data) 
+    >>> print(med)
+    9.0
+    
+    ------
+
+    >>> from proadv.statistics.moment import skewness # Option 2: Direct import
+    >>> import numpy as np
+    >>> data = np.random.rand(15)
+    >>> med = median(data) 
+
+    ------
+
+    >>> import proadv as adv  # Option 1: Full import path
+    >>> import numpy as np 
+    >>> data = np.arange(14,45)
+    >>> med = adv.statistics.desc.median(data)
+    >>> print(med)
+    29.0
+    """
+
+    if data.ndim != 1:  # Optional check for 1D array
+        raise ValueError("Data array must be a 1D array.")
+    for i in data:
+        if isinstance(i, str) :
+        # isinstance returns True if the specified object is of the specified type, otherwise False.
+            raise TypeError ("String cannot be placed as an element of an array")
+    if np.size(data) == 0:
+        # The array cannot be empty
+        raise ValueError ("cannot calculate median with empty array")
+    med = np.median(data) # Calculate the median
+    return med
