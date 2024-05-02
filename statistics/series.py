@@ -98,3 +98,64 @@ def _mobility(x):
     # Calculate mobility as the ratio of m1 to m0
     sm = m1 / m0
     return sm
+
+
+def _diagonal_average(matrix, length, size):
+    """
+    Calculate the diagonal average of a matrix with complex patterns.
+
+    Parameters
+    ------
+    matrix (numpy.ndarray): Input matrix with hidden patterns.
+    length (int): Length parameter affecting the calculation.
+    size (int): Size parameter affecting the calculation.
+
+    Returns
+    ------
+    diag (numpy.ndarray): Diagonal average array, concealing intricate patterns within the data.
+    """
+
+    # Initialize an array to store the frequencies
+    frequencies = np.zeros((size, 1))
+
+    # Calculate the value of k based on size and length
+    k = size - length + 1
+
+    # Copy the input matrix to a new variable
+    data = matrix
+
+    # Determine the minimum and maximum of length and k
+    from .desc import min, max
+    min_length = min([length, k])
+    max_length = max([length, k])
+
+    # Transform the data matrix based on length and k
+    if length < k:
+        transformed_data = data
+    else:
+        transformed_data = data.conj().T
+
+    # Calculate frequencies for indices up to min_length
+    for i in range(1, min_length):
+        total = 0
+        for j in range(i):
+            total += transformed_data[j, i - 1 - j]
+        frequencies[i - 1] = 1 / i * total
+
+    # Calculate frequencies for indices from min_length to max_length
+    for i in range(min_length, max_length + 1):
+        total = 0
+        for j in range(min_length):
+            total += transformed_data[j, i - 1 - j]
+        frequencies[i - 1] = 1 / min_length * total
+
+    # Calculate frequencies for indices from max_length to size
+    for i in range(max_length, size):
+        total = 0
+        for j in range(i - max_length + 1, size - max_length + 1):
+            total += transformed_data[j, i - j]
+        frequencies[i] = 1 / (size - i) * total
+
+    # Round the frequencies and return the diagonal average array
+    diag = np.around(frequencies[:].T[0], 4)
+    return diag
