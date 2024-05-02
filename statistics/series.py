@@ -196,21 +196,21 @@ def ssa(x, fs, f):
         trajectory_matrix[:, i] = x[i:i + window_length]
 
     # Compute the covariance matrix
-    c = trajectory_matrix @ trajectory_matrix.conj().T
+    covariance = trajectory_matrix @ trajectory_matrix.conj().T
 
     # Perform eigenvalue decomposition
-    _, eigen = np.linalg.eigh(c)
+    _, eigen = np.linalg.eigh(covariance)
 
     # Compute the mobility measure for each eigenvector
-    sm = np.zeros(window_length)
+    mobility = np.zeros(window_length)
     for i in range(window_length):
-        sm[i] = _mobility(eigen[:, i])
+        mobility[i] = _mobility(eigen[:, i])
 
     # Determine threshold for selecting eigenvectors
     dummy = np.sin(2 * np.pi * np.arange(0, window_length) * f / fs)
     thresh = _mobility(dummy)
 
     # Select relevant eigenvectors based on threshold
-    arg = np.nonzero(sm <= thresh)
+    arg = np.nonzero(mobility <= thresh)
     xf = _diagonal_average(eigen[:, arg[0]] @ eigen[:, arg[0]].conj().T @ trajectory_matrix, window_length, array_size)
     return xf
