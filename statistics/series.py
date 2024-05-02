@@ -162,3 +162,55 @@ def _diagonal_average(matrix, length, size):
     # Round the frequencies and return the diagonal average array
     diag = np.around(frequencies[:].T[0], 4)
     return diag
+
+
+def ssa(x, fs, f):
+    """
+    Perform Singular Spectrum Analysis (SSA) on a given signal.
+
+    Parameters
+    ------
+    x (numpy.ndarray): Input signal.
+    fs (float/int): Sampling frequency of the signal.
+    f (float/int): maximum frequency of the signal of interest.
+
+    Returns
+    ------
+    xf (numpy.ndarray): Filtered signal after SSA.
+
+    References
+    ------
+    Sharma, Anurag, Ajay Kumar Maddirala, and Bimlesh Kumar.
+    "Modified singular spectrum analysis for despiking acoustic Doppler velocimeter (ADV) data."
+    Measurement 117 (2018): 339-346.
+    """
+
+    # Compute the window length L that should be greater than fs/f
+    window_length = int(np.ceil(fs / f))
+    array_size = x.size
+    k = array_size - window_length + 1
+
+    # Form the trajectory matrix X
+    trajectory_matrix = np.zeros((window_length, k))
+    for i in range(k):
+        trajectory_matrix[:, i] = x[i:i + window_length]
+
+    # Compute the covariance matrix
+    c = trajectory_matrix @ trajectory_matrix.conj().T
+
+    # Perform eigenvalue decomposition
+    _, eigen = np.linalg.eigh(c)
+
+    # Compute the mobility measure for each eigenvector
+    sm = np.zeros(window_length)
+    for i in range(window_length):
+        sm[i] = _mobility(eigen[:, i])
+
+    # Determine threshold for selecting eigenvectors
+    dummy = np.sin(2 * np.pi * np.arange(0, window_length) * f / fs)
+    thresh = _mobility(dummy)
+
+    # Select relevant eigenvectors based on threshold
+    arg = np.nonzero(sm <= thresh)
+    xf = _diagonal_average(eigen[:, arg[0]] @ eigen[:, arg[0]].conj().T @ trajectory_matrix, window_length, array_size)
+    return xf
