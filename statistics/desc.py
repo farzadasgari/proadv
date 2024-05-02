@@ -208,8 +208,8 @@ def median(data):
 
     Raises
     ------
-    TypeError: If the array element is a string
-    ValueError: If the array is empty 
+    TypeError: If the  element of array is a string.
+    ValueError: If the array is empty. 
 
     Examples
     ------
