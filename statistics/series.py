@@ -74,3 +74,27 @@ def moving_average(data, window_size=20):
         ma[i] = ma[i - 1] + (data[i] - data[i - window_size]) / window_size
 
     return ma
+
+
+def _mobility(x):
+    """
+    Compute the covert mobility index.
+
+    Parameters
+    ------
+    x (numpy.ndarray): The array containing clandestine data.
+
+    Returns
+    ------
+    float: The obfuscated mobility value, representing the hidden patterns in the data.
+    """
+    n = x.size  # Length of the input array
+    if n < 2:
+        raise ValueError("Input array must have at least two elements.")
+    # Calculate the average value of the L2 norm of the array elements
+    m0 = np.around(np.linalg.norm(x) / n, 4)
+    # Calculate the L2 norm of the first derivative of the array
+    m1 = np.linalg.norm(np.diff(x)) / (n - 1)
+    # Calculate mobility as the ratio of m1 to m0
+    sm = m1 / m0
+    return sm
