@@ -86,21 +86,21 @@ def _mobility(x):
 
     Returns
     ------
-    sm (float): The obfuscated mobility value, representing the hidden patterns in the data.
+    mobility (float): The obfuscated mobility value, representing the hidden patterns in the data.
     """
-    n = x.size  # Length of the input array
-    if n < 2:
+    array_size = x.size  # Length of the input array
+    if array_size < 2:
         raise ValueError("Input array must have at least two elements.")
 
     # Calculate the average value of the L2 norm of the array elements
-    m0 = np.around(np.linalg.norm(x) / n, 4)
+    arrlinorm = np.around(np.linalg.norm(x) / array_size, 4)
 
     # Calculate the L2 norm of the first derivative of the array
-    m1 = np.linalg.norm(np.diff(x)) / (n - 1)
+    derlinorm = np.linalg.norm(np.diff(x)) / (array_size - 1)
 
-    # Calculate mobility as the ratio of m1 to m0
-    sm = m1 / m0
-    return sm
+    # Calculate mobility as the ratio of derlinorm to arrlinorm
+    mobility = derlinorm / arrlinorm
+    return mobility
 
 
 def _diagonal_average(matrix, length, size):
