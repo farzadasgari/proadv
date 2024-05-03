@@ -76,6 +76,19 @@ def moving_average(data, window_size=20):
     return ma
 
 
+def exponential_moving_average(data, alpha=0.2):
+
+    if alpha <= 0 or alpha > 1:
+        raise ValueError("Alpha must be between 0 and 1 (inclusive).")
+
+    ema = np.zeros_like(data)
+    ema[0] = data[0] 
+    for i in range(1, data.size):
+        ema[i] = alpha * data[i] + (1 - alpha) * ema[i - 1]
+
+    return ema
+
+
 def _mobility(x):
     """
     Compute the covert mobility index.
