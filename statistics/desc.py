@@ -213,7 +213,7 @@ def median(data):
 
     Examples
     ------
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([14, 8, 11, 10, 5, 7])
     >>> med = adv.statistics.desc.median(data) 
@@ -222,14 +222,14 @@ def median(data):
     
     ------
 
-    >>> from proadv.statistics.desc import median # Option 2: Direct import
+    >>> from proadv.statistics.desc import median
     >>> import numpy as np
     >>> data = np.random.rand(15)
     >>> med = median(data) 
 
     ------
 
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np 
     >>> data = np.arange(14,45)
     >>> med = adv.statistics.desc.median(data)
@@ -259,13 +259,13 @@ def mode(data):
 
     Returns:
     ------
-    values: The mode of the data
-    counts: The number of repetitions of the mode
+    values[max_count] (int): The mode of the data
+    counts[max_count] (int): The number of repetitions of the mode
 
     Exampls:
     ------
     
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([3, 0, 3, 7, 2])
     >>> values, counts = adv.statistics.desc.mode(data) 
@@ -276,7 +276,7 @@ def mode(data):
 
     ------
 
-    >>> from proadv.statistics.desc import mode # Option 2: Direct import
+    >>> from proadv.statistics.desc import mode
     >>> import numpy as np
     >>> data = np.array([4, 6, 12, 4, 15, 4, 6, 16])
     >>> values, counts = mode(data)
