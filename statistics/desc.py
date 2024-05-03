@@ -213,7 +213,7 @@ def median(data):
 
     Examples
     ------
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([14, 8, 11, 10, 5, 7])
     >>> med = adv.statistics.desc.median(data) 
@@ -222,14 +222,14 @@ def median(data):
     
     ------
 
-    >>> from proadv.statistics.moment import skewness # Option 2: Direct import
+    >>> from proadv.statistics.desc import median
     >>> import numpy as np
     >>> data = np.random.rand(15)
     >>> med = median(data) 
 
     ------
 
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np 
     >>> data = np.arange(14,45)
     >>> med = adv.statistics.desc.median(data)
@@ -248,3 +248,44 @@ def median(data):
         raise ValueError ("cannot calculate median with empty array")
     med = np.median(data) # Calculate the median
     return med
+
+def mode(data):
+    """
+    Compute an array of the modal (most common) value in the passed array.
+
+    Parameters:
+    ------
+    data (np.ndarray): The 1D array of data for which to calculate the Mode.
+
+    Returns:
+    ------
+    values[max_count] (int): The mode of the data
+    counts[max_count] (int): The number of repetitions of the mode
+
+    Exampls:
+    ------
+    
+    >>> import proadv as adv
+    >>> import numpy as np
+    >>> data = np.array([3, 0, 3, 7, 2])
+    >>> values, counts = adv.statistics.desc.mode(data) 
+    >>> print(f"mode:",values)
+    >>> print(f"count:",counts)
+    mode: 3
+    count: 2
+
+    ------
+
+    >>> from proadv.statistics.desc import mode
+    >>> import numpy as np
+    >>> data = np.array([4, 6, 12, 4, 15, 4, 6, 16])
+    >>> values, counts = mode(data)
+    >>> print(f"mode:",values)
+    >>> print(f"count:",counts)
+    mode: 4
+    count: 3
+    """
+    values, counts = np.unique(data, return_counts=True) #Unique values ​​and replicate counts are calculated
+    max_count = np.argmax(counts) #Calculate the indices of the maximum values ​​in the count array
+    return values[max_count], counts[max_count]
+
