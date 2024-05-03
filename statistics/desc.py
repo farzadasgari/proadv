@@ -209,7 +209,7 @@ def median(data):
 
     Examples
     ------
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([14, 8, 11, 10, 5, 7])
     >>> med = adv.statistics.desc.median(data) 
@@ -218,14 +218,14 @@ def median(data):
     
     ------
 
-    >>> from proadv.statistics.desc import median # Option 2: Direct import
+    >>> from proadv.statistics.desc import median
     >>> import numpy as np
     >>> data = np.random.rand(15)
     >>> med = median(data) 
 
     ------
 
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np 
     >>> data = np.arange(14,45)
     >>> med = adv.statistics.desc.median(data)
