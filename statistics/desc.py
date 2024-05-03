@@ -32,7 +32,7 @@ def min(x):
         >>> import proadv as adv  # Option 1: Full import path
         >>> import numpy as np
         >>> adv.statistics.desc.min([1, 2, 3, 4, 5])
-        out: 1
+        1
 
         >>> from proadv.statistics.desc import min # Option 2: Direct import
         >>> import numpy as np
@@ -88,7 +88,7 @@ def max(x):
      >>> import proadv as adv  # Option 1: Full import path
      >>> import numpy as np
      >>> adv.statistics.desc.max([1, 2, 3, 4, 5])
-     out: 5
+     5
 
      >>> from proadv.statistics.desc import max # Option 2: Direct import
      >>> import numpy as np
@@ -145,18 +145,18 @@ def mean(x):
         >>> import proadv as adv  # Option 1: Full import path
         >>> import numpy as np
         >>> adv.statistics.desc.mean(5)
-        out: 5
+        5
 
         >>> from proadv.statistics.desc import mean # Option 2: Direct import
         >>> import numpy as np
         >>> mean([1, 2, 3, 4, 5])
-        out: 3.0
+        3.0
 
         >>> mean([1, '2', 3.5, 'not a number'])
-        out: 2.1666666666666665
+        2.1666666666666665
 
         >>> mean([])
-        out: 'Invalid input.'
+        'Invalid input.'
     """
 
     if isinstance(x, (int, float)):
