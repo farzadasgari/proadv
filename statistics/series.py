@@ -7,13 +7,13 @@ def moving_average(data, window_size=20):
 
     Parameters
     ------
-    data (np.ndarray): The 1D array of data for which to calculate the moving average.
+    data (numpy.ndarray): The 1D array of data for which to calculate the moving average.
     window_size (int, optional): The size of the window for the moving average.
         Defaults to 20. Must be less than or equal to the size of the data array.
 
     Returns
     ------
-    np.ndarray: The moving average of the data, with the same shape as the input array.
+    ma (numpy.ndarray): The moving average of the data, with the same shape as the input array.
 
     Raises
     ------
@@ -22,7 +22,7 @@ def moving_average(data, window_size=20):
     Notes
     ------
     This function implements a cumulative moving average calculation. It's more
-    efficient than calculating a simple moving average for each element.
+        efficient than calculating a simple moving average for each element.
 
     Examples
     ------
@@ -70,20 +70,67 @@ def moving_average(data, window_size=20):
         
         Update the moving average based on the previous average, new data point,
         and the difference between the current and window_sizeth previous data point
-       """
+        """
         ma[i] = ma[i - 1] + (data[i] - data[i - window_size]) / window_size
 
     return ma
 
 
 def exponential_moving_average(data, alpha=0.2):
+    """
+    Calculates the exponential moving average of a given data series.
 
+    Parameters
+    ------
+    data (numpy.array): The 1D array of data for which to calculate the exponential moving average.
+    alpha (float, optional): Smoothing factor between 0 and 1.
+        Higher alpha discounts older observations faster. Default is 0.2.
+
+    Returns
+    ------
+    ema (numpy.ndarray): Exponential moving average of the input data.
+
+    Raises
+    ------
+    ValueError: If alpha is not between 0 and 1 (inclusive).
+
+    Notes
+    ------
+    The exponential moving average (EMA) is a type of moving average that places more weight
+        on recent observations while still considering older data. It is particularly useful for
+        smoothing noisy data and identifying trends.
+
+    Examples
+    ------
+    >>> import numpy as np
+    >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    >>> ema = exponential_moving_average(data, alpha=0.5)
+    >>> print(ema)
+    [1.         1.5        2.25       3.125      4.0625     5.03125
+     6.015625   7.0078125  8.00390625 9.00195312]
+    """
+
+    # Check if alpha is within the valid range
     if alpha <= 0 or alpha > 1:
         raise ValueError("Alpha must be between 0 and 1 (inclusive).")
 
+    # Initialize the exponential moving average array with zeros
     ema = np.zeros_like(data)
+    
+    # Set the first value of ema to be equal to the first value of the data
     ema[0] = data[0] 
+    
+    # Calculate exponential moving average for subsequent data points
     for i in range(1, data.size):
+        """
+        This loop calculates the exponential moving average for elements from index 1 onwards.
+        It utilizes the previously calculated exponential moving average (ema[i-1]) and the new data point
+        (data[i]) to efficiently update the exponential moving average using the formula:
+        ema[i] = alpha * data[i] + (1 - alpha) * ema[i - 1]
+        
+        Update the exponential moving average based on the previous average, new data point,
+        and the smoothing factor alpha.
+        """
         ema[i] = alpha * data[i] + (1 - alpha) * ema[i - 1]
 
     return ema
