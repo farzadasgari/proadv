@@ -25,15 +25,14 @@ def last_valid_data(velocities, spike_indices):
     return modified_data
 
 
-def linear_interpolation(velocities, spike_indices):
+def linear_interpolation(velocities, spike_indices, decimals=4):
     from proadv.statistics.desc import mean
     modified_data = np.copy(velocities)
     modified_data[spike_indices] = np.nan
     for idx in spike_indices:
         try:
-            modified_data[idx] = np.around(
-                mean(modified_data[idx - 1] + modified_data[idx:][~np.isnan(modified_data[idx:])][0]),
-                decimals=4)
+            modified_data[idx] = mean(modified_data[idx - 1] + modified_data[idx:][~np.isnan(modified_data[idx:])][0]),
         except IndexError:
             modified_data[idx] = mean(velocities)
-    return modified_data
+    modified_data[np.isnan(modified_data)] = mean(velocities)
+    return np.around(modified_data, decimals=decimals)
