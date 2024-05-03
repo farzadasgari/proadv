@@ -62,4 +62,5 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
     # Replace spikes without valid data in one side.
     # Like first and last data points.
     modified_data[np.isnan(modified_data)] = mean(velocities)
+
     return np.around(modified_data, decimals=decimals)
