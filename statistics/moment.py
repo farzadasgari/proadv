@@ -93,13 +93,13 @@ def kurtosis(x):
     >>> import numpy as np
     >>> data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
     >>> adv.statistics.moment.kurtosis(data)
-    out: 2.2
+    2.2
     ------
     >>> from proadv.statistics.moment import kurtosis # Option 2: Direct import
     >>> import numpy as np
     >>> data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
     >>> kurtosis(data)
-    out: 2.2
+    2.2
     """
 
     # Convert data to a numpy array
