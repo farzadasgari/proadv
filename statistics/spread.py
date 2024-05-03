@@ -20,7 +20,7 @@ def variance(data):
 
     Examples
     ------
-    >>> import proadv as dav # Option 1: Full import path
+    >>> import proadv as adv # Option 1: Full import path
     >>> import numpy as np
     >>> data = np.array([14, 8, 11, 10])
     >>> var = adv.statistics.spread.variance(data)
@@ -36,7 +36,7 @@ def variance(data):
 
     ------
 
-    >>> import proadv as dav # Option 1: Full import path
+    >>> import proadv as adv # Option 1: Full import path
     >>> import numpy as np
     >>> data = np.arange(15,30)
     >>> var = adv.statistics.spread.variance(data)
@@ -45,17 +45,16 @@ def variance(data):
     """
 
     if data.ndim != 1:  # Optional check for 1D array
-        raise ValueError("Data array must be a 1D array.")    
+        raise ValueError("Data array must be a 1D array.")
     for i in data:
         if isinstance(i, str):
-        # isinstance returns True if the specified object is of the specified type, otherwise False.
-            raise TypeError ("String cannot be placed as an element of an array")
+            # isinstance returns True if the specified object is of the specified type, otherwise False.
+            raise TypeError("String cannot be placed as an element of an array")
     if np.size(data) == 0:
         # The array cannot be empty
-        raise ValueError ("cannot calculate variance with empty array")
+        raise ValueError("cannot calculate variance with empty array")
     var = np.var(data)
     return var
-
 
 
 def std(data):
@@ -105,13 +104,13 @@ def std(data):
 
     if data.ndim != 1:  # Optional check for 1D array
         raise ValueError("Data array must be a 1D array.")
-    
+
     for element in data:
-        if isinstance(element , str):
-        # isinstance returns True if the specified object is of the specified type, otherwise False. 
-            raise TypeError ("String cannot be placed as an element of an array")
+        if isinstance(element, str):
+            # isinstance returns True if the specified object is of the specified type, otherwise False.
+            raise TypeError("String cannot be placed as an element of an array")
     if np.size(data) == 0:
         # The array cannot be empty
-        raise ValueError ("cannot calculate standard deviation with empty array")    
-    stdev= np.std(data)
+        raise ValueError("cannot calculate standard deviation with empty array")
+    stdev = np.std(data)
     return stdev
