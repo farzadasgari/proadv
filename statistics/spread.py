@@ -4,27 +4,19 @@ import numpy as np
 def variance(data):
     """
     Compute the variance along the specified axis.
-
-    The variance of the array elements, a measure of the spread of a distribution. 
-    The variance is computed for the flattened array by default, otherwise over the specified axis.
-
+    
     Parameters
     ------
     data (np.ndarray): The 1D array of data for which to calculate the variance. 
        
-
     Returns
     ------
-    var : The Variance of the data
+    var: The Variance of the data
     
     Raises
     ------
-    TypeError:
-        "String cannot be placed as an element of an array."
-
-    ValueError:
-        "Data array must be a 1D array." 
-
+    TypeError: If the  element of array is a string.
+    ValueError: If the array is empty. 
 
     Examples
     ------
@@ -55,7 +47,7 @@ def variance(data):
     if data.ndim != 1:  # Optional check for 1D array
         raise ValueError("Data array must be a 1D array.")    
     for i in data:
-        if isinstance(i, str) :
+        if isinstance(i, str):
         # isinstance returns True if the specified object is of the specified type, otherwise False.
             raise TypeError ("String cannot be placed as an element of an array")
     if np.size(data) == 0:
@@ -70,10 +62,6 @@ def std(data):
     """
     Compute the standard deviation along the specified axis.
 
-    Standard deviation, a measure of the spread of a distribution, 
-    of the array elements. The standard deviation is computed for the flattened array 
-    by default, otherwise over the specified axis.
-
     Parameters
     ------
     data (np.ndarray): The 1D array of data for which to calculate the Standard deviation. 
@@ -82,16 +70,12 @@ def std(data):
     ------
     stdev : The standard deviation of data. 
     If out is None, return a new array containing the standard deviation, 
-    otherwise return a reference to the output array. 
+        otherwise return a reference to the output array. 
 
     Raises
     ------
-    TypeError
-        "String cannot be placed as an element of an array."
-
-    ValueError:
-        "Data array must be a 1D array." 
-
+    TypeError: If the  element of array is a string.
+    ValueError: If the array is empty. 
 
     Examples
     ------
@@ -118,7 +102,7 @@ def std(data):
     >>> print(stdev)
     2.0
     """
-    
+
     if data.ndim != 1:  # Optional check for 1D array
         raise ValueError("Data array must be a 1D array.")
     

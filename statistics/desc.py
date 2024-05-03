@@ -204,15 +204,12 @@ def median(data):
 
     Returns
     ------
-    med : the median of the data
+    med: the median of the data
 
     Raises
     ------
-    TypeError
-        "String cannot be placed as an element of an array"
-
-    ValueError
-        "cannot calculate median with empty array"
+    TypeError: If the  element of array is a string.
+    ValueError: If the array is empty. 
 
     Examples
     ------
@@ -243,7 +240,7 @@ def median(data):
     if data.ndim != 1:  # Optional check for 1D array
         raise ValueError("Data array must be a 1D array.")
     for i in data:
-        if isinstance(i, str) :
+        if isinstance(i, str):
         # isinstance returns True if the specified object is of the specified type, otherwise False.
             raise TypeError ("String cannot be placed as an element of an array")
     if np.size(data) == 0:
