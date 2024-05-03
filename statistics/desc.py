@@ -10,37 +10,34 @@ def min(x):
         occur during the operation.
 
         Parameters
-        ----------
-        x : array_like
-            The input data which should be an array or any array-like structure.
+        ------
+        x : array_like: The input data which should be an array or any array-like structure.
+
 
         Returns
-        -------
-        number
-            The minimum value in the array. If the array contains NaN values, the function will not return a value
-            and will raise a ValueError instead.
+        ------
+        number: The minimum value in the array. If the array contains NaN values, the function will not return a value
+                and will raise a ValueError instead.
 
         Raises
         ------
-        TypeError
-            If an operation or function is applied to an object of inappropriate type.
-        ValueError
-            If a function receives an argument of correct type but inappropriate value.
-        AttributeError
-            If an attribute reference or assignment fails.
-        IndexError
-            If a sequence subscript is out of range.
-        MemoryError
-            If an operation runs out of memory.
+        TypeError: If an operation or function is applied to an object of inappropriate type.
+        ValueError: If a function receives an argument of correct type but inappropriate value.
+        AttributeError: If an attribute reference or assignment fails.
+        IndexError: If a sequence subscript is out of range.
+        MemoryError: If an operation runs out of memory.
 
         Examples
-        --------
-        >>> min([1, 2, 3, 4, 5])
+        ------
+        >>> import proadv as adv  # Option 1: Full import path
+        >>> import numpy as np
+        >>> adv.statistics.desc.min([1, 2, 3, 4, 5])
         1
 
+        >>> from proadv.statistics.desc import min # Option 2: Direct import
+        >>> import numpy as np
         >>> min(np.array([1, 2, np.nan, 4, 5]))
         ValueError: The array contains NaN values. The min function cannot be applied to arrays with NaN values.
-
         """
 
     try:
@@ -70,34 +67,31 @@ def max(x):
      occur during the operation.
 
      Parameters
-     ----------
-     x : array_like
-         The input data which should be an array or any array-like structure.
+     ------
+     x : array_like : The input data which should be an array or any array-like structure.
 
      Returns
-     -------
-     number
-         The maximum value in the array. If the array contains NaN values, the function will not return a value
-         and will raise a ValueError instead.
+     ------
+     number :The maximum value in the array. If the array contains NaN values, the function will not return a value
+             and will raise a ValueError instead.
 
      Raises
      ------
-     TypeError
-         If an operation or function is applied to an object of inappropriate type.
-     ValueError
-         If a function receives an argument of correct type but inappropriate value.
-     AttributeError
-         If an attribute reference or assignment fails.
-     IndexError
-         If a sequence subscript is out of range.
-     MemoryError
-         If an operation runs out of memory.
+     TypeError: If an operation or function is applied to an object of inappropriate type.
+     ValueError: If a function receives an argument of correct type but inappropriate value.
+     AttributeError: If an attribute reference or assignment fails.
+     IndexError: If a sequence subscript is out of range.
+     MemoryError: If an operation runs out of memory.
 
      Examples
-     --------
-     >>> max([1, 2, 3, 4, 5])
+     ------
+     >>> import proadv as adv  # Option 1: Full import path
+     >>> import numpy as np
+     >>> adv.statistics.desc.max([1, 2, 3, 4, 5])
      5
 
+     >>> from proadv.statistics.desc import max # Option 2: Direct import
+     >>> import numpy as np
      >>> max(np.array([1, 2, np.nan, 4, 5]))
      ValueError: The array contains NaN values. The max function cannot be applied to arrays with NaN values.
 
@@ -126,33 +120,35 @@ def mean(x):
         Calculate the mean of a dataset, handling non-numeric and numeric data.
 
         This function calculates the mean of a dataset
-        , which can be a single number, a list of numbers, or a list containing
+        ,which can be a single number, a list of numbers, or a list containing
         both numbers and strings. Non-numeric strings are converted to floats if possible, and ignored if not.
 
         Parameters
-        ----------
-        x : int, float, list, tuple, set, arrays
-            The input data. Can be a single integer or float value, or a list containing integers, floats, and strings.
+        ------
+        x : numeric, array_like : The input data. Can be a numeric or array_like value.
 
         Returns
-        -------
-        float or str
-            The mean of the input data if it is valid, otherwise a message indicating invalid input.
+        ------
+        float or str: The mean of the input data if it is valid, otherwise a message indicating invalid input.
 
         Notes
-        -----
+        ------
         The function first checks if the input is a single number and returns it if so.
-         If the input is a list,the function
+        If the input is a list,the function
         checks if all elements are numeric and calculates the mean.
-         If there are strings in the list, it attempts to convert
+        If there are strings in the list, it attempts to convert
         them to floats and calculates the mean of the numeric values.
-         If the input is invalid or empty, it returns an error message.
+        If the input is invalid or empty, it returns an error message.
 
         Examples
-        --------
-        >>> mean(5)
+        ------
+        >>> import proadv as adv  # Option 1: Full import path
+        >>> import numpy as np
+        >>> adv.statistics.desc.mean(5)
         5
 
+        >>> from proadv.statistics.desc import mean # Option 2: Direct import
+        >>> import numpy as np
         >>> mean([1, 2, 3, 4, 5])
         3.0
 
@@ -241,12 +237,12 @@ def median(data):
         raise ValueError("Data array must be a 1D array.")
     for i in data:
         if isinstance(i, str):
-        # isinstance returns True if the specified object is of the specified type, otherwise False.
-            raise TypeError ("String cannot be placed as an element of an array")
+            # isinstance returns True if the specified object is of the specified type, otherwise False.
+            raise TypeError("String cannot be placed as an element of an array")
     if np.size(data) == 0:
         # The array cannot be empty
-        raise ValueError ("cannot calculate median with empty array")
-    med = np.median(data) # Calculate the median
+        raise ValueError("cannot calculate median with empty array")
+    med = np.median(data)  # Calculate the median
     return med
 
 def mode(data):
