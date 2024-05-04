@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 # Setting up
 setup(
     name="proadv",
-    version="0.1.0",
+    version="1.0.1",
     author="Farzad Asgari",
     author_email="std_farzad.asgari@alumni.khu.ac.ir",
     packages=find_packages(),
