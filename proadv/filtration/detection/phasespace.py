@@ -1,6 +1,6 @@
 import numpy as np
 from proadv.filtration.detection.poincare import calculate_rho
-
+from proadv.statistics.spread import std
 
 def calculate_derivatives(c):
     """
@@ -55,9 +55,9 @@ def calculate_parameters(c, dc, dc2):
         b3 (float): Coefficient 'b3'.
     """
     # Calculate standard deviations
-    std_c = np.std(c)
-    std_dc = np.std(dc)
-    std_dc2 = np.std(dc2)
+    std_c = std(c)
+    std_dc = std(dc)
+    std_dc2 = std(dc2)
 
     # Calculate lambda value
     lambda_ = np.sqrt(2 * np.log(len(c)))
