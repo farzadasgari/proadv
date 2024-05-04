@@ -52,6 +52,21 @@ def calculate_ab(std1, std2, theta, lambda_):
 
 
 def calculate_rho(x, y, theta, a, b):
+    """
+    Calculate rho value for velocity correlation.
+
+    Parameters
+    ------
+        x (numpy.ndarray): First velocity component.
+        y (numpy.ndarray): Second velocity component.
+        theta (float): Angle between velocity components.
+        a (float): Coefficient 'a' used in velocity correlation.
+        b (float): Coefficient 'b' used in velocity correlation.
+
+    Returns
+    ------
+        rho (numpy.ndarray): Rho value calculated for velocity correlation.
+    """
     xp = x * np.cos(theta) + y * np.sin(theta)
     yp = y * np.cos(theta) - x * np.sin(theta)
     return (xp / a) ** 2 + (yp / b) ** 2
