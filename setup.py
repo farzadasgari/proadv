@@ -25,8 +25,7 @@ setup(
     """,
     long_description_content_type="text/markdown",
     install_requires=[
-        "numpy", 
-        "pytest",
+        "numpy",
     ], 
     keywords=["python", "signal processing", "velocity", "Doppler velocimeter", "acoustic"]
 )
