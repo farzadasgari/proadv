@@ -26,6 +26,14 @@ setup(
     long_description_content_type="text/markdown",
     install_requires=[
         "numpy",
-    ], 
-    keywords=["python", "signal processing", "velocity", "Doppler velocimeter", "acoustic"]
+    ],
+    keywords=[
+        "ProADV",
+        "python",
+        "signal processing",
+        "data processing",
+        "acoustic Doppler velocimeter",
+        "ADV",
+        "Despiking"
+    ]
 )
