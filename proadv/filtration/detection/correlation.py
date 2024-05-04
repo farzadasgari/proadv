@@ -1,5 +1,6 @@
 import numpy as np
 from proadv.filtration.detection.poincare import calculate_ab, calculate_rho
+from proadv.statistics.spread import std
 
 
 def calculate_parameters(up, vp, wp):
@@ -19,7 +20,6 @@ def calculate_parameters(up, vp, wp):
         std_v (float): Standard deviation of the transverse velocity component.
         std_w (float): Standard deviation of the vertical velocity component.
     """
-    from proadv.statistics.spread import std
     data_size = up.size
     std_u = std(up)
     std_v = std(vp)
@@ -45,8 +45,8 @@ def velocity_correlation(ui, vi, wi):
     References
     ------
         Cea, L., J. Puertas, and L. Pena.
-        "Velocity measurements on highly turbulent free surface flow using ADV."
-        Experiments in fluids 42 (2007): 333-348.
+            "Velocity measurements on highly turbulent free surface flow using ADV."
+            Experiments in fluids 42 (2007): 333-348.
     """
     from proadv.statistics.desc import mean
     ui, vi, wi = ui - mean(ui), vi - mean(vi), wi - mean(wi)

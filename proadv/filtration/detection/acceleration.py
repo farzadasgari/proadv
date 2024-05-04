@@ -1,4 +1,5 @@
 import numpy as np
+from proadv.statistics.spread import std
 
 
 def acceleration_thresholding(velocities, frequency, tag, gravity=980, k_gravity=1.5, k_sigma=1):
@@ -41,9 +42,9 @@ def acceleration_thresholding(velocities, frequency, tag, gravity=980, k_gravity
 
     References
     ------
-    Goring, Derek G., and Vladimir I. Nikora.
-    "Despiking acoustic Doppler velocimeter data."
-    Journal of hydraulic engineering 128.1 (2002): 117-126.
+        Goring, Derek G., and Vladimir I. Nikora.
+            "Despiking acoustic Doppler velocimeter data."
+            Journal of hydraulic engineering 128.1 (2002): 117-126.
     """
     velocities = np.asarray(velocities)
 
@@ -53,11 +54,11 @@ def acceleration_thresholding(velocities, frequency, tag, gravity=980, k_gravity
     if tag == 1:
         # Detect positive acceleration events
         accel_indices = np.intersect1d(np.where(differences > k_gravity * gravity)[0],
-                                       np.where(velocities > np.mean(velocities) + k_sigma * np.std(velocities))[0])
+                                       np.where(velocities > np.mean(velocities) + k_sigma * std(velocities))[0])
     elif tag == 2:
         # Detect negative acceleration events
         accel_indices = np.intersect1d(np.where(differences < -k_gravity * gravity)[0],
-                                       np.where(velocities < np.mean(velocities) - k_sigma * np.std(velocities))[0])
+                                       np.where(velocities < np.mean(velocities) - k_sigma * std(velocities))[0])
     else:
         raise ValueError("Invalid tag value. Expected 1 or 2.")
 
