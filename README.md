@@ -94,7 +94,7 @@ We welcome collaboration and contributions from the community. To contribute to 
 
 ## Contact
 For any inquiries, please contact:
-- Email: std_farzad.asgari@gmail.com
+- Email: std_farzad.asgari@alumni.khu.ac.ir
 - Email: khufarzadasgari@gmail.com
 
 
