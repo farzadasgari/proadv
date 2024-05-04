@@ -5,10 +5,12 @@ def calculate_derivatives(c):
     """
     Calculate time-independent first and second order derivatives of the input data.
 
-    Parameters:
+    Parameters
+    ------
         c (numpy.ndarray): Input data.
 
-    Returns:
+    Returns
+    ------
         dc (numpy.ndarray): First derivative of the input data.
         dc2 (numpy.ndarray): Second derivative of the input data.
     """
@@ -31,12 +33,14 @@ def calculate_parameters(c, dc, dc2):
     """
     Calculate parameters for phase-space thresholding.
 
-    Parameters:
+    Parameters
+    ------
         c (numpy.ndarray): Array of the velocity component.
         dc (numpy.ndarray): First derivative of the input data.
         dc2 (numpy.ndarray): Second derivative of the input data.
 
-    Returns:
+    Returns
+    ------
         std_c (float): Standard deviation of the input data.
         std_dc (float): Standard deviation of the first derivative.
         std_dc2 (float): Standard deviation of the second derivative.
