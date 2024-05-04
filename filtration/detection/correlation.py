@@ -70,3 +70,32 @@ def calculate_rho(x, y, theta, a, b):
     xp = x * np.cos(theta) + y * np.sin(theta)
     yp = y * np.cos(theta) - x * np.sin(theta)
     return (xp / a) ** 2 + (yp / b) ** 2
+
+
+def velocity_correlation(ui, vi, wi):
+    lambda_, std_u, std_v, std_w = calculate_parameters(ui, vi, wi)
+
+    # Calculate angles between velocity components
+    theta1 = np.arctan(np.sum(ui * vi) / np.sum(ui ** 2))
+    theta2 = np.arctan(np.sum(ui * wi) / np.sum(ui ** 2))
+    theta3 = np.arctan(np.sum(vi * wi) / np.sum(vi ** 2))
+
+    # Calculate 'a' and 'b' coefficients for each angle
+    a1, b1 = calculate_ab(std_u, std_v, theta1, lambda_)
+    a2, b2 = calculate_ab(std_u, std_w, theta2, lambda_)
+    a3, b3 = calculate_ab(std_v, std_w, theta3, lambda_)
+
+    # Calculate rho values for each component pair
+    rho1 = calculate_rho(ui, vi, theta1, a1, b1)
+    rho2 = calculate_rho(ui, wi, theta2, a2, b2)
+    rho3 = calculate_rho(vi, wi, theta3, a3, b3)
+
+    # Find indices where rho values exceed 1 (indicating correlation)
+    x1 = np.nonzero(rho1 > 1)[0]
+    x2 = np.nonzero(rho2 > 1)[0]
+    x3 = np.nonzero(rho3 > 1)[0]
+
+    # Combine all detected indices and remove duplicates
+    correl_indices = np.sort(np.unique(np.concatenate((x1, x2, x3))))
+
+    return correl_indices
