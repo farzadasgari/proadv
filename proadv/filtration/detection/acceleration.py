@@ -1,6 +1,7 @@
 import numpy as np
 from proadv.statistics.spread import std
 
+
 def acceleration_thresholding(velocities, frequency, tag, gravity=980, k_gravity=1.5, k_sigma=1):
     """
     Detects acceleration events based on velocity data.
