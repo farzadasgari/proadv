@@ -2,6 +2,22 @@ import numpy as np
 
 
 def calculate_parameters(up, vp, wp):
+    """
+    Calculate parameters required for velocity correlation.
+
+    Parameters
+    ------
+        up (numpy.ndarray): Array of the first velocity component.
+        vp (numpy.ndarray): Array of the second velocity component.
+        wp (numpy.ndarray): Array of the third velocity component.
+
+    Returns
+    ------
+        lambda_ (float): Lambda value used in velocity correlation detection.
+        std_u (float): Standard deviation of the longitudinal velocity component.
+        std_v (float): Standard deviation of the transverse velocity component.
+        std_w (float): Standard deviation of the vertical velocity component.
+    """
     data_size = up.size
     std_u = np.std(up)
     std_v = np.std(vp)
