@@ -27,30 +27,6 @@ def calculate_parameters(up, vp, wp):
     return lambda_, std_u, std_v, std_w
 
 
-def calculate_ab(std1, std2, theta, lambda_):
-    """
-    Calculate 'a' and 'b' coefficients for velocity correlation detection.
-
-    Parameters
-    ------
-        std1 (float): Standard deviation of the first velocity component.
-        std2 (float): Standard deviation of the second velocity component.
-        theta (float): Angle between velocity components.
-        lambda_ (float): Lambda value used in velocity correlation.
-
-    Returns
-    ------
-        float: Coefficient 'a' used in velocity correlation.
-        float: Coefficient 'b' used in velocity correlation.
-    """
-    r1 = lambda_ * std1
-    r2 = lambda_ * std2
-    fact = np.cos(theta) ** 4 - np.sin(theta) ** 4
-    fa = (r1 ** 2 * np.cos(theta) ** 2 - r2 ** 2 * np.sin(theta) ** 2) / fact
-    fb = (r2 ** 2 * np.cos(theta) ** 2 - r1 ** 2 * np.sin(theta) ** 2) / fact
-    return np.sqrt(fa), np.sqrt(fb) if fa > 0 and fb > 0 else (1e10, 1e10)
-
-
 def velocity_correlation(ui, vi, wi):
     """
     Detect spikes using velocity correlation filter, based on three velocity components.
