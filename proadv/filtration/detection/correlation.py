@@ -1,4 +1,5 @@
 import numpy as np
+from proadv.filtration.detection.poincare import calculate_ab, calculate_rho
 
 
 def calculate_parameters(up, vp, wp):
