@@ -73,6 +73,25 @@ def calculate_rho(x, y, theta, a, b):
 
 
 def velocity_correlation(ui, vi, wi):
+    """
+    Detect spikes using velocity correlation filter, based on three velocity components.
+
+    Parameters
+    ------
+        ui (numpy.ndarray): Array of the longitudinal velocity component.
+        vi (numpy.ndarray): Array of the transverse velocity component.
+        wi (numpy.ndarray): Array of the vertical velocity component.
+
+    Returns
+    ------
+        correl_indices (numpy.ndarray): Indices of spikes detected by velocity correlation.
+
+    References
+    ------
+    Cea, L., J. Puertas, and L. Pena.
+    "Velocity measurements on highly turbulent free surface flow using ADV."
+    Experiments in fluids 42 (2007): 333-348.
+    """
     lambda_, std_u, std_v, std_w = calculate_parameters(ui, vi, wi)
 
     # Calculate angles between velocity components
