@@ -25,3 +25,7 @@ def test_min_with_empty_data():
     with pytest.raises(ValueError):
         min(())
         min([])
+
+def test_min_with_non_numerical():
+    with pytest.raises(TypeError):
+        min("proadv")

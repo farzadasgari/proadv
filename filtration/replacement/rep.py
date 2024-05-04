@@ -55,7 +55,7 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
     for idx in spike_indices:
         # Linear interpolation
         try:
-            modified_data[idx] = mean((modified_data[idx - 1], modified_data[idx:][~np.isnan(modified_data[idx:])][0])),
+            modified_data[idx] = mean((modified_data[idx - 1], modified_data[idx:][~np.isnan(modified_data[idx:])][0]))
         except IndexError:
             modified_data[idx] = mean(velocities)
 
