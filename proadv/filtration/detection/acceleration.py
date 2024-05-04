@@ -41,9 +41,9 @@ def acceleration_thresholding(velocities, frequency, tag, gravity=980, k_gravity
 
     References
     ------
-    Goring, Derek G., and Vladimir I. Nikora.
-    "Despiking acoustic Doppler velocimeter data."
-    Journal of hydraulic engineering 128.1 (2002): 117-126.
+        Goring, Derek G., and Vladimir I. Nikora.
+            "Despiking acoustic Doppler velocimeter data."
+            Journal of hydraulic engineering 128.1 (2002): 117-126.
     """
     velocities = np.asarray(velocities)
 

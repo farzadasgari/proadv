@@ -45,8 +45,8 @@ def velocity_correlation(ui, vi, wi):
     References
     ------
         Cea, L., J. Puertas, and L. Pena.
-        "Velocity measurements on highly turbulent free surface flow using ADV."
-        Experiments in fluids 42 (2007): 333-348.
+            "Velocity measurements on highly turbulent free surface flow using ADV."
+            Experiments in fluids 42 (2007): 333-348.
     """
     from proadv.statistics.desc import mean
     ui, vi, wi = ui - mean(ui), vi - mean(vi), wi - mean(wi)
