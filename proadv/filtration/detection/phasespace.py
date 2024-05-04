@@ -1,4 +1,5 @@
 import numpy as np
+from proadv.filtration.detection.poincare import calculate_rho
 
 
 def calculate_derivatives(c):
@@ -73,3 +74,19 @@ def calculate_parameters(c, dc, dc2):
     a3 = np.sqrt(a1 ** 2 * np.cos(theta) ** 2 - b2 ** 2 * np.sin(theta) ** 2) / fact
     b3 = np.sqrt(b2 ** 2 * np.cos(theta) ** 2 - a1 ** 2 * np.sin(theta) ** 2) / fact
     return std_c, std_dc, std_dc2, lambda_, theta, a1, b1, a2, b2, a3, b3
+
+
+def phasespace_thresholding(c):
+    dc, dc2 = calculate_derivatives(c)
+    std_c, std_dc, std_dc2, lambda_, theta, a1, b1, a2, b2, a3, b3 = calculate_parameters(c, dc, dc2)
+
+    rho1 = calculate_rho(c, dc, 0, a1, b1)
+    rho2 = calculate_rho(dc, dc2, 0, a2, b2)
+    rho3 = calculate_rho(c, dc2, theta, a3, b3)
+    x1 = np.nonzero(rho1 > 1)[0]
+    x2 = np.nonzero(rho2 > 1)[0]
+    x3 = np.nonzero(rho3 > 1)[0]
+
+    phase_indices = np.sort(np.unique(np.concatenate((x1, x2, x3))))
+
+    return phase_indices
