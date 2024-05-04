@@ -49,3 +49,9 @@ def calculate_ab(std1, std2, theta, lambda_):
     fa = (r1 ** 2 * np.cos(theta) ** 2 - r2 ** 2 * np.sin(theta) ** 2) / fact
     fb = (r2 ** 2 * np.cos(theta) ** 2 - r1 ** 2 * np.sin(theta) ** 2) / fact
     return np.sqrt(fa), np.sqrt(fb) if fa > 0 and fb > 0 else (1e10, 1e10)
+
+
+def calculate_rho(x, y, theta, a, b):
+    xp = x * np.cos(theta) + y * np.sin(theta)
+    yp = y * np.cos(theta) - x * np.sin(theta)
+    return (xp / a) ** 2 + (yp / b) ** 2
