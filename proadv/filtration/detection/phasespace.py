@@ -2,6 +2,7 @@ import numpy as np
 from proadv.filtration.detection.poincare import calculate_rho
 from proadv.statistics.spread import std
 
+
 def calculate_derivatives(c):
     """
     Calculate time-independent first and second order derivatives of the input data.

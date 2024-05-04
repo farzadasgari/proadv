@@ -245,6 +245,7 @@ def median(data):
     med = np.median(data)  # Calculate the median
     return med
 
+
 def mode(data):
     """
     Compute an array of the modal (most common) value in the passed array.
@@ -281,7 +282,6 @@ def mode(data):
     mode: 4
     count: 3
     """
-    values, counts = np.unique(data, return_counts=True) #Unique values ​​and replicate counts are calculated
-    max_count = np.argmax(counts) #Calculate the indices of the maximum values ​​in the count array
+    values, counts = np.unique(data, return_counts=True)  # Unique values ​​and replicate counts are calculated
+    max_count = np.argmax(counts)  # Calculate the indices of the maximum values ​​in the count array
     return values[max_count], counts[max_count]
-

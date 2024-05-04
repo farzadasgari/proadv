@@ -61,8 +61,8 @@ def skewness(data):
     std_dev = std(data)  # Calculate the Standard Deviation
 
     # Compute the Skewness according to the formula
-    skew = np.sum((data - average)**3) / (n * std_dev**3) 
-   
+    skew = np.sum((data - average) ** 3) / (n * std_dev ** 3)
+
     return skew
 
 

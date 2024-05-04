@@ -116,10 +116,10 @@ def exponential_moving_average(data, alpha=0.2):
 
     # Initialize the exponential moving average array with zeros
     ema = np.zeros_like(data)
-    
+
     # Set the first value of ema to be equal to the first value of the data
-    ema[0] = data[0] 
-    
+    ema[0] = data[0]
+
     # Calculate exponential moving average for subsequent data points
     for i in range(1, data.size):
         """
