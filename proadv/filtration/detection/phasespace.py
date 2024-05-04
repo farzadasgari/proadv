@@ -28,11 +28,39 @@ def calculate_derivatives(c):
 
 
 def calculate_parameters(c, dc, dc2):
+    """
+    Calculate parameters for phase-space thresholding.
+
+    Parameters:
+        c (numpy.ndarray): Array of the velocity component.
+        dc (numpy.ndarray): First derivative of the input data.
+        dc2 (numpy.ndarray): Second derivative of the input data.
+
+    Returns:
+        std_c (float): Standard deviation of the input data.
+        std_dc (float): Standard deviation of the first derivative.
+        std_dc2 (float): Standard deviation of the second derivative.
+        lambda_ (float): Lambda value.
+        theta (float | rad): Angle between components.
+        a1 (float): Coefficient 'a1'.
+        b1 (float): Coefficient 'b1'.
+        a2 (float): Coefficient 'a2'.
+        b2 (float): Coefficient 'b2'.
+        a3 (float): Coefficient 'a3'.
+        b3 (float): Coefficient 'b3'.
+    """
+    # Calculate standard deviations
     std_c = np.std(c)
     std_dc = np.std(dc)
     std_dc2 = np.std(dc2)
+
+    # Calculate lambda value
     lambda_ = np.sqrt(2 * np.log(len(c)))
+
+    # Calculate theta value
     theta = np.arctan(np.sum(c * dc2) / np.sum(c ** 2))
+
+    # Calculate coefficients
     a1 = lambda_ * std_c
     b1 = lambda_ * std_dc
     a2 = lambda_ * std_dc
