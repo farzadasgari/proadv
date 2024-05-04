@@ -77,16 +77,47 @@ def calculate_parameters(c, dc, dc2):
 
 
 def phasespace_thresholding(c):
+    """
+    Detect spikes using phase-space thresholding, based on each velocity component and
+    their first-order and second-order derivatives.
+
+    Phase-space thresholding is a method for detecting spikes or abrupt changes in time series data
+    by analyzing the behavior of the data in a multidimensional space defined by the data and its derivatives.
+
+
+    Parameters
+    ------
+        c (numpy.ndarray): Phase space data.
+
+    Returns
+    ------
+        phase_indices (numpy.ndarray): Indices of acceleration events.
+            An array containing the indices of detected acceleration events.
+
+    References
+    ------
+        Goring, Derek G., and Vladimir I. Nikora.
+            "Despiking acoustic Doppler velocimeter data."
+            Journal of hydraulic engineering 128.1 (2002): 117-126.
+    """
+
+    # Calculate first and second order derivatives of the input data
     dc, dc2 = calculate_derivatives(c)
+
+    # Calculate parameters used in phase-space thresholding
     std_c, std_dc, std_dc2, lambda_, theta, a1, b1, a2, b2, a3, b3 = calculate_parameters(c, dc, dc2)
 
+    # Calculate poincare map rho values for each dimension
     rho1 = calculate_rho(c, dc, 0, a1, b1)
     rho2 = calculate_rho(dc, dc2, 0, a2, b2)
     rho3 = calculate_rho(c, dc2, theta, a3, b3)
+
+    # Find indices where rho values exceed the threshold
     x1 = np.nonzero(rho1 > 1)[0]
     x2 = np.nonzero(rho2 > 1)[0]
     x3 = np.nonzero(rho3 > 1)[0]
 
+    # Concatenate and sort indices to get unique spike indices
     phase_indices = np.sort(np.unique(np.concatenate((x1, x2, x3))))
 
     return phase_indices
