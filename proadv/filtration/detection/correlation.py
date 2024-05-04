@@ -36,7 +36,7 @@ def calculate_ab(std1, std2, theta, lambda_):
         std1 (float): Standard deviation of the first velocity component.
         std2 (float): Standard deviation of the second velocity component.
         theta (float): Angle between velocity components.
-        lambda_: Lambda value used in velocity correlation.
+        lambda_ (float): Lambda value used in velocity correlation.
 
     Returns
     ------
@@ -88,10 +88,12 @@ def velocity_correlation(ui, vi, wi):
 
     References
     ------
-    Cea, L., J. Puertas, and L. Pena.
-    "Velocity measurements on highly turbulent free surface flow using ADV."
-    Experiments in fluids 42 (2007): 333-348.
+        Cea, L., J. Puertas, and L. Pena.
+        "Velocity measurements on highly turbulent free surface flow using ADV."
+        Experiments in fluids 42 (2007): 333-348.
     """
+    from proadv.statistics.desc import mean
+    ui, vi, wi = ui - mean(ui), vi - mean(vi), wi - mean(wi)
     lambda_, std_u, std_v, std_w = calculate_parameters(ui, vi, wi)
 
     # Calculate angles between velocity components
