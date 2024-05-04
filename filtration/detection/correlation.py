@@ -28,6 +28,21 @@ def calculate_parameters(up, vp, wp):
 
 
 def calculate_ab(std1, std2, theta, lambda_):
+    """
+    Calculate 'a' and 'b' coefficients for velocity correlation detection.
+
+    Parameters
+    ------
+        std1 (float): Standard deviation of the first velocity component.
+        std2 (float): Standard deviation of the second velocity component.
+        theta (float): Angle between velocity components.
+        lambda_: Lambda value used in velocity correlation.
+
+    Returns
+    ------
+        float: Coefficient 'a' used in velocity correlation.
+        float: Coefficient 'b' used in velocity correlation.
+    """
     r1 = lambda_ * std1
     r2 = lambda_ * std2
     fact = np.cos(theta) ** 4 - np.sin(theta) ** 4
