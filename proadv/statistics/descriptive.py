@@ -31,10 +31,10 @@ def min(x):
         ------
         >>> import proadv as adv  # Option 1: Full import path
         >>> import numpy as np
-        >>> adv.statistics.desc.min([1, 2, 3, 4, 5])
+        >>> adv.statistics.descriptive.min([1, 2, 3, 4, 5])
         1
 
-        >>> from proadv.statistics.desc import min # Option 2: Direct import
+        >>> from proadv.statistics.descriptive import min # Option 2: Direct import
         >>> import numpy as np
         >>> min(np.array([1, 2, np.nan, 4, 5]))
         ValueError: The array contains NaN values. The min function cannot be applied to arrays with NaN values.
@@ -87,10 +87,10 @@ def max(x):
      ------
      >>> import proadv as adv  # Option 1: Full import path
      >>> import numpy as np
-     >>> adv.statistics.desc.max([1, 2, 3, 4, 5])
+     >>> adv.statistics.descriptive.max([1, 2, 3, 4, 5])
      5
 
-     >>> from proadv.statistics.desc import max # Option 2: Direct import
+     >>> from proadv.statistics.descriptive import max # Option 2: Direct import
      >>> import numpy as np
      >>> max(np.array([1, 2, np.nan, 4, 5]))
      ValueError: The array contains NaN values. The max function cannot be applied to arrays with NaN values.
@@ -144,10 +144,10 @@ def mean(x):
         ------
         >>> import proadv as adv  # Option 1: Full import path
         >>> import numpy as np
-        >>> adv.statistics.desc.mean(5)
+        >>> adv.statistics.descriptive.mean(5)
         5
 
-        >>> from proadv.statistics.desc import mean # Option 2: Direct import
+        >>> from proadv.statistics.descriptive import mean # Option 2: Direct import
         >>> import numpy as np
         >>> mean([1, 2, 3, 4, 5])
         3.0
@@ -212,13 +212,13 @@ def median(data):
     >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([14, 8, 11, 10, 5, 7])
-    >>> med = adv.statistics.desc.median(data) 
+    >>> med = adv.statistics.descriptive.median(data)
     >>> print(med)
     9.0
     
     ------
 
-    >>> from proadv.statistics.desc import median
+    >>> from proadv.statistics.descriptive import median
     >>> import numpy as np
     >>> data = np.random.rand(15)
     >>> med = median(data) 
@@ -228,7 +228,7 @@ def median(data):
     >>> import proadv as adv
     >>> import numpy as np 
     >>> data = np.arange(14,45)
-    >>> med = adv.statistics.desc.median(data)
+    >>> med = adv.statistics.descriptive.median(data)
     >>> print(med)
     29.0
     """
@@ -264,7 +264,7 @@ def mode(data):
     >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([3, 0, 3, 7, 2])
-    >>> values, counts = adv.statistics.desc.mode(data) 
+    >>> values, counts = adv.statistics.descriptive.mode(data)
     >>> print(f"mode:",values)
     >>> print(f"count:",counts)
     mode: 3
@@ -272,7 +272,7 @@ def mode(data):
 
     ------
 
-    >>> from proadv.statistics.desc import mode
+    >>> from proadv.statistics.descriptive import mode
     >>> import numpy as np
     >>> data = np.array([4, 6, 12, 4, 15, 4, 6, 16])
     >>> values, counts = mode(data)
