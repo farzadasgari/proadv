@@ -25,3 +25,7 @@ def test_max_with_empty_data():
     with pytest.raises(ValueError):
         max(())
         max([])
+
+def test_max_with_non_numerical():
+    with pytest.raises(TypeError):
+        max("proadv")
