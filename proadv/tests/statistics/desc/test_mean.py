@@ -1,7 +1,7 @@
 #test_mean.py
 import pytest
 import numpy as np
-from proadv.statistics.desc import mean
+from proadv.statistics.descriptive import mean
 
 def test_mean_with_list():
     assert round(mean([2,4,6,8]),2) == 5.00

@@ -48,7 +48,7 @@ def velocity_correlation(ui, vi, wi):
             "Velocity measurements on highly turbulent free surface flow using ADV."
             Experiments in fluids 42 (2007): 333-348.
     """
-    from proadv.statistics.desc import mean
+    from proadv.statistics.descriptive import mean
     ui, vi, wi = ui - mean(ui), vi - mean(vi), wi - mean(wi)
     lambda_, std_u, std_v, std_w = calculate_parameters(ui, vi, wi)
 

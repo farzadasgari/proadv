@@ -188,7 +188,7 @@ def _diagonal_average(matrix, length, size):
     data = matrix
 
     # Determine the minimum and maximum of length and k
-    from .desc import min, max
+    from .descriptive import min, max
     min_length = min([length, k])
     max_length = max([length, k])
 

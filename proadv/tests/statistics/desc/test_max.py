@@ -1,7 +1,7 @@
 #test_max.py
 import pytest
 import numpy as np
-from proadv.statistics.desc import max
+from proadv.statistics.descriptive import max
 
 def test_max_with_list():
     assert max([3,5,7,9,1]) == 9

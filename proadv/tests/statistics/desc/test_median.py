@@ -1,7 +1,7 @@
 #test_median.py
 import pytest
 import numpy as np
-from proadv.statistics.desc import median
+from proadv.statistics.descriptive import median
 
 def test_median_with_numpy_array():
     assert round(median(np.array([2,4,6,8])),2) == 5.00

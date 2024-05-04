@@ -44,7 +44,7 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
         modified_data (numpy.ndarray): Modified velocity data with spikes replaced by interpolated values.
             An array containing the modified velocity data.
     """
-    from proadv.statistics.desc import mean
+    from proadv.statistics.descriptive import mean
 
     # Create a copy of velocity data
     modified_data = np.copy(velocities)

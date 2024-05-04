@@ -1,5 +1,5 @@
 import numpy as np
-from desc import mean
+from descriptive import mean
 from spread import std
 
 

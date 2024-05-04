@@ -1,7 +1,7 @@
 #test_min.py
 import pytest
 import numpy as np
-from proadv.statistics.desc import min
+from proadv.statistics.descriptive import min
 
 def test_min_with_list():
     assert min([3,5,7,9,1]) == 1
