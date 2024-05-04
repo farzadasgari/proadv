@@ -18,9 +18,10 @@ def calculate_parameters(up, vp, wp):
         std_v (float): Standard deviation of the transverse velocity component.
         std_w (float): Standard deviation of the vertical velocity component.
     """
+    from proadv.statistics.spread import std
     data_size = up.size
-    std_u = np.std(up)
-    std_v = np.std(vp)
-    std_w = np.std(wp)
+    std_u = std(up)
+    std_v = std(vp)
+    std_w = std(wp)
     lambda_ = np.sqrt(2 * np.log(data_size))
     return lambda_, std_u, std_v, std_w
