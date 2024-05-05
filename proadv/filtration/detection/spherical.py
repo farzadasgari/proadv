@@ -136,3 +136,25 @@ def _spike_indices(x, y, z, a, b, c):
             zp.append(z[i])
     spike_indices = np.array(ip, dtype=np.int64)
     return spike_indices
+
+
+def spherical_phasespace_thresholding(c, iteration, c_mean):
+    # Calculate mean and center the data
+    c, c_mean = _descript(c, iteration, c_mean)
+
+    # Calculate gradients
+    dc, dc2 = _gradients(c)
+
+    # Calculaterotation angle
+    theta = np.around(np.arctan2(np.sum(c * dc), np.sum(dc2 ** 2)), 4)
+
+    # Rotate data
+    x, y, z = _rotation(c, dc, dc2, theta)
+
+    # Calculate parameters
+    a, b, c = _parameters(x, y, z)
+
+    # Calculate spike indices
+    spherical_indices = _spike_indices(x, y, z, a, b, c)
+
+    return spherical_indices
