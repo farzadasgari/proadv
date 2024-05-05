@@ -43,6 +43,21 @@ def _gradients(c):
 
 
 def _rotation(c, dc, dc2, theta):
+    """
+    Rotate the input data based on the specified angle theta.
+
+    Parameters
+    ----------
+    c (numpy.ndarray): Input data.
+    dc (numpy.ndarray): First order derivative of the input data.
+    dc2 (numpy.ndarray): Second order derivative of the input data.
+
+    Returns
+    -------
+    x (numpy.ndarray): Rotated X-axis data.
+    y (numpy.ndarray): Rotated Y-axis data.
+    z (numpy.ndarray): Rotated Z-axis data.
+    """
     if theta == 0:
         x = c.copy()
         y = dc.copy()
