@@ -98,6 +98,22 @@ def _parameters(x, y, z):
 
 
 def _spike_indices(x, y, z, a, b, c):
+    """
+    Calculate spike indices based on the input data and coefficients.
+
+    Parameters
+    ------
+    x (numpy.ndarray): Rotated X-axis data.
+    y (numpy.ndarray): Rotated Y-axis data.
+    z (numpy.ndarray): Rotated Z-axis data.
+    a (float): Coefficient 'a'.
+    b (float): Coefficient 'a'.
+    c (float): Coefficient 'a'.
+
+    Returns
+    ------
+    spike_indices (numpy.ndarray): Indices of detected spikes.
+    """
     xp, yp, zp, ip = [], [], [], []
     for i in range(x.size):
         x1 = x[i]
