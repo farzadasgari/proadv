@@ -21,3 +21,14 @@ ADVs are employed in a diverse range of applications, including:
 Environmental Engineering: Assessing pollution dispersion, mixing processes in aquatic environments, and studying the impact of human activities on water bodies.
 - **Civil Engineering**: Analyzing flow patterns around bridges and other hydraulic structures, studying coastal erosion, and optimizing channel design.
 - **Other fields**: ADVs are also utilized in various other fields, such as fisheries research, limnology, and glaciology.
+
+***
+
+### Working Principle
+
+The core principle behind ADV operation relies on the Doppler shift phenomenon. The instrument emits sound waves at a specific frequency, which are then reflected back by particles suspended in the water. Due to the relative motion between the particles and the ADV, the reflected sound waves experience a slight shift in frequency. This shift is proportional to the velocity of the particles, allowing the ADV to calculate the flow velocity.
+
+Different types of ADVs exist, categorized primarily by their operating frequency:
+
+- **Broadband ADVs**: Utilize a wider range of frequencies, offering higher spatial resolution but potentially lower signal-to-noise ratio in challenging environments.
+- **Narrowband ADVs**: Operate at a single frequency, resulting in a stronger signal but potentially lower spatial resolution.
