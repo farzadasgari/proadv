@@ -25,6 +25,18 @@ def _descript(c, iteration, c_mean):
 
 
 def _gradients(c):
+    """
+    Calculate the first and second order derivatives of the input data.
+
+    Parameters
+    ------
+    c (numpy.ndarray): Input data
+
+    Returns
+    ------
+    dc (numpy.ndarray): First order derivative of the input data.
+    dc2 (numpy.ndarray): Second order derivative of the input data
+    """
     dc = np.gradient(c)
     dc2 = np.gradient(dc)
     return dc, dc2
