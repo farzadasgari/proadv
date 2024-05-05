@@ -139,6 +139,27 @@ def _spike_indices(x, y, z, a, b, c):
 
 
 def spherical_phasespace_thresholding(c, iteration, c_mean):
+    """
+    Detect spikes using three-dimensional phase-space thresholding, based on each velocity component and
+        their first-order and second-order derivatives.
+
+    Parameters
+    ------
+    c (numpy.ndarray): Velocity component
+    iteration (int): Loop counter.
+    c_mean (float): Mean of the velocity component
+
+    Returns
+    ------
+    spherical_indices (numpy.ndarray): Array containing the indices of detected spikes.
+
+    References
+    ------
+        Wahl, Tony L.
+        "Discussion of “Despiking acoustic doppler velocimeter data” by Derek G. Goring and Vladimir I. Nikora."
+        Journal of Hydraulic Engineering 129, no. 6 (2003): 484-487.
+    """
+
     # Calculate mean and center the data
     c, c_mean = _descript(c, iteration, c_mean)
 

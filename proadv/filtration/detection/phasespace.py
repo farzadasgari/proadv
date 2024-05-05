@@ -80,20 +80,19 @@ def calculate_parameters(c, dc, dc2):
 def phasespace_thresholding(c):
     """
     Detect spikes using phase-space thresholding, based on each velocity component and
-    their first-order and second-order derivatives.
+        their first-order and second-order derivatives.
 
     Phase-space thresholding is a method for detecting spikes or abrupt changes in time series data
-    by analyzing the behavior of the data in a multidimensional space defined by the data and its derivatives.
+        by analyzing the behavior of the data in a multidimensional space defined by the data and its derivatives.
 
 
     Parameters
     ------
-        c (numpy.ndarray): Phase space data.
+        c (numpy.ndarray): Velocity component
 
     Returns
     ------
-        phase_indices (numpy.ndarray): Indices of acceleration events.
-            An array containing the indices of detected acceleration events.
+        phase_indices (numpy.ndarray): Array containing the indices of detected spikes.
 
     References
     ------
