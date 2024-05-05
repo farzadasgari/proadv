@@ -45,3 +45,9 @@ However, ADV data can be affected by various challenges:
 - **Data quality issues**: Factors like low signal strength, inadequate sampling duration, or instrument malfunction can lead to inaccurate measurements.
 
 Spikes and data quality issues can significantly distort the flow characteristics and hinder accurate analysis. Therefore, robust cleaning and despiking algorithms are crucial for ensuring reliable ADV data analysis.
+
+***
+
+### Summary
+
+Acoustic Doppler velocimetry has become a vital tool for measuring fluid velocities in various scientific and engineering applications. While ADVs offer numerous advantages, addressing data quality challenges through proper cleaning and analysis techniques is essential for obtaining accurate and meaningful results.
