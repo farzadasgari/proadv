@@ -47,13 +47,13 @@ def _rotation(c, dc, dc2, theta):
     Rotate the input data based on the specified angle theta.
 
     Parameters
-    ----------
+    ------
     c (numpy.ndarray): Input data.
     dc (numpy.ndarray): First order derivative of the input data.
     dc2 (numpy.ndarray): Second order derivative of the input data.
 
     Returns
-    -------
+    ------
     x (numpy.ndarray): Rotated X-axis data.
     y (numpy.ndarray): Rotated Y-axis data.
     z (numpy.ndarray): Rotated Z-axis data.
@@ -79,13 +79,13 @@ def _parameters(x, y, z):
     Calculate parameters for phase-space thresholding in spherical coordinates.
 
     Parameters
-    ----------
+    ------
     x (numpy.ndarray): Rotated X-axis data.
     y (numpy.ndarray): Rotated Y-axis data.
     z (numpy.ndarray): Rotated Z-axis data.
 
     Returns
-    -------
+    ------
     a (float): Coefficient 'a'.
     b (float): Coefficient 'b'.
     c (float): Coefficient 'c'.
@@ -95,3 +95,28 @@ def _parameters(x, y, z):
     b = np.around(lambda_ * np.nanstd(y), 4)
     c = np.around(lambda_ * np.nanstd(z), 4)
     return a, b, c
+
+
+def _spike_indices(x, y, z, a, b, c):
+    xp, yp, zp, ip = [], [], [], []
+    for i in range(x.size):
+        x1 = x[i]
+        y1 = y[i]
+        z1 = z[i]
+        x2 = np.around(a * b * c * x1 / np.sqrt((a * c * y1) ** 2 + b ** 2 * (c ** 2 * x1 ** 2 + a ** 2 * z1 ** 2)), 4)
+        y2 = np.around(a * b * c * y1 / np.sqrt((a * c * y1) ** 2 + b ** 2 * (c ** 2 * x1 ** 2 + a ** 2 * z1 ** 2)), 4)
+        zt = np.around(c ** 2 * (1 - (x2 / a) ** 2 - (y2 / b) ** 2), 4)
+        if z1 < 0:
+            z2 = -np.around(np.sqrt(zt), 4)
+        elif z1 > 0:
+            z2 = np.around(np.sqrt(zt), 4)
+        else:
+            z2 = 0
+        dis = (x2 ** 2 + y2 ** 2 + z2 ** 2) - (x1 ** 2 + y1 ** 2 + z1 ** 2)
+        if dis < 0:
+            ip.append(i)
+            xp.append(x[i])
+            yp.append(y[i])
+            zp.append(z[i])
+    spike_indices = np.array(ip, dtype=np.int64)
+    return spike_indices
