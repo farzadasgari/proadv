@@ -72,3 +72,11 @@ def _rotation(c, dc, dc2, theta):
         y = np.around(c * rotation_matrix[1, 0] + dc * rotation_matrix[1, 1] + dc2 * rotation_matrix[1, 2], 4)
         z = np.around(c * rotation_matrix[2, 0] + dc * rotation_matrix[2, 1] + dc2 * rotation_matrix[2, 2], 4)
     return x, y, z
+
+
+def _parameters(x, y, z):
+    lambda_ = np.around(np.sqrt(2 * np.log(x.size)), 4)
+    a = np.around(lambda_ * np.nanstd(x), 4)
+    b = np.around(lambda_ * np.nanstd(y), 4)
+    c = np.around(lambda_ * np.nanstd(z), 4)
+    return a, b, c
