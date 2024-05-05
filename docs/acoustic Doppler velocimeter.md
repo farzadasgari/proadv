@@ -32,3 +32,16 @@ Different types of ADVs exist, categorized primarily by their operating frequenc
 
 - **Broadband ADVs**: Utilize a wider range of frequencies, offering higher spatial resolution but potentially lower signal-to-noise ratio in challenging environments.
 - **Narrowband ADVs**: Operate at a single frequency, resulting in a stronger signal but potentially lower spatial resolution.
+
+***
+
+### Data Acquisition and Challenges
+
+ADV data acquisition typically involves deploying the instrument in the desired location within the water body. The ADV transmits sound waves and receives the reflected signals, processing them to determine the flow velocity at the measurement point.
+
+However, ADV data can be affected by various challenges:
+
+- **Spikes**: Sudden, erroneous values in the data caused by air bubbles, electrical noise, or debris passing through the sampling volume, etc.
+- **Data quality issues**: Factors like low signal strength, inadequate sampling duration, or instrument malfunction can lead to inaccurate measurements.
+
+Spikes and data quality issues can significantly distort the flow characteristics and hinder accurate analysis. Therefore, robust cleaning and despiking algorithms are crucial for ensuring reliable ADV data analysis.
