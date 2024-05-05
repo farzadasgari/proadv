@@ -75,6 +75,21 @@ def _rotation(c, dc, dc2, theta):
 
 
 def _parameters(x, y, z):
+    """
+    Calculate parameters for phase-space thresholding in spherical coordinates.
+
+    Parameters
+    ----------
+    x (numpy.ndarray): Rotated X-axis data.
+    y (numpy.ndarray): Rotated Y-axis data.
+    z (numpy.ndarray): Rotated Z-axis data.
+
+    Returns
+    -------
+    a (float): Coefficient 'a'.
+    b (float): Coefficient 'b'.
+    c (float): Coefficient 'c'.
+    """
     lambda_ = np.around(np.sqrt(2 * np.log(x.size)), 4)
     a = np.around(lambda_ * np.nanstd(x), 4)
     b = np.around(lambda_ * np.nanstd(y), 4)
