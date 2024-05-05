@@ -22,3 +22,9 @@ def _descript(c, iteration, c_mean):
         f_mean = np.around(c_mean + np.nanmean(c), 4)
     f = np.around(c - np.nanmean(c), 4)
     return f, f_mean
+
+
+def _gradients(c):
+    dc = np.gradient(c)
+    dc2 = np.gradient(dc)
+    return dc, dc2
