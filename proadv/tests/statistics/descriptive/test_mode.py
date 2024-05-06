@@ -23,3 +23,12 @@ def test_mode_with_numpy_array():
     assert mode(np.array([1, 3, 5, 7, 9, 7, 5, 9, 5, 7, 9, 7])) == (7, 4)
     assert mode(np.array([-1, -2, -4, -3, -4, -5, -6])) == (-4, 2)
     assert mode(np.array([5])) == (5, 1)
+
+def test_median_with_non_numerical():
+    with pytest.raises(TypeError):
+        mode(np.array["proadv"])
+
+def test_mode_with_empty_data():
+    with pytest.raises(ValueError):
+        mode(())
+        mode([])
