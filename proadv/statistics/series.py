@@ -192,6 +192,12 @@ def weighted_moving_average(data, step_size=20):
     wma = np.zeros(data.size)  # Weighted Moving Average
 
     for i in range(step_size, data.size):
+        """
+        This loop calculates the weighted moving average for elements from index 'step_size' onwards. 
+        Calculate the weights as a sequence from 1 to the step size value and then normalize to sum up to 1.
+        Use np.convolve to calculate the weighted moving aevrage by convolving the data array with the weights array.
+            The mode='valid' parameter ensures that the output has only valid entires.  
+        """
         weighted = np.arange(1, step_size + 1)
         weighted = weighted / np.sum(weighted)   
         wma = np.convolve(data, weighted, mode='valid')
