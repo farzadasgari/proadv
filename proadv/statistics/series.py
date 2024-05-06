@@ -137,6 +137,45 @@ def exponential_moving_average(data, alpha=0.2):
 
 
 def weighted_moving_average(data, step_size=20):
+    """
+    Calculates the weighted moving average of a given data series.
+
+    Parameters
+    ------
+    data (numpy.array): The 1D array of data for which to calculate the weighted moving average.
+    step_size (int, optional): The size of the step for the weighted moving average.
+        Defaults to 20. Must be less than or equal to the size of the data array.
+
+    Returns
+    ------
+    wma (numpy.ndarray): Weighted moving average of the input data.
+
+    Raises
+    ------
+    ValueError: If the step_size is larger than the size of the data array.
+
+    Notes
+    ------
+    The weighted moving average (WMA) is a type of moving average that puts more weight 
+        on recent data and less on past data.
+    
+    Examples
+    ------
+    >>> import proadv as adv  
+    >>> import numpy as np
+    >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    >>> wma = adv.statistics.series.weighted_moving_average(data, step_size=3)
+    >>> print(wma)
+    [1.66666667 2.66666667 3.66666667 4.66666667 5.66666667 6.66666667
+     7.66666667 8.66666667]
+
+    ------
+
+    >>> from proadv.statistics.series import weighted_moving_average  
+    >>> import numpy as np
+    >>> data = np.random.rand(300)
+    >>> wma = weighted_moving_average(data)    
+    """
 
     if step_size <= 0:
         raise ValueError("step size must be greater than zero.")
