@@ -21,8 +21,8 @@ def moving_average(data, window_size=20):
 
     Notes
     ------
-    This function implements a cumulative moving average calculation. It's more
-        efficient than calculating a simple moving average for each element.
+    This function implements a  moving average calculation. It's more
+        efficient than calculating a cumulativesimple moving average for each element.
 
     Examples
     ------
@@ -136,10 +136,49 @@ def exponential_moving_average(data, alpha=0.2):
     return ema
 
 
-def weighted_moving_average(data, period=30):
+def weighted_moving_average(data, step_size=20):
+    """
+    Calculates the weighted moving average of a given data series.
 
-    if period <= 0:
-        raise ValueError("period must be greater than zero.")
+    Parameters
+    ------
+    data (numpy.array): The 1D array of data for which to calculate the weighted moving average.
+    step_size (int, optional): The size of the step for the weighted moving average.
+        Defaults to 20. Must be less than or equal to the size of the data array.
+
+    Returns
+    ------
+    wma (numpy.ndarray): Weighted moving average of the input data.
+
+    Raises
+    ------
+    ValueError: If the step_size is larger than the size of the data array.
+
+    Notes
+    ------
+    The weighted moving average (WMA) is a type of moving average that puts more weight 
+        on recent data and less on past data.
+    
+    Examples
+    ------
+    >>> import proadv as adv  
+    >>> import numpy as np
+    >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    >>> wma = adv.statistics.series.weighted_moving_average(data, step_size=3)
+    >>> print(wma)
+    [1.66666667 2.66666667 3.66666667 4.66666667 5.66666667 6.66666667
+     7.66666667 8.66666667]
+
+    ------
+
+    >>> from proadv.statistics.series import weighted_moving_average  
+    >>> import numpy as np
+    >>> data = np.random.rand(300)
+    >>> wma = weighted_moving_average(data)    
+    """
+
+    if step_size <= 0:
+        raise ValueError("step size must be greater than zero.")
 
     if data.size == 0:
         return np.array([])  # Handle empty array gracefully
@@ -147,13 +186,16 @@ def weighted_moving_average(data, period=30):
     if data.ndim != 1:  # Optional check for 1D array
         raise ValueError("Data array must be a 1D array.")
 
-    if period > data.size:
-        raise ValueError("Data array size must be greater than period.")
+    if step_size > data.size:
+        raise ValueError("Data array size must be greater than step size.")
     
     wma = np.zeros(data.size)  # Weighted Moving Average
 
-    for i in range(1, data.size):
-        weighted = np.arange(1, period + 1)
+    for i in range(step_size, data.size):
+        """
+        This loop calculates the weighted moving average for elements from index 'period' onwards.
+        """
+        weighted = np.arange(1, step_size + 1)
         weighted = weighted / np.sum(weighted)
         wma = np.convolve(data, weighted, mode='valid')
     return wma
