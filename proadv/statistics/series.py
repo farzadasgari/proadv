@@ -138,6 +138,18 @@ def exponential_moving_average(data, alpha=0.2):
 
 def weighted_moving_average(data, step_size=20):
 
+    if step_size <= 0:
+        raise ValueError("step size must be greater than zero.")
+
+    if data.size == 0:
+        return np.array([])  # Handle empty array gracefully
+
+    if data.ndim != 1:  # Optional check for 1D array
+        raise ValueError("Data array must be a 1D array.")
+
+    if step_size > data.size:
+        raise ValueError("Data array size must be greater than step size.")
+
     wma = np.zeros(data.size)  # Weighted Moving Average
 
     for i in range(step_size, data.size):
