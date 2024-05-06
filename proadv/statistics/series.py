@@ -137,6 +137,19 @@ def exponential_moving_average(data, alpha=0.2):
 
 
 def weighted_moving_average(data, period=30):
+
+    if period <= 0:
+        raise ValueError("period must be greater than zero.")
+
+    if data.size == 0:
+        return np.array([])  # Handle empty array gracefully
+
+    if data.ndim != 1:  # Optional check for 1D array
+        raise ValueError("Data array must be a 1D array.")
+
+    if period > data.size:
+        raise ValueError("Data array size must be greater than period.")
+    
     wma = np.zeros(data.size)  # Weighted Moving Average
 
     for i in range(1, data.size):
