@@ -136,6 +136,16 @@ def exponential_moving_average(data, alpha=0.2):
     return ema
 
 
+def weighted_moving_average(data, period=20):
+    wma = []
+    
+    for i in range(period, data.size):
+        weight = np.arange(1, period+1) # Weight matrix
+        weighted_sum = (weight * data[i - period : i]).sum() / (weight.sum()) # Calculate the multiplication of weighted moving average
+        wma = np.append(wma, weighted_sum) # Add to array
+    return wma
+
+
 def _mobility(x):
     """
     Compute the covert mobility index.
