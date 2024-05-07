@@ -117,7 +117,7 @@ def max(x):
         raise MemoryError(f"Memory Error: {me}")
 
 
-def mean(x):
+def mean(array):
     """
         Calculate the mean of a dataset, handling non-numeric and numeric data.
 
@@ -127,7 +127,7 @@ def mean(x):
 
         Parameters
         ------
-        x : numeric, array_like : The input data. Can be a numeric or array_like value.
+        array : numeric, array_like : The input data. Can be a numeric or array_like value.
 
         Returns
         ------
@@ -161,33 +161,33 @@ def mean(x):
         'Invalid input.'
     """
 
-    if isinstance(x, (int, float)):
-        return x  # If it's a single number, return it as the mean
+    if isinstance(array, (int, float)):
+        return array  # If it's a single number, return it as the mean
 
-    elif np.size(np.array(x)) != 0 and type(x) != str and all(isinstance(item, (int, float)) for item in x):
+    elif np.size(np.array(array)) != 0 and type(array) != str and all(isinstance(item, (int, float)) for item in array):
         # The 'all()' function checks if all elements in 'data' satisfy a condition
         # The 'isinstance(item, (int, float))' inside 'all()' checks each item to ensure it is a number (int or float)
         # If any item is not a number, 'all()' returns False, and the function returns a message about non-num values
-        x = list(x)
-        mean_x = np.sum(x) / np.size(x)
-        return mean_x  # Returns the average if all the items are an int or float
+        array = list(array)
+        mean_array = np.sum(array) / np.size(array)
+        return mean_array  # Returns the average if all the items are an int or float
 
     # if at least one of the items in our list is not an int or float:
-    if not isinstance(x, (int, float)) and np.size(np.array(x)) != 0:
-        for item in x:
+    if not isinstance(array, (int, float)) and np.size(np.array(array)) != 0:
+        for item in array:
             if isinstance(item, str):
                 # Trys to convert the string to a float
                 try:
-                    x = list(x)
-                    index = x.index(item)
-                    x[index] = float(item)
+                    array = list(array)
+                    index = array.index(item)
+                    array[index] = float(item)
 
                 except ValueError:
                     # If conversion fails, it's not a number, so we take out the invalid data and calculate the rest
-                    x = [item for item in x if isinstance(item, (int, float))]
+                    array = [item for item in array if isinstance(item, (int, float))]
                     continue
-        mean_x = np.sum(x) / np.size(x)
-        return x + mean_x
+        mean_array = np.sum(array) / np.size(array)
+        return mean_array
 
     else:
         return "Invalid input."  # if there are any invalid inputs like a str this statement becomes true
