@@ -257,8 +257,8 @@ def mode(data):
 
     Returns:
     ------
-    values[max_count] (int): The mode of the data
-    counts[max_count] (int): The number of repetitions of the mode
+    mode_value (int): The mode of the data
+    frequency (int): The number of repetitions of the mode
 
     Exampls:
     ------
