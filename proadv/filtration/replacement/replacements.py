@@ -5,13 +5,15 @@ def last_valid_data(velocities, spike_indices):
     """
     Replace spike values in velocities array with the last valid data before each.
 
-    Parameters:
+    Parameters
+    ------
         velocities (numpynd.array): Array of velocity data.
             An array-like object containing velocity values.
         spike_indices (numpy.ndarray): Indices of spikes.
             An array-like object containing the indices of detected spikes.
 
-    Returns:
+    Returns
+    ------
         modified_data (numpy.ndarray): Modified data with spikes replaced by last valid values.
             An array containing the modified data.
     """
