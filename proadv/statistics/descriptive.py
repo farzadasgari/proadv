@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def min(array):
+def min(data):
     """
     Calculate the minimum value in an array, handling NaN values and exceptions.
 
@@ -11,54 +11,59 @@ def min(array):
 
     Parameters
     ------
-    array (np.ndarray): The input data which should be an array or any array-like structure.
+    data (np.ndarray): The input data which should be an array or any array-like structure.
 
     Returns
     ------
-    min_array (numerical): The minimum value in the array. If the array contains NaN values, the function will not return a value
+    minimum (numerical): The minimum value in the data. If the array contains NaN values, the function will not return a value
         and will raise a ValueError instead.
 
     Raises
     ------
-    TypeError: If an operation or function is applied to an object of inappropriate type.
-    ValueError: If a function receives an argument of correct type but inappropriate value.
-    AttributeError: If an attribute reference or assignment fails.
-    IndexError: If a sequence subscript is out of range.
-    MemoryError: If an operation runs out of memory.
+    TypeError: If the  element of array is a string.
+    ValueError: If the array is empty.
 
     Examples
     ------
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv 
     >>> import numpy as np
-    >>> adv.statistics.descriptive.min([1, 2, 3, 4, 5])
+    >>> data = np.array([1, 2, 3, 4, 5])
+    >>> minimum = adv.statistics.descriptive.min(data)
+    >>> print(minimum)
     1
+    
+    ------
 
-    >>> from proadv.statistics.descriptive import min # Option 2: Direct import
+    >>> from proadv.statistics.descriptive import min
     >>> import numpy as np
-    >>> min(np.array([1, 2, np.nan, 4, 5]))
+    >>> data = np.array([1, 2, np.nan, 4, 5])
+    >>> minimum = min(data)
+    >>> print(minimum)
     ValueError: The array contains NaN values. The min function cannot be applied to arrays with NaN values.
+
+    ------
+
+    >>> from proadv.statistics.descriptive import min 
+    >>> import numpy as np
+    >>> data = np.random.rand(20)
+    >>> maximum = max(data)
     """
 
-    try:
-        if np.isnan(array).any():
-            raise ValueError(
-                "The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
-        min_array = np.min(array)
-        return min_array
-
-    except TypeError as te:
-        raise TypeError(f"Type Error: {te}")
-    except ValueError as ve:
-        raise ValueError(f"Value Error: {ve}")
-    except AttributeError as ae:
-        raise AttributeError(f"Attribute Error: {ae}")
-    except IndexError as ie:
-        raise IndexError(f"Index Error: {ie}")
-    except MemoryError as me:
-        raise MemoryError(f"Memory Error: {me}")
+    for i in data:
+        if isinstance(i, str):  # isinstance returns True if the specified object is of the specified type, otherwise False.
+            raise TypeError("String cannot be placed as an element of an array")
+    if np.isnan(data).any():
+        raise ValueError("The array contains NaN values. The min function cannot be applied to arrays with NaN values.")
+    if data.ndim != 1:  # Optional check for 1D array
+        raise ValueError("Data array must be a 1D array.")   
+    if np.size(data) == 0: # The array cannot be empty
+        raise ValueError("cannot calculate minimum with empty array")
+      
+    minimum = np.min(data) # Calculate the minimum
+    return minimum
 
 
-def max(array):
+def max(data):
     """
     Calculate the maximum value in an array, handling NaN values and exceptions.
 
@@ -68,51 +73,61 @@ def max(array):
 
     Parameters
     ------
-    array (np.ndarray): The input data which should be an array or any array-like structure.
+    data (np.ndarray): The input data which should be an array or any array-like structure.
 
     Returns
     ------
-    number :The maximum value in the array. If the array contains NaN values, the function will not return a value
+    maximum :The maximum value in the data. If the array contains NaN values, the function will not return a value
         and will raise a ValueError instead.
 
     Raises
     ------
-    TypeError: If an operation or function is applied to an object of inappropriate type.
-    ValueError: If a function receives an argument of correct type but inappropriate value.
-    AttributeError: If an attribute reference or assignment fails.
-    IndexError: If a sequence subscript is out of range.
-    MemoryError: If an operation runs out of memory.
+    TypeError: If the  element of array is a string.
+    ValueError: If the array is empty.
 
     Examples
     ------
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv 
     >>> import numpy as np
-    >>> adv.statistics.descriptive.max([1, 2, 3, 4, 5])
+    >>> data = np.array([1, 2, 3, 4, 5])
+    >>> maximum = adv.statistics.descriptive.max(data)
+    >>> print(maximum)
     5
 
-    >>> from proadv.statistics.descriptive import max # Option 2: Direct import
+    ------
+
+    >>> from proadv.statistics.descriptive import max 
     >>> import numpy as np
-    >>> max(np.array([1, 2, np.nan, 4, 5]))
+    >>> data = np.array([1, 2, np.nan, 4, 5]))
+    >>> maximum = max(data)
     ValueError: The array contains NaN values. The max function cannot be applied to arrays with NaN values.
+
+    ------
+
+    >>> from proadv.statistics.descriptive import max 
+    >>> import numpy as np
+    >>> data = np.arange(2,10)
+    >>> maximum = max(data)
+    >>> print(maximum)
+    9
     """
+    
+    for i in data:
+        if isinstance(i, str): # isinstance returns True if the specified object is of the specified type, otherwise False.
+            raise TypeError("String cannot be placed as an element of an array")
 
-    try:
-        if np.isnan(array).any():
-            raise ValueError(
-                "The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
-        max_array = np.max(array)
-        return max_array
-
-    except TypeError as te:
-        raise TypeError(f"Type Error: {te}")
-    except ValueError as ve:
-        raise ValueError(f"Value Error: {ve}")
-    except AttributeError as ae:
-        raise AttributeError(f"Attribute Error: {ae}")
-    except IndexError as ie:
-        raise IndexError(f"Index Error: {ie}")
-    except MemoryError as me:
-        raise MemoryError(f"Memory Error: {me}")
+    if np.isnan(data).any():
+        raise ValueError("The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
+    
+    if data.ndim != 1:  # Optional check for 1D array
+        raise ValueError("Data array must be a 1D array.")
+    
+    if np.size(data) == 0:
+        # The array cannot be empty
+        raise ValueError("cannot calculate maximum with empty array")
+    maximum = np.max(data)  # Calculate the maximum
+    
+    return maximum
 
 
 def mean(array):
@@ -142,20 +157,37 @@ def mean(array):
 
     Examples
     ------
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv 
     >>> import numpy as np
-    >>> adv.statistics.descriptive.mean(5)
-    5
+    >>> array = np.array([1, 2, 3])
+    >>> mean_array = adv.statistics.descriptive.mean(array)
+    >>> print(mean_array)
+    2
 
-    >>> from proadv.statistics.descriptive import mean # Option 2: Direct import
+    ------
+
+    >>> from proadv.statistics.descriptive import mean 
     >>> import numpy as np
-    >>> mean([1, 2, 3, 4, 5])
+    >>> array = np.array([1, 2, 3, 4, 5])
+    >>> mean_array = mean(array)
     3.0
 
-    >>> mean([1, '2', 3.5, 'not a number'])
+    ------
+
+    >>> from proadv.statistics.descriptive import mean 
+    >>> import numpy as np
+    >>> array = np.array([1, '2', 3.5, 'not a number'])
+    >>> mean_array = mean(array)
+    >>> print(mean_array)
     2.1666666666666665
 
-    >>> mean([])
+    ------
+
+    >>> import proadv as adv 
+    >>> import numpy as np
+    >>> array = np.array([])
+    >>> mean_array = adv.statistics.descriptive.mean(array)
+    >>> print(mean_array)
     'Invalid input.'
     """
 
@@ -251,7 +283,7 @@ def mode(data):
     """
     Compute an array of the modal (most common) value in the passed array.
 
-    Parameters:
+    Parameters
     ------
     data (np.ndarray): The 1D array of data for which to calculate the Mode.
 
@@ -260,7 +292,7 @@ def mode(data):
     mode_value (int): The mode of the data
     frequency (int): The number of repetitions of the mode
 
-    Exampls:
+    Exampls
     ------
     
     >>> import proadv as adv
