@@ -50,7 +50,10 @@ def mean_value(velocities, spike_indices):
     # Replace values at spikes indices with the mean value
     modified_data[spike_indices] = mean(velocities)
 
-    return modified_data
+    # Multiply mean by 2 and return it
+    x = mean * 2
+
+    return x
 
 
 def linear_interpolation(velocities, spike_indices, decimals=4):
