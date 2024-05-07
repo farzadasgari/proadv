@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def min(x):
+def min(array):
     """
         Calculate the minimum value in an array, handling NaN values and exceptions.
 
@@ -11,7 +11,7 @@ def min(x):
 
         Parameters
         ------
-        x : array_like: The input data which should be an array or any array-like structure.
+        array : array_like: The input data which should be an array or any array-like structure.
 
 
         Returns
@@ -41,11 +41,11 @@ def min(x):
         """
 
     try:
-        if np.isnan(x).any():
+        if np.isnan(array).any():
             raise ValueError(
                 "The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
-        min_x = np.min(x)
-        return min_x
+        min_array = np.min(array)
+        return min_array
 
     except TypeError as te:
         raise TypeError(f"Type Error: {te}")
