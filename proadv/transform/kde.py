@@ -14,3 +14,10 @@ def _scaling(data):
     min_co = data.min(1)
     scale = max_co - min_co
     return max_co, min_co, scale
+
+
+def _transform(data, max_co, min_co, scale):
+    numerator = data.T - np.tile(min_co, (data[0].size, 1))
+    denominator = np.tile(scale, (data[0].size, 1))
+    transformed_data = numerator / denominator
+    return transformed_data
