@@ -7,3 +7,10 @@ def _rotation(x, y):
     denominator = data_size * np.sum(x * x) - np.sum(x) * np.sum(x)
     theta = np.arctan2(numerator, denominator)
     return theta
+
+
+def _scaling(data):
+    max_co = data.max(1)
+    min_co = data.min(1)
+    scale = max_co - min_co
+    return max_co, min_co, scale
