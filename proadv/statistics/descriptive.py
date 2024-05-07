@@ -11,7 +11,7 @@ def min(array):
 
     Parameters
     ------
-    array (array_like): The input data which should be an array or any array-like structure.
+    array (np.ndarray): The input data which should be an array or any array-like structure.
 
     Returns
     ------
@@ -68,7 +68,7 @@ def max(array):
 
     Parameters
     ------
-    array (array_like): The input data which should be an array or any array-like structure.
+    array (np.ndarray): The input data which should be an array or any array-like structure.
 
     Returns
     ------
@@ -125,7 +125,7 @@ def mean(array):
 
     Parameters
     ------
-    array (numeric, array_like): The input data. Can be a numeric or array_like value.
+    array (numeric, np.ndarray): The input data. Can be a numeric or array_like value.
 
     Returns
     ------
