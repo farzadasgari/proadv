@@ -56,3 +56,9 @@ def _discrete_cosine_2d(data):
     weight = np.tile(w[:, np.newaxis], (1, columns))
     discrete = _discrete_cosine_1d(_discrete_cosine_1d(data, weight).T, weight).T
     return discrete
+
+
+def _k(s_indices):
+    step = 2
+    index_array = np.arange(start=1, stop=2 * s_indices - 1 + 0.1 * step, step=step)
+    return (-1) ** s_indices * np.prod(index_array) / np.sqrt(2 * np.pi)
