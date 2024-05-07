@@ -287,6 +287,6 @@ def mode(data):
     """
     values, counts = np.unique(data, return_counts=True)  # Unique values ​​and replicate counts are calculated
     max_count = np.argmax(counts)  # Calculate the indices of the maximum values ​​in the count array
-    val_mc = values[max_count]  # values mc => max count
-    counts_mc = counts[max_count]  # counts mc => max count
-    return val_mc, counts_mc
+    mode_value = values[max_count]  # values mc => max count
+    frequency = counts[max_count]  # counts mc => max count
+    return mode_value, frequency
