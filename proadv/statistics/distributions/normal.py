@@ -1,4 +1,6 @@
 import numpy as np
+
+
 def cdf(array, decimals=4):
     from math import erf, erfc
     array = np.copy(array)
@@ -21,3 +23,14 @@ def cdf(array, decimals=4):
                 array[j] = y
         j += 1
     return np.around(array, decimals=decimals)
+
+
+def pdf(array, std=1, mean=0, decimals=4):
+    array = np.copy(array)
+    if array.size == 0:
+        raise ValueError("cannot calculate PDF with empty array")
+    if np.isnan(array).any():
+        raise TypeError('array cannot contain nan values.')
+    x = (-0.5 * np.log(2 * np.pi)) - np.log(std)
+    y = np.power(array - mean, 2) / (2 * (std * std))
+    return np.around(np.exp(x - y), decimals=decimals)
