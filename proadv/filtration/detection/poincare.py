@@ -45,4 +45,5 @@ def calculate_rho(x, y, theta, a, b):
     """
     xp = x * np.cos(theta) + y * np.sin(theta)
     yp = y * np.cos(theta) - x * np.sin(theta)
-    return (xp / a) ** 2 + (yp / b) ** 2
+    calculate_rho_result = (xp / a) ** 2 + (yp / b) ** 2
+    return calculate_rho_result
