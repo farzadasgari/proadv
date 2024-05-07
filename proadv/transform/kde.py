@@ -21,3 +21,10 @@ def _transform(data, max_co, min_co, scale):
     denominator = np.tile(scale, (data[0].size, 1))
     transformed_data = numerator / denominator
     return transformed_data
+
+
+def accumarray(subs, vals, sz):
+    accum = np.zeros(sz, dtype=vals.dtype)
+    for i, sub in enumerate(subs):
+        accum[tuple(sub)] += vals[i]
+    return accum
