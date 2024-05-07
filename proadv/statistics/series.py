@@ -166,7 +166,8 @@ def weighted_moving_average(data, period=20):
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     >>> wma = adv.statistics.series.weighted_moving_average(data, period=3)
     >>> print(wma)
-    
+    [2.33333333 3.33333333 4.33333333 5.33333333 6.33333333 7.33333333
+     8.33333333]
 
     ------
 
