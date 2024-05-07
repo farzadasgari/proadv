@@ -111,6 +111,7 @@ def max(data):
     >>> print(maximum)
     9
     """
+    
     for i in data:
         if isinstance(i, str): # isinstance returns True if the specified object is of the specified type, otherwise False.
             raise TypeError("String cannot be placed as an element of an array")
@@ -156,20 +157,37 @@ def mean(array):
 
     Examples
     ------
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv 
     >>> import numpy as np
-    >>> adv.statistics.descriptive.mean(5)
-    5
+    >>> array = np.array([1, 2, 3])
+    >>> mean_array = adv.statistics.descriptive.mean(array)
+    >>> print(mean_array)
+    2
 
-    >>> from proadv.statistics.descriptive import mean # Option 2: Direct import
+    ------
+
+    >>> from proadv.statistics.descriptive import mean 
     >>> import numpy as np
-    >>> mean([1, 2, 3, 4, 5])
+    >>> array = np.array([1, 2, 3, 4, 5])
+    >>> mean_array = mean(array)
     3.0
 
-    >>> mean([1, '2', 3.5, 'not a number'])
+    ------
+
+    >>> from proadv.statistics.descriptive import mean 
+    >>> import numpy as np
+    >>> array = np.array([1, '2', 3.5, 'not a number'])
+    >>> mean_array = mean(array)
+    >>> print(mean_array)
     2.1666666666666665
 
-    >>> mean([])
+    ------
+
+    >>> import proadv as adv 
+    >>> import numpy as np
+    >>> array = np.array([])
+    >>> mean_array = adv.statistics.descriptive.mean(array)
+    >>> print(mean_array)
     'Invalid input.'
     """
 
