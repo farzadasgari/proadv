@@ -23,8 +23,19 @@ def _transform(data, max_co, min_co, scale):
     return transformed_data
 
 
-def accumarray(subs, vals, sz):
+def _accumarray(subs, vals, sz):
     accum = np.zeros(sz, dtype=vals.dtype)
     for i, sub in enumerate(subs):
         accum[tuple(sub)] += vals[i]
     return accum
+
+
+def _histogram(trans, grid):
+    rows, cols = trans.shape
+    bins = np.zeros((rows, cols), dtype=int)
+    hist = np.linspace(0, 1, grid+1)
+    for i in range(cols):
+        bins[:, i] = np.digitize(trans[:,i], hist, 1)
+        bins[:, i] = np.minimum(bins[:, i], grid-1)
+    binned_data = _accumarray(bins, np.ones(rows), (grid,) * cols) / rows
+    return binned_data
