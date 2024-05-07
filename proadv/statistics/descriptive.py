@@ -117,46 +117,46 @@ def max(array):
 
 def mean(array):
     """
-        Calculate the mean of a dataset, handling non-numeric and numeric data.
+    Calculate the mean of a dataset, handling non-numeric and numeric data.
 
-        This function calculates the mean of a dataset
+    This function calculates the mean of a dataset
         ,which can be a single number, a list of numbers, or a list containing
         both numbers and strings. Non-numeric strings are converted to floats if possible, and ignored if not.
 
-        Parameters
-        ------
-        array : numeric, array_like : The input data. Can be a numeric or array_like value.
+    Parameters
+    ------
+    array (numeric, array_like): The input data. Can be a numeric or array_like value.
 
-        Returns
-        ------
-        float or str: The mean of the input data if it is valid, otherwise a message indicating invalid input.
+    Returns
+    ------
+    mean_array (float | str): The mean of the input data if it is valid, otherwise a message indicating invalid input.
 
-        Notes
-        ------
-        The function first checks if the input is a single number and returns it if so.
+    Notes
+    ------
+    The function first checks if the input is a single number and returns it if so.
         If the input is a list,the function
         checks if all elements are numeric and calculates the mean.
         If there are strings in the list, it attempts to convert
         them to floats and calculates the mean of the numeric values.
         If the input is invalid or empty, it returns an error message.
 
-        Examples
-        ------
-        >>> import proadv as adv  # Option 1: Full import path
-        >>> import numpy as np
-        >>> adv.statistics.descriptive.mean(5)
-        5
+    Examples
+    ------
+    >>> import proadv as adv  # Option 1: Full import path
+    >>> import numpy as np
+    >>> adv.statistics.descriptive.mean(5)
+    5
 
-        >>> from proadv.statistics.descriptive import mean # Option 2: Direct import
-        >>> import numpy as np
-        >>> mean([1, 2, 3, 4, 5])
-        3.0
+    >>> from proadv.statistics.descriptive import mean # Option 2: Direct import
+    >>> import numpy as np
+    >>> mean([1, 2, 3, 4, 5])
+    3.0
 
-        >>> mean([1, '2', 3.5, 'not a number'])
-        2.1666666666666665
+    >>> mean([1, '2', 3.5, 'not a number'])
+    2.1666666666666665
 
-        >>> mean([])
-        'Invalid input.'
+    >>> mean([])
+    'Invalid input.'
     """
 
     if isinstance(array, (int, float)):
