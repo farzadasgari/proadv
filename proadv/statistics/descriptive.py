@@ -73,32 +73,43 @@ def max(data):
 
     Parameters
     ------
-    array (np.ndarray): The input data which should be an array or any array-like structure.
+    data (np.ndarray): The input data which should be an array or any array-like structure.
 
     Returns
     ------
-    number :The maximum value in the array. If the array contains NaN values, the function will not return a value
+    maximum :The maximum value in the data. If the array contains NaN values, the function will not return a value
         and will raise a ValueError instead.
 
     Raises
     ------
-    TypeError: If an operation or function is applied to an object of inappropriate type.
-    ValueError: If a function receives an argument of correct type but inappropriate value.
-    AttributeError: If an attribute reference or assignment fails.
-    IndexError: If a sequence subscript is out of range.
-    MemoryError: If an operation runs out of memory.
+    TypeError: If the  element of array is a string.
+    ValueError: If the array is empty.
 
     Examples
     ------
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv 
     >>> import numpy as np
-    >>> adv.statistics.descriptive.max([1, 2, 3, 4, 5])
+    >>> data = np.array([1, 2, 3, 4, 5])
+    >>> maximum = adv.statistics.descriptive.max(data)
+    >>> print(maximum)
     5
 
-    >>> from proadv.statistics.descriptive import max # Option 2: Direct import
+    ------
+
+    >>> from proadv.statistics.descriptive import max 
     >>> import numpy as np
-    >>> max(np.array([1, 2, np.nan, 4, 5]))
+    >>> data = np.array([1, 2, np.nan, 4, 5]))
+    >>> maximum = max(data)
     ValueError: The array contains NaN values. The max function cannot be applied to arrays with NaN values.
+
+    ------
+
+    >>> from proadv.statistics.descriptive import max 
+    >>> import numpy as np
+    >>> data = np.arange(2,10)
+    >>> maximum = max(data)
+    >>> print(maximum)
+    9
     """
     for i in data:
         if isinstance(i, str): # isinstance returns True if the specified object is of the specified type, otherwise False.
