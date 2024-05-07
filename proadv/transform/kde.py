@@ -75,3 +75,28 @@ def _psi(s_indices, time, initial_condition, autocorrelation_squared):
             * np.pi ** (2 * np.sum(s_indices))
     )
     return result
+
+
+def _evolve(t_guess, data_size: int, initial_condition, autocorrelation_squared):
+    def __func(s, t):
+        return _func(s, t, data_size, initial_condition, autocorrelation_squared)
+
+    sum_func = __func([0, 2], t_guess) + __func([2, 0], t_guess) + 2 * __func([1, 1], t_guess)
+    actual_time = (2 * np.pi * data_size * sum_func) ** (-1 / 3)
+    time_evolution = (t_guess - actual_time) / actual_time
+    return time_evolution, actual_time
+
+
+def _func(s, t, n_sample: int, initial_condition, autocorrelation_squared):
+    if sum(s) <= 4:
+        sum_func = _func([s[0] + 1, s[1]], t, n_sample=n_sample, initial_condition=initial_condition,
+                         autocorrelation_squared=autocorrelation_squared) + _func(
+            [s[0], s[1] + 1], t, n_sample=n_sample, initial_condition=initial_condition,
+            autocorrelation_squared=autocorrelation_squared
+        )
+        const = (1 + 1 / 2 ** (np.sum(s) + 1)) / 3
+        time = (-2 * const * _k(s[0]) * _k(s[1]) / n_sample / sum_func) ** (1 / (2 + np.sum(s)))
+        out = _psi(s, time, initial_condition, autocorrelation_squared)
+    else:
+        out = _psi(s, t, initial_condition, autocorrelation_squared)
+    return out
