@@ -167,7 +167,8 @@ def mean(x):
         # The 'isinstance(item, (int, float))' inside 'all()' checks each item to ensure it is a number (int or float)
         # If any item is not a number, 'all()' returns False, and the function returns a message about non-num values
         x = list(x)
-        return np.sum(x) / np.size(x)  # Returns the average if all the items are an int or float
+        mean_x = np.sum(x) / np.size(x)
+        return mean_x  # Returns the average if all the items are an int or float
 
     # if at least one of the items in our list is not an int or float:
     if not isinstance(x, (int, float)) and np.size(np.array(x)) != 0:
@@ -183,8 +184,8 @@ def mean(x):
                     # If conversion fails, it's not a number, so we take out the invalid data and calculate the rest
                     x = [item for item in x if isinstance(item, (int, float))]
                     continue
-
-        return np.sum(x) / np.size(x)
+        mean_x=np.sum(x) / np.size(x)
+        return x+mean_x
 
     else:
         return "Invalid input."  # if there are any invalid inputs like a str this statement becomes true
