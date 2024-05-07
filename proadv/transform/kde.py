@@ -55,3 +55,4 @@ def _discrete_cosine_2d(data):
     w = np.concatenate(([1], 2 * np.exp(-1j * indices * np.pi / (2 * rows))))
     weight = np.tile(w[:, np.newaxis], (1, columns))
     discrete = _discrete_cosine_1d(_discrete_cosine_1d(data, weight).T, weight).T
+    return discrete
