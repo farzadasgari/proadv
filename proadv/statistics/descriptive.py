@@ -63,7 +63,7 @@ def min(data):
     return minimum
 
 
-def max(array):
+def max(data):
     """
     Calculate the maximum value in an array, handling NaN values and exceptions.
 
@@ -100,24 +100,22 @@ def max(array):
     >>> max(np.array([1, 2, np.nan, 4, 5]))
     ValueError: The array contains NaN values. The max function cannot be applied to arrays with NaN values.
     """
+    for i in data:
+        if isinstance(i, str): # isinstance returns True if the specified object is of the specified type, otherwise False.
+            raise TypeError("String cannot be placed as an element of an array")
 
-    try:
-        if np.isnan(array).any():
-            raise ValueError(
-                "The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
-        max_array = np.max(array)
-        return max_array
-
-    except TypeError as te:
-        raise TypeError(f"Type Error: {te}")
-    except ValueError as ve:
-        raise ValueError(f"Value Error: {ve}")
-    except AttributeError as ae:
-        raise AttributeError(f"Attribute Error: {ae}")
-    except IndexError as ie:
-        raise IndexError(f"Index Error: {ie}")
-    except MemoryError as me:
-        raise MemoryError(f"Memory Error: {me}")
+    if np.isnan(data).any():
+        raise ValueError("The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
+    
+    if data.ndim != 1:  # Optional check for 1D array
+        raise ValueError("Data array must be a 1D array.")
+    
+    if np.size(data) == 0:
+        # The array cannot be empty
+        raise ValueError("cannot calculate maximum with empty array")
+    maximum = np.max(data)  # Calculate the maximum
+    
+    return maximum
 
 
 def mean(array):
