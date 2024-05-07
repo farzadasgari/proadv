@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def min(array):
+def min(data):
     """
     Calculate the minimum value in an array, handling NaN values and exceptions.
 
@@ -39,23 +39,20 @@ def min(array):
     ValueError: The array contains NaN values. The min function cannot be applied to arrays with NaN values.
     """
 
-    try:
-        if np.isnan(array).any():
-            raise ValueError(
-                "The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
-        min_array = np.min(array)
-        return min_array
-
-    except TypeError as te:
-        raise TypeError(f"Type Error: {te}")
-    except ValueError as ve:
-        raise ValueError(f"Value Error: {ve}")
-    except AttributeError as ae:
-        raise AttributeError(f"Attribute Error: {ae}")
-    except IndexError as ie:
-        raise IndexError(f"Index Error: {ie}")
-    except MemoryError as me:
-        raise MemoryError(f"Memory Error: {me}")
+    for i in data:
+        if isinstance(i, str):
+            # isinstance returns True if the specified object is of the specified type, otherwise False.
+            raise TypeError("String cannot be placed as an element of an array")
+    if np.isnan(data).any():
+        raise ValueError("The array contains NaN values. The min function cannot be applied to arrays with NaN values.")
+    if data.ndim != 1:  # Optional check for 1D array
+        raise ValueError("Data array must be a 1D array.")   
+    if np.size(data) == 0:
+        # The array cannot be empty
+        raise ValueError("cannot calculate minimum with empty array")
+      
+    minimum = np.min(data) # Calculate the minimum
+    return minimum
 
 
 def max(array):
@@ -251,7 +248,7 @@ def mode(data):
     """
     Compute an array of the modal (most common) value in the passed array.
 
-    Parameters:
+    Parameters
     ------
     data (np.ndarray): The 1D array of data for which to calculate the Mode.
 
@@ -260,7 +257,7 @@ def mode(data):
     mode_value (int): The mode of the data
     frequency (int): The number of repetitions of the mode
 
-    Exampls:
+    Exampls
     ------
     
     >>> import proadv as adv
