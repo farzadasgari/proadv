@@ -39,3 +39,10 @@ def _histogram(trans, grid):
         bins[:, i] = np.minimum(bins[:, i], grid - 1)
     binned_data = _accumarray(bins, np.ones(rows), (grid,) * cols) / rows
     return binned_data
+
+
+def _discrete_cosine_1d(data, weight):
+    reordered = np.vstack((data[::2, :], data[::-2, :]))
+    transform = np.real(weight * np.fft.fft(reordered))
+    return transform
+
