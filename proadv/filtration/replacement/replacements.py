@@ -136,5 +136,4 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
             modified_data[start:end + 1] = fallback_value
 
     # Round the interpolated values to the specified number of decimal places
-    modified_data = np.around(modified_data, decimals=decimals)
-    return modified_data
+    return np.around(modified_data, decimals=decimals)
