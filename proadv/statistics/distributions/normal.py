@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def cdf(array, decimals=4):
+def cdf(array):
     from math import erf, erfc
     array_cdf = np.copy(array)
     if array_cdf.size == 0:
@@ -34,5 +34,5 @@ def pdf(array, std=1, mean=0):
         raise TypeError('array cannot contain nan values.')
     x = (-0.5 * np.log(2 * np.pi)) - np.log(std)
     y = np.power(array - mean, 2) / (2 * (std * std))
-    array_pdf=np.exp(x - y)
+    array_pdf = np.exp(x - y)
     return array_pdf
