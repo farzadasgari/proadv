@@ -3,42 +3,42 @@ import numpy as np
 
 def min(array):
     """
-        Calculate the minimum value in an array, handling NaN values and exceptions.
+    Calculate the minimum value in an array, handling NaN values and exceptions.
 
-        This function calculates the minimum value of an array-like input while checking for NaN values.
+    This function calculates the minimum value of an array-like input while checking for NaN values.
         If NaN values are present, it raises a ValueError. It also handles various exceptions that may
         occur during the operation.
 
-        Parameters
-        ------
-        array : array_like: The input data which should be an array or any array-like structure.
+    Parameters
+    ------
+    array (array_like): The input data which should be an array or any array-like structure.
 
 
-        Returns
-        ------
-        number: The minimum value in the array. If the array contains NaN values, the function will not return a value
-                and will raise a ValueError instead.
+    Returns
+    ------
+    min_array (numerical): The minimum value in the array. If the array contains NaN values, the function will not return a value
+        and will raise a ValueError instead.
 
-        Raises
-        ------
-        TypeError: If an operation or function is applied to an object of inappropriate type.
-        ValueError: If a function receives an argument of correct type but inappropriate value.
-        AttributeError: If an attribute reference or assignment fails.
-        IndexError: If a sequence subscript is out of range.
-        MemoryError: If an operation runs out of memory.
+    Raises
+    ------
+    TypeError: If an operation or function is applied to an object of inappropriate type.
+    ValueError: If a function receives an argument of correct type but inappropriate value.
+    AttributeError: If an attribute reference or assignment fails.
+    IndexError: If a sequence subscript is out of range.
+    MemoryError: If an operation runs out of memory.
 
-        Examples
-        ------
-        >>> import proadv as adv  # Option 1: Full import path
-        >>> import numpy as np
-        >>> adv.statistics.descriptive.min([1, 2, 3, 4, 5])
-        1
+    Examples
+    ------
+    >>> import proadv as adv  # Option 1: Full import path
+    >>> import numpy as np
+    >>> adv.statistics.descriptive.min([1, 2, 3, 4, 5])
+    1
 
-        >>> from proadv.statistics.descriptive import min # Option 2: Direct import
-        >>> import numpy as np
-        >>> min(np.array([1, 2, np.nan, 4, 5]))
-        ValueError: The array contains NaN values. The min function cannot be applied to arrays with NaN values.
-        """
+    >>> from proadv.statistics.descriptive import min # Option 2: Direct import
+    >>> import numpy as np
+    >>> min(np.array([1, 2, np.nan, 4, 5]))
+    ValueError: The array contains NaN values. The min function cannot be applied to arrays with NaN values.
+    """
 
     try:
         if np.isnan(array).any():
