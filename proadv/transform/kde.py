@@ -62,3 +62,16 @@ def _k(s_indices):
     step = 2
     index_array = np.arange(start=1, stop=2 * s_indices - 1 + 0.1 * step, step=step)
     return (-1) ** s_indices * np.prod(index_array) / np.sqrt(2 * np.pi)
+
+
+def _psi(s_indices, time, initial_condition, autocorrelation_squared):
+    weight_vector = np.exp(-initial_condition * np.pi ** 2 * time) * np.append(1, 0.5 * np.ones(
+        len(initial_condition) - 1))
+    wx = weight_vector * (initial_condition ** s_indices[0])
+    wy = weight_vector * (initial_condition ** s_indices[1])
+    result = (
+            (-1) ** np.sum(s_indices)
+            * (np.matmul(np.matmul(wy, autocorrelation_squared), wx.T))
+            * np.pi ** (2 * np.sum(s_indices))
+    )
+    return result
