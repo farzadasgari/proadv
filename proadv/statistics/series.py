@@ -137,6 +137,12 @@ def exponential_moving_average(data, alpha=0.2):
 
 
 def weighted_moving_average(data, period=20):
+    if period <= 0:
+        raise ValueError("Period must be greater than zero.")
+
+    if period > data.size:
+        raise ValueError("Data array size must be greater than period.")
+    
     wma = []
     
     for i in range(period, data.size):
