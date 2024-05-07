@@ -59,7 +59,7 @@ def min(x):
         raise MemoryError(f"Memory Error: {me}")
 
 
-def max(x):
+def max(array):
     """
      Calculate the maximum value in an array, handling NaN values and exceptions.
 
@@ -69,7 +69,7 @@ def max(x):
 
      Parameters
      ------
-     x : array_like : The input data which should be an array or any array-like structure.
+     array : array_like : The input data which should be an array or any array-like structure.
 
      Returns
      ------
@@ -99,11 +99,11 @@ def max(x):
      """
 
     try:
-        if np.isnan(x).any():
+        if np.isnan(array).any():
             raise ValueError(
                 "The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
-        max_x = np.max(x)
-        return max_x
+        max_array = np.max(array)
+        return max_array
 
     except TypeError as te:
         raise TypeError(f"Type Error: {te}")
