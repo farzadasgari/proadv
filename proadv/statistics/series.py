@@ -136,6 +136,65 @@ def exponential_moving_average(data, alpha=0.2):
     return ema
 
 
+def weighted_moving_average(data, period=20):
+    """
+    Calculates the weighted moving average of a 1D array.
+
+    Parameters
+    ------
+    data (numpy.array): The 1D array of data for which to calculate the weighted moving average.
+    period (int, optional): The period for the weighted moving average. Defaults to 20. 
+        Must be less than or equal to the size of the data array.
+
+    Returns
+    ------
+    wma (numpy.ndarray): Weighted moving average of the input data and weights.
+
+    Raises
+    ------
+    ValueError: If the period is larger than the size of the data array.
+
+    Notes
+    ------
+    The weighted moving average (WMA) is a type of moving average that assigns a greater weighting 
+        to the most recent data points, and less weighting to data points in the distant past.
+    
+    Examples
+    ------
+    >>> import proadv as adv  
+    >>> import numpy as np
+    >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    >>> wma = adv.statistics.series.weighted_moving_average(data, period=3)
+    >>> print(wma)
+    [2.33333333 3.33333333 4.33333333 5.33333333 6.33333333 7.33333333
+     8.33333333]
+
+    ------
+
+    >>> from proadv.statistics.series import weighted_moving_average  
+    >>> import numpy as np
+    >>> data = np.random.rand(300)
+    >>> wma = weighted_moving_average(data)    
+    """
+    if period <= 0:
+        raise ValueError("Period must be greater than zero.")
+
+    if period > data.size:
+        raise ValueError("Data array size must be greater than period.")
+    
+    wma = []
+    
+    for i in range(period, data.size):
+        """
+        We obtain weighted moving average by multiplying each number in the data set by a predetermined weight 
+            and summing up the resulting values. Finally, the result value is divided to the total weights. 
+        """
+        weight = np.arange(1, period+1) # Weight matrix
+        weighted_sum = (weight * data[i - period : i]).sum() / (weight.sum()) # Calculate the weighted moving average
+        wma = np.append(wma, weighted_sum) # Add to array
+    return wma
+
+
 def _mobility(x):
     """
     Compute the covert mobility index.
