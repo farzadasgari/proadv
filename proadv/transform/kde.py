@@ -46,3 +46,12 @@ def _discrete_cosine_1d(data, weight):
     transform = np.real(weight * np.fft.fft(reordered))
     return transform
 
+
+def _discrete_cosine_2d(data):
+    rows, columns = data.shape
+    if rows != columns:
+        raise ValueError('Data shape must be square')
+    indices = np.arange(1, rows)
+    w = np.concatenate(([1], 2 * np.exp(-1j * indices * np.pi / (2 * rows))))
+    weight = np.tile(w[:, np.newaxis], (1, columns))
+    discrete = _discrete_cosine_1d(_discrete_cosine_1d(data, weight).T, weight).T
