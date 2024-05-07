@@ -22,9 +22,7 @@ def calculate_ab(std1, std2, theta, lambda_):
     fact = np.cos(theta) ** 4 - np.sin(theta) ** 4
     fa = (r1 ** 2 * np.cos(theta) ** 2 - r2 ** 2 * np.sin(theta) ** 2) / fact
     fb = (r2 ** 2 * np.cos(theta) ** 2 - r1 ** 2 * np.sin(theta) ** 2) / fact
-    sqrt_fb = np.sqrt(fb) if fa > 0 and fb > 0 else (1e10, 1e10)
-    sqrt_fa = np.sqrt(fa)
-    return sqrt_fa, sqrt_fb
+    return np.sqrt(fa), np.sqrt(fb) if fa > 0 and fb > 0 else (1e10, 1e10)
 
 
 def calculate_rho(x, y, theta, a, b):
