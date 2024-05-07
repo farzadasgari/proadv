@@ -44,7 +44,8 @@ def min(x):
         if np.isnan(x).any():
             raise ValueError(
                 "The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
-        return np.min(x)
+        min_x = np.min(x)
+        return min_x
 
     except TypeError as te:
         raise TypeError(f"Type Error: {te}")
