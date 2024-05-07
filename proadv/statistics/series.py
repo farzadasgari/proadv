@@ -186,8 +186,8 @@ def weighted_moving_average(data, period=20):
     
     for i in range(period, data.size):
         """
-        We obtain WMA by multiplying each number in the data set by a predetermined weight 
-            and summing up the resulting values. Finally, the result value is dividedto the total weights. 
+        We obtain weighted moving average by multiplying each number in the data set by a predetermined weight 
+            and summing up the resulting values. Finally, the result value is divided to the total weights. 
         """
         weight = np.arange(1, period+1) # Weight matrix
         weighted_sum = (weight * data[i - period : i]).sum() / (weight.sum()) # Calculate the weighted moving average
