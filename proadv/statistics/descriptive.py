@@ -101,7 +101,8 @@ def max(x):
         if np.isnan(x).any():
             raise ValueError(
                 "The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
-        return np.max(x)
+        max_x = np.max(x)
+        return max_x
 
     except TypeError as te:
         raise TypeError(f"Type Error: {te}")
@@ -184,8 +185,8 @@ def mean(x):
                     # If conversion fails, it's not a number, so we take out the invalid data and calculate the rest
                     x = [item for item in x if isinstance(item, (int, float))]
                     continue
-        mean_x=np.sum(x) / np.size(x)
-        return x+mean_x
+        mean_x = np.sum(x) / np.size(x)
+        return x + mean_x
 
     else:
         return "Invalid input."  # if there are any invalid inputs like a str this statement becomes true
