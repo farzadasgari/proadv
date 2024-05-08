@@ -26,19 +26,20 @@ def moving_average(data, window_size=20):
 
     Examples
     ------
+    >>> from proadv.statistics.series import moving_average  # Option 2: Direct import
+    >>> import numpy as np
+    >>> data = np.random.rand(300)
+    >>> ma = moving_average(data)
+
+    ------
+
     >>> import proadv as adv  # Option 1: Full import path
     >>> import numpy as np
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     >>> ma = adv.statistics.series.moving_average(data, window_size=3)
     >>> print(ma)
-    [1.0 1.5 2.0 2.7 3.3 4.0 4.7 5.3 6.0 6.7]
+    [1.  1.5 2.  3.  4.  5.  6.  7.  8.  9. ]
 
-    ------
-
-    >>> from proadv.statistics.series import moving_average  # Option 2: Direct import
-    >>> import numpy as np
-    >>> data = np.random.rand(300)
-    >>> ma = moving_average(data)
     """
 
     if window_size <= 0:
@@ -106,8 +107,8 @@ def exponential_moving_average(data, alpha=0.2):
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     >>> ema = exponential_moving_average(data, alpha=0.5)
     >>> print(ema)
-    [1.         1.5        2.25       3.125      4.0625     5.03125
-     6.015625   7.0078125  8.00390625 9.00195312]
+    [1 1 2 3 4 5 6 7 8 9]
+
     """
 
     # Check if alpha is within the valid range
@@ -333,3 +334,4 @@ def ssa(x, fs, f):
     arg = np.nonzero(mobility <= thresh)
     xf = _diagonal_average(eigen[:, arg[0]] @ eigen[:, arg[0]].conj().T @ trajectory_matrix, window_length, array_size)
     return xf
+

@@ -36,7 +36,7 @@ def skewness(data):
     >>> import numpy as np
     >>> data = np.array([2, 8, 0, 4, 1, 9, 9, 0]) 
     >>> skew = adv.statistics.moment.skewness(data)
-    >>> print(data)
+    >>> print(skew)
     0.2650554122698573
 
     ------
@@ -52,7 +52,7 @@ def skewness(data):
     >>> import numpy as np
     >>> data = np.arange(1,6)
     >>> skew = adv.statistics.moment.skewness(data)
-    >>> print(data)
+    >>> skew
     0.0
     """
     n = np.size(data)
@@ -71,16 +71,15 @@ def kurtosis(x):
     Compute the kurtosis of a dataset.
 
     Kurtosis is a measure of the "tailedness" of the probability distribution of a real-valued random variable.
-    This function calculates kurtosis using the Pearson method, which is the standardized fourth central moment.
+        This function calculates kurtosis using the Pearson method, which is the standardized fourth central moment.
 
     Parameters
     ------
-    x : array_like : n array containing the data points. The array will be flattened if it is not already 1-D.
+    x (array_like): An array containing the data points. The array will be flattened if it is not already 1-D.
 
     Returns
     ------
-    float : The kurtosis of the dataset. If the input contains NaNs, the function will return NaN.
-
+    standardized_moment (float): The kurtosis of the dataset. If the input contains NaNs, the function will return NaN.
 
     Notes
     ------
@@ -88,17 +87,20 @@ def kurtosis(x):
     computes the fourth central moment, and then standardizes it to find the kurtosis.
 
     Examples
-    --------
-    >>> import proadv as adv # Option 1: Full import path
-    >>> import numpy as np
-    >>> data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
-    >>> adv.statistics.moment.kurtosis(data)
-    2.2
     ------
     >>> from proadv.statistics.moment import kurtosis # Option 2: Direct import
     >>> import numpy as np
+    >>> array = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
+    >>> kurt = kurtosis(array)
+    >>> kurt
+    2.2
+
+    ------
+    >>> import proadv as adv # Option 1: Full import path
+    >>> import numpy as np
     >>> data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
-    >>> kurtosis(data)
+    >>> kurt = adv.statistics.moment.kurtosis(data)
+    >>> kurt
     2.2
     """
 

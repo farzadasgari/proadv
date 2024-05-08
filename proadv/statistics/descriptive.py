@@ -38,7 +38,8 @@ def min(data):
     >>> import numpy as np
     >>> data = np.array([1, 2, np.nan, 4, 5])
     >>> minimum = min(data)
-    >>> print(minimum)
+    Traceback (most recent call last):
+       raise ValueError("The array contains NaN values. The min function cannot be applied to arrays with NaN values.")
     ValueError: The array contains NaN values. The min function cannot be applied to arrays with NaN values.
 
     ------
@@ -87,6 +88,16 @@ def max(data):
 
     Examples
     ------
+    >>> from proadv.statistics.descriptive import max
+    >>> import numpy as np
+    >>> data = np.array([1, 2, np.nan, 4, 5])
+    >>> maximum = max(data)
+    Traceback (most recent call last):
+        raise ValueError("The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
+    ValueError: The array contains NaN values. The max function cannot be applied to arrays with NaN values.
+
+    ------
+
     >>> import proadv as adv 
     >>> import numpy as np
     >>> data = np.array([1, 2, 3, 4, 5])
@@ -96,13 +107,7 @@ def max(data):
 
     ------
 
-    >>> from proadv.statistics.descriptive import max 
-    >>> import numpy as np
-    >>> data = np.array([1, 2, np.nan, 4, 5]))
-    >>> maximum = max(data)
-    ValueError: The array contains NaN values. The max function cannot be applied to arrays with NaN values.
 
-    ------
 
     >>> from proadv.statistics.descriptive import max 
     >>> import numpy as np
@@ -162,7 +167,7 @@ def mean(array):
     >>> array = np.array([1, 2, 3])
     >>> mean_array = adv.statistics.descriptive.mean(array)
     >>> print(mean_array)
-    2
+    2.0
 
     ------
 
@@ -170,6 +175,7 @@ def mean(array):
     >>> import numpy as np
     >>> array = np.array([1, 2, 3, 4, 5])
     >>> mean_array = mean(array)
+    >>> print(mean_array)
     3.0
 
     ------
@@ -188,7 +194,7 @@ def mean(array):
     >>> array = np.array([])
     >>> mean_array = adv.statistics.descriptive.mean(array)
     >>> print(mean_array)
-    'Invalid input.'
+    Invalid input.
     """
 
     if isinstance(array, (int, float)):
@@ -299,10 +305,10 @@ def mode(data):
     >>> import numpy as np
     >>> data = np.array([3, 0, 3, 7, 2])
     >>> values, counts = adv.statistics.descriptive.mode(data)
-    >>> print(f"mode:",values)
-    >>> print(f"count:",counts)
-    mode: 3
-    count: 2
+    >>> values
+    3
+    >>> counts
+    2
 
     ------
 
@@ -310,10 +316,10 @@ def mode(data):
     >>> import numpy as np
     >>> data = np.array([4, 6, 12, 4, 15, 4, 6, 16])
     >>> values, counts = mode(data)
-    >>> print(f"mode:",values)
-    >>> print(f"count:",counts)
-    mode: 4
-    count: 3
+    >>> values
+    4
+    >>> counts
+    3
     """
     values, counts = np.unique(data, return_counts=True)  # Unique values ​​and replicate counts are calculated
     max_count = np.argmax(counts)  # Calculate the indices of the maximum values ​​in the count array
