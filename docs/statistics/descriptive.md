@@ -62,3 +62,44 @@ Examples
     >>> maximum = max(data)
     >>> print(maximum)
     9
+
+
+# Mean Function
+
+Return the mean of a dataset, handling non-numeric and numeric data. Dataset can be a single number, a list of numbers, or a list containing both numbers and strings. Non-numeric strings are converted to floats if possible, and ignored if not. 
+
+- Examples:
+
+>>>
+    >>> import proadv as adv 
+    >>> import numpy as np
+    >>> array = np.array([1, 2, 3])
+    >>> mean_array = adv.statistics.descriptive.mean(array)
+    >>> print(mean_array)
+    2.0
+
+>>>
+    >>> from proadv.statistics.descriptive import mean 
+    >>> import numpy as np
+    >>> array = np.array([1, 2, 3, 4, 5])
+    >>> mean_array = mean(array)
+    >>> print(mean_array)
+    3.0
+
+>>>
+    >>> from proadv.statistics.descriptive import mean 
+    >>> import numpy as np
+    >>> array = np.array([1, '2', 3.5, 'not a number'])
+    >>> mean_array = mean(array)
+    >>> print(mean_array)
+    2.1666666666666665
+
+>>>
+    >>> import proadv as adv 
+    >>> import numpy as np
+    >>> array = np.array([])
+    >>> mean_array = adv.statistics.descriptive.mean(array)
+    >>> print(mean_array)
+    Invalid input.
+
+
