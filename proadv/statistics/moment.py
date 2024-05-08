@@ -9,7 +9,7 @@ def skewness(data):
 
     Parameters
     ------
-    data (np.ndarray): The 1D array of data for which to calculate the Skewness. 
+    data (array_like): The 1D array of data for which to calculate the Skewness.
 
     Returns
     ------
@@ -32,23 +32,23 @@ def skewness(data):
 
     Examples
     ------
-    >>> import proadv as adv # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([2, 8, 0, 4, 1, 9, 9, 0]) 
     >>> skew = adv.statistics.moment.skewness(data)
-    >>> print(skew)
+    >>> skew
     0.2650554122698573
 
     ------
 
-    >>> from proadv.statistics.moment import skewness # Option 2: Direct import
+    >>> from proadv.statistics.moment import skewness
     >>> import numpy as np
     >>> data = np.random.rand(20)
     >>> skew = skewness(data) 
 
     ------
 
-    >>> import proadv as adv # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.arange(1,6)
     >>> skew = adv.statistics.moment.skewness(data)
@@ -88,7 +88,7 @@ def kurtosis(x):
 
     Examples
     ------
-    >>> from proadv.statistics.moment import kurtosis # Option 2: Direct import
+    >>> from proadv.statistics.moment import kurtosis
     >>> import numpy as np
     >>> array = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
     >>> kurt = kurtosis(array)
@@ -96,7 +96,7 @@ def kurtosis(x):
     2.2
 
     ------
-    >>> import proadv as adv # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
     >>> kurt = adv.statistics.moment.kurtosis(data)
