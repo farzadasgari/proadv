@@ -138,7 +138,7 @@ It returns:
 1. **mode_value (int)**: The mode of the data
 2. **frequency (int)**: The number of repetitions of the mode
 
-- Exampls:
+- Examples:
 
 >>>
     >>> import proadv as adv
