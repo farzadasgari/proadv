@@ -7,13 +7,13 @@ def _descript(c, iteration, c_mean):
 
     Parameters
     ------
-    c (numpy.ndarray): Input data.
+    c (array_like): Input data.
     iteration (int): Loop counter.
     c_mean (float): Mean value of input data.
 
     Returns
     ------
-    f (numpy.ndarray): Centered input data.
+    f (array_like): Centered input data.
     f_mean (float): Updated mean value.
     """
     if iteration == 1:
@@ -30,12 +30,12 @@ def _gradients(c):
 
     Parameters
     ------
-    c (numpy.ndarray): Input data.
+    c (array_like): Input data.
 
     Returns
     ------
-    dc (numpy.ndarray): First order derivative of the input data.
-    dc2 (numpy.ndarray): Second order derivative of the input data.
+    dc (array_like): First order derivative of the input data.
+    dc2 (array_like): Second order derivative of the input data.
     """
     dc = np.gradient(c)
     dc2 = np.gradient(dc)
@@ -48,15 +48,15 @@ def _rotation(c, dc, dc2, theta):
 
     Parameters
     ------
-    c (numpy.ndarray): Input data.
-    dc (numpy.ndarray): First order derivative of the input data.
-    dc2 (numpy.ndarray): Second order derivative of the input data.
+    c (array_like): Input data.
+    dc (array_like): First order derivative of the input data.
+    dc2 (array_like): Second order derivative of the input data.
 
     Returns
     ------
-    x (numpy.ndarray): Rotated X-axis data.
-    y (numpy.ndarray): Rotated Y-axis data.
-    z (numpy.ndarray): Rotated Z-axis data.
+    x (array_like): Rotated X-axis data.
+    y (array_like): Rotated Y-axis data.
+    z (array_like): Rotated Z-axis data.
     """
     if theta == 0:
         x = c.copy()
@@ -80,9 +80,9 @@ def _parameters(x, y, z):
 
     Parameters
     ------
-    x (numpy.ndarray): Rotated X-axis data.
-    y (numpy.ndarray): Rotated Y-axis data.
-    z (numpy.ndarray): Rotated Z-axis data.
+    x (array_like): Rotated X-axis data.
+    y (array_like): Rotated Y-axis data.
+    z (array_like): Rotated Z-axis data.
 
     Returns
     ------
@@ -103,9 +103,9 @@ def _spike_indices(x, y, z, a, b, c):
 
     Parameters
     ------
-    x (numpy.ndarray): Rotated X-axis data.
-    y (numpy.ndarray): Rotated Y-axis data.
-    z (numpy.ndarray): Rotated Z-axis data.
+    x (array_like): Rotated X-axis data.
+    y (array_like): Rotated Y-axis data.
+    z (array_like): Rotated Z-axis data.
     a (float): Coefficient 'a'.
     b (float): Coefficient 'a'.
     c (float): Coefficient 'a'.
@@ -145,13 +145,13 @@ def spherical_phasespace_thresholding(c, iteration, c_mean):
 
     Parameters
     ------
-    c (numpy.ndarray): Velocity component
+    c (array_like): Velocity component
     iteration (int): Loop counter.
     c_mean (float): Mean of the velocity component
 
     Returns
     ------
-    spherical_indices (numpy.ndarray): Array containing the indices of detected spikes.
+    spherical_indices (array_like): Array containing the indices of detected spikes.
 
     References
     ------
