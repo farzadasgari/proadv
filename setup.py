@@ -14,6 +14,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/farzadasgari/proadv",
+    license_file='https://raw.githubusercontent.com/farzadasgari/proadv/main/LICENSE?token=GHSAT0AAAAAACPXOXAUNB5KQHWKTYNW7UN6ZR3YF6Q',
     packages=find_packages(),
     install_requires=[
         "numpy>=1.0",
