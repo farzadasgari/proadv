@@ -1,6 +1,6 @@
 # Min Function
 
-Return the minimum of an array input while checking for NaN values. If NaN values are present, it raises a ValueError. 
+Return the `minimum` of an array input while checking for NaN values. If NaN values are present, it raises a ValueError. 
 It also handles various exceptions that may occur during the operation.
 
 - Examples:
@@ -31,12 +31,10 @@ It also handles various exceptions that may occur during the operation.
 
 # Max Function
 
-Return the maximum of an array input while checking for NaN values. If NaN values are present, it raises a ValueError. 
+Return the `maximum` of an array input while checking for NaN values. If NaN values are present, it raises a ValueError. 
 It also handles various exceptions that may occur during the operation.
 
 - Examples:
-
-Examples
 
 >>>
     >>> from proadv.statistics.descriptive import max
@@ -66,7 +64,7 @@ Examples
 
 # Mean Function
 
-Return the mean of a dataset, handling non-numeric and numeric data. Dataset can be a single number, a list of numbers, or a list containing both numbers and strings. Non-numeric strings are converted to floats if possible, and ignored if not. 
+Return the `mean` of a dataset, handling non-numeric and numeric data. Dataset can be a single number, a list of numbers, or a list containing both numbers and strings. Non-numeric strings are converted to floats if possible, and ignored if not. 
 
 - Examples:
 
@@ -105,7 +103,7 @@ Return the mean of a dataset, handling non-numeric and numeric data. Dataset can
 
 # Median Function
 
-Returnn the median along the specified axis. If the element of array is a string, it raises a TypeError. 
+Returnn the `median` along the specified axis. If the element of array is a string, it raises a TypeError. 
 Also, If the array is empty, it raises a ValueError.
 
 - Examples:
