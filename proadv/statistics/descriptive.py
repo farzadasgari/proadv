@@ -11,7 +11,7 @@ def min(data):
 
     Parameters
     ------
-    data (np.ndarray): The input data which should be an array or any array-like structure.
+    data (array_like): The input data which should be an array or any array-like structure.
 
     Returns
     ------
@@ -29,7 +29,7 @@ def min(data):
     >>> import numpy as np
     >>> data = np.array([1, 2, 3, 4, 5])
     >>> minimum = adv.statistics.descriptive.min(data)
-    >>> print(minimum)
+    >>> minimum
     1
     
     ------
@@ -74,7 +74,7 @@ def max(data):
 
     Parameters
     ------
-    data (np.ndarray): The input data which should be an array or any array-like structure.
+    data (array_like): The input data which should be an array or any array-like structure.
 
     Returns
     ------
@@ -102,7 +102,7 @@ def max(data):
     >>> import numpy as np
     >>> data = np.array([1, 2, 3, 4, 5])
     >>> maximum = adv.statistics.descriptive.max(data)
-    >>> print(maximum)
+    >>> maximum
     5
 
     ------
@@ -113,7 +113,7 @@ def max(data):
     >>> import numpy as np
     >>> data = np.arange(2,10)
     >>> maximum = max(data)
-    >>> print(maximum)
+    >>> maximum
     9
     """
     
@@ -145,7 +145,7 @@ def mean(array):
 
     Parameters
     ------
-    array (numeric, np.ndarray): The input data. Can be a numeric or array_like value.
+    array (numeric, array_like): The input data. Can be a numeric or array_like value.
 
     Returns
     ------
@@ -166,7 +166,7 @@ def mean(array):
     >>> import numpy as np
     >>> array = np.array([1, 2, 3])
     >>> mean_array = adv.statistics.descriptive.mean(array)
-    >>> print(mean_array)
+    >>> mean_array
     2.0
 
     ------
@@ -175,7 +175,7 @@ def mean(array):
     >>> import numpy as np
     >>> array = np.array([1, 2, 3, 4, 5])
     >>> mean_array = mean(array)
-    >>> print(mean_array)
+    >>> mean_array
     3.0
 
     ------
@@ -184,7 +184,7 @@ def mean(array):
     >>> import numpy as np
     >>> array = np.array([1, '2', 3.5, 'not a number'])
     >>> mean_array = mean(array)
-    >>> print(mean_array)
+    >>> mean_array
     2.1666666666666665
 
     ------
@@ -193,8 +193,8 @@ def mean(array):
     >>> import numpy as np
     >>> array = np.array([])
     >>> mean_array = adv.statistics.descriptive.mean(array)
-    >>> print(mean_array)
-    Invalid input.
+    >>> mean_array
+    'Invalid input.'
     """
 
     if isinstance(array, (int, float)):
@@ -235,7 +235,7 @@ def median(data):
 
     Parameters
     ------
-    data (np.ndarray): The 1D array of data for which to calculate the Median. 
+    data (array_like): The 1D array of data for which to calculate the Median.
 
     Returns
     ------
@@ -252,7 +252,7 @@ def median(data):
     >>> import numpy as np
     >>> data = np.array([14, 8, 11, 10, 5, 7])
     >>> med = adv.statistics.descriptive.median(data)
-    >>> print(med)
+    >>> med
     9.0
     
     ------
@@ -268,7 +268,7 @@ def median(data):
     >>> import numpy as np 
     >>> data = np.arange(14,45)
     >>> med = adv.statistics.descriptive.median(data)
-    >>> print(med)
+    >>> med
     29.0
     """
 
@@ -291,7 +291,7 @@ def mode(data):
 
     Parameters
     ------
-    data (np.ndarray): The 1D array of data for which to calculate the Mode.
+    data (array_like): The 1D array of data for which to calculate the Mode.
 
     Returns:
     ------

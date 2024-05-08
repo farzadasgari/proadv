@@ -11,7 +11,7 @@ def cdf(array):
 
     Parameters
     ------
-    array (np.ndarray): The input data which should be an array or any array-like structure.
+    array (array_like): The input data which should be an array or any array-like structure.
 
     Returns
     ------
@@ -31,8 +31,8 @@ def cdf(array):
     >>> import numpy as np
     >>> array = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
     >>> cdf_array = cdf(array)
-    >>> print(cdf_array)
-    [0.66780212 0.72994878 0.49735891 0.6718849  0.65784697]
+    >>> cdf_array
+    array([0.66780212, 0.72994878, 0.49735891, 0.6718849 , 0.65784697])
 
 
     >>> import proadv as adv
@@ -79,7 +79,7 @@ def pdf(array, std=1, mean=0):
 
         Parameters
         ------
-        array (np.ndarray): The input data which should be an array or any array-like structure.
+        array (array_like): The input data which should be an array or any array-like structure.
 
         Returns
         ------
@@ -99,8 +99,8 @@ def pdf(array, std=1, mean=0):
         >>> import numpy as np
         >>> array = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
         >>> pdf_array = pdf(array)
-        >>> print(pdf_array)
-        [0.36310893 0.33067691 0.39893354 0.36131462 0.36729206]
+        >>> pdf_array
+        array([0.36310893, 0.33067691, 0.39893354, 0.36131462, 0.36729206])
 
         >>> import proadv as adv
         >>> import numpy as np
