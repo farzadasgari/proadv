@@ -29,7 +29,7 @@ def variance(data):
 
     ------
 
-    >>> from adv.statistics.spread import variance # Option 2: Direct import
+    >>> from proadv.statistics.spread import variance # Option 2: Direct import
     >>> import numpy as np
     >>> data = np.random.randn(20)
     >>> var = variance(data)
@@ -78,19 +78,22 @@ def std(data):
 
     Examples
     ------
-    >>> import proadv as adv  # Option 1: Full import path
-    >>> import numpy as np  
-    >>> data = np.array([14, 8, 11, 10, 5, 7])
-    >>> stdev = adv.statistics.spread.std(data)
-    >>> print(stdev)
-    2.9107081994288304
 
-    ------
+
     
     >>> from proadv.statistics.spread import std  # Option 2: Direct import
     >>> import numpy as np
     >>> data = np.random.rand(25)
     >>> stdev = std(data)
+
+    ------
+
+    >>> import proadv as adv  # Option 1: Full import path
+    >>> import numpy as np
+    >>> data = np.array([14, 8, 11, 10, 5, 7])
+    >>> stdev = adv.statistics.spread.std(data)
+    >>> print(stdev)
+    2.9107081994288304
 
     ------
 
