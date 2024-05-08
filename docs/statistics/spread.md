@@ -28,3 +28,12 @@ In this function:
     >>> var = adv.statistics.spread.variance(data)
     >>> var
     18.666666666666668
+
+
+# STD Function
+
+Return the `standard deviation` along the specified axis. 
+If out is None, return a new array containing the standard deviation, otherwise return a reference to the output array. 
+In this function:
+1. If the element of array is a string, it raises a TypeError.
+2. If the array is empty, it raises a ValueError.
