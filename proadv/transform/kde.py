@@ -1,4 +1,5 @@
 import numpy as np
+from scipy import optimize
 
 
 def _rotation(x, y):
@@ -100,3 +101,53 @@ def _func(s, t, n_sample: int, initial_condition, autocorrelation_squared):
     else:
         out = _psi(s, t, initial_condition, autocorrelation_squared)
     return out
+
+
+def root(fun, n):
+    max_tol = 0.1
+    n = 50 * int(n <= 50) + 1050 * int(n >= 1050) + n * int((n < 1050) & (n > 50))
+    tol = 10 ** -12 + 0.01 * (n - 50) / 1000
+    solved = False
+    while not solved:
+        try:
+            t = optimize.brentq(f=fun, a=0, b=tol)
+            solved = True
+        except ValueError:
+            tol = min(tol * 2, max_tol)
+        if tol >= max_tol:
+            t = optimize.fminbound(func=lambda x: abs(fun(x)), x1=0, x2=0.1)
+            solved = True
+    return t
+
+
+def bivariate_kernel(data, hx, hy, grid):
+    data_size = data.size
+    max_co, min_co, scale = _scaling(data)
+    transformed_data = _transform(data, max_co, min_co, scale)
+    binned_data = _histogram(transformed_data, grid)
+    discrete = _discrete_cosine_2d(binned_data)
+    ic = np.arange(0, discrete.shape[0], 1, dtype=float) ** 2
+    ac2 = discrete ** 2
+    t_star = root(lambda t: t - _evolve(t, data_size, ic, ac2)[0], n=data_size)
+
+    def _temp(s, t):
+        return _func(s, t, data.shape[1], ic, ac2)
+
+    p_02 = _temp([0, 2], t_star)
+    p_20 = _temp([2, 0], t_star)
+    p_11 = _temp([1, 1], t_star)
+    t_y = (p_02 ** (3 / 4) / (4 * np.pi * data.shape[1] * p_20 ** (3 / 4) * (p_11 + np.sqrt(p_20 * p_02)))) ** (1 / 3)
+    t_x = (p_20 ** (3 / 4) / (4 * np.pi * data.shape[1] * p_02 ** (3 / 4) * (p_11 + np.sqrt(p_20 * p_02)))) ** (1 / 3)
+    n_range = np.arange(0, grid, dtype=float)
+    v1 = np.atleast_2d(np.exp(-(n_range ** 2) * np.pi ** 2 * t_x / 2)).T
+    v2 = np.atleast_2d(np.exp(-(n_range ** 2) * np.pi ** 2 * t_y / 2))
+    a_t = np.matmul(v1, v2) * discrete
+    density_mx = _discrete_cosine_2d(a_t) * (a_t.size / np.prod(scale))
+    density_mx[density_mx < 0] = np.finfo(float).eps
+    x_step = scale[0] / (grid - 1)
+    y_step = scale[1] / (grid - 1)
+    x_vec = np.arange(start=min_co[0], stop=max_co[0] + 0.1 * x_step, step=x_step)
+    y_vec = np.arange(start=min_co[1], stop=max_co[1] + 0.1 * y_step, step=y_step)
+    x_mx, y_mx = np.meshgrid(x_vec, y_vec)
+    density_mx = density_mx.T
+    return density_mx, x_mx, y_mx
