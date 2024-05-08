@@ -1,6 +1,6 @@
 # Variance Function
 
-Return the `variance` along the specified axis. 
+Compute the `variance` along the specified axis of a 1D array. 
 In this function:
 1. If the element of array is a string, it raises a TypeError.
 2. If the array is empty, it raises a ValueError.
@@ -32,7 +32,7 @@ In this function:
 
 # STD Function
 
-Return the `standard deviation` along the specified axis. 
+Compute the `standard deviation` along the specified axis of a 1D array. 
 If out is None, return a new array containing the standard deviation, otherwise return a reference to the output array. 
 In this function:
 1. If the element of array is a string, it raises a TypeError.
