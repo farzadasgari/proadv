@@ -121,3 +121,16 @@ def phasespace_thresholding(c):
     phase_indices = np.sort(np.unique(np.concatenate((x1, x2, x3))))
 
     return phase_indices
+
+
+def phasespace_thresholding_premodification(data, c1=1.5, c2=1.35):
+    data_size = data.size
+    theta = np.median(np.absolute(data - np.median(data)))
+    unremovable_indices = np.intersect1d(np.nonzero(data >= -c1 * theta)[0], np.nonzero(data <= c1 * theta)[0])
+    removable_threshold = c2 * theta * np.sqrt(2 * np.log(data_size))
+    removable_indices = np.intersect1d(np.nonzero(data > removable_threshold)[0],
+                                       np.nonzero(data < -removable_threshold)[0])
+
+    for i in removable_indices:
+        data[i] = data[i - 1]
+    return data, unremovable_indices
