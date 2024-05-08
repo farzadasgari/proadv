@@ -34,3 +34,11 @@ There are two parameters in this function:
 1. **data (array_like)**: The 1D array of data for which to calculate the exponential moving average.
 2. **alpha (float, optional)**: Smoothing factor between 0 and 1. Higher alpha discounts older observations faster. Default is 0.2.
 
+Example:
+
+>>>
+    >>> import numpy as np
+    >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    >>> ema = exponential_moving_average(data, alpha=0.5)
+    >>> ema
+    array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
