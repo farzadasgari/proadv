@@ -1,5 +1,6 @@
 import numpy as np
 from proadv.statistics.descriptive import mean
+from scipy.interpolate import interp1d
 
 
 def last_valid_data(velocities, spike_indices):
@@ -136,4 +137,18 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
             modified_data[start:end + 1] = fallback_value
 
     # Round the interpolated values to the specified number of decimal places
+    return np.around(modified_data, decimals=decimals)
+
+
+def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
+    modified_data = velocities.copy()
+    modified_data[spike_indices] = np.nan
+    x = np.array(list(range(1, 13)) + list(range(14, 26)))
+    for i in spike_indices:
+        if i <= 30 or i >= (len(velocities) - 30):
+            velocities[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2, 4)
+        else:
+            yint = np.delete(np.append(velocities[i - 13:i], modified_data[i:][~np.isnan(modified_data[i:])][0:12]), 12)
+            f = interp1d(x, yint, 3)
+            modified_data[i] = f(13)
     return np.around(modified_data, decimals=decimals)
