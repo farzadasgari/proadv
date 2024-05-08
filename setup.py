@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 # Setting up
 setup(
     name="proadv",
-    version="1.3.1",
+    version="1.4.5",
     author="Farzad Asgari",
     author_email="std_farzad.asgari@alumni.khu.ac.ir",
     packages=find_packages(),
@@ -26,6 +26,7 @@ setup(
     long_description_content_type="text/markdown",
     install_requires=[
         "numpy",
+        "scipy"
     ],
     keywords=[
         "ProADV",
