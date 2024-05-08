@@ -85,6 +85,16 @@ In this function, The obfuscated mobility value, representing the hidden pattern
 Calculate the `diagonal average` of a matrix with complex patterns.
 
 There are three parameters in this function:
-1. matrix (array_like): Input matrix with hidden patterns.
-2. length (int): Length parameter affecting the calculation.
-3. size (int): Size parameter affecting the calculation.
+1. **matrix (array_like)**: Input matrix with hidden patterns.
+2. **length (int)**: Length parameter affecting the calculation.
+3. **size (int)**: Size parameter affecting the calculation.
+
+
+# SSA Function
+
+Perform `Singular Spectrum Analysis (SSA)` on a given signal. It returns filtered signal after SSA.
+
+There are three parameters in this function:
+1. **x (array_like)**: Input signal.
+2. **fs (float/int)**: Sampling frequency of the signal.
+3. **f (float/int)**: maximum frequency of the signal of interest.
