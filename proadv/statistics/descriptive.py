@@ -305,10 +305,10 @@ def mode(data):
     >>> import numpy as np
     >>> data = np.array([3, 0, 3, 7, 2])
     >>> values, counts = adv.statistics.descriptive.mode(data)
-    >>> print(f"mode:",values)
-    mode: 3
-    >>> print(f"count:",counts)
-    count: 2
+    >>> values
+    3
+    >>> counts
+    2
 
     ------
 
@@ -316,10 +316,10 @@ def mode(data):
     >>> import numpy as np
     >>> data = np.array([4, 6, 12, 4, 15, 4, 6, 16])
     >>> values, counts = mode(data)
-    >>> print(f"mode:",values)
-    mode: 4
-    >>> print(f"count:",counts)
-    count: 3
+    >>> values
+    4
+    >>> counts
+    3
     """
     values, counts = np.unique(data, return_counts=True)  # Unique values ​​and replicate counts are calculated
     max_count = np.argmax(counts)  # Calculate the indices of the maximum values ​​in the count array
