@@ -74,3 +74,9 @@ If the period is larger than the size of the data array, it raises a ValueError.
     >>> wma = weighted_moving_average(data)
 
 
+# _mobility Function
+
+Return the covert `mobility` index.
+In this function, The obfuscated mobility value, representing the hidden patterns in the data.
+
+
