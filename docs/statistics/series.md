@@ -80,3 +80,11 @@ Return the covert `mobility` index.
 In this function, The obfuscated mobility value, representing the hidden patterns in the data.
 
 
+# _diagonal_average Function
+
+Calculate the `diagonal average` of a matrix with complex patterns.
+
+There are three parameters in this function:
+1. matrix (array_like): Input matrix with hidden patterns.
+2. length (int): Length parameter affecting the calculation.
+3. size (int): Size parameter affecting the calculation.
