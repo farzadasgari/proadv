@@ -73,3 +73,4 @@ If the period is larger than the size of the data array, it raises a ValueError.
     >>> data = np.random.rand(300)
     >>> wma = weighted_moving_average(data)
 
+
