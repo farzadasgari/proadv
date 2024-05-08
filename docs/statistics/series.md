@@ -44,3 +44,15 @@ If alpha is not between 0 and 1 (inclusive), It raises a ValueError.
     >>> ema = exponential_moving_average(data, alpha=0.5)
     >>> ema
     array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+
+# Weighted Moving Average Function
+
+Calculates the `weighted moving average` of a 1D array. 
+The weighted moving average (WMA) is a type of moving average that assigns a greater weighting to the most recent data points, and less weighting to data points in the distant past.
+
+There are two parameters in this function:
+1. **data (array_like)**: The 1D array of data for which to calculate the weighted moving average.
+2. **period (int, optional)**: The period for the weighted moving average. Defaults to 20. Must be less than or equal to the size of the data array.
+If the period is larger than the size of the data array, it raises a ValueError. 
+
