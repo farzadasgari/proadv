@@ -1,4 +1,7 @@
-# Min Function
+# Statistical Analysis: 
+ProADV equips you with essential statistical tools to characterize your ADV data:
+
+## Min Function
 
 Return the `minimum` of an array input while checking for NaN values. If NaN values are present, it raises a ValueError. 
 It also handles various exceptions that may occur during the operation.
@@ -29,7 +32,7 @@ It also handles various exceptions that may occur during the operation.
     >>> minimum = min(data)
 
 
-# Max Function
+## Max Function
 
 Return the `maximum` of an array input while checking for NaN values. If NaN values are present, it raises a ValueError. 
 It also handles various exceptions that may occur during the operation.
@@ -62,7 +65,7 @@ It also handles various exceptions that may occur during the operation.
     9
 
 
-# Mean Function
+## Mean Function
 
 Return the `mean` of a dataset, handling non-numeric and numeric data. Dataset can be a single number, a list of numbers, or a list containing both numbers and strings. Non-numeric strings are converted to floats if possible, and ignored if not. 
 
@@ -101,7 +104,7 @@ Return the `mean` of a dataset, handling non-numeric and numeric data. Dataset c
     Invalid input.
 
 
-# Median Function
+## Median Function
 
 Returnn the `median` along the specified axis. If the element of array is a string, it raises a TypeError. 
 Also, If the array is empty, it raises a ValueError.
@@ -131,7 +134,7 @@ Also, If the array is empty, it raises a ValueError.
     29.0
 
 
-# Mod Function
+## Mod Function
 
 This function computes an array of the modal (most common) value in the passed array. 
 It returns:
