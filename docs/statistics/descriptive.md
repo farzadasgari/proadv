@@ -131,3 +131,33 @@ Also, If the array is empty, it raises a ValueError.
     >>> med = adv.statistics.descriptive.median(data)
     >>> print(med)
     29.0
+
+
+# Mod Function
+
+This function computes an array of the modal (most common) value in the passed array. 
+It returns:
+1. **mode_value (int)**: The mode of the data
+2. **frequency (int)**: The number of repetitions of the mode
+
+- Exampls:
+
+>>>
+    >>> import proadv as adv
+    >>> import numpy as np
+    >>> data = np.array([3, 0, 3, 7, 2])
+    >>> values, counts = adv.statistics.descriptive.mode(data)
+    >>> values
+    3
+    >>> counts
+    2
+
+>>>
+    >>> from proadv.statistics.descriptive import mode
+    >>> import numpy as np
+    >>> data = np.array([4, 6, 12, 4, 15, 4, 6, 16])
+    >>> values, counts = mode(data)
+    >>> values
+    4
+    >>> counts
+    3
