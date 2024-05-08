@@ -103,3 +103,31 @@ Return the mean of a dataset, handling non-numeric and numeric data. Dataset can
     Invalid input.
 
 
+# Median Function
+
+Returnn the median along the specified axis. If the element of array is a string, it raises a TypeError. 
+Also, If the array is empty, it raises a ValueError.
+
+- Examples:
+
+>>>
+    >>> import proadv as adv
+    >>> import numpy as np
+    >>> data = np.array([14, 8, 11, 10, 5, 7])
+    >>> med = adv.statistics.descriptive.median(data)
+    >>> print(med)
+    9.0
+    
+>>>
+    >>> from proadv.statistics.descriptive import median
+    >>> import numpy as np
+    >>> data = np.random.rand(15)
+    >>> med = median(data) 
+
+>>>
+    >>> import proadv as adv
+    >>> import numpy as np 
+    >>> data = np.arange(14,45)
+    >>> med = adv.statistics.descriptive.median(data)
+    >>> print(med)
+    29.0
