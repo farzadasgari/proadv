@@ -1,4 +1,7 @@
-# Moving Average Function
+# Advanced Analysis: 
+In addition to cleaning and basic statistics, ProADV offers advanced functionalities for deeper insights:
+
+## Moving Average Function
 
 Return the `moving average` of a 1D array. This function implements a cumulative moving average calculation. It's more
 efficient than calculating a simple moving average for each element. 
@@ -25,7 +28,7 @@ If the window size is larger than the size of the data array, it raises a ValueE
     array([1. , 1.5, 2. , 3. , 4. , 5. , 6. , 7. , 8. , 9. ])
 
 
-# Exponential Moving Average Function
+## Exponential Moving Average Function
 
 Calculates the `exponential moving average` of a given data series. 
 The exponential moving average (EMA) is a type of moving average that places more weight on recent observations while still considering older data. 
@@ -46,7 +49,7 @@ If alpha is not between 0 and 1 (inclusive), It raises a ValueError.
     array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 
-# Weighted Moving Average Function
+## Weighted Moving Average Function
 
 Calculates the `weighted moving average` of a 1D array. 
 The weighted moving average (WMA) is a type of moving average that assigns a greater weighting to the most recent data points, and less weighting to data points in the distant past.
@@ -74,13 +77,13 @@ If the period is larger than the size of the data array, it raises a ValueError.
     >>> wma = weighted_moving_average(data)
 
 
-# _mobility Function
+## _mobility Function
 
 Return the covert `mobility` index.
 In this function, The obfuscated mobility value, representing the hidden patterns in the data.
 
 
-# _diagonal_average Function
+## _diagonal_average Function
 
 Calculate the `diagonal average` of a matrix with complex patterns.
 
@@ -90,7 +93,7 @@ There are three parameters in this function:
 3. **size (int)**: Size parameter affecting the calculation.
 
 
-# SSA Function
+## SSA Function
 
 Perform `Singular Spectrum Analysis (SSA)` on a given signal. It returns filtered signal after SSA.
 
