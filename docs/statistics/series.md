@@ -34,6 +34,7 @@ It is particularly useful for smoothing noisy data and identifying trends.
 There are two parameters in this function:
 1. **data (array_like)**: The 1D array of data for which to calculate the exponential moving average.
 2. **alpha (float, optional)**: Smoothing factor between 0 and 1. Higher alpha discounts older observations faster. Default is 0.2.
+If alpha is not between 0 and 1 (inclusive), It raises a ValueError. 
 
 - Example:
 
