@@ -37,3 +37,19 @@ This function:
 3. computes the fourth central moment
 4. and then standardizes it to find the kurtosis
 
+- Examples:
+
+>>> from proadv.statistics.moment import kurtosis  # Option 2: Direct import
+    >>> import numpy as np
+    >>> data = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
+    >>> kurt = kurtosis(data)
+    >>> kurt
+    2.2
+
+>>>
+    >>> import proadv as adv  # Option 1: Full import path
+    >>> import numpy as np
+    >>> data = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
+    >>> kurt = adv.statistics.moment.kurtosis(data)
+    >>> kurt
+    2.2
