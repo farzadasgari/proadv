@@ -1,32 +1,23 @@
 from setuptools import setup, find_packages
 
+# Read the contents of the README file for the long description
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
 # Setting up
 setup(
     name="proadv",
     version="1.4.6",
     author="Farzad Asgari",
     author_email="std_farzad.asgari@alumni.khu.ac.ir",
-    packages=find_packages(),
-    short_description="ProAdv: Process Acoustic Doppler Velocimeter data with advanced despiking and analysis tools",
-    long_description="""
-    ProAdv is a Python package designed for post-processing acoustic Doppler velocimeter (ADV) datasets. It offers a comprehensive suite of tools for denoising and despiking ADV data, ensuring reliable and accurate measurements.
-
-    **Key Features:**
-
-    * Advanced Despiking Algorithms: Employ robust methods like ACC, PST, mPST, VC, KDE, 3d-KDE, and m3d-KDE to effectively remove noise and outliers.
-    * Comprehensive Statistical Functions: Calculate essential statistical measures like minimum, maximum, mean, median, skewness, and kurtosis to gain deeper insights into your data.
-    * Additional Analysis Tools: Analyze your data further with moving average calculations, singular spectrum analysis (SSA), and pollution rate (PR) calculation.
-
-    **Benefits:**
-
-    * Improved Data Quality: ProADV's advanced despiking algorithms ensure clean and reliable ADV data, crucial for accurate scientific analysis.
-    * Enhanced Statistical Insights: Gain a deeper understanding of your data through comprehensive statistical analysis tools.
-    * Streamlined Workflow: ProAdv provides a convenient platform for post-processing and analyzing ADV datasets.
-    """,
+    description="Process Acoustic Doppler Velocimeter data with advanced despiking and analysis tools",
+    long_description=long_description,
     long_description_content_type="text/markdown",
+    url="https://github.com/farzadasgari/proadv",
+    packages=find_packages(),
     install_requires=[
-        "numpy",
-        "scipy"
+        "numpy>=1.0",
+        "scipy>=1.0"
     ],
     keywords=[
         "ProADV",
@@ -35,6 +26,28 @@ setup(
         "data processing",
         "acoustic Doppler velocimeter",
         "ADV",
+        "Denoising",
         "Despiking",
-    ]
+    ],
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Topic :: Scientific/Engineering",
+        "Topic :: Scientific/Engineering :: Signal Processing",
+        "Topic :: Scientific/Engineering :: Denoising",
+        "Topic :: Scientific/Engineering :: Despiking",
+    ],
+    project_urls={
+        "Bug Tracker": "https://github.com/farzadasgari/proadv/issues",
+        "Documentation": "https://github.com/farzadasgari/proadv/tree/main/docs",
+        "Source Code": "https://github.com/farzadasgari/proadv",
+    },
 )
