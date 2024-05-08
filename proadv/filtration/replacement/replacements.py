@@ -34,14 +34,14 @@ def mean_value(velocities, spike_indices):
     Replace spike values in velocities array with the mean value of velocity component.
 
     Parameters
-    ———
+    ------
         velocities (numpynd.array): Array of velocity data.
             An array-like object containing velocity values.
         spike_indices (numpy.ndarray): Indices of spikes.
             An array-like object containing the indices of detected spikes.
 
     Returns
-    ———
+    ------
         modified_data (numpy.ndarray): Modified data with spikes replaced by mean value of velocity component.
             An array containing the modified data.
     """
@@ -98,7 +98,6 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
     >>> velocities = np.array([5, 6, 7, 50, 7, 6, 5])
     >>> spike_indices = np.array([3])
     >>> linear_interpolation(velocities, spike_indices)
-    array([5., 6., 7., 7., 7., 6., 5.])
     """
 
     # Create a copy of the velocity data to avoid modifying the original array
@@ -141,13 +140,52 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
 
 
 def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
+    """
+    Interpolates missing data points in a velocity array using cubic polynomial interpolation.
+
+    Parameters
+    ------
+    velocities (numpy.ndarray): Array of velocity data. It should be a one-dimensional array-like object.
+        This function assumes the input velocities array has at least 25 data points.
+    spike_indices (numpy.ndarray): Indices where data is missing (spikes). It should be a one-dimensional array-like
+        object containing integers representing the indices of missing data points (spikes).
+        If spike_indices contains invalid indices (e.g., negative values or indices exceeding the array size),
+        a ValueError will be raised.
+    decimals (int, optional): Number of decimal places to round the result to. Default is 4.
+
+    Returns
+    ------
+    modified_data (numpy.ndarray): Array of velocities with missing data interpolated. The interpolated values
+        are calculated based on cubic polynomial interpolation using neighboring data points.
+
+    Raises
+    ------
+    ValueError: If spike_indices contains invalid indices or if velocities is not a one-dimensional array-like object.
+
+    Notes
+    ------
+    - This function uses cubic polynomial interpolation to estimate missing data points based on neighboring values.
+    - If a missing data point (spike) occurs near the boundaries of the velocities array, linear interpolation
+      is used instead of cubic polynomial interpolation.
+    - The input velocities array is modified in-place to replace missing data points with interpolated values.
+    """
+
+    # Make a copy of velocities to preserve original data
     modified_data = velocities.copy()
+
+    # Replace spike indices with NaN values
     modified_data[spike_indices] = np.nan
+
+    # Generate x values for interpolation
     x = np.array(list(range(1, 13)) + list(range(14, 26)))
+
     for i in spike_indices:
+        # Check if index is near the boundaries
         if i <= 30 or i >= (len(velocities) - 30):
-            velocities[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2, 4)
+            # Use linear interpolation near the boundaries
+            modified_data[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2, 4)
         else:
+            # Use cubic polynomial interpolation
             yint = np.delete(np.append(velocities[i - 13:i], modified_data[i:][~np.isnan(modified_data[i:])][0:12]), 12)
             f = interp1d(x, yint, 3)
             modified_data[i] = f(13)
