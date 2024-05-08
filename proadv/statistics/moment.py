@@ -52,7 +52,7 @@ def skewness(data):
     >>> import numpy as np
     >>> data = np.arange(1,6)
     >>> skew = adv.statistics.moment.skewness(data)
-    >>> print(skew)
+    >>> skew
     0.0
     """
     n = np.size(data)
@@ -71,16 +71,15 @@ def kurtosis(x):
     Compute the kurtosis of a dataset.
 
     Kurtosis is a measure of the "tailedness" of the probability distribution of a real-valued random variable.
-    This function calculates kurtosis using the Pearson method, which is the standardized fourth central moment.
+        This function calculates kurtosis using the Pearson method, which is the standardized fourth central moment.
 
     Parameters
     ------
-    x : array_like : n array containing the data points. The array will be flattened if it is not already 1-D.
+    x (array_like): An array containing the data points. The array will be flattened if it is not already 1-D.
 
     Returns
     ------
-    float : The kurtosis of the dataset. If the input contains NaNs, the function will return NaN.
-
+    standardized_moment (float): The kurtosis of the dataset. If the input contains NaNs, the function will return NaN.
 
     Notes
     ------
@@ -92,16 +91,17 @@ def kurtosis(x):
     >>> from proadv.statistics.moment import kurtosis # Option 2: Direct import
     >>> import numpy as np
     >>> array = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
-    >>> kurtosis(array)
+    >>> kurt = kurtosis(array)
+    >>> kurt
     2.2
 
     ------
     >>> import proadv as adv # Option 1: Full import path
     >>> import numpy as np
     >>> data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
-    >>> adv.statistics.moment.kurtosis(data)
+    >>> kurt = adv.statistics.moment.kurtosis(data)
+    >>> kurt
     2.2
-
     """
 
     # Convert data to a numpy array
@@ -120,5 +120,3 @@ def kurtosis(x):
     standardized_moment = fourth_moment / standard_dev ** 4
 
     return standardized_moment  # Returns the standardized moment which basically is kurtosis
-
-
