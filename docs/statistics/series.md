@@ -56,3 +56,20 @@ There are two parameters in this function:
 2. **period (int, optional)**: The period for the weighted moving average. Defaults to 20. Must be less than or equal to the size of the data array.
 If the period is larger than the size of the data array, it raises a ValueError. 
 
+- Examples:
+
+>>>
+    >>> import proadv as adv  
+    >>> import numpy as np
+    >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    >>> wma = adv.statistics.series.weighted_moving_average(data, period=3)
+    >>> wma
+    array([2.33333333, 3.33333333, 4.33333333, 5.33333333, 6.33333333,
+           7.33333333, 8.33333333])
+
+>>>
+    >>> from proadv.statistics.series import weighted_moving_average  
+    >>> import numpy as np
+    >>> data = np.random.rand(300)
+    >>> wma = weighted_moving_average(data)
+
