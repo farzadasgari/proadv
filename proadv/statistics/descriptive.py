@@ -11,7 +11,7 @@ def min(data):
 
     Parameters
     ------
-    data (np.ndarray): The input data which should be an array or any array-like structure.
+    data (array_like): The input data which should be an array or any array-like structure.
 
     Returns
     ------
