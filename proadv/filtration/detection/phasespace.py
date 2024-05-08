@@ -124,13 +124,50 @@ def phasespace_thresholding(c):
 
 
 def phasespace_thresholding_premodification(data, c1=1.5, c2=1.35):
+    """
+    Perform phase space thresholding premodification on a given data array.
+
+    Parameters
+    ------
+        data (numpy.array): Array of data to be processed.
+        c1 (float, optional): Threshold parameter for unremovable data. Default is 1.5.
+        c2 (float, optional): Threshold parameter for removable data. Default is 1.35.
+
+    Returns
+    ------
+        data (numpy.ndarray): Processed data array with potential modifications.
+        unremovable_indices (numpy.ndarray): Indices of unremovable data points.
+
+    Notes
+    ------
+        This function applies phase space thresholding premodification to the input data array.
+        Threshold parameters c1 and c2 determine which data points are considered unremovable and removable, respectively.
+        Unremovable data points are those within the range of -c1*theta to c1*theta, where theta is the median absolute deviation.
+        Removable data points are those exceeding c2*theta*sqrt(2*log(ndata)), where theta is the median absolute deviation
+            and ndata is the length of the data array.
+        Removable data points are replaced with the value of the preceding data point.
+
+    Example
+    ------
+        >>> data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        >>> phasespace_thresholding_premodification(data)
+    """
+
     data_size = data.size
     theta = np.median(np.absolute(data - np.median(data)))
+
+    # Calculate indices of unremovable data
     unremovable_indices = np.intersect1d(np.nonzero(data >= -c1 * theta)[0], np.nonzero(data <= c1 * theta)[0])
+
+    # Calculate threshold for removable data
     removable_threshold = c2 * theta * np.sqrt(2 * np.log(data_size))
+
+    # Calculate indices of removable data
     removable_indices = np.intersect1d(np.nonzero(data > removable_threshold)[0],
                                        np.nonzero(data < -removable_threshold)[0])
 
+    # Replace removable data points with the preceding data point
     for i in removable_indices:
         data[i] = data[i - 1]
+
     return data, unremovable_indices
