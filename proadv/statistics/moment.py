@@ -36,7 +36,7 @@ def skewness(data):
     >>> import numpy as np
     >>> data = np.array([2, 8, 0, 4, 1, 9, 9, 0]) 
     >>> skew = adv.statistics.moment.skewness(data)
-    >>> print(data)
+    >>> print(skew)
     0.2650554122698573
 
     ------
@@ -52,7 +52,7 @@ def skewness(data):
     >>> import numpy as np
     >>> data = np.arange(1,6)
     >>> skew = adv.statistics.moment.skewness(data)
-    >>> print(data)
+    >>> print(skew)
     0.0
     """
     n = np.size(data)
@@ -88,18 +88,20 @@ def kurtosis(x):
     computes the fourth central moment, and then standardizes it to find the kurtosis.
 
     Examples
-    --------
+    ------
+    >>> from proadv.statistics.moment import kurtosis # Option 2: Direct import
+    >>> import numpy as np
+    >>> array = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
+    >>> kurtosis(array)
+    2.2
+
+    ------
     >>> import proadv as adv # Option 1: Full import path
     >>> import numpy as np
     >>> data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
     >>> adv.statistics.moment.kurtosis(data)
     2.2
-    ------
-    >>> from proadv.statistics.moment import kurtosis # Option 2: Direct import
-    >>> import numpy as np
-    >>> data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
-    >>> kurtosis(data)
-    2.2
+
     """
 
     # Convert data to a numpy array
@@ -118,3 +120,5 @@ def kurtosis(x):
     standardized_moment = fourth_moment / standard_dev ** 4
 
     return standardized_moment  # Returns the standardized moment which basically is kurtosis
+
+
