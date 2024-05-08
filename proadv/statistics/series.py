@@ -38,7 +38,7 @@ def moving_average(data, window_size=20):
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     >>> ma = adv.statistics.series.moving_average(data, window_size=3)
     >>> ma
-    [1.  1.5 2.  3.  4.  5.  6.  7.  8.  9. ]
+    array([1. , 1.5, 2. , 3. , 4. , 5. , 6. , 7. , 8. , 9. ])
 
     """
 
@@ -107,7 +107,7 @@ def exponential_moving_average(data, alpha=0.2):
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     >>> ema = exponential_moving_average(data, alpha=0.5)
     >>> ema
-    [1 1 2 3 4 5 6 7 8 9]
+    array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
     """
 
@@ -167,8 +167,8 @@ def weighted_moving_average(data, period=20):
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     >>> wma = adv.statistics.series.weighted_moving_average(data, period=3)
     >>> wma
-    [2.33333333 3.33333333 4.33333333 5.33333333 6.33333333 7.33333333
-     8.33333333]
+    array([2.33333333, 3.33333333, 4.33333333, 5.33333333, 6.33333333,
+           7.33333333, 8.33333333])
 
     ------
 

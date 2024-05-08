@@ -112,7 +112,7 @@ def _spike_indices(x, y, z, a, b, c):
 
     Returns
     ------
-    spike_indices (numpy.ndarray): Indices of detected spikes.
+    spike_indices (array_like): Indices of detected spikes.
     """
     xp, yp, zp, ip = [], [], [], []
     for i in range(x.size):

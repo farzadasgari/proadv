@@ -37,7 +37,7 @@ def mean_value(velocities, spike_indices):
     ------
         velocities (array_like): Array of velocity data.
             An array-like object containing velocity values.
-        spike_indices (numpy.ndarray): Indices of spikes.
+        spike_indices (array_like): Indices of spikes.
             An array-like object containing the indices of detected spikes.
 
     Returns

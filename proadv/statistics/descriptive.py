@@ -194,7 +194,7 @@ def mean(array):
     >>> array = np.array([])
     >>> mean_array = adv.statistics.descriptive.mean(array)
     >>> mean_array
-    Invalid input.
+    'Invalid input.'
     """
 
     if isinstance(array, (int, float)):
