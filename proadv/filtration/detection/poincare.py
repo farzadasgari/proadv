@@ -31,15 +31,15 @@ def calculate_rho(x, y, theta, a, b):
 
     Parameters
     ------
-        x (numpy.ndarray): First component.
-        y (numpy.ndarray): Second component.
+        x (array_like): First component.
+        y (array_like): Second component.
         theta (float | rad): Angle between components.
         a (float): Coefficient 'a' used in poincare map.
         b (float): Coefficient 'b' used in poincare map.
 
     Returns
     ------
-        rho (numpy.ndarray): Rho value calculated for poincare map.
+        rho (array_like): Rho value calculated for poincare map.
     """
     xp = x * np.cos(theta) + y * np.sin(theta)
     yp = y * np.cos(theta) - x * np.sin(theta)

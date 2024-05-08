@@ -7,13 +7,13 @@ def moving_average(data, window_size=20):
 
     Parameters
     ------
-    data (numpy.ndarray): The 1D array of data for which to calculate the moving average.
+    data (array_like): The 1D array of data for which to calculate the moving average.
     window_size (int, optional): The size of the window for the moving average.
         Defaults to 20. Must be less than or equal to the size of the data array.
 
     Returns
     ------
-    ma (numpy.ndarray): The moving average of the data, with the same shape as the input array.
+    ma (array_like): The moving average of the data, with the same shape as the input array.
 
     Raises
     ------
@@ -26,19 +26,19 @@ def moving_average(data, window_size=20):
 
     Examples
     ------
-    >>> from proadv.statistics.series import moving_average  # Option 2: Direct import
+    >>> from proadv.statistics.series import moving_average
     >>> import numpy as np
     >>> data = np.random.rand(300)
     >>> ma = moving_average(data)
 
     ------
 
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     >>> ma = adv.statistics.series.moving_average(data, window_size=3)
-    >>> print(ma)
-    [1.  1.5 2.  3.  4.  5.  6.  7.  8.  9. ]
+    >>> ma
+    array([1. , 1.5, 2. , 3. , 4. , 5. , 6. , 7. , 8. , 9. ])
 
     """
 
@@ -83,13 +83,13 @@ def exponential_moving_average(data, alpha=0.2):
 
     Parameters
     ------
-    data (numpy.array): The 1D array of data for which to calculate the exponential moving average.
+    data (array_like): The 1D array of data for which to calculate the exponential moving average.
     alpha (float, optional): Smoothing factor between 0 and 1.
         Higher alpha discounts older observations faster. Default is 0.2.
 
     Returns
     ------
-    ema (numpy.ndarray): Exponential moving average of the input data.
+    ema (array_like): Exponential moving average of the input data.
 
     Raises
     ------
@@ -106,8 +106,8 @@ def exponential_moving_average(data, alpha=0.2):
     >>> import numpy as np
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     >>> ema = exponential_moving_average(data, alpha=0.5)
-    >>> print(ema)
-    [1 1 2 3 4 5 6 7 8 9]
+    >>> ema
+    array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
     """
 
@@ -126,11 +126,11 @@ def exponential_moving_average(data, alpha=0.2):
         """
         This loop calculates the exponential moving average for elements from index 1 onwards.
         It utilizes the previously calculated exponential moving average (ema[i-1]) and the new data point
-        (data[i]) to efficiently update the exponential moving average using the formula:
-        ema[i] = alpha * data[i] + (1 - alpha) * ema[i - 1]
+            (data[i]) to efficiently update the exponential moving average using the formula:
+            ema[i] = alpha * data[i] + (1 - alpha) * ema[i - 1]
         
         Update the exponential moving average based on the previous average, new data point,
-        and the smoothing factor alpha.
+            and the smoothing factor alpha.
         """
         ema[i] = alpha * data[i] + (1 - alpha) * ema[i - 1]
 
@@ -143,13 +143,13 @@ def weighted_moving_average(data, period=20):
 
     Parameters
     ------
-    data (numpy.array): The 1D array of data for which to calculate the weighted moving average.
+    data (array_like): The 1D array of data for which to calculate the weighted moving average.
     period (int, optional): The period for the weighted moving average. Defaults to 20. 
         Must be less than or equal to the size of the data array.
 
     Returns
     ------
-    wma (numpy.ndarray): Weighted moving average of the input data and weights.
+    wma (array_like): Weighted moving average of the input data and weights.
 
     Raises
     ------
@@ -166,9 +166,9 @@ def weighted_moving_average(data, period=20):
     >>> import numpy as np
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     >>> wma = adv.statistics.series.weighted_moving_average(data, period=3)
-    >>> print(wma)
-    [2.33333333 3.33333333 4.33333333 5.33333333 6.33333333 7.33333333
-     8.33333333]
+    >>> wma
+    array([2.33333333, 3.33333333, 4.33333333, 5.33333333, 6.33333333,
+           7.33333333, 8.33333333])
 
     ------
 
@@ -202,7 +202,7 @@ def _mobility(x):
 
     Parameters
     ------
-    x (numpy.ndarray): The array containing clandestine data.
+    x (array_like): The array containing clandestine data.
 
     Returns
     ------
@@ -229,13 +229,13 @@ def _diagonal_average(matrix, length, size):
 
     Parameters
     ------
-    matrix (numpy.ndarray): Input matrix with hidden patterns.
+    matrix (array_like): Input matrix with hidden patterns.
     length (int): Length parameter affecting the calculation.
     size (int): Size parameter affecting the calculation.
 
     Returns
     ------
-    diag (numpy.ndarray): Diagonal average array, concealing intricate patterns within the data.
+    diag (array_like): Diagonal average array, concealing intricate patterns within the data.
     """
 
     # Initialize an array to store the frequencies
@@ -290,13 +290,13 @@ def ssa(x, fs, f):
 
     Parameters
     ------
-    x (numpy.ndarray): Input signal.
+    x (array_like): Input signal.
     fs (float/int): Sampling frequency of the signal.
     f (float/int): maximum frequency of the signal of interest.
 
     Returns
     ------
-    xf (numpy.ndarray): Filtered signal after SSA.
+    xf (array_like): Filtered signal after SSA.
 
     References
     ------

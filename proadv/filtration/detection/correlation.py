@@ -9,9 +9,9 @@ def calculate_parameters(up, vp, wp):
 
     Parameters
     ------
-        up (numpy.ndarray): Array of the first velocity component.
-        vp (numpy.ndarray): Array of the second velocity component.
-        wp (numpy.ndarray): Array of the third velocity component.
+        up (array_like): Array of the first velocity component.
+        vp (array_like): Array of the second velocity component.
+        wp (array_like): Array of the third velocity component.
 
     Returns
     ------
@@ -34,13 +34,13 @@ def velocity_correlation(ui, vi, wi):
 
     Parameters
     ------
-        ui (numpy.ndarray): Array of the longitudinal velocity component.
-        vi (numpy.ndarray): Array of the transverse velocity component.
-        wi (numpy.ndarray): Array of the vertical velocity component.
+        ui (array_like): Array of the longitudinal velocity component.
+        vi (array_like): Array of the transverse velocity component.
+        wi (array_like): Array of the vertical velocity component.
 
     Returns
     ------
-        correl_indices (numpy.ndarray): Indices of spikes detected by velocity correlation.
+        correl_indices (array_like): Indices of spikes detected by velocity correlation.
 
     References
     ------

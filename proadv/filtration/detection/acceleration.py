@@ -7,11 +7,11 @@ def acceleration_thresholding(velocities, frequency, tag, gravity=980, k_gravity
     Detects acceleration events based on velocity data.
 
     This function calculates acceleration events based on velocity data, considering thresholds
-    for acceleration magnitude and velocity deviation from mean.
+        for acceleration magnitude and velocity deviation from mean.
 
     Parameters
     ------
-        velocities (numpy.ndarray): Array of velocity data.
+        velocities (array_like): Array of velocity data.
             An array-like object containing velocity values.
         frequency (float): Sampling frequency.
             The frequency at which the velocity data is sampled,
@@ -32,7 +32,7 @@ def acceleration_thresholding(velocities, frequency, tag, gravity=980, k_gravity
 
     Returns
     ------
-        accel_indices (numpy.ndarray): Indices of acceleration events.
+        accel_indices (array_like): Indices of acceleration events.
             An array containing the indices of the detected acceleration events.
 
     Raises

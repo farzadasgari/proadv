@@ -9,12 +9,12 @@ def calculate_derivatives(c):
 
     Parameters
     ------
-        c (numpy.ndarray): Input data.
+        c (array_like): Input data.
 
     Returns
     ------
-        dc (numpy.ndarray): First derivative of the input data.
-        dc2 (numpy.ndarray): Second derivative of the input data.
+        dc (array_like): First derivative of the input data.
+        dc2 (array_like): Second derivative of the input data.
     """
     # Initialize arrays for first and second derivatives
     dc = np.zeros_like(c)
@@ -37,9 +37,9 @@ def calculate_parameters(c, dc, dc2):
 
     Parameters
     ------
-        c (numpy.ndarray): Array of the velocity component.
-        dc (numpy.ndarray): First derivative of the input data.
-        dc2 (numpy.ndarray): Second derivative of the input data.
+        c (array_like): Array of the velocity component.
+        dc (array_like): First derivative of the input data.
+        dc2 (array_like): Second derivative of the input data.
 
     Returns
     ------
@@ -88,11 +88,11 @@ def phasespace_thresholding(c):
 
     Parameters
     ------
-        c (numpy.ndarray): Velocity component
+        c (array_like): Velocity component
 
     Returns
     ------
-        phase_indices (numpy.ndarray): Array containing the indices of detected spikes.
+        phase_indices (array_like): Array containing the indices of detected spikes.
 
     References
     ------
@@ -129,14 +129,14 @@ def phasespace_thresholding_premodification(data, c1=1.5, c2=1.35):
 
     Parameters
     ------
-        data (numpy.array): Array of data to be processed.
+        data (array_like): Array of data to be processed.
         c1 (float, optional): Threshold parameter for unremovable data. Default is 1.5.
         c2 (float, optional): Threshold parameter for removable data. Default is 1.35.
 
     Returns
     ------
-        data (numpy.ndarray): Processed data array with potential modifications.
-        unremovable_indices (numpy.ndarray): Indices of unremovable data points.
+        data (array_like): Processed data array with potential modifications.
+        unremovable_indices (array_like): Indices of unremovable data points.
 
     Notes
     ------
