@@ -41,7 +41,8 @@ This function:
 
 - Examples:
 
->>> from proadv.statistics.moment import kurtosis  # Option 2: Direct import
+>>>
+    >>> from proadv.statistics.moment import kurtosis  # Option 2: Direct import
     >>> import numpy as np
     >>> data = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
     >>> kurt = kurtosis(data)
