@@ -7,7 +7,7 @@ def variance(data):
     
     Parameters
     ------
-    data (np.ndarray): The 1D array of data for which to calculate the variance. 
+    data (array_like): The 1D array of data for which to calculate the variance.
        
     Returns
     ------
@@ -20,27 +20,27 @@ def variance(data):
 
     Examples
     ------
-    >>> import proadv as adv # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([14, 8, 11, 10])
     >>> var = adv.statistics.spread.variance(data)
-    >>> print(var)
+    >>> var
     4.6875
 
     ------
 
-    >>> from proadv.statistics.spread import variance # Option 2: Direct import
+    >>> from proadv.statistics.spread import variance
     >>> import numpy as np
     >>> data = np.random.randn(20)
     >>> var = variance(data)
 
     ------
 
-    >>> import proadv as adv # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.arange(15,30)
     >>> var = adv.statistics.spread.variance(data)
-    >>> print(var)
+    >>> var
     18.666666666666668
     """
 
@@ -63,7 +63,7 @@ def std(data):
 
     Parameters
     ------
-    data (np.ndarray): The 1D array of data for which to calculate the Standard deviation. 
+    data (array_like): The 1D array of data for which to calculate the Standard deviation.
 
     Returns
     ------
@@ -81,27 +81,27 @@ def std(data):
 
 
     
-    >>> from proadv.statistics.spread import std  # Option 2: Direct import
+    >>> from proadv.statistics.spread import std
     >>> import numpy as np
     >>> data = np.random.rand(25)
     >>> stdev = std(data)
 
     ------
 
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([14, 8, 11, 10, 5, 7])
     >>> stdev = adv.statistics.spread.std(data)
-    >>> print(stdev)
+    >>> stdev
     2.9107081994288304
 
     ------
 
-    >>> import proadv as adv  # Option 1: Full import path
+    >>> import proadv as adv
     >>> import numpy as np  
     >>> data = np.arange(3,10)
     >>> stdev = adv.statistics.spread.std(data)
-    >>> print(stdev)
+    >>> stdev
     2.0
     """
 
