@@ -27,7 +27,6 @@ def cdf(array):
 
     Examples
     ------
-    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
     >>> cdf_array = cdf(data)
@@ -62,6 +61,40 @@ def cdf(array):
 
 
 def pdf(array, std=1, mean=0):
+    '''
+        Calculate the pdf value in an array, handling NaN values and exceptions.
+
+        This function calculates the pdf value of an array-like input while checking for NaN values.
+            If NaN values are present, it raises a ValueError. It also handles various exceptions that may
+            occur during the operation.
+
+        Parameters
+        ------
+        array (np.ndarray): The input data which should be an array or any array-like structure.
+
+        Returns
+        ------
+        Probability density function (pdf): Function to calculate the probability density of data.
+            If the array contains NaN values,
+            the function will not return a value
+            and will raise a ValueError instead.
+
+        Raises
+        ------
+        TypeError: If the  element of array is a NaN.
+        ValueError: If the array is empty.
+
+        Examples
+        ------
+        >>> import numpy as np
+        >>> array = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
+        >>> pdf_array = pdf(array)
+        >>> print(pdf_array)
+        [0.36310893 0.33067691 0.39893354 0.36131462 0.36729206]
+
+        ------
+
+        '''
     array = np.copy(array)
     if array.size == 0:
         raise ValueError("cannot calculate PDF with empty array")
