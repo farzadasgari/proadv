@@ -37,3 +37,27 @@ If out is None, return a new array containing the standard deviation, otherwise 
 In this function:
 1. If the element of array is a string, it raises a TypeError.
 2. If the array is empty, it raises a ValueError.
+
+- Examples:
+
+>>>
+    >>> from proadv.statistics.spread import std
+    >>> import numpy as np
+    >>> data = np.random.rand(25)
+    >>> stdev = std(data)
+
+>>>
+    >>> import proadv as adv
+    >>> import numpy as np
+    >>> data = np.array([14, 8, 11, 10, 5, 7])
+    >>> stdev = adv.statistics.spread.std(data)
+    >>> stdev
+    2.9107081994288304
+
+>>>
+    >>> import proadv as adv
+    >>> import numpy as np  
+    >>> data = np.arange(3,10)
+    >>> stdev = adv.statistics.spread.std(data)
+    >>> stdev
+    2.0
