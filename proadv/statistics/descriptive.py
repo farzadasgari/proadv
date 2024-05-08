@@ -47,7 +47,7 @@ def min(data):
     >>> from proadv.statistics.descriptive import min 
     >>> import numpy as np
     >>> data = np.random.rand(20)
-    >>> maximum = max(data)
+    >>> minimum = min(data)
     """
 
     for i in data:

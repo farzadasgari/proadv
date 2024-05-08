@@ -3,7 +3,7 @@
 Return the minimum of an array input while checking for NaN values. If NaN values are present, it raises a ValueError. 
 It also handles various exceptions that may occur during the operation.
 
-- Example 1:
+- Examples:
 
 >>>
     >>> import proadv as adv 
@@ -13,8 +13,6 @@ It also handles various exceptions that may occur during the operation.
     >>> print(minimum)
     1
 
-- Example 2:
-
 >>> 
     >>> from proadv.statistics.descriptive import min
     >>> import numpy as np
@@ -23,6 +21,12 @@ It also handles various exceptions that may occur during the operation.
     Traceback (most recent call last):
        raise ValueError("The array contains NaN values. The min function cannot be applied to arrays with NaN values.")
     ValueError: The array contains NaN values. The min function cannot be applied to arrays with NaN values.
+
+>>>
+    >>> from proadv.statistics.descriptive import min 
+    >>> import numpy as np
+    >>> data = np.random.rand(20) 
+    >>> minimum = min(data)
 
 
 # Max Function
