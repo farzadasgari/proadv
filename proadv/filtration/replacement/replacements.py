@@ -9,14 +9,14 @@ def last_valid_data(velocities, spike_indices):
 
     Parameters
     ------
-        velocities (numpynd.array): Array of velocity data.
+        velocities (array_like): Array of velocity data.
             An array-like object containing velocity values.
-        spike_indices (numpy.ndarray): Indices of spikes.
+        spike_indices (array_like): Indices of spikes.
             An array-like object containing the indices of detected spikes.
 
     Returns
     ------
-        modified_data (numpy.ndarray): Modified data with spikes replaced by last valid values.
+        modified_data (array_like): Modified data with spikes replaced by last valid values.
             An array containing the modified data.
     """
     # Create a copy of the original data
@@ -35,14 +35,14 @@ def mean_value(velocities, spike_indices):
 
     Parameters
     ------
-        velocities (numpynd.array): Array of velocity data.
+        velocities (array_like): Array of velocity data.
             An array-like object containing velocity values.
         spike_indices (numpy.ndarray): Indices of spikes.
             An array-like object containing the indices of detected spikes.
 
     Returns
     ------
-        modified_data (numpy.ndarray): Modified data with spikes replaced by mean value of velocity component.
+        modified_data (array_like): Modified data with spikes replaced by mean value of velocity component.
             An array containing the modified data.
     """
     # Create a copy of the original data
@@ -59,17 +59,17 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
     Perform linear interpolation to replace spike values in velocity data.
 
     This function identifies spikes in the velocity data and replaces them with
-    linearly interpolated values based on the nearest valid data points before
-    and after each spike. If a spike occurs at the end of the data, it is replaced
-    with the mean of the entire dataset. The function is robust to handle individual
-    spikes as well as sequences of consecutive spikes.
+        linearly interpolated values based on the nearest valid data points before
+        and after each spike. If a spike occurs at the end of the data, it is replaced
+        with the mean of the entire dataset. The function is robust to handle individual
+        spikes as well as sequences of consecutive spikes.
 
     Parameters
     ------
-    velocities : (numpy.ndarray)
+    velocities : (array_like)
         An array-like object containing velocity values. It should be a one-dimensional
         array of numerical data representing velocities.
-    spike_indices : (numpy.ndarray)
+    spike_indices : (array_like)
         An array-like object containing the indices of detected spike events. It should
         be a one-dimensional array of integers where each integer represents the index
         in 'velocities' that corresponds to a spike.
@@ -80,7 +80,7 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
 
     Returns
     ------
-    modified_data (numpy.ndarray):
+    modified_data (array_like):
         An array containing the modified velocity data with spikes replaced by
         interpolated values. The shape and type of the array are the same as the
         input 'velocities' array.
@@ -88,16 +88,11 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
     Notes
     ------
     The function uses linear interpolation to estimate the values of spikes based on the
-    surrounding non-spike data. For spikes at the beginning or end of the data where a
-    neighboring non-spike value is not available, the function uses the mean of the entire
-    dataset as a replacement value. This approach ensures that the data remains as accurate
-    and representative of the original dataset as possible.
+        surrounding non-spike data. For spikes at the beginning or end of the data where a
+        neighboring non-spike value is not available, the function uses the mean of the entire
+        dataset as a replacement value. This approach ensures that the data remains as accurate
+        and representative of the original dataset as possible.
 
-    Examples
-    ------
-    >>> velocities = np.array([5, 6, 7, 50, 7, 6, 5])
-    >>> spike_indices = np.array([3])
-    >>> linear_interpolation(velocities, spike_indices)
     """
 
     # Create a copy of the velocity data to avoid modifying the original array
@@ -145,9 +140,9 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
 
     Parameters
     ------
-    velocities (numpy.ndarray): Array of velocity data. It should be a one-dimensional array-like object.
+    velocities (array_like): Array of velocity data. It should be a one-dimensional array-like object.
         This function assumes the input velocities array has at least 25 data points.
-    spike_indices (numpy.ndarray): Indices where data is missing (spikes). It should be a one-dimensional array-like
+    spike_indices (array_like): Indices where data is missing (spikes). It should be a one-dimensional array-like
         object containing integers representing the indices of missing data points (spikes).
         If spike_indices contains invalid indices (e.g., negative values or indices exceeding the array size),
         a ValueError will be raised.
@@ -155,7 +150,7 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
 
     Returns
     ------
-    modified_data (numpy.ndarray): Array of velocities with missing data interpolated. The interpolated values
+    modified_data (array_like): Array of velocities with missing data interpolated. The interpolated values
         are calculated based on cubic polynomial interpolation using neighboring data points.
 
     Raises
@@ -166,7 +161,7 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
     ------
     - This function uses cubic polynomial interpolation to estimate missing data points based on neighboring values.
     - If a missing data point (spike) occurs near the boundaries of the velocities array, linear interpolation
-      is used instead of cubic polynomial interpolation.
+        is used instead of cubic polynomial interpolation.
     - The input velocities array is modified in-place to replace missing data points with interpolated values.
     """
 
