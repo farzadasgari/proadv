@@ -136,8 +136,10 @@ def bivariate_kernel(data, hx, hy, grid):
     p_02 = _temp([0, 2], t_star)
     p_20 = _temp([2, 0], t_star)
     p_11 = _temp([1, 1], t_star)
-    t_y = (p_02 ** (3 / 4) / (4 * np.pi * data.shape[1] * p_20 ** (3 / 4) * (p_11 + np.sqrt(p_20 * p_02)))) ** (1 / 3)
-    t_x = (p_20 ** (3 / 4) / (4 * np.pi * data.shape[1] * p_02 ** (3 / 4) * (p_11 + np.sqrt(p_20 * p_02)))) ** (1 / 3)
+    # t_y = (p_02 ** (3 / 4) / (4 * np.pi * data.shape[1] * p_20 ** (3 / 4) * (p_11 + np.sqrt(p_20 * p_02)))) ** (1 / 3)
+    # t_x = (p_20 ** (3 / 4) / (4 * np.pi * data.shape[1] * p_02 ** (3 / 4) * (p_11 + np.sqrt(p_20 * p_02)))) ** (1 / 3)
+    t_y = hy ** 2
+    t_x = hx ** 2
     n_range = np.arange(0, grid, dtype=float)
     v1 = np.atleast_2d(np.exp(-(n_range ** 2) * np.pi ** 2 * t_x / 2)).T
     v2 = np.atleast_2d(np.exp(-(n_range ** 2) * np.pi ** 2 * t_y / 2))
