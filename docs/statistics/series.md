@@ -6,6 +6,7 @@ efficient than calculating a simple moving average for each element.
 There are two parameters in this function:
 1. **data (array_like)**: The 1D array of data for which to calculate the moving average.
 2. **window_size (int, optional)**: The size of the window for the moving average. Defaults to 20. Must be less than or equal to the size of the data array.
+If the window size is larger than the size of the data array, it raises a ValueError. 
 
 - Examples:
 
@@ -34,7 +35,7 @@ There are two parameters in this function:
 1. **data (array_like)**: The 1D array of data for which to calculate the exponential moving average.
 2. **alpha (float, optional)**: Smoothing factor between 0 and 1. Higher alpha discounts older observations faster. Default is 0.2.
 
-Example:
+- Example:
 
 >>>
     >>> import numpy as np
