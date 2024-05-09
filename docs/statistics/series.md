@@ -1,5 +1,5 @@
 # Advanced Analysis: 
-In addition to cleaning and basic statistics, ProADV offers advanced functionalities for deeper insights:
+In addition to cleaning and basic statistics, `ProADV` offers advanced functionalities for deeper insights:
 
 ## Moving Average Function
 

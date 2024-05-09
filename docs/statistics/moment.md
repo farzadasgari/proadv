@@ -1,5 +1,5 @@
 # Statistical Analysis: 
-ProADV equips you with essential statistical tools to characterize your ADV data:
+`ProADV` equips you with essential statistical tools to characterize your ADV data:
 
 ## Skewness Function
 
