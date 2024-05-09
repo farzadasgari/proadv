@@ -1,4 +1,7 @@
-# Skewness Function
+# Statistical Analysis: 
+`ProADV` equips you with essential statistical tools to characterize your ADV data:
+
+## Skewness Function
 
 Compute the sample `skewness` of a data set. 
 - For normally distributed data, the skewness should be about zero. 
@@ -29,7 +32,7 @@ Compute the sample `skewness` of a data set.
     0.0
 
 
-# Kurtosis Function
+## Kurtosis Function
 
 Return the `kurtosis` of a dataset. If the input contains NaNs, the function will return NaN. 
 Kurtosis is a measure of the "tailedness" of the probability distribution of a real-valued random variable. 
