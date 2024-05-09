@@ -44,7 +44,12 @@ This function has three parameters:
     the output data to be presented with a consistent level of precision. The default
     value is 4, but this can be adjusted as needed.
 
-
+**Notes**:
+The function uses linear interpolation to estimate the values of spikes based on the
+surrounding non-spike data. For spikes at the beginning or end of the data where a
+neighboring non-spike value is not available, the function uses the mean of the entire
+dataset as a replacement value. This approach ensures that the data remains as accurate
+and representative of the original dataset as possible.
 
 
 ## 12PP (12 Points Cubic Polynomial) Function
