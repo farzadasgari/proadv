@@ -7,7 +7,16 @@
 Replace spike values in velocities array with the `last valid data` before each. 
 It returns modified data with spikes replaced by last valid values. An array containing the modified data.
 
-This function has three parameters:
+This function has two parameters:
 1. **velocities (array_like)**: Array of velocity data. An array-like object containing velocity values.
 2. **spike_indices (array_like)**: Indices of spikes. An array-like object containing the indices of detected spikes.
 
+
+## MV (Mean Value) Function
+
+Replace spike values in velocities array with the `mean value` of velocity component. 
+It returns modified data with spikes replaced by mean value of velocity component. An array containing the modified data.
+
+This function has two parameters:
+1. **velocities (array_like)**: Array of velocity data. An array-like object containing velocity values.
+2. **spike_indices (array_like)**: Indices of spikes. An array-like object containing the indices of detected spikes.
