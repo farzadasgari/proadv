@@ -1,4 +1,6 @@
-# CDF Function
+# Spectral Analysis
+
+## CDF Function
 
 This function calculates the `cdf` value of an array-like input while checking for NaN values. 
 If NaN values are present, it raises a ValueError. It also handles various exceptions that may occur during the operation.
@@ -25,7 +27,7 @@ If the array contains NaN values, the function will not return a value and will 
     TypeError: array cannot contain NaN values.
 
 
-# PDF Function
+## PDF Function
 
 Provides the probability of encountering specific velocity values. 
 This function calculates the `pdf` value of an array-like input while checking for NaN values.
