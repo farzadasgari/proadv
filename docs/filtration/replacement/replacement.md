@@ -62,11 +62,11 @@ If spike_indices contains invalid indices or if velocities is not a one-dimensio
 
 This function has three parameters:
 1. **velocities (array_like)**: Array of velocity data. It should be a one-dimensional array-like object.
-        This function assumes the input velocities array has at least 25 data points.
+    This function assumes the input velocities array has at least 25 data points.
 2. **spike_indices (array_like)**: Indices where data is missing (spikes). It should be a one-dimensional array-like
-        object containing integers representing the indices of missing data points (spikes).
-        If spike_indices contains invalid indices (e.g., negative values or indices exceeding the array size),
-        a ValueError will be raised.
+    object containing integers representing the indices of missing data points (spikes).
+    If spike_indices contains invalid indices (e.g., negative values or indices exceeding the array size),
+    a ValueError will be raised.
 3. **decimals (int, optional)**: Number of decimal places to round the result to. Default is 4.
 
 **Notes**:
