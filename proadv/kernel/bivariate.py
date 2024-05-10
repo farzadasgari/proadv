@@ -67,8 +67,12 @@ def _transform(data, max_co, min_co, scale):
     ------
     transformed_data (array_like): Transformed data array.
     """
+    
+    # Compute the numerator and denominator for transformation
     numerator = data.T - np.tile(min_co, (data[0].size, 1))
     denominator = np.tile(scale, (data[0].size, 1))
+    
+    # Perform the transformation
     transformed_data = numerator / denominator
     return transformed_data
 
