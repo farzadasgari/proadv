@@ -91,9 +91,14 @@ def _accumarray(subs, vals, sz):
     ------
     accum (array_like): Accumulated array with the specified size.
     """
+    
+    # Initialize an array for accumulation with zeros
     accum = np.zeros(sz, dtype=vals.dtype)
+    
+    # Iterate over each subscript and accumulate the corresponding value
     for i, sub in enumerate(subs):
         accum[tuple(sub)] += vals[i]
+        
     return accum
 
 
