@@ -174,13 +174,22 @@ def _discrete_cosine_2d(data):
     ------
     discrete (array_like): 2D discrete cosine transform of the input data.
     """
+    
+    # Get the number of rows and columns in the data
     rows, columns = data.shape
+    
+    # Check if the data shape is square
     if rows != columns:
         raise ValueError('Data shape must be square')
+    
+    # Generate the weight factors for the transform
     indices = np.arange(1, rows)
     w = np.concatenate(([1], 2 * np.exp(-1j * indices * np.pi / (2 * rows))))
     weight = np.tile(w[:, np.newaxis], (1, columns))
+    
+    # Compute the 1D discrete cosine transform for each row and column
     discrete = _discrete_cosine_1d(_discrete_cosine_1d(data, weight).T, weight).T
+    
     return discrete
 
 
