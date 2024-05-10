@@ -13,19 +13,21 @@ If the window size is larger than the size of the data array, it raises a ValueE
 
 - Examples:
 
->>>
-    >>> from proadv.statistics.series import moving_average
-    >>> import numpy as np
-    >>> data = np.random.rand(300)
-    >>> ma = moving_average(data)
+```python
+>>> from proadv.statistics.series import moving_average
+>>> import numpy as np
+>>> data = np.random.rand(300)
+>>> ma = moving_average(data)
+```
 
->>>
-    >>> import proadv as adv
-    >>> import numpy as np
-    >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    >>> ma = adv.statistics.series.moving_average(data, window_size=3)
-    >>> ma
-    array([1. , 1.5, 2. , 3. , 4. , 5. , 6. , 7. , 8. , 9. ])
+```python
+>>> import proadv as adv
+>>> import numpy as np
+>>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+>>> ma = adv.statistics.series.moving_average(data, window_size=3)
+>>> ma
+array([1. , 1.5, 2. , 3. , 4. , 5. , 6. , 7. , 8. , 9. ])
+```
 
 
 ## Exponential Moving Average Function
@@ -41,12 +43,13 @@ If alpha is not between 0 and 1 (inclusive), It raises a ValueError.
 
 - Example:
 
->>>
-    >>> import numpy as np
-    >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    >>> ema = exponential_moving_average(data, alpha=0.5)
-    >>> ema
-    array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```python
+>>> import numpy as np
+>>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+>>> ema = exponential_moving_average(data, alpha=0.5)
+>>> ema
+array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```
 
 
 ## Weighted Moving Average Function
@@ -61,20 +64,22 @@ If the period is larger than the size of the data array, it raises a ValueError.
 
 - Examples:
 
->>>
-    >>> import proadv as adv  
-    >>> import numpy as np
-    >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    >>> wma = adv.statistics.series.weighted_moving_average(data, period=3)
-    >>> wma
-    array([2.33333333, 3.33333333, 4.33333333, 5.33333333, 6.33333333,
-           7.33333333, 8.33333333])
+```python
+>>> import proadv as adv  
+>>> import numpy as np
+>>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+>>> wma = adv.statistics.series.weighted_moving_average(data, period=3)
+>>> wma
+array([2.33333333, 3.33333333, 4.33333333, 5.33333333, 6.33333333,
+       7.33333333, 8.33333333])
+```
 
->>>
-    >>> from proadv.statistics.series import weighted_moving_average  
-    >>> import numpy as np
-    >>> data = np.random.rand(300)
-    >>> wma = weighted_moving_average(data)
+```python
+>>> from proadv.statistics.series import weighted_moving_average  
+>>> import numpy as np
+>>> data = np.random.rand(300)
+>>> wma = weighted_moving_average(data)
+```
 
 
 ## _mobility Function
