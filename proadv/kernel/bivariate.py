@@ -250,6 +250,22 @@ def _psi(s_indices, time, initial_condition, autocorrelation_squared):
 
 
 def _evolve(t_guess, data_size: int, initial_condition, autocorrelation_squared):
+    """
+    Compute the time evolution of the system based on the given parameters.
+
+    Parameters
+    ----------
+    t_guess (float): Initial guess for time.
+    data_size (int): Size of the data.
+    initial_condition (array_like): Array containing initial conditions.
+    autocorrelation_squared (array_like): Autocorrelation squared.
+
+    Returns
+    -------
+    time_evolution (float): The computed time evolution.
+    actual_time (float): The actual time.
+    """
+    
     def __func(s, t):
         return _func(s, t, data_size, initial_condition, autocorrelation_squared)
 
