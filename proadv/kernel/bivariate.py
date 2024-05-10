@@ -269,9 +269,15 @@ def _evolve(t_guess, data_size: int, initial_condition, autocorrelation_squared)
     def __func(s, t):
         return _func(s, t, data_size, initial_condition, autocorrelation_squared)
 
+    # Compute the sum of the functions
     sum_func = __func([0, 2], t_guess) + __func([2, 0], t_guess) + 2 * __func([1, 1], t_guess)
+    
+    # Compute the actual time
     actual_time = (2 * np.pi * data_size * sum_func) ** (-1 / 3)
+    
+    # Compute the time evolution
     time_evolution = (t_guess - actual_time) / actual_time
+    
     return time_evolution, actual_time
 
 
