@@ -42,8 +42,12 @@ def _scaling(data):
     min_co (array_like): Array containing the minimum value for each dimension.
     scale (array_like): Array containing the scaling factor for each dimension.
     """
+
+    # Compute the maximum and minimum values for each dimension
     max_co = data.max(1)
     min_co = data.min(1)
+
+    # Compute the scaling factor for each dimension
     scale = max_co - min_co
     return max_co, min_co, scale
 
