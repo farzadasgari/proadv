@@ -140,6 +140,18 @@ def _histogram(trans, grid):
 
 
 def _discrete_cosine_1d(data, weight):
+    """
+    Compute the 1D discrete cosine transform of the input data.
+
+    Parameters
+    ------
+    data (array_like): Input data array.
+    weight (float): Weight factor for the transform.
+
+    Returns
+    ------
+    transform (array_like): 1D discrete cosine transform of the input data.
+    """
     reordered = np.vstack((data[::2, :], data[::-2, :]))
     transform = np.real(weight * np.fft.fft(reordered))
     return transform
