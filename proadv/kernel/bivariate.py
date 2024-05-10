@@ -78,6 +78,19 @@ def _transform(data, max_co, min_co, scale):
 
 
 def _accumarray(subs, vals, sz):
+    """
+    Accumulate values into an array based on subscripts.
+
+    Parameters
+    ------
+    subs (array_like): Subscripts indicating the position where each value should be accumulated.
+    vals (array_like): Values to be accumulated.
+    sz (tuple): Size of the output array.
+
+    Returns
+    ------
+    accum (array_like): Accumulated array with the specified size.
+    """
     accum = np.zeros(sz, dtype=vals.dtype)
     for i, sub in enumerate(subs):
         accum[tuple(sub)] += vals[i]
