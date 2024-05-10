@@ -103,6 +103,18 @@ def _accumarray(subs, vals, sz):
 
 
 def _histogram(trans, grid):
+    """
+    Compute the histogram of the transformed data.
+
+    Parameters
+    ------
+    trans (array_like): Transformed data array.
+    grid (int): Number of bins along each dimension.
+
+    Returns
+    ------
+    binned_data (array_like): Histogram of the transformed data.
+    """
     rows, cols = trans.shape
     bins = np.zeros((rows, cols), dtype=int)
     hist = np.linspace(0, 1, grid + 1)
