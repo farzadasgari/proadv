@@ -229,21 +229,24 @@ def _psi(s_indices, time, initial_condition, autocorrelation_squared):
 
     Returns
     -------
-    result (float): The computed psi value.
+    psi (float): The computed psi value.
     """
     
+    # Generate the weight vector
     weight_vector = np.exp(-initial_condition * np.pi ** 2 * time) * np.append(1, 0.5 * np.ones(
         len(initial_condition) - 1))
         
+    # Compute wx and wy
     wx = weight_vector * (initial_condition ** s_indices[0])
     wy = weight_vector * (initial_condition ** s_indices[1])
     
-    result = (
+    # Compute the result
+    psi = (
             (-1) ** np.sum(s_indices)
             * (np.matmul(np.matmul(wy, autocorrelation_squared), wx.T))
             * np.pi ** (2 * np.sum(s_indices))
     )
-    return result
+    return psi
 
 
 def _evolve(t_guess, data_size: int, initial_condition, autocorrelation_squared):
