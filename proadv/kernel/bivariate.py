@@ -163,6 +163,17 @@ def _discrete_cosine_1d(data, weight):
 
 
 def _discrete_cosine_2d(data):
+    """
+    Compute the 2D discrete cosine transform of the input square data.
+
+    Parameters
+    ------
+    data (array_like): Input square data array.
+
+    Returns
+    ------
+    discrete (array_like): 2D discrete cosine transform of the input data.
+    """
     rows, columns = data.shape
     if rows != columns:
         raise ValueError('Data shape must be square')
