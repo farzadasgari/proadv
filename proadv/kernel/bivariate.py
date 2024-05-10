@@ -217,10 +217,27 @@ def _k(s_indices):
 
 
 def _psi(s_indices, time, initial_condition, autocorrelation_squared):
+    """
+    Compute the psi value based on the given indices and autocorrelation.
+
+    Parameters
+    ----------
+    s_indices (tuple): The values of s indices.
+    time (float): Time value.
+    initial_condition (array_like): Array containing initial conditions.
+    autocorrelation_squared (array_like): Autocorrelation array.
+
+    Returns
+    -------
+    result (float): The computed psi value.
+    """
+    
     weight_vector = np.exp(-initial_condition * np.pi ** 2 * time) * np.append(1, 0.5 * np.ones(
         len(initial_condition) - 1))
+        
     wx = weight_vector * (initial_condition ** s_indices[0])
     wy = weight_vector * (initial_condition ** s_indices[1])
+    
     result = (
             (-1) ** np.sum(s_indices)
             * (np.matmul(np.matmul(wy, autocorrelation_squared), wx.T))
