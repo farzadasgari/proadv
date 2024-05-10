@@ -194,6 +194,17 @@ def _discrete_cosine_2d(data):
 
 
 def _k(s_indices):
+    """
+    Compute the k-value based on the given indices.
+
+    Parameters
+    ------
+    s_indices (int): The value of s indices.
+
+    Returns
+    -------
+    k (float): The computed k-value.
+    """
     step = 2
     index_array = np.arange(start=1, stop=2 * s_indices - 1 + 0.1 * step, step=step)
     return (-1) ** s_indices * np.prod(index_array) / np.sqrt(2 * np.pi)
