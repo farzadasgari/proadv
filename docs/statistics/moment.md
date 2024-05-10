@@ -9,27 +9,30 @@ Compute the sample `skewness` of a data set.
 
 - Examples:
 
->>>
-    >>> import proadv as adv # Option 1: Full import path
-    >>> import numpy as np
-    >>> data = np.array([2, 8, 0, 4, 1, 9, 9, 0]) 
-    >>> skew = adv.statistics.moment.skewness(data)
-    >>> print(skew)
-    0.2650554122698573
+```python
+>>> import proadv as adv # Option 1: Full import path
+>>> import numpy as np
+>>> data = np.array([2, 8, 0, 4, 1, 9, 9, 0]) 
+>>> skew = adv.statistics.moment.skewness(data)
+>>> print(skew)
+0.2650554122698573
+```
 
->>>
-    >>> from proadv.statistics.moment import skewness # Option 2: Direct import
-    >>> import numpy as np
-    >>> data = np.random.rand(20)
-    >>> skew = skewness(data) 
+```python
+>>> from proadv.statistics.moment import skewness # Option 2: Direct import
+>>> import numpy as np
+>>> data = np.random.rand(20)
+>>> skew = skewness(data) 
+```
 
->>>
-    >>> import proadv as adv # Option 1: Full import path
-    >>> import numpy as np
-    >>> data = np.arange(1,6)
-    >>> skew = adv.statistics.moment.skewness(data)
-    >>> skew
-    0.0
+```python
+>>> import proadv as adv # Option 1: Full import path
+>>> import numpy as np
+>>> data = np.arange(1,6)
+>>> skew = adv.statistics.moment.skewness(data)
+>>> skew
+0.0
+```
 
 
 ## Kurtosis Function
@@ -44,18 +47,20 @@ This function:
 
 - Examples:
 
->>>
-    >>> from proadv.statistics.moment import kurtosis  # Option 2: Direct import
-    >>> import numpy as np
-    >>> data = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
-    >>> kurt = kurtosis(data)
-    >>> kurt
-    2.2
+```python
+>>> from proadv.statistics.moment import kurtosis  # Option 2: Direct import
+>>> import numpy as np
+>>> data = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
+>>> kurt = kurtosis(data)
+>>> kurt
+2.2
+```
 
->>>
-    >>> import proadv as adv  # Option 1: Full import path
-    >>> import numpy as np
-    >>> data = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
-    >>> kurt = adv.statistics.moment.kurtosis(data)
-    >>> kurt
-    2.2
+```python
+>>> import proadv as adv  # Option 1: Full import path
+>>> import numpy as np
+>>> data = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
+>>> kurt = adv.statistics.moment.kurtosis(data)
+>>> kurt
+2.2
+```
