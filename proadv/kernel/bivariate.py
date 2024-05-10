@@ -152,8 +152,13 @@ def _discrete_cosine_1d(data, weight):
     ------
     transform (array_like): 1D discrete cosine transform of the input data.
     """
+    
+    # Reorder the data for the discrete cosine transform
     reordered = np.vstack((data[::2, :], data[::-2, :]))
+    
+    # Compute the discrete cosine transform using FFT
     transform = np.real(weight * np.fft.fft(reordered))
+    
     return transform
 
 
