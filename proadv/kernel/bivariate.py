@@ -205,8 +205,14 @@ def _k(s_indices):
     -------
     k (float): The computed k-value.
     """
+    
+    # Define the step for the index array
     step = 2
+    
+    # Generate the index array
     index_array = np.arange(start=1, stop=2 * s_indices - 1 + 0.1 * step, step=step)
+    
+    # Compute and return the k-value
     return (-1) ** s_indices * np.prod(index_array) / np.sqrt(2 * np.pi)
 
 
