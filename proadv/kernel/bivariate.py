@@ -29,6 +29,19 @@ def _rotation(x, y):
 
 
 def _scaling(data):
+    """
+    Compute the scaling parameters for each dimension of the input data.
+
+    Parameters
+    ------
+    data (array_like): Input data array.
+
+    Returns
+    ------
+    max_co (array_like): Array containing the maximum value for each dimension.
+    min_co (array_like): Array containing the minimum value for each dimension.
+    scale (array_like): Array containing the scaling factor for each dimension.
+    """
     max_co = data.max(1)
     min_co = data.min(1)
     scale = max_co - min_co
