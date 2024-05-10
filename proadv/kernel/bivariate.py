@@ -53,6 +53,20 @@ def _scaling(data):
 
 
 def _transform(data, max_co, min_co, scale):
+    """
+    Transform the input data using the provided scaling parameters.
+
+    Parameters
+    ------
+    data (array_like): Input data array.
+    max_co (array_like): Array containing the maximum value for each dimension.
+    min_co (array_like): Array containing the minimum value for each dimension.
+    scale (array_like): Array containing the scaling factor for each dimension.
+
+    Returns
+    ------
+    transformed_data (array_like): Transformed data array.
+    """
     numerator = data.T - np.tile(min_co, (data[0].size, 1))
     denominator = np.tile(scale, (data[0].size, 1))
     transformed_data = numerator / denominator
