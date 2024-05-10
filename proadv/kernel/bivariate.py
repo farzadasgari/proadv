@@ -3,6 +3,18 @@ from scipy import optimize
 
 
 def _rotation(x, y):
+    """
+    Calculate the rotation angle theta between two variables x and y.
+
+    Parameters
+    ------
+    x (array_like): Array containing the values of the first variable.
+    y (array_like): Array containing the values of the second variable.
+
+    Returns
+    ------
+    theta (float): The rotation angle theta in radians.
+    """
     data_size = x.size
     numerator = data_size * np.sum(x * y) - np.sum(x) * np.sum(y)
     denominator = data_size * np.sum(x * x) - np.sum(x) * np.sum(x)
