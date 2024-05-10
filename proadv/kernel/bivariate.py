@@ -246,6 +246,7 @@ def _psi(s_indices, time, initial_condition, autocorrelation_squared):
             * (np.matmul(np.matmul(wy, autocorrelation_squared), wx.T))
             * np.pi ** (2 * np.sum(s_indices))
     )
+    
     return psi
 
 
@@ -332,19 +333,31 @@ def root(fun, n):
     ------
     t (float): The root of the function.
     """
+    
+    # Define the maximum tolerance
     max_tol = 0.1
+    
+    # Adjust n based on predefined conditions
     n = 50 * int(n <= 50) + 1050 * int(n >= 1050) + n * int((n < 1050) & (n > 50))
+    
+    # Compute the initial tolerance
     tol = 10 ** -12 + 0.01 * (n - 50) / 1000
     solved = False
+    
+    # Iterate until a solution is found
     while not solved:
         try:
+            # Attempt to find the root using Brent's method
             t = optimize.brentq(f=fun, a=0, b=tol)
             solved = True
         except ValueError:
+            # If Brent's method fails, increase the tolerance
             tol = min(tol * 2, max_tol)
         if tol >= max_tol:
+            # If the tolerance exceeds the maximum tolerance, use golden section search
             t = optimize.fminbound(func=lambda x: abs(fun(x)), x1=0, x2=0.1)
             solved = True
+    
     return t
 
 
