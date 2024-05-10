@@ -320,6 +320,18 @@ def _func(s, t, n_sample: int, initial_condition, autocorrelation_squared):
 
 
 def root(fun, n):
+    """
+    Find the root of a function within a certain tolerance.
+
+    Parameters
+    ------
+    fun (callable): The function for which to find the root.
+    n (int): A value used to determine the tolerance.
+
+    Returns
+    ------
+    t (float): The root of the function.
+    """
     max_tol = 0.1
     n = 50 * int(n <= 50) + 1050 * int(n >= 1050) + n * int((n < 1050) & (n > 50))
     tol = 10 ** -12 + 0.01 * (n - 50) / 1000
