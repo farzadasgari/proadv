@@ -15,9 +15,15 @@ def _rotation(x, y):
     ------
     theta (float): The rotation angle theta in radians.
     """
+
+    # Compute the size of the data
     data_size = x.size
+
+    # Calculate the numerator and denominator for the rotation angle
     numerator = data_size * np.sum(x * y) - np.sum(x) * np.sum(y)
     denominator = data_size * np.sum(x * x) - np.sum(x) * np.sum(x)
+
+    # Compute the rotation angle theta using arctan2
     theta = np.arctan2(numerator, denominator)
     return theta
 
