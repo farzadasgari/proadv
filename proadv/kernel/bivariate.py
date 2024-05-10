@@ -298,17 +298,24 @@ def _func(s, t, n_sample: int, initial_condition, autocorrelation_squared):
     out (float): The computed function value.
     """
     
+    # Compute the sum of the functions
     if sum(s) <= 4:
         sum_func = _func([s[0] + 1, s[1]], t, n_sample=n_sample, initial_condition=initial_condition,
                          autocorrelation_squared=autocorrelation_squared) + _func(
             [s[0], s[1] + 1], t, n_sample=n_sample, initial_condition=initial_condition,
             autocorrelation_squared=autocorrelation_squared
         )
+        
+        # Compute the constant and time
         const = (1 + 1 / 2 ** (np.sum(s) + 1)) / 3
         time = (-2 * const * _k(s[0]) * _k(s[1]) / n_sample / sum_func) ** (1 / (2 + np.sum(s)))
+        
+        # Compute the psi value
         out = _psi(s, time, initial_condition, autocorrelation_squared)
     else:
+        # Compute the psi value directly
         out = _psi(s, t, initial_condition, autocorrelation_squared)
+    
     return out
 
 
