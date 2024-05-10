@@ -362,6 +362,22 @@ def root(fun, n):
 
 
 def bivariate_kernel(data, hx, hy, grid):
+    """
+    Compute the bivariate kernel density estimation.
+
+    Parameters
+    ----------
+    data (array_like): Input data array.
+    hx (float): Bandwidth along the x-axis.
+    hy (float): Bandwidth along the y-axis.
+    grid (int): Number of bins along each dimension for histogram computation.
+
+    Returns
+    -------
+    density_mx (array_like): Bivariate kernel density estimation.
+    x_mx (array_like): Meshgrid of x values.
+    y_mx (array_like): Meshgrid of y values.
+    """
     data_size = data.size
     max_co, min_co, scale = _scaling(data)
     transformed_data = _transform(data, max_co, min_co, scale)
