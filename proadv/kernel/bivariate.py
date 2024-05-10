@@ -202,7 +202,7 @@ def _k(s_indices):
     s_indices (int): The value of s indices.
 
     Returns
-    -------
+    ------
     k (float): The computed k-value.
     """
     
@@ -221,14 +221,14 @@ def _psi(s_indices, time, initial_condition, autocorrelation_squared):
     Compute the psi value based on the given indices and autocorrelation.
 
     Parameters
-    ----------
+    ------
     s_indices (tuple): The values of s indices.
     time (float): Time value.
     initial_condition (array_like): Array containing initial conditions.
     autocorrelation_squared (array_like): Autocorrelation array.
 
     Returns
-    -------
+    ------
     psi (float): The computed psi value.
     """
     
@@ -254,14 +254,14 @@ def _evolve(t_guess, data_size: int, initial_condition, autocorrelation_squared)
     Compute the time evolution of the system based on the given parameters.
 
     Parameters
-    ----------
+    ------
     t_guess (float): Initial guess for time.
     data_size (int): Size of the data.
     initial_condition (array_like): Array containing initial conditions.
     autocorrelation_squared (array_like): Autocorrelation squared.
 
     Returns
-    -------
+    ------
     time_evolution (float): The computed time evolution.
     actual_time (float): The actual time.
     """
@@ -282,6 +282,22 @@ def _evolve(t_guess, data_size: int, initial_condition, autocorrelation_squared)
 
 
 def _func(s, t, n_sample: int, initial_condition, autocorrelation_squared):
+    """
+    Compute the function value based on the given indices, time, and parameters.
+
+    Parameters
+    ------
+    s (tuple): The values of s indices.
+    t (float): Time value.
+    n_sample (int): Number of samples.
+    initial_condition (array_like): Array containing initial conditions.
+    autocorrelation_squared (array_like): Autocorrelation squared.
+
+    Returns
+    ------
+    out (float): The computed function value.
+    """
+    
     if sum(s) <= 4:
         sum_func = _func([s[0] + 1, s[1]], t, n_sample=n_sample, initial_condition=initial_condition,
                          autocorrelation_squared=autocorrelation_squared) + _func(
