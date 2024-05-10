@@ -25,6 +25,7 @@ def _rotation(x, y):
 
     # Compute the rotation angle theta using arctan2
     theta = np.arctan2(numerator, denominator)
+    
     return theta
 
 
@@ -49,6 +50,7 @@ def _scaling(data):
 
     # Compute the scaling factor for each dimension
     scale = max_co - min_co
+    
     return max_co, min_co, scale
 
 
@@ -74,6 +76,7 @@ def _transform(data, max_co, min_co, scale):
     
     # Perform the transformation
     transformed_data = numerator / denominator
+    
     return transformed_data
 
 
@@ -115,13 +118,24 @@ def _histogram(trans, grid):
     ------
     binned_data (array_like): Histogram of the transformed data.
     """
+    
+    # Get the number of rows and columns in the transformed data
     rows, cols = trans.shape
+    
+    # Initialize an array to store the bins
     bins = np.zeros((rows, cols), dtype=int)
+    
+    # Generate the histogram bins
     hist = np.linspace(0, 1, grid + 1)
+    
+    # Iterate over each column and compute the bins
     for i in range(cols):
         bins[:, i] = np.digitize(trans[:, i], hist, 1)
         bins[:, i] = np.minimum(bins[:, i], grid - 1)
+        
+    # Accumulate the binned data
     binned_data = _accumarray(bins, np.ones(rows), (grid,) * cols) / rows
+    
     return binned_data
 
 
