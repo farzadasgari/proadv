@@ -169,3 +169,31 @@ def _cutoff(dp, uf, c1, c2, f, Ip, ngrid):
     ul = uf[i1]
     uu = uf[i2]
     return ul, uu
+
+
+def kernel(u1, w1, grid):
+    dataset = np.array([u1, w1])
+    theta = _rotation(u1, w1)
+    ut, wt = _transform(u1, w1, theta)
+    mesh_u, mesh_w = _scaling(ut, wt, grid)
+    uf, wf = _profile(mesh_u, mesh_w)
+    positions, values = _position(mesh_u, mesh_w, ut, wt)
+    evals = _density(values)
+    evole = _evolve(dataset, positions, evals)
+    estimation = _estimation(evole.T, mesh_u)
+    density = np.reshape(kde(values)(positions).T, mesh_u.shape)
+    peak, up, wp, fu, fw = _peak(density)
+    lambda_ = np.sqrt(2 * np.log(u1.size))
+    stdu = np.std(u1)
+    stdw = np.std(w1)
+    cu = lambda_ * stdu / np.sqrt(u1.size)
+    cw = lambda_ * stdw / np.sqrt(u1.size)
+    ul, uu = _cutoff(peak, uf, cu, cu, fu, up, grid)
+    wl, wu = _cutoff(peak, wf, cw, cw, fw, wp, grid)
+    uu1 = uu - 0.5 * (uu + ul)
+    wu1 = wu - 0.5 * (wu + wl)
+    Ut1 = ut - 0.5 * (uu + ul)
+    Wt1 = wt - 0.5 * (wu + wl)
+    rho = (Ut1 / uu1) ** 2 + (Wt1 / wu1) ** 2
+    id_ = np.where(rho > 1)[0]
+    return id_, estimation
