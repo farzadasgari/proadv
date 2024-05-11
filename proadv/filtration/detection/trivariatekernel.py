@@ -123,6 +123,20 @@ def _profile(meshgrid_x, meshgrid_y):
 
 
 def _position(meshgrid_x, meshgrid_y, trans_x, trans_y):
+    """
+    Generate positions and values for interpolation.
+
+    Parameters
+    ------
+    meshgrid_x (array_like): Meshgrid of x-coordinates.
+    meshgrid_y (array_like): Meshgrid of y-coordinates.
+    trans_x (array_like): Transformed x-coordinates.
+    trans_y (array_like): Transformed y-coordinates.
+
+    Returns
+    ------
+    Positions and values for interpolation.
+    """
     positions = np.vstack([meshgrid_x.ravel(), meshgrid_y.ravel()])
     
     values = np.vstack([trans_x, trans_y])
