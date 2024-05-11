@@ -96,3 +96,15 @@ def _covariance(data, rows, cols):
         "log": log
     }
     return compute
+
+
+def _type(cov, scatt):
+    data_type = np.common_type(cov, scatt)
+    data_size = np.dtype(data_type).itemsize
+    if data_size == 4:
+        data_size = 'float'
+    elif data_size == 8:
+        data_size = 'double'
+    elif data_size in (12, 16):
+        data_size = 'long double'
+    return data_type, data_size
