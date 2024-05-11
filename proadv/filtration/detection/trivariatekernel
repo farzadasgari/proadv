@@ -54,3 +54,7 @@ def _position(meshgrid_x, meshgrid_y, trans_x, trans_y):
     values = np.vstack([trans_x, trans_y])
 
     return positions, values
+
+
+def _factor(rows, cols):
+    return np.power(cols, -1. / (rows + 4))
