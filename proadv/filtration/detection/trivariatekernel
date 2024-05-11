@@ -74,3 +74,25 @@ def _cholesky(data):
 
 def _determination(data):
     return 2 * np.sum(np.log(np.diag(data * np.sqrt(np.pi * 2))))
+
+
+def _covariance(data, rows, cols):
+    factor = _factor(rows, cols)
+    weight = _weight(cols)
+    net = np.power(np.sum(weight ** 2), -1)
+    factor = _factor(rows, net)
+    cov = _cov(data, weight)
+    sky = _cholesky(cov)
+    covariance = cov * factor ** 2
+    cholesky = sky * factor
+    cholesky.dtype = np.float64
+    log = _determination(cholesky)
+    compute = {
+        "factor": factor,
+        "weight": weight,
+        "net": net,
+        "covariance": covariance,
+        "cholesky": cholesky,
+        "log": log
+    }
+    return compute
