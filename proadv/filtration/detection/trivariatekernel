@@ -129,3 +129,14 @@ def _extraction(dataset, parameters, poses):
     scatt = np.atleast_2d(np.asarray(poses))
     data_type, data_mode = _type(parameters["covariance"], scatt)
     return dataset.T, parameters["weight"][:, None], poses.T, parameters["cholesky"].T, data_type, data_mode
+
+
+def _evolve(dataset, poses, computations):
+    dataset = _extraction(dataset, computations, poses)
+    dens = gke[dataset[5]](
+        dataset[0],
+        dataset[1],
+        dataset[2],
+        dataset[3],
+        dataset[4])
+    return dens[:, 0]
