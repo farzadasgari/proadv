@@ -164,6 +164,17 @@ def _factor(rows, cols):
 
 
 def _weight(cols):
+    """
+    Generate weights.
+
+    Parameters
+    ------
+    cols (int): Number of columns.
+
+    Returns
+    ------
+    Array of weights.
+    """
     return np.ones(cols) / cols
 
 
