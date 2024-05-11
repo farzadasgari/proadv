@@ -46,24 +46,21 @@ def reynolds_stresses(ui, vi, wi):
     ------
         Tuple containing the Reynolds stresses (uu, vv, ww, uv, uw, vw).
     """
-
+    
+    # Compute fluctuations
     up = ui - mean(ui)
     vp = vi - mean(vi)
     wp = wi - mean(wi)
     
+    # Calculate the mean squared velocities in each direction
     mean_ui2 = mean(up ** 2)
     mean_vi2 = mean(vp ** 2)
     mean_wi2 = mean(wp ** 2)
 
+    # Compute the cross-correlation terms between velocity components
     mean_uivi = mean(up * vp)
     mean_uiwi = mean(up * wp)
     mean_viwi = mean(vp * wp)
 
+    # Return the Reynolds stresses as a tuple
     return (mean_ui2, mean_vi2, mean_wi2, mean_uivi, mean_uiwi, mean_viwi)
-
-
-
-
-
-
-
