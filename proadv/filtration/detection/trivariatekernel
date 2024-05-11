@@ -42,3 +42,7 @@ def _scaling(x, y, grid):
     ymin = y.min()
     ymax = y.max()
     return np.mgrid[xmin:xmax:grid * 1j, ymin:ymax:grid * 1j]
+
+
+def _profile(meshgrid_x, meshgrid_y):
+    return meshgrid_x[:, 0], meshgrid_y[0, :]
