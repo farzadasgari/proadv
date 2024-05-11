@@ -158,6 +158,8 @@ def _factor(rows, cols):
     ------
     Factor.
     """
+
+    # Calculate the covariance factor
     return np.power(cols, -1. / (rows + 4))
 
 
