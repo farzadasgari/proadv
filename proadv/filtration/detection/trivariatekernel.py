@@ -246,15 +246,27 @@ def _covariance(data, rows, cols):
     ------
     Dictionary containing computed factors, weights, net, covariance, Cholesky decomposition, and log.
     """
+
+    # Compute factors and weights
     weight = _weight(cols)
+
+    # Compute net and adjust factor
     net = np.power(np.sum(weight ** 2), -1)
     factor = _factor(rows, net)
+
+    # Compute covariance matrix and its Cholesky decomposition
     cov = _cov(data, weight)
     sky = _cholesky(cov)
+
+    # Adjust covariance and Cholesky decomposition
     covariance = cov * factor ** 2
     cholesky = sky * factor
     cholesky.dtype = np.float64
+
+    # Compute log
     log = _determination(cholesky)
+
+    # Return computed values as a dictionary
     compute = {
         "factor": factor,
         "weight": weight,
@@ -263,6 +275,7 @@ def _covariance(data, rows, cols):
         "cholesky": cholesky,
         "log": log
     }
+
     return compute
 
 
