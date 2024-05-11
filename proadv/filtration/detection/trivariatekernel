@@ -24,4 +24,13 @@ def _rotation(u1, w1):
     theta = np.arctan2((data_size * np.sum(u1 * w1) - np.sum(u1) * np.sum(w1)),
                        (data_size * np.sum(u1 * u1) - np.sum(u1) * np.sum(u1)))
     
-		return theta
+return theta
+
+
+def _transform(x, y, theta):
+
+    xt = x * np.cos(theta) + y * np.sin(theta)
+
+    yt = -x * np.sin(theta) + y * np.cos(theta)
+
+    return xt, yt
