@@ -227,6 +227,8 @@ def _determination(data):
     ------
     Determinant of the input matrix.
     """
+
+    # Compute the determinant
     return 2 * np.sum(np.log(np.diag(data * np.sqrt(np.pi * 2))))
 
 
