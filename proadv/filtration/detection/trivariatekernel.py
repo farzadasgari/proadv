@@ -148,3 +148,24 @@ def _peak(pdf):
     fu = pdf[:, wp]
     fw = pdf[up, :]
     return peak, up, wp, fu, fw
+
+
+def _cutoff(dp, uf, c1, c2, f, Ip, ngrid):
+    lf = f.size
+    dk = np.append([0], np.diff(f)) * ngrid / dp
+    for i in list(range(1, Ip))[::-1]:
+        if f[i] / f[Ip] <= c1 and abs(dk[i]) <= c2:
+            i1 = i
+            break
+        else:
+            i1 = 1
+
+    for i in range(Ip + 1, lf - 1):
+        if f[i] / f[Ip] <= c1 and abs(dk[i]) <= c2:
+            i2 = i
+            break
+        else:
+            i2 = lf - 1
+    ul = uf[i1]
+    uu = uf[i2]
+    return ul, uu
