@@ -18,7 +18,7 @@ def _derivatives(data):
     dc (array_like): First derivative of the input data.
     dc2 (array_like): Second derivative of the input data.
     """
-    
+
     # Initialize arrays for first and second derivatives
     dc = np.zeros_like(data)
     dc2 = np.zeros_like(data)
@@ -54,7 +54,7 @@ def _rotation(u1, w1):
     # Calculate theta using the arctan2 function
     theta = np.arctan2((data_size * np.sum(u1 * w1) - np.sum(u1) * np.sum(w1)),
                        (data_size * np.sum(u1 * u1) - np.sum(u1) * np.sum(u1)))
-    
+
     return theta
 
 
@@ -181,6 +181,18 @@ def _weight(cols):
 
 
 def _cov(data, aweights):
+    """
+    Compute the weighted covariance matrix.
+
+    Parameters
+    ------
+    data (array_like): Input data.
+    aweights (array_like): Array of weights.
+
+    Returns
+    ------
+    Weighted covariance matrix.
+    """
     return np.atleast_2d(np.cov(data, rowvar=1, bias=False, aweights=aweights))
 
 
