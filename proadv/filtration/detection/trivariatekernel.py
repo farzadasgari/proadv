@@ -39,12 +39,12 @@ def _rotation(u1, w1):
     Calculate rotation angle theta between vectors u1 and w1.
 
     Parameters
-    ----------
+    ------
     u1 (array_like): Vector u1.
     w1 (array_like): Vector w1.
 
     Returns
-    -------
+    ------
     theta (float): Rotation angle.
     """
 
@@ -59,6 +59,19 @@ def _rotation(u1, w1):
 
 
 def _transform(x, y, theta):
+    """
+    Transform coordinates (x, y) using rotation angle theta.
+
+    Parameters
+    ----------
+    x (array_like): x-coordinate.
+    y (array_like): y-coordinate.
+    theta (float): Rotation angle
+
+    Returns
+    ------
+        xt, yt (array_like): Transformed coordinates.
+    """
 
     xt = x * np.cos(theta) + y * np.sin(theta)
 
