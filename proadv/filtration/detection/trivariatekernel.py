@@ -280,6 +280,18 @@ def _covariance(data, rows, cols):
 
 
 def _type(cov, scatt):
+    """
+    Determine the data type and size.
+
+    Parameters
+    ------
+    cov (array_like): Covariance matrix.
+    scatt (array_like): Scattering data.
+
+    Returns
+    ------
+    Data type and size.
+    """
     data_type = np.common_type(cov, scatt)
     data_size = np.dtype(data_type).itemsize
     if data_size == 4:
