@@ -47,8 +47,11 @@ def _rotation(u1, w1):
     -------
     theta (float): Rotation angle.
     """
+
+    # Compute data size
     data_size = u1.size
 
+    # Calculate theta using the arctan2 function
     theta = np.arctan2((data_size * np.sum(u1 * w1) - np.sum(u1) * np.sum(w1)),
                        (data_size * np.sum(u1 * u1) - np.sum(u1) * np.sum(u1)))
     
