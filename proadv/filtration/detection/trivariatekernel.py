@@ -344,6 +344,19 @@ def _estimation(krn, x):
 
 
 def _extraction(dataset, parameters, poses):
+    """
+    Extract necessary data for extraction.
+
+    Parameters
+    ------
+    dataset (array_like): Input dataset.
+    parameters (dict): Parameters dictionary containing covariance and scattering data.
+    poses (array_like): Scattering positions.
+
+    Returns
+    ------
+    Extracted dataset components.
+    """
     scatt = np.atleast_2d(np.asarray(poses))
     data_type, data_mode = _type(parameters["covariance"], scatt)
     return dataset.T, parameters["weight"][:, None], poses.T, parameters["cholesky"].T, data_type, data_mode
