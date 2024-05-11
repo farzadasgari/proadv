@@ -140,3 +140,11 @@ def _evolve(dataset, poses, computations):
         dataset[3],
         dataset[4])
     return dens[:, 0]
+
+
+def _peak(pdf):
+    peak = pdf.max()
+    up, wp = np.where(pdf == peak)[0][0], np.where(pdf == peak)[1][0]
+    fu = pdf[:, wp]
+    fw = pdf[up, :]
+    return peak, up, wp, fu, fw
