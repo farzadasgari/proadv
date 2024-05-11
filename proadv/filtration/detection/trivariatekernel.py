@@ -405,25 +405,54 @@ def _peak(pdf):
     return peak, up, wp, fu, fw
 
 
-def _cutoff(dp, uf, c1, c2, f, Ip, ngrid):
-    lf = f.size
-    dk = np.append([0], np.diff(f)) * ngrid / dp
-    for i in list(range(1, Ip))[::-1]:
-        if f[i] / f[Ip] <= c1 and abs(dk[i]) <= c2:
-            i1 = i
-            break
-        else:
-            i1 = 1
+def _cutoff(density_profile, velocity_profile, c1_threshold, c2_threshold, force_profile, peak_index, grid):
+    """
+    Find the lower and upper cutoff velocities based on specified criteria.
 
-    for i in range(Ip + 1, lf - 1):
-        if f[i] / f[Ip] <= c1 and abs(dk[i]) <= c2:
-            i2 = i
+    Parameters
+    ------
+    density_profile (array_like): Density profile of the system.
+    velocity_profile (array_like): Velocity profile of the system.
+    c1_threshold (float): Threshold ratio for force compared to peak force.
+    c2_threshold (float): Threshold for absolute change in force.
+    force_profile (array_like): Force profile of the system.
+    peak_index (int): Index of the peak force in the force profile.
+    grid (int): Grid spacing or resolution.
+
+    Returns
+    ------
+    lower_cutoff_velocity, upper_cutoff_velocity: A tuple containing the lower and upper cutoff velocities.
+
+    Note
+    ------
+    This function assumes that the input arrays (density_profile, velocity_profile, and force_profile)
+        are of the same length.
+        length.
+    The density profile, velocity profile, and force profile should be consistent and correspond to
+        each other at each index.
+    """
+
+    profile_length = force_profile.size
+    delta_force = np.append([0], np.diff(force_profile)) * grid / density_profile
+
+    for i in range(peak_index - 1, 0, -1):
+        if force_profile[i] / force_profile[peak_index] <= c1_threshold and abs(delta_force[i]) <= c2_threshold:
+            lower_cutoff_index = i
             break
-        else:
-            i2 = lf - 1
-    ul = uf[i1]
-    uu = uf[i2]
-    return ul, uu
+    else:
+        lower_cutoff_index = 1
+
+    for i in range(peak_index + 1, profile_length - 1):
+        if force_profile[i] / force_profile[peak_index] <= c1_threshold and abs(delta_force[i]) <= c2_threshold:
+            upper_cutoff_index = i
+            break
+    else:
+        upper_cutoff_index = profile_length - 1
+
+    lower_cutoff_velocity = velocity_profile[lower_cutoff_index]
+    upper_cutoff_velocity = velocity_profile[upper_cutoff_index]
+
+    return lower_cutoff_velocity, upper_cutoff_velocity
 
 
 def kernel(u1, w1, grid):
