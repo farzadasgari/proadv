@@ -2,3 +2,16 @@ import numpy as np
 from scipy import linalg
 from scipy.stats._stats import gaussian_kernel_estimate as gke
 from scipy.stats import gaussian_kde as kde
+
+def _derivatives(data):
+
+    dc = np.zeros_like(data)
+    dc2 = np.zeros_like(data)
+
+    for i in range(1, data.size - 1):
+        dc[i] = (data[i + 1] - data[i - 1]) / 2
+
+    for i in range(1, data.size - 1):
+        dc2[i] = (dc[i + 1] - dc[i - 1]) / 2
+
+    return dc, dc2
