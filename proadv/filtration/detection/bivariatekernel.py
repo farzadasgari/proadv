@@ -1,7 +1,6 @@
 import numpy as np
 
 def _cutoff(density_profile, velocity_profile, c1_threshold, c2_threshold, force_profile, peak_index, grid):
-    grid):
     """
     Find the lower and upper cutoff velocities based on specified criteria.
 
