@@ -233,7 +233,19 @@ def _determination(data):
 
 
 def _covariance(data, rows, cols):
-    factor = _factor(rows, cols)
+    """
+    Calculate the covariance and Cholesky decomposition.
+
+    Parameters
+    ------
+    data (array_like): Input data
+    rows (int): Number of rows.
+    cols (int): Number of columns.
+
+    Returns
+    ------
+    Dictionary containing computed factors, weights, net, covariance, Cholesky decomposition, and log.
+    """
     weight = _weight(cols)
     net = np.power(np.sum(weight ** 2), -1)
     factor = _factor(rows, net)
