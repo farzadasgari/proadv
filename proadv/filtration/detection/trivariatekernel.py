@@ -193,6 +193,8 @@ def _cov(data, aweights):
     ------
     Weighted covariance matrix.
     """
+
+    # Compute the weighted covariance matrix
     return np.atleast_2d(np.cov(data, rowvar=1, bias=False, aweights=aweights))
 
 
