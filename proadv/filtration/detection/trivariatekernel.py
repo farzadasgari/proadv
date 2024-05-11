@@ -63,14 +63,14 @@ def _transform(x, y, theta):
     Transform coordinates (x, y) using rotation angle theta.
 
     Parameters
-    ----------
+    ------
     x (array_like): x-coordinate.
     y (array_like): y-coordinate.
     theta (float): Rotation angle
 
     Returns
     ------
-        xt, yt (array_like): Transformed coordinates.
+    xt, yt (array_like): Transformed coordinates.
     """
 
     # Apply rotation transformation
@@ -81,6 +81,20 @@ def _transform(x, y, theta):
 
 
 def _scaling(x, y, grid):
+    """
+    Scale coordinates (x, y) into a grid.
+
+    Parameters
+    ------
+    x (array_like): x-coordinate.
+    y (array_like): y-coordinate.
+    grid (int): Number of grid points.
+
+    Returns
+    ------
+    Meshgrid of scaled coordinates.
+    """
+
     xmin = x.min()
     xmax = x.max()
     ymin = y.min()
