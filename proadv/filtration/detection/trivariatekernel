@@ -24,7 +24,7 @@ def _rotation(u1, w1):
     theta = np.arctan2((data_size * np.sum(u1 * w1) - np.sum(u1) * np.sum(w1)),
                        (data_size * np.sum(u1 * u1) - np.sum(u1) * np.sum(u1)))
     
-return theta
+    return theta
 
 
 def _transform(x, y, theta):
@@ -34,3 +34,11 @@ def _transform(x, y, theta):
     yt = -x * np.sin(theta) + y * np.cos(theta)
 
     return xt, yt
+
+
+def _scaling(x, y, grid):
+    xmin = x.min()
+    xmax = x.max()
+    ymin = y.min()
+    ymax = y.max()
+    return np.mgrid[xmin:xmax:grid * 1j, ymin:ymax:grid * 1j]
