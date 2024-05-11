@@ -66,3 +66,7 @@ def _weight(cols):
 
 def _cov(data, aweights):
     return np.atleast_2d(np.cov(data, rowvar=1, bias=False, aweights=aweights))
+
+
+def _cholesky(data):
+    return linalg.cholesky(data)
