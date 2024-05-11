@@ -15,3 +15,13 @@ def _derivatives(data):
         dc2[i] = (dc[i + 1] - dc[i - 1]) / 2
 
     return dc, dc2
+
+
+def _rotation(u1, w1):
+
+    data_size = u1.size
+
+    theta = np.arctan2((data_size * np.sum(u1 * w1) - np.sum(u1) * np.sum(w1)),
+                       (data_size * np.sum(u1 * u1) - np.sum(u1) * np.sum(u1)))
+    
+		return theta
