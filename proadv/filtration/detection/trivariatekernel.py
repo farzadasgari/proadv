@@ -35,7 +35,18 @@ def _derivatives(data):
 
 
 def _rotation(u1, w1):
+    """
+    Calculate rotation angle theta between vectors u1 and w1.
 
+    Parameters
+    ----------
+    u1 (array_like): Vector u1.
+    w1 (array_like): Vector w1.
+
+    Returns
+    -------
+    theta (float): Rotation angle.
+    """
     data_size = u1.size
 
     theta = np.arctan2((data_size * np.sum(u1 * w1) - np.sum(u1) * np.sum(w1)),
