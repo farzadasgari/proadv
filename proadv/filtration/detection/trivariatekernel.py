@@ -2,6 +2,8 @@ import numpy as np
 from scipy import linalg
 from scipy.stats._stats import gaussian_kernel_estimate as gke
 from scipy.stats import gaussian_kde as kde
+from proadv.statistics.spread import std
+
 
 def _derivatives(data):
 
@@ -184,8 +186,8 @@ def kernel(u1, w1, grid):
     density = np.reshape(kde(values)(positions).T, mesh_u.shape)
     peak, up, wp, fu, fw = _peak(density)
     lambda_ = np.sqrt(2 * np.log(u1.size))
-    stdu = np.std(u1)
-    stdw = np.std(w1)
+    stdu = std(u1)
+    stdw = std(w1)
     cu = lambda_ * stdu / np.sqrt(u1.size)
     cw = lambda_ * stdw / np.sqrt(u1.size)
     ul, uu = _cutoff(peak, uf, cu, cu, fu, up, grid)
