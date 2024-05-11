@@ -146,6 +146,18 @@ def _position(meshgrid_x, meshgrid_y, trans_x, trans_y):
 
 
 def _factor(rows, cols):
+    """
+    Calculate covariance factor based on rows and columns.
+
+    Parameters
+    ------
+    rows (int): Number of rows.
+    cols (int): Number of columns.
+
+    Returns
+    ------
+    Factor.
+    """
     return np.power(cols, -1. / (rows + 4))
 
 
