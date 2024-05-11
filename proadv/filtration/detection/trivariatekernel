@@ -108,3 +108,14 @@ def _type(cov, scatt):
     elif data_size in (12, 16):
         data_size = 'long double'
     return data_type, data_size
+
+
+def _density(values):
+    dataset = np.atleast_2d(np.asarray(values))
+    if dataset.size < 1:
+        raise ValueError("Dataset should have more than one element.")
+    rows, cols = dataset.shape
+    if rows > cols:
+        raise ValueError("Number of dimensions exceeds the number of samples.")
+    evals = _covariance(dataset, rows, cols)
+    return evals
