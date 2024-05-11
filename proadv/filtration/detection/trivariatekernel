@@ -70,3 +70,7 @@ def _cov(data, aweights):
 
 def _cholesky(data):
     return linalg.cholesky(data)
+
+
+def _determination(data):
+    return 2 * np.sum(np.log(np.diag(data * np.sqrt(np.pi * 2))))
