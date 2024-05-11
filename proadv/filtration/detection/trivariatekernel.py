@@ -216,6 +216,17 @@ def _cholesky(data):
 
 
 def _determination(data):
+    """
+    Compute the determinant of a matrix.
+
+    Parameters
+    ------
+    data (array_like): Input matrix.
+
+    Returns
+    ------
+    Determinant of the input matrix.
+    """
     return 2 * np.sum(np.log(np.diag(data * np.sqrt(np.pi * 2))))
 
 
