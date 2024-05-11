@@ -210,6 +210,8 @@ def _cholesky(data):
     ------
     Cholesky decomposition of the input matrix.
     """
+
+    # Compute the Cholesky decomposition
     return linalg.cholesky(data)
 
 
