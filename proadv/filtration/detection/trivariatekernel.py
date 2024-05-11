@@ -292,6 +292,7 @@ def _type(cov, scatt):
     ------
     Data type and size.
     """
+
     data_type = np.common_type(cov, scatt)
     data_size = np.dtype(data_type).itemsize
     if data_size == 4:
@@ -304,6 +305,18 @@ def _type(cov, scatt):
 
 
 def _density(values):
+    """
+    Compute the density estimation.
+
+    Parameters
+    ------
+    values (array_like): Values for density estimation.
+
+    Returns
+    ------
+    Dictionary containing the density estimation results.
+    """
+
     dataset = np.atleast_2d(np.asarray(values))
     if dataset.size < 1:
         raise ValueError("Dataset should have more than one element.")
