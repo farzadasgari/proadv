@@ -117,6 +117,8 @@ def _profile(meshgrid_x, meshgrid_y):
     ------
     Profile coordinates.
     """
+
+    # Extract profile coordinates from meshgrid
     return meshgrid_x[:, 0], meshgrid_y[0, :]
 
 
