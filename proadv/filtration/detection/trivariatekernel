@@ -46,3 +46,11 @@ def _scaling(x, y, grid):
 
 def _profile(meshgrid_x, meshgrid_y):
     return meshgrid_x[:, 0], meshgrid_y[0, :]
+
+
+def _position(meshgrid_x, meshgrid_y, trans_x, trans_y):
+    positions = np.vstack([meshgrid_x.ravel(), meshgrid_y.ravel()])
+    
+    values = np.vstack([trans_x, trans_y])
+
+    return positions, values
