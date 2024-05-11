@@ -137,8 +137,9 @@ def _position(meshgrid_x, meshgrid_y, trans_x, trans_y):
     ------
     Positions and values for interpolation.
     """
+
+    # Stack meshgrid coordinates and transformed coordinates
     positions = np.vstack([meshgrid_x.ravel(), meshgrid_y.ravel()])
-    
     values = np.vstack([trans_x, trans_y])
 
     return positions, values
