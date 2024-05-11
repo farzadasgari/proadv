@@ -6,7 +6,18 @@ from proadv.statistics.spread import std
 
 
 def _derivatives(data):
+    """
+    Calculate time-independent first and second order derivatives of the input data.
 
+    Parameters
+    ------
+    data (array_like): Input data.
+
+    Returns
+    ------
+    dc (array_like): First derivative of the input data.
+    dc2 (array_like): Second derivative of the input data.
+    """
     dc = np.zeros_like(data)
     dc2 = np.zeros_like(data)
 
