@@ -197,3 +197,12 @@ def kernel(u1, w1, grid):
     rho = (Ut1 / uu1) ** 2 + (Wt1 / wu1) ** 2
     id_ = np.where(rho > 1)[0]
     return id_, estimation
+
+
+def three_dimensional_kernel(data, grid):
+    dc, dc2 = _derivatives(data)
+    x1, _ = kernel(data, dc, grid)
+    x2, _ = kernel(data, dc2, grid)
+    x3, _ = kernel(dc, dc2, grid)
+    kde3d_indices = np.sort(np.unique(np.concatenate((x1, x2, x3))))
+    return kde3d_indices
