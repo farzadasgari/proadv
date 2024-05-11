@@ -175,6 +175,8 @@ def _weight(cols):
     ------
     Array of weights.
     """
+
+    # Generate equal weights
     return np.ones(cols) / cols
 
 
