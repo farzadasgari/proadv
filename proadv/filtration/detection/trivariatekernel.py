@@ -105,6 +105,18 @@ def _scaling(x, y, grid):
 
 
 def _profile(meshgrid_x, meshgrid_y):
+    """
+    Extract profile coordinates from meshgrid.
+
+    Parameters
+    ------
+    meshgrid_x (array_like): Meshgrid of x-coordinates.
+    meshgrid_y (array_like): Meshgrid of y-coordinates.
+
+    Returns
+    ------
+    Profile coordinates.
+    """
     return meshgrid_x[:, 0], meshgrid_y[0, :]
 
 
