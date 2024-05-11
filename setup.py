@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 # Setting up
 setup(
     name="proadv",
-    version="1.4.6",
+    version="2.0.1",
     author="Farzad Asgari",
     author_email="std_farzad.asgari@alumni.khu.ac.ir",
     description="Process Acoustic Doppler Velocimeter data with advanced despiking and analysis tools",
@@ -18,7 +18,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         "numpy>=1.0",
-        "scipy>=1.0"
+        "scipy>=1.0",
+        "fastkde",
     ],
     keywords=[
         "ProADV",
