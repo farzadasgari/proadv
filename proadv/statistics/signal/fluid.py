@@ -44,7 +44,7 @@ def reynolds_stresses(ui, vi, wi):
 
     Returns
     ------
-        Tuple containing the Reynolds stresses (uu, vv, ww, uv, uw, vw).
+    Tuple containing the Reynolds stresses (uu, vv, ww, uv, uw, vw).
     """
     
     # Compute fluctuations
