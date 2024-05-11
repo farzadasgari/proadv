@@ -99,6 +99,8 @@ def _scaling(x, y, grid):
     xmax = x.max()
     ymin = y.min()
     ymax = y.max()
+
+    # Generate a meshgrid of scaled coordinates
     return np.mgrid[xmin:xmax:grid * 1j, ymin:ymax:grid * 1j]
 
 
