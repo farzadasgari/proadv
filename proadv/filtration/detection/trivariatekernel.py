@@ -363,6 +363,19 @@ def _extraction(dataset, parameters, poses):
 
 
 def _evolve(dataset, poses, computations):
+    """
+    Evolve the dataset based on computed parameters.
+
+    Parameters
+    ------
+    dataset (array_like): Input dataset.
+    poses (array_like): Scattering poses.
+    computations (dict): Computed parameters.
+
+    Returns
+    ------
+    Evolved dataset.
+    """
     dataset = _extraction(dataset, computations, poses)
     dens = gke[dataset[5]](
         dataset[0],
