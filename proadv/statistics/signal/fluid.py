@@ -33,6 +33,19 @@ def kinetic_turbulent_energy(u, v, w):
 
 
 def reynolds_stresses(ui, vi, wi):
+    """
+    Compute the Reynolds stresses based on velocity components.
+
+    Parameters
+    ------
+    u (array_like): Array containing longitudinal velocity component. 
+    v (array_like): Array containing transverse velocity component. 
+    w (array_like): Array containing vertical velocity component. 
+
+    Returns
+    ------
+        Tuple containing the Reynolds stresses (uu, vv, ww, uv, uw, vw).
+    """
 
     up = ui - mean(ui)
     vp = vi - mean(vi)
