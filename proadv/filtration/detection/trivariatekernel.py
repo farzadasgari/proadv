@@ -73,8 +73,8 @@ def _transform(x, y, theta):
         xt, yt (array_like): Transformed coordinates.
     """
 
+    # Apply rotation transformation
     xt = x * np.cos(theta) + y * np.sin(theta)
-
     yt = -x * np.sin(theta) + y * np.cos(theta)
 
     return xt, yt
