@@ -1,4 +1,4 @@
-from proadv.statistics.spread import mean
+from proadv.statistics.descriptive import mean
 
 
 def kinetic_turbulent_energy(u, v, w):
