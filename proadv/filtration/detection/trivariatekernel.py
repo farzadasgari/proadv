@@ -199,6 +199,17 @@ def _cov(data, aweights):
 
 
 def _cholesky(data):
+    """
+    Compute the Cholesky decomposition of a matrix.
+
+    Parameters
+    ------
+    data (array_like): Input matrix.
+
+    Returns
+    ------
+    Cholesky decomposition of the input matrix.
+    """
     return linalg.cholesky(data)
 
 
