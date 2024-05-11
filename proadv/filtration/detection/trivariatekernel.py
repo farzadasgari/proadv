@@ -458,6 +458,20 @@ def _cutoff(density_profile, velocity_profile, c1_threshold, c2_threshold, force
 
 
 def kernel(u1, w1, grid):
+    """
+    Perform kernel computation.
+
+    Parameters
+    ------
+    u1 (array_like): Input velocity component.
+    w1 (array_like): Input velocity component.
+    grid (int): Grid size.
+
+    Returns
+    ------
+        Spieks Indices and estimation.
+    """
+
     dataset = np.array([u1, w1])
     theta = _rotation(u1, w1)
     ut, wt = _transform(u1, w1, theta)
@@ -482,6 +496,7 @@ def kernel(u1, w1, grid):
     Wt1 = wt - 0.5 * (wu + wl)
     rho = (Ut1 / uu1) ** 2 + (Wt1 / wu1) ** 2
     id_ = np.where(rho > 1)[0]
+
     return id_, estimation
 
 
