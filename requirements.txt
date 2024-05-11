@@ -1,3 +1,11 @@
+fastkde==2.0.1
 numpy==1.26.4
-proadv==1.4.6
+packaging==24.0
+pandas==2.2.2
+proadv @ file:///E:/Work/proadv
+python-dateutil==2.9.0.post0
+pytz==2024.1
 scipy==1.13.0
+six==1.16.0
+tzdata==2024.1
+xarray==2024.3.0
