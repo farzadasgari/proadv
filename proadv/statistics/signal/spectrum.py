@@ -19,7 +19,11 @@ def power_spectra(data, sampling_frequency, overlap=50, block=2048, onesided=Tru
     fxu (array_like): Array of frequencies.
     fyu (array_like): Power spectral density of the input data.
     """
+
+    # Define Hann window
     win=hann(block, True)
+
+    # Compute power spectral density
     fxu, fyu = welch(data, sampling_frequency, window=win, noverlap=overlap, nfft=block, return_onesided=onesided)
-    return fxu, fyu
     
+    return fxu, fyu
