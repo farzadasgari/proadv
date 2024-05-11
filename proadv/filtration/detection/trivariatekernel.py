@@ -18,12 +18,16 @@ def _derivatives(data):
     dc (array_like): First derivative of the input data.
     dc2 (array_like): Second derivative of the input data.
     """
+    
+    # Initialize arrays for first and second derivatives
     dc = np.zeros_like(data)
     dc2 = np.zeros_like(data)
 
+    # Calculate first derivative
     for i in range(1, data.size - 1):
         dc[i] = (data[i + 1] - data[i - 1]) / 2
 
+    # Calculate second derivative
     for i in range(1, data.size - 1):
         dc2[i] = (dc[i + 1] - dc[i - 1]) / 2
 
