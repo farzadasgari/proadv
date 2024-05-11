@@ -119,3 +119,7 @@ def _density(values):
         raise ValueError("Number of dimensions exceeds the number of samples.")
     evals = _covariance(dataset, rows, cols)
     return evals
+
+
+def _estimation(kde, x):
+    return np.reshape(kde, x.shape)
