@@ -327,8 +327,20 @@ def _density(values):
     return evals
 
 
-def _estimation(kde, x):
-    return np.reshape(kde, x.shape)
+def _estimation(krn, x):
+    """
+    Perform density estimation.
+
+    Parameters
+    ------
+    krn (array_like): Kernel density estimation.
+    x (array_like): Input data.
+
+    Returns
+    ------
+    Estimated density.
+    """
+    return np.reshape(krn, x.shape)
 
 
 def _extraction(dataset, parameters, poses):
