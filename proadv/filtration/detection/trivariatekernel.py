@@ -387,6 +387,17 @@ def _evolve(dataset, poses, computations):
 
 
 def _peak(pdf):
+    """
+    Find the peak in the probability density function.
+
+    Parameters
+    ------
+    pdf (array_like): Probability density function.
+
+    Returns
+    ------
+    Peak and its indices.
+    """
     peak = pdf.max()
     up, wp = np.where(pdf == peak)[0][0], np.where(pdf == peak)[1][0]
     fu = pdf[:, wp]
