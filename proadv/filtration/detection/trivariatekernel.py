@@ -469,7 +469,7 @@ def kernel(u1, w1, grid):
 
     Returns
     ------
-        Spieks Indices and estimation.
+    Spieks Indices and estimation.
     """
 
     dataset = np.array([u1, w1])
@@ -501,6 +501,18 @@ def kernel(u1, w1, grid):
 
 
 def three_dimensional_kernel(data, grid):
+    """
+    Perform three-dimensional kernel computation.
+
+    Parameters
+    ------
+    data (array_like): Input data.
+    grid (int): Grid size.
+
+    Returns
+    ------
+    Spikes  indices.
+    """
     dc, dc2 = _derivatives(data)
     x1, _ = kernel(data, dc, grid)
     x2, _ = kernel(data, dc2, grid)
