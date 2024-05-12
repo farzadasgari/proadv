@@ -335,3 +335,13 @@ def ssa(x, fs, f):
     xf = _diagonal_average(eigen[:, arg[0]] @ eigen[:, arg[0]].conj().T @ trajectory_matrix, window_length, array_size)
     return xf
 
+
+def kalman_filter(data, initial_state, initial_covariance, process_noise, measurement_noise):
+    filtered_data = []
+    state_estimate = initial_state
+    covariance_estimate = initial_covariance
+    Q = process_noise
+    R = measurement_noise
+    A = np.array([[1]]) 
+    H = np.array([[1]])
+    
