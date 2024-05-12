@@ -96,13 +96,20 @@ For further information and in-depth understanding of the algorithms employed in
 1. [Exploring the role of signal pollution rate on the performance of despiking velocity time-series algorithms](https://doi.org/10.1016/j.flowmeasinst.2023.102485)
 2. [Unleashing the power of three-dimensional kernel density estimation for Doppler Velocimeter data despiking](https://doi.org/10.1016/j.measurement.2023.114053)
 
+
+### Acknowledgment
+- This project was developed under the supervision of **[Dr. Seyed Hossein Mohaeri](https://khu.ac.ir/cv/1139/Seyed-Hossein-Mohajeri)** and **[Dr. Mojtaba Mehraein](https://khu.ac.ir/cv/279/Mojtaba-Mehraein)**.
+- Special thanks to [Parvaneh Yaghoubi](https://github.com/parvanehyaghoubi), [Hossein Abazari](https://github.com/HossA12), [Narges Yaghoubi](https://github.com/nargesyaghoubi), [Mojtaba Karimi](https://github.com/mojikarimi), and [Hiva Yarandi](https://github.com/Hivayrn) for their valuable contributions to this project.
+
+
 ### Contact
 For any inquiries, please contact:
-- Email: std_farzad.asgari@alumni.khu.ac.ir
-- Email: khufarzadasgari@gmail.com
+- std_farzad.asgari@alumni.khu.ac.ir
+- khufarzadasgari@gmail.com
 
 ### Links
 
+##### Farzad Asgari
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://farzadasgari.ir/)
 
 [![Google Scholar Badge](https://img.shields.io/badge/Google%20Scholar-4285F4?logo=googlescholar&logoColor=fff&style=for-the-badge)](https://scholar.google.com/citations?user=Rhue_kkAAAAJ&hl=en)
@@ -110,3 +117,25 @@ For any inquiries, please contact:
 [![ResearchGate Badge](https://img.shields.io/badge/ResearchGate-0CB?logo=researchgate&logoColor=fff&style=for-the-badge)](https://www.researchgate.net/profile/Farzad-Asgari)
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/farzad-asgari-5a90942b2/)
+
+
+##### Seyed Hossein Mohajeri
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://khu.ac.ir/cv/1139/Seyed-Hossein-Mohajeri)
+
+[![Google Scholar Badge](https://img.shields.io/badge/Google%20Scholar-4285F4?logo=googlescholar&logoColor=fff&style=for-the-badge)](https://scholar.google.com/citations?user=E8PFUBEAAAAJ&hl=en)
+
+[![ResearchGate Badge](https://img.shields.io/badge/ResearchGate-0CB?logo=researchgate&logoColor=fff&style=for-the-badge)](https://www.researchgate.net/profile/Seyed-Mohajeri-2)
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](
+https://ir.linkedin.com/in/hossein-mohajeri)
+
+
+##### Mojtaba Mehraein
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://khu.ac.ir/cv/279/Mojtaba-Mehraein)
+
+[![Google Scholar Badge](https://img.shields.io/badge/Google%20Scholar-4285F4?logo=googlescholar&logoColor=fff&style=for-the-badge)](https://scholar.google.com/citations?user=GwT49LIAAAAJ&hl=en)
+
+[![ResearchGate Badge](https://img.shields.io/badge/ResearchGate-0CB?logo=researchgate&logoColor=fff&style=for-the-badge)](https://ir.linkedin.com/in/mojtaba-mehraein-002a03238)
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](
+https://ir.linkedin.com/in/mojtaba-mehraein-002a03238)
