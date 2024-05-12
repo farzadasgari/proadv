@@ -357,6 +357,12 @@ def kalman_filter(data, initial_state, initial_covariance, process_noise, measur
     The Kalman filter is an algorithm that tracks an optimal estimate of the state of a stochastic dynamical system,
         given a sequence of noisy observations or measurements of the state over time.
     
+    Examples
+    ------
+    >>> from proadv.statistics.series import kalman_filter  
+    >>> import numpy as np
+    >>> data = np.random.rand(300)
+    >>> filtered_data = kalman_filter(data, initial_state, initial_covariance, process_noise, measurement_noise)
     """
     filtered_data = []
     state_estimate = initial_state
