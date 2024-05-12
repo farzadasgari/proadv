@@ -1,7 +1,6 @@
 fastkde==2.0.1
-numpy==1.26.4
+numpy==1.24.4
 packaging==24.0
-pandas==2.2.2
 python-dateutil==2.9.0.post0
 pytz==2024.1
 scipy==1.13.0
