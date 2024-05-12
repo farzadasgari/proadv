@@ -369,8 +369,8 @@ def kalman_filter(data, initial_state, initial_covariance, process_noise, measur
     covariance_estimate = initial_covariance
     Q = process_noise
     R = measurement_noise
-    A = np.array([[1]]) 
-    H = np.array([[1]])
+    A = np.array([[1]]) # A matrix for Prediction step 
+    H = np.array([[1]]) # A matrix for Measurement update
     for measurement in data:
         # Prediction step
         predicted_state = np.dot(A, state_estimate)
