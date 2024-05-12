@@ -14,7 +14,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/farzadasgari/proadv",
-    license_file="https://github.com/farzadasgari/proadv/blob/main/LICENSE",
+    license_file="MIT",
     packages=find_packages(),
     install_requires=[
         "numpy>=1.0",
