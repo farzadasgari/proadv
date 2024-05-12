@@ -44,8 +44,6 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Topic :: Scientific/Engineering",
         "Topic :: Scientific/Engineering :: Signal Processing",
-        "Topic :: Scientific/Engineering :: Denoising",
-        "Topic :: Scientific/Engineering :: Despiking",
     ],
     project_urls={
         "Bug Tracker": "https://github.com/farzadasgari/proadv/issues",
