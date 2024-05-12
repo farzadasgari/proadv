@@ -337,6 +337,27 @@ def ssa(x, fs, f):
 
 
 def kalman_filter(data, initial_state, initial_covariance, process_noise, measurement_noise):
+    """
+    Calculates kalman filter for a 1D array
+
+    Parameters
+    ------
+    data (array_like): The 1D array of data for which to calculate the kalman filter.
+    initial_state (array_like): An initial estimate for the state variable.
+    initial_covariance (array_like): An initial estimate for the covariance.
+    process_noise (array_like): Process noise that occurs in the process of changing a state variable.
+    measurement_noise (array_like): Measurement noise present in the input data.
+
+    Returns
+    ------
+    filtered_data (array_like): Filtered data after kalman_filter.
+
+    Notes
+    ------
+    The Kalman filter is an algorithm that tracks an optimal estimate of the state of a stochastic dynamical system,
+        given a sequence of noisy observations or measurements of the state over time.
+    
+    """
     filtered_data = []
     state_estimate = initial_state
     covariance_estimate = initial_covariance
