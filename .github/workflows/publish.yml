@@ -2,7 +2,7 @@ name: Upload ProADv to PyPI while new Release
 
 on:
   release:
-    types: [ published ]
+    types: [ created ]
 
 jobs:
   pypi-publish:
