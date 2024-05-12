@@ -344,4 +344,16 @@ def kalman_filter(data, initial_state, initial_covariance, process_noise, measur
     R = measurement_noise
     A = np.array([[1]]) 
     H = np.array([[1]])
+    for measurement in data:
+        
+        predicted_state = np.dot(A, state_estimate)
+        predicted_covariance = np.dot(np.dot(A, covariance_estimate), A.T) + Q
+        
+        kalman_gain = np.dot(np.dot(predicted_covariance, H.T) , np.linalg.inv(np.dot(np.dot(H, predicted_covariance), H.T) + R))
+        state_estimate = predicted_state + np.dot(kalman_gain, (measurement - np.dot(H, predicted_state)))
+        covariance_estimate = np.dot((np.eye(len(state_estimate)) - np.dot(kalman_gain, H)), predicted_covariance)
+                                 
+        filtered_data.append(state_estimate)
+
+    return filtered_data
     
