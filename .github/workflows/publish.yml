@@ -1,0 +1,25 @@
+name: Upload ProADv to PyPI while new Release
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  pypi-publish:
+    name: Publish release to PyPI
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/proadv
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Build ProADV
+        run: python setup.py build
