@@ -130,12 +130,12 @@ def theoretical_quantiles(x):
     Calculate the theoretical quantiles for a probability plot.
 
     Parameters
-    ----------
+    ------
     x : array_like
         The data for which to calculate the theoretical quantiles.
 
     Returns
-    -------
+    ------
     quantiles : ndarray
         Theoretical quantiles calculated based on Filliben's estimate.
     """
