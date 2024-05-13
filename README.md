@@ -4,9 +4,8 @@
 [![GitHub forks](https://img.shields.io/github/forks/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/network)
 [![GitHub issues](https://img.shields.io/github/issues/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/issues)
 [![GitHub license](https://img.shields.io/github/license/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/blob/main/LICENSE)
-[![PyPI version](https://badge.fury.io/py/proadv.svg)](https://badge.fury.io/py/proadv)
-[![conda](https://img.shields.io/conda/vn/conda-forge/proadv.svg)](https://anaconda.org/conda-forge/proadv)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/proadv)](https://pypi.org/project/proadv/)
+[![PyPI version](https://img.shields.io/pypi/v/proadv.svg)](https://pypi.org/project/proadv/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/proadv.svg)](https://pypi.org/project/proadv/)
 [![GitHub contributors](https://img.shields.io/github/contributors/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/graphs/contributors)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/pulls)
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/pulls?q=is%3Apr+is%3Aclosed)
@@ -42,6 +41,7 @@
 * **Advanced Analysis:** In addition to cleaning and basic statistics, ProADV offers advanced functionalities for deeper insights:
     * **Moving Average:** Smooths out data fluctuations for better visualization and trend analysis. Provided in simple moving average, exponential moving average, and weighted moving average methods. 
     * **SSA (Singular Spectrum Analysis):** Extracts underlying patterns and trends from time series data.
+    * **Kalman Filter:** Implements the Kalman filter algorithm for state estimation and prediction in time series data. 
     * **PR (Pollution Rate) Calculation:** Estimates the level of noise or pollution within the data.
     * **Spectral Analysis:**
         * **PSD (Power Spectral Density):** Analyzes the distribution of energy across different frequencies within the data.
@@ -58,12 +58,7 @@ There are three convenient ways to install ProADV:
    pip install proadv
    ```
 
-2. **Using conda-forge:**
-   ```bash
-   conda install -c conda-forge proadv
-   ```
-
-3. **From source code:**
+2. **From source code:**
 
    a. Clone the repository:
       ```bash
