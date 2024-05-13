@@ -162,7 +162,7 @@ def probplot(x, dist='norm', sparams=(), fit=True, plot=None, rvalue=False):
     the data is likely to follow the specified distribution.
 
     Parameters
-    ----------
+    ------
     x : array_like
         Sample/response data from which probplot creates the plot.
     dist : str or stats.distributions instance, optional
@@ -184,14 +184,14 @@ def probplot(x, dist='norm', sparams=(), fit=True, plot=None, rvalue=False):
         A higher ( R^2 ) value indicates a better fit of the data to the line.
 
     Returns
-    -------
+    ------
     (osm, osr) : tuple of ndarrays
         Tuple of theoretical quantiles (osm) and ordered responses (osr).
     (slope, intercept, r) : tuple of floats, optional
         Tuple containing the result of the least-squares fit.
 
-       Examples
-    --------
+    Examples
+    ------
     >>> import numpy as np
     >>> import matplotlib.pyplot as plt
     # Generate some data that follows a normal distribution
