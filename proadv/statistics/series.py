@@ -335,3 +335,52 @@ def ssa(x, fs, f):
     xf = _diagonal_average(eigen[:, arg[0]] @ eigen[:, arg[0]].conj().T @ trajectory_matrix, window_length, array_size)
     return xf
 
+
+def kalman_filter(data, initial_state, initial_covariance, process_noise, measurement_noise):
+    """
+    Calculates kalman filter for a 1D array
+
+    Parameters
+    ------
+    data (array_like): The 1D array of data for which to calculate the kalman filter.
+    initial_state (array_like): An initial estimate for the state variable.
+    initial_covariance (array_like): An initial estimate for the covariance.
+    process_noise (array_like): Process noise that occurs in the process of changing a state variable.
+    measurement_noise (array_like): Measurement noise present in the input data.
+
+    Returns
+    ------
+    filtered_data (array_like): Filtered data after kalman_filter.
+
+    Notes
+    ------
+    The Kalman filter is an algorithm that tracks an optimal estimate of the state of a stochastic dynamical system,
+        given a sequence of noisy observations or measurements of the state over time.
+    
+    Examples
+    ------
+    >>> from proadv.statistics.series import kalman_filter  
+    >>> import numpy as np
+    >>> data = np.random.rand(300)
+    >>> filtered_data = kalman_filter(data, initial_state, initial_covariance, process_noise, measurement_noise)
+    """
+    filtered_data = []
+    state_estimate = initial_state
+    covariance_estimate = initial_covariance
+    Q = process_noise
+    R = measurement_noise
+    A = np.array([[1]]) # A matrix for Prediction step 
+    H = np.array([[1]]) # A matrix for Measurement update
+    for measurement in data:
+        # Prediction step
+        predicted_state = np.dot(A, state_estimate)
+        predicted_covariance = np.dot(np.dot(A, covariance_estimate), A.T) + Q
+        # Measurement update
+        kalman_gain = np.dot(np.dot(predicted_covariance, H.T) , np.linalg.inv(np.dot(np.dot(H, predicted_covariance), H.T) + R))
+        state_estimate = predicted_state + np.dot(kalman_gain, (measurement - np.dot(H, predicted_state)))
+        covariance_estimate = np.dot((np.eye(len(state_estimate)) - np.dot(kalman_gain, H)), predicted_covariance)
+                                 
+        filtered_data.append(state_estimate)
+
+    return filtered_data
+    
