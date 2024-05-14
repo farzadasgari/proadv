@@ -1,4 +1,5 @@
 import numpy as np
+from .descriptive import mean
 
 
 def moving_average(data, window_size=20):
@@ -59,7 +60,7 @@ def moving_average(data, window_size=20):
     # Calculate the initial moving average for the first window_size elements
     for i in range(window_size):
         # Calculate the average of the data points from begining up to the current index (inclusive)
-        ma[i] = np.mean(data[:i + 1])
+        ma[i] = mean(data[:i + 1])
 
     # Efficiently calculate the moving average for remaining elements using cumulative sum
     for i in range(window_size, data.size):
@@ -103,9 +104,10 @@ def exponential_moving_average(data, alpha=0.2):
 
     Examples
     ------
+    >>> import proadv as adv
     >>> import numpy as np
     >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    >>> ema = exponential_moving_average(data, alpha=0.5)
+    >>> ema = adv.statistics.series.exponential_moving_average(data, alpha=0.5)
     >>> ema
     array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 

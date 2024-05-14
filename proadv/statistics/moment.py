@@ -1,6 +1,6 @@
 import numpy as np
-from descriptive import mean
-from spread import std
+from .descriptive import mean
+from .spread import std
 
 
 def skewness(data):
