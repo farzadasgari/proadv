@@ -51,16 +51,15 @@ def min(data):
     """
 
     for i in data:
-        if isinstance(i, str):  # isinstance returns True if the specified object is of the specified type, otherwise False.
+        if isinstance(i,
+                      str):  # isinstance returns True if the specified object is of the specified type, otherwise False
             raise TypeError("String cannot be placed as an element of an array")
     if np.isnan(data).any():
         raise ValueError("The array contains NaN values. The min function cannot be applied to arrays with NaN values.")
-    if data.ndim != 1:  # Optional check for 1D array
-        raise ValueError("Data array must be a 1D array.")   
-    if np.size(data) == 0: # The array cannot be empty
+    if np.size(data) == 0:  # The array cannot be empty
         raise ValueError("cannot calculate minimum with empty array")
-      
-    minimum = np.min(data) # Calculate the minimum
+
+    minimum = np.min(data)  # Calculate the minimum
     return minimum
 
 
@@ -116,22 +115,20 @@ def max(data):
     >>> maximum
     9
     """
-    
+
     for i in data:
-        if isinstance(i, str): # isinstance returns True if the specified object is of the specified type, otherwise False.
+        if isinstance(i,
+                      str):  # isinstance returns True if the specified object is of the specified type, otherwise False.
             raise TypeError("String cannot be placed as an element of an array")
 
     if np.isnan(data).any():
         raise ValueError("The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
-    
-    if data.ndim != 1:  # Optional check for 1D array
-        raise ValueError("Data array must be a 1D array.")
-    
+
     if np.size(data) == 0:
         # The array cannot be empty
         raise ValueError("cannot calculate maximum with empty array")
     maximum = np.max(data)  # Calculate the maximum
-    
+
     return maximum
 
 
