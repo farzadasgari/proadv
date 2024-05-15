@@ -14,3 +14,7 @@ def test_moving_average_window_size_greater_than_data_size():
 def test_moving_average_with_posetive_values():
     with pytest.raises(ValueError):
         moving_average(np.array([1, 2, 3]))
+
+def test_moving_average_with_negative_values():
+    with pytest.raises(ValueError):
+        moving_average(np.array([-1, -2, -3]))
