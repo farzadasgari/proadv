@@ -131,7 +131,7 @@ def log_cdf(array):
     return logcdf
 
 def sf(array):
-    pass
-
+    sf_array=1-cdf(array)
+    return sf_array
 def log_sf(array):
     pass
