@@ -18,3 +18,7 @@ def test_moving_average_with_posetive_values():
 def test_moving_average_with_negative_values():
     with pytest.raises(ValueError):
         moving_average(np.array([-1, -2, -3]))
+
+def test_moving_average_with_large_array():
+    with pytest.raises(ValueError):
+        moving_average(np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
