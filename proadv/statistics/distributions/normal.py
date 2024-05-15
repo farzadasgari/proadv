@@ -134,4 +134,5 @@ def sf(array):
     sf_array=1-cdf(array)
     return sf_array
 def log_sf(array):
-    pass
+    logsf=sf(array)
+    return logsf
