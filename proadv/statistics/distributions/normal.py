@@ -81,6 +81,10 @@ def pdf(array, std=1, mean=0):
         ------
         array (array_like): The input data which should be an array or any array-like structure.
 
+        std (float) : The Standard deviation of The normal data.
+
+        mean (float) : The mean of the normal data.
+
         Returns
         ------
         Probability density function (pdf): Function to calculate the probability density of data.
@@ -123,16 +127,74 @@ def pdf(array, std=1, mean=0):
     array_pdf = np.exp(x - y)
     return array_pdf
 
-def log_pdf(array,std=1,mean=0):
-    logpdf=np.log(pdf(array,std,mean))
+
+def log_pdf(array, std=1, mean=0):
+    """
+        Calculate the log_pdf value in an array, handling NaN values and exceptions.
+
+        This function calculates the pdf value of an array-like input while checking for NaN values.
+            If NaN values are present, it raises a ValueError. It also handles various exceptions that may
+            occur during the operation.
+
+        Parameters
+        ------
+        array (array_like): The input data which should be an array or any array-like structure.
+
+        std (float) : The Standard deviation of The normal data.
+
+        mean (float) : The mean of the normal data.
+
+        Returns
+        ------
+        Probability density function logarithm (log_pdf): Function to calculate the probability density logarithm of data.
+            If the array contains NaN values,
+            the function will not return a value
+            and will raise a ValueError instead.
+
+        Raises
+        ------
+        TypeError: If the  element of array is a NaN.
+        ValueError: If the array is empty.
+
+        Examples
+        ------
+        >>> from proadv.statistics.distributions.normal import log_pdf
+        >>> import numpy as np
+        >>> array = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
+        >>> pdf_array = log_pdf(array)
+        >>> pdf_array
+        array([-1.0130524  -1.10661349 -0.91896045 -1.01800619 -1.00159795])
+
+        >>> import proadv as adv
+        >>> import numpy as np
+        >>> array = np.array([0.43385221, 0.61265808, -0.00662029, np.nan,  0.44512392,  0.4065942])
+        >>> adv.statistics.distributions.normal.log_pdf(array)
+        Traceback (most recent call last):
+            raise TypeError('array cannot contain nan values.')
+        TypeError: array cannot contain NaN values.
+
+        ------
+
+        """
+    array = np.copy(array)
+    if array.size == 0:
+        raise ValueError("cannot calculate Log_PDF with empty array")
+    if np.isnan(array).any():
+        raise TypeError('array cannot contain NaN values.')
+    logpdf = np.log(pdf(array, std, mean))
     return logpdf
+
+
 def log_cdf(array):
     logcdf = np.log(pdf(array))
     return logcdf
 
+
 def sf(array):
-    sf_array=1-cdf(array)
+    sf_array = 1 - cdf(array)
     return sf_array
+
+
 def log_sf(array):
-    logsf=sf(array)
+    logsf = sf(array)
     return logsf
