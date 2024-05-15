@@ -127,7 +127,8 @@ def log_pdf(array,std=1,mean=0):
     logpdf=np.log(pdf(array,std,mean))
     return logpdf
 def log_cdf(array):
-    pass
+    logcdf = np.log(pdf(array))
+    return logcdf
 
 def sf(array):
     pass
