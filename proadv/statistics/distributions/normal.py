@@ -123,4 +123,14 @@ def pdf(array, std=1, mean=0):
     array_pdf = np.exp(x - y)
     return array_pdf
 
+def log_pdf(array,std=1,mean=0):
+    logpdf=np.log(pdf(array,std,mean))
+    return logpdf
+def log_cdf(array):
+    pass
 
+def sf(array):
+    pass
+
+def log_sf(array):
+    pass
