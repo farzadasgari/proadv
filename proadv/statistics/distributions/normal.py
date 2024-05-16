@@ -164,9 +164,9 @@ def log_pdf(array, std=1, mean=0):
         >>> from proadv.statistics.distributions.normal import log_pdf
         >>> import numpy as np
         >>> array = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
-        >>> pdf_array = log_pdf(array)
-        >>> pdf_array
-        array([-1.0130524  -1.10661349 -0.91896045 -1.01800619 -1.00159795])
+        >>> logpdf_array = log_pdf(array)
+        >>> logpdf_array
+        array([-1.0130524 , -1.10661349, -0.91896045, -1.01800619, -1.00159795])
 
         >>> import proadv as adv
         >>> import numpy as np
@@ -217,9 +217,9 @@ def log_cdf(array):
     >>> from proadv.statistics.distributions.normal import log_pdf
     >>> import numpy as np
     >>> array = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
-    >>> pdf_array = log_cdf(array)
-    >>> pdf_array
-    array([-1.0130524  -1.10661349 -0.91896045 -1.01800619 -1.00159795])
+    >>> logcdf_array = log_cdf(array)
+    >>> logcdf_array
+    array([-0.40376338, -0.31478092, -0.69844337, -0.39766824, -0.41878294])
 
     >>> import proadv as adv
     >>> import numpy as np
@@ -234,7 +234,7 @@ def log_cdf(array):
     """
     array_cdf = np.copy(array)
     if array_cdf.size == 0:
-        raise ValueError("cannot calculate PDF with empty array.")
+        raise ValueError("cannot calculate Log_CDF with empty array.")
     if np.isnan(array_cdf).any():
         raise TypeError('array cannot contain NaN values.')
     logcdf = np.log(cdf(array))
@@ -242,6 +242,54 @@ def log_cdf(array):
 
 
 def sf(array):
+    """
+    Calculate the sf value in an array, handling NaN values and exceptions.
+
+    This function calculates the sf value of an array-like input while checking for NaN values.
+        If NaN values are present, it raises a ValueError. It also handles various exceptions that may
+        occur during the operation.
+
+    Parameters
+    ------
+    array (array_like): The input data which should be an array or any array-like structure.
+
+    Returns
+    ------
+    Survival function (sf): Function to calculate the Survival of data.
+        If the array contains NaN values,
+        the function will not return a value
+        and will raise a ValueError instead.
+
+    Raises
+    ------
+    TypeError: If the  element of array is a NaN.
+    ValueError: If the array is empty.
+
+    Examples
+    ------
+    >>> from proadv.statistics.distributions.normal import sf
+    >>> import numpy as np
+    >>> array = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
+    >>> sf_array = sf(array)
+    >>> sf_array
+    array([0.33219788, 0.27005122, 0.50264109, 0.3281151 , 0.34215303])
+
+    >>> import proadv as adv
+    >>> import numpy as np
+    >>> array = np.array([0.43385221, 0.61265808, -0.00662029, np.nan,  0.44512392,  0.4065942])
+    >>> adv.statistics.distributions.normal.sf(array)
+    Traceback (most recent call last):
+        raise TypeError('array cannot contain nan values.')
+    TypeError: array cannot contain NaN values.
+
+    ------
+
+    """
+    array_sf = np.copy(array)
+    if array_sf.size == 0:
+        raise ValueError("cannot calculate SF with empty array.")
+    if np.isnan(array_sf).any():
+        raise TypeError('array cannot contain NaN values.')
     sf_array = 1 - cdf(array)
     return sf_array
 
@@ -249,3 +297,4 @@ def sf(array):
 def log_sf(array):
     logsf = np.log(sf(array))
     return logsf
+
