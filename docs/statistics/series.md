@@ -18,10 +18,10 @@ There are two parameters in this function:
 2. **window_size (int, optional)**: The size of the window for the moving average. Defaults to 20. Must be less than or equal to the size of the data array.
 If the window size is larger than the size of the data array, it raises a ValueError. 
 
-- plot:
+- **plot**:
 
 
-- Examples:
+- **Examples**:
 
 ```python
 >>> from proadv.statistics.series import moving_average
@@ -103,10 +103,10 @@ There are two parameters in this function:
 2. **alpha (float, optional)**: Smoothing factor between 0 and 1. Higher alpha discounts older observations faster. Default is 0.2.
 If alpha is not between 0 and 1 (inclusive), It raises a ValueError. 
 
-- plot:
+- **plot**:
 
 
-- Example:
+- **Example**:
 
 ```python
 >>> import numpy as np
@@ -133,10 +133,10 @@ There are two parameters in this function:
 2. **period (int, optional)**: The period for the weighted moving average. Defaults to 20. Must be less than or equal to the size of the data array.
 If the period is larger than the size of the data array, it raises a ValueError. 
 
-- plot:
+- **plot**:
 
 
-- Examples:
+- **Examples**:
 
 ```python
 >>> import proadv as adv  
@@ -231,7 +231,7 @@ The `Kalman filter` is an algorithm that tracks an optimal estimate of the state
 given a sequence of noisy observations or measurements of the state over time.
 This function calculates `kalman filter` for a 1D array. 
 
-- plot:
+- **plot**:
 
 
 - **Parameters**:
@@ -248,6 +248,8 @@ There are five parameters in the Kalman Filter function:
 
 Huang, Chuanjiang, Fangli Qiao, and Hongyu Ma. "Noise reduction of acoustic Doppler velocimeter data based on Kalman
 filtering and autoregressive moving average models." Acta Oceanologica Sinica 39 (2020): 106-113.
+
+- **plot**:
 
 - **Examples**:
 
