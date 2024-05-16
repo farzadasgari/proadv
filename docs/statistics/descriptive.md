@@ -5,6 +5,9 @@
 
 Return the `minimum` of an array input while checking for NaN values. If NaN values are present, it raises a ValueError. 
 It also handles various exceptions that may occur during the operation.
+The input data which should be an array or any array-like structure.
+If the array contains NaN values, the function will not return a value and will raise a ValueError instead.
+On the other hand, this function will raise a TypeError if the type of array is something other than integer.
 
 - Examples:
 
@@ -37,8 +40,11 @@ ValueError: The array contains NaN values. The min function cannot be applied to
 
 ## Max Function
 
-Return the `maximum` of an array input while checking for NaN values. If NaN values are present, it raises a ValueError. 
-It also handles various exceptions that may occur during the operation.
+This function calculates the `maximum` value of an array-like input while checking for NaN values. If NaN values are 
+present, it raises a ValueError. It also handles various exceptions that may occur during the operation.
+The input data which should be an array or any array-like structure. 
+If the array contains NaN values, the function will not return a value and will raise a ValueError instead.
+On the other hand, this function will raise a TypeError if the type of array is something other than integer.
 
 - Examples:
 
@@ -68,12 +74,42 @@ ValueError: The array contains NaN values. The max function cannot be applied to
 >>> maximum = max(data)
 >>> print(maximum)
 9
-
 ```
+
+```python
+>>> import proadv as adv 
+>>> import numpy as np
+>>> data = np.array(["proadv"])
+>>> maximum = adv.statistics.descriptive.max(data)
+>>> print(maximum)
+Traceback (most recent call last):
+    raise TypeError("String cannot be placed as an element of an array")
+TypeError: String cannot be placed as an element of an array
+```
+
+```python
+>>> from proadv.statistics.descriptive import max 
+>>> import numpy as np
+>>> data = np.array([])
+>>> maximum = max(data)
+>>> print(maximum)
+Traceback (most recent call last):
+    raise ValueError("cannot calculate maximum with empty array")
+ValueError: cannot calculate maximum with empty array
+```
+
 
 ## Mean Function
 
-Return the `mean` of a dataset, handling non-numeric and numeric data. Dataset can be a single number, a list of numbers, or a list containing both numbers and strings. Non-numeric strings are converted to floats if possible, and ignored if not. 
+Return the `mean` of a dataset, handling non-numeric and numeric data. Dataset can be a single number, a list of numbers, 
+or a list containing both numbers and strings. Non-numeric strings are converted to floats if possible, and ignored if 
+not. 
+
+- Notes:
+
+The function first checks if the input is a single number and returns it if so. If the input is a list,the function
+checks if all elements are numeric and calculates the mean. If there are strings in the list, it attempts to convert
+them to floats and calculates the mean of the numeric values. If the input is invalid or empty, it returns an error message.
 
 - Examples:
 
@@ -144,6 +180,39 @@ Also, If the array is empty, it raises a ValueError.
 >>> med = adv.statistics.descriptive.median(data)
 >>> print(med)
 29.0
+```
+
+```python
+>>> import proadv as adv
+>>> import numpy as np 
+>>> data = np.array([])
+>>> med = adv.statistics.descriptive.median(data)
+>>> print(med)
+Traceback (most recent call last):
+    raise ValueError("cannot calculate median with empty array")
+ValueError: cannot calculate median with empty array
+```
+
+```python
+>>> import proadv as adv
+>>> import numpy as np 
+>>> data = np.array([[1,2],[6,8]])
+>>> med = adv.statistics.descriptive.median(data)
+>>> print(med)
+Traceback (most recent call last):
+    raise ValueError("Data array must be a 1D array.")
+ValueError: Data array must be a 1D array.
+```
+
+```python
+>>> from proadv.statistics.descriptive import median
+>>> import numpy as np
+>>> data = np.array(["proadv"])
+>>> med = median(data) 
+>>> print(med)
+Traceback (most recent call last):
+    raise TypeError("String cannot be placed as an element of an array")
+TypeError: String cannot be placed as an element of an array
 ```
 
 
