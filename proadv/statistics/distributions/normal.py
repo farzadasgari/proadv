@@ -295,6 +295,48 @@ def sf(array):
 
 
 def log_sf(array):
+    """
+    Calculate the log_sf value in an array, handling NaN values and exceptions.
+
+    This function calculates the log_sf value of an array-like input while checking for NaN values.
+        If NaN values are present, it raises a ValueError. It also handles various exceptions that may
+        occur during the operation.
+
+    Parameters
+    ------
+    array (array_like): The input data which should be an array or any array-like structure.
+
+    Returns
+    ------
+    Survival function logarithm (log_sf): Function to calculate the Survival of data.
+        If the array contains NaN values,
+        the function will not return a value
+        and will raise a ValueError instead.
+
+    Raises
+    ------
+    TypeError: If the  element of array is a NaN.
+    ValueError: If the array is empty.
+
+    Examples
+    ------
+    >>> from proadv.statistics.distributions.normal import log_sf
+    >>> import numpy as np
+    >>> array = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
+    >>> logsf_array = log_sf(array)
+    >>> logsf_array
+    array([-1.10202446, -1.30914362, -0.68787889, -1.11439081, -1.07249719])
+
+    >>> import proadv as adv
+    >>> import numpy as np
+    >>> array = np.array([0.43385221, 0.61265808, -0.00662029, np.nan,  0.44512392,  0.4065942])
+    >>> adv.statistics.distributions.normal.log_sf(array)
+    Traceback (most recent call last):
+        raise TypeError('array cannot contain nan values.')
+    TypeError: array cannot contain NaN values.
+
+    ------
+
+    """
     logsf = np.log(sf(array))
     return logsf
-
