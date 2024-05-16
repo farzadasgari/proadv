@@ -47,10 +47,13 @@ def cdf(array):
 
     from math import erf, erfc
     array_cdf = np.copy(array)
+    D = array_cdf.shape  # array dimensions
     if array_cdf.size == 0:
         raise ValueError("cannot calculate PDF with empty array.")
     if np.isnan(array_cdf).any():
         raise TypeError('array cannot contain NaN values.')
+    if array_cdf.ndim > 1:
+        array_cdf = array_cdf.flatten()
     np_sqrt = 1.0 / np.sqrt(2)
     array_ns = array_cdf * np_sqrt
     absolute_value = np.fabs(array_ns)
@@ -65,7 +68,7 @@ def cdf(array):
             else:
                 array_cdf[j] = y
         j += 1
-
+    array_cdf = array_cdf.reshape(D)
     return array_cdf
 
 
@@ -186,7 +189,55 @@ def log_pdf(array, std=1, mean=0):
 
 
 def log_cdf(array):
-    logcdf = np.log(pdf(array))
+    """
+    Calculate the log_cdf value in an array, handling NaN values and exceptions.
+
+    This function calculates the pdf value of an array-like input while checking for NaN values.
+        If NaN values are present, it raises a ValueError. It also handles various exceptions that may
+        occur during the operation.
+
+    Parameters
+    ------
+    array (array_like): The input data which should be an array or any array-like structure.
+
+    Returns
+    ------
+    Cumulative distribution function logarithm (log_cdf): Function to calculate the Cumulative distribution logarithm of data.
+        If the array contains NaN values,
+        the function will not return a value
+        and will raise a ValueError instead.
+
+    Raises
+    ------
+    TypeError: If the  element of array is a NaN.
+    ValueError: If the array is empty.
+
+    Examples
+    ------
+    >>> from proadv.statistics.distributions.normal import log_pdf
+    >>> import numpy as np
+    >>> array = np.array([0.43385221, 0.61265808, -0.00662029,  0.44512392,  0.4065942 ])
+    >>> pdf_array = log_cdf(array)
+    >>> pdf_array
+    array([-1.0130524  -1.10661349 -0.91896045 -1.01800619 -1.00159795])
+
+    >>> import proadv as adv
+    >>> import numpy as np
+    >>> array = np.array([0.43385221, 0.61265808, -0.00662029, np.nan,  0.44512392,  0.4065942])
+    >>> adv.statistics.distributions.normal.log_cdf(array)
+    Traceback (most recent call last):
+        raise TypeError('array cannot contain nan values.')
+    TypeError: array cannot contain NaN values.
+
+    ------
+
+    """
+    array_cdf = np.copy(array)
+    if array_cdf.size == 0:
+        raise ValueError("cannot calculate PDF with empty array.")
+    if np.isnan(array_cdf).any():
+        raise TypeError('array cannot contain NaN values.')
+    logcdf = np.log(cdf(array))
     return logcdf
 
 
@@ -196,5 +247,5 @@ def sf(array):
 
 
 def log_sf(array):
-    logsf = sf(array)
+    logsf = np.log(sf(array))
     return logsf
