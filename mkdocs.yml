@@ -1,0 +1,23 @@
+site_name: ProADV
+site_url: https://github.com/farzadasgari/proadv
+nav:
+  - Home: "index.md"
+  - About: "acoustic-Doppler-velocimeter.md"
+  - Descriptive Stats: "statistics/descriptive.md"
+  - Spread Stats: "statistics/spread.md"
+  - Moments: "statistics/moment.md"
+  - Series: "statistics/series.md"
+  - Distributions: "statistics/distributions/normal.md"
+  - Kernel Density: "kernel/kernel-density-estimation.md"
+  - Bivariate KDE: "kernel/bivariate-kde.md"
+  - Fast KDE: "kernel/fast-kernel.md"
+  - Acceleration: "filtration/detection/acceleration.md"
+  - Phase-Space: "filtration/detection/phase-space.md"
+  - Velocity Correlation: "filtration/detection/velocity-correlation.md"
+  - Bivariate KDE-Based: "filtration/detection/kernel-density.md"
+  - 3d KDE-Based: "filtration/detection/three-dimensional-kernel-density.md"
+  - Modified 3d KDE-Based: "filtration/detection/modified-three-dimensional-kernel-density.md"
+  - Replacement: "filtration/replacement/replacement.md"
+
+
+theme: "readthedocs"
