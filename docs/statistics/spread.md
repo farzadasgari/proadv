@@ -32,6 +32,39 @@ In this function:
 18.666666666666668
 ```
 
+```python
+>>> import proadv as adv
+>>> import numpy as np
+>>> data = np.array([])
+>>> var = adv.statistics.spread.variance(data)
+>>> print(var)
+Traceback (most recent call last):
+    raise ValueError("cannot calculate variance with empty array")
+ValueError: cannot calculate variance with empty array
+```
+
+```python
+>>> from proadv.statistics.spread import variance
+>>> import numpy as np
+>>> data = np.array([[1,2],[9,3]])
+>>> var = variance(data)
+>>> print(var)
+Traceback (most recent call last):
+    raise ValueError("Data array must be a 1D array.")
+ValueError: Data array must be a 1D array.
+```
+
+```python
+>>> from proadv.statistics.spread import variance
+>>> import numpy as np
+>>> data = np.array(["proadv"])
+>>> var = variance(data)
+>>> print(var)
+Traceback (most recent call last):
+    raise TypeError("String cannot be placed as an element of an array")
+TypeError: String cannot be placed as an element of an array
+```
+
 
 # STD Function
 
@@ -66,4 +99,37 @@ In this function:
 >>> stdev = adv.statistics.spread.std(data)
 >>> stdev
 2.0
+```
+
+```python
+>>> import proadv as adv
+>>> import numpy as np  
+>>> data = np.array([])
+>>> stdev = adv.statistics.spread.std(data)
+>>> print(stdev)
+Traceback (most recent call last):
+    raise ValueError("cannot calculate standard deviation with empty array")
+ValueError: cannot calculate standard deviation with empty array
+```
+
+```python
+>>> import proadv as adv
+>>> import numpy as np  
+>>> data = np.array(["proadv"])
+>>> stdev = adv.statistics.spread.std(data)
+>>> print(stdev)
+Traceback (most recent call last):
+    raise TypeError("String cannot be placed as an element of an array")
+TypeError: String cannot be placed as an element of an array
+```
+
+```python
+>>> import proadv as adv
+>>> import numpy as np
+>>> data = np.array([[14, 8, 11],[4, 6, 8]])
+>>> stdev = adv.statistics.spread.std(data)
+>>> print(stdev)
+Traceback (most recent call last):
+    raise ValueError("Data array must be a 1D array.")
+ValueError: Data array must be a 1D array.
 ```
