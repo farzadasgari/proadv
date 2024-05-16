@@ -1,4 +1,5 @@
 import numpy as np
+from proadv.statistics.moment import kurtosis, skewness
 
 
 def cdf(array):
@@ -124,3 +125,186 @@ def pdf(array, std=1, mean=0):
     return array_pdf
 
 
+def skewtest(data, alternative='two-sided'):
+    """
+    Perform the skewness test for normality.
+
+    The skewness test measures whether the skewness of the provided dataset
+    differs significantly from that of a normally distributed dataset.
+
+    Parameters
+    ------
+    data : array_like
+        The data to be tested.
+    alternative : {'two-sided', 'less', 'greater'}, optional
+        The alternative hypothesis to test. Default is 'two-sided'.
+
+    Returns
+    ------
+    statistic : float or ndarray
+        The computed z-score for this test.
+    pvalue : float or ndarray
+        The p-value for the hypothesis test.
+
+    Raises
+    ------
+    ValueError
+        If the number of samples is less than 8.
+
+    Notes
+    ------
+    The null hypothesis for this test is that the skewness of the population
+    that the sample was drawn from is the same as that of a corresponding
+    normal distribution.
+    """
+    # Convert input data to a numpy array
+    data = np.asarray(data)
+
+    # Calculate the skewness of the data
+    skew = skewness(data)
+
+    # Calculate the number of samples
+    sample_size = data.shape[0]
+
+    # Check if the sample size is valid
+    if sample_size < 8:
+        raise ValueError("skewtest requires at least 8 samples; {} samples were given.".format(sample_size))
+
+    # Calculate the adjustment factor for the skewness
+    adjustment_factor = np.sqrt(((sample_size + 1) * (sample_size + 3)) / (6.0 * (sample_size - 2)))
+
+    # Calculate the adjusted skewness
+    adjusted_skewness = skew * adjustment_factor
+
+    # Calculate the beta2 constant
+    beta2 = (3.0 * (sample_size ** 2 + 27 * sample_size - 70) * (sample_size + 1) * (sample_size + 3)) / (
+            (sample_size - 2.0) * (sample_size + 5) * (sample_size + 7) * (sample_size + 9))
+
+    # Calculate the w2 constant
+    w2 = -1 + np.sqrt(2 * (beta2 - 1))
+
+    # Calculate the delta constant
+    delta = 1 / np.sqrt(0.5 * np.log(w2))
+
+    # Calculate the alpha constant
+    alpha = np.sqrt(2.0 / (w2 - 1))
+
+    # Ensure adjusted skewness is not zero for calculation
+    adjusted_skewness = np.where(adjusted_skewness == 0, 1, adjusted_skewness)
+
+    # Calculate the z score
+    z = delta * np.log(adjusted_skewness / alpha + np.sqrt((adjusted_skewness / alpha) ** 2 + 1))
+
+    # Initialize p_value to None to ensure it has a value in all code paths
+    p_value = None
+
+    # Calculate the p-value based on the z score
+    if alternative == 'two-sided':
+        p_value = 2 * (1 - cdf(abs(z)))
+    elif alternative == 'greater':
+        p_value = 1 - cdf(z)
+    elif alternative == 'less':
+        p_value = cdf(z)
+
+    # Check if p_value was set, raise an error if not
+    if p_value is None:
+        raise ValueError("Invalid value for 'alternative'. Please choose from 'two-sided', 'less', or 'greater'.")
+
+    return z, p_value
+
+
+def kurtotest(data, alternative='two-sided'):
+    """
+    Perform the kurtosis test for normality.
+
+    This function tests the null hypothesis that the kurtosis of the data
+    set is the same as that of a normal distribution: a kurtosis of three.
+
+    Parameters
+    ------
+    data : array_like
+        Array of sample data.
+    alternative : {'two-sided', 'less', 'greater'}, optional
+        The alternative hypothesis to test. Default is 'two-sided'.
+
+    Returns
+    ------
+    statistic : float or ndarray
+        The computed z-score for this test.
+    pvalue : float or ndarray
+        The p-value for the hypothesis test.
+
+    Raises
+    ------
+    ValueError
+        If the number of observations is less than 5.
+
+    Notes
+    ------
+    The null hypothesis for the kurtosis test is that the kurtosis of the
+    population from which the sample was drawn is that of the normal
+    distribution: kurtosis = 3(n-1)/(n+1).
+
+    """
+    # Convert input data to a numpy array
+    data = np.asarray(data)
+
+    # Calculate the number of observations
+    num_observations = data.shape[0]
+
+    # Validate the number of observations
+    if num_observations < 5:
+        raise ValueError(
+            "kurtosistest requires at least 5 observations; {} observations were given.".format(num_observations))
+
+    # Calculate the kurtosis of the data
+    kurtosis_value = kurtosis(data)
+
+    # Expected kurtosis for a normal distribution
+    expected_kurtosis = 3.0 * (num_observations - 1) / (num_observations + 1)
+
+    # Variance of the kurtosis estimate
+    variance_kurtosis = 24.0 * num_observations * (num_observations - 2) * (num_observations - 3) / (
+            (num_observations + 1) * (num_observations + 1) * (num_observations + 3) * (num_observations + 5))
+
+    # Standardized test statistic
+    z_score = (kurtosis_value - expected_kurtosis) / np.ma.sqrt(variance_kurtosis)
+
+    # Adjustments for small sample sizes
+    sqrt_beta1 = 6.0 * (num_observations ** 2 - 5 * num_observations + 2) / (
+            (num_observations + 7) * (num_observations + 9)) * np.ma.sqrt(
+        (6.0 * (num_observations + 3) * (num_observations + 5)) / (
+                num_observations * (num_observations - 2) * (num_observations - 3)))
+    a = 6.0 + 8.0 / sqrt_beta1 * (2.0 / sqrt_beta1 + np.ma.sqrt(1 + 4.0 / (sqrt_beta1 ** 2)))
+
+    # Terms for the calculation of the z-score
+    term1 = 1 - 2.0 / (9.0 * a)
+    denom = 1 + z_score * np.ma.sqrt(2 / (a - 4.0))
+
+    # Ensure denom is an array before assignment
+    if isinstance(denom, np.ma.MaskedArray):
+        denom[denom == 0.0] = np.ma.masked
+    elif np.isscalar(denom) and denom == 0.0:
+        denom = np.ma.masked
+
+    term2 = np.ma.power((1 - 2.0 / a) / denom, 1 / 3.0)
+
+    # Final z-score calculation
+    z_score_final = (term1 - term2) / np.ma.sqrt(2 / (9.0 * a))
+
+    # Initialize p_value to None to ensure it has a value in all code paths
+    p_value = None
+
+    # Calculate the p-value based on the z-score
+    if alternative == 'two-sided':
+        p_value = 2 * (1 - cdf(abs(z_score_final)))
+    elif alternative == 'greater':
+        p_value = 1 - cdf(z_score_final)
+    elif alternative == 'less':
+        p_value = cdf(z_score_final)
+
+    # Check if p_value was set, raise an error if not
+    if p_value is None:
+        raise ValueError("Invalid value for 'alternative'. Please choose from 'two-sided', 'less', or 'greater'.")
+
+    return z_score_final, p_value
