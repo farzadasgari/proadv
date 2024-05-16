@@ -22,10 +22,6 @@ The Botev method for bivariate kernel density estimation involves the following 
 
 6. **Optional: Visualization:** Visualize the estimated density using contour plots, heatmaps, or other graphical representations to gain insights into the joint distribution of the two variables.
 
-## Code Example
-
-Below is a Python code snippet demonstrating how to perform bivariate kernel density estimation using the Botev method with the `scikit-learn` library:
-
 ## Conclusion
 
 Bivariate kernel density estimation with the Botev method is a powerful technique for analyzing the joint distribution of two variables. By estimating the probability density function in two dimensions, it provides valuable insights into the relationship between the variables and can be used for various statistical and machine learning. 
