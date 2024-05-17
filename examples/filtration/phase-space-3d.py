@@ -1,0 +1,50 @@
+import proadv as adv
+from proadv.filtration.detection.spherical import spherical_phasespace_thresholding
+from proadv.filtration.replacement.replacements import linear_interpolation
+import numpy as np
+from pandas import read_csv
+import matplotlib.pyplot as plt
+
+
+def main():
+    df = read_csv('../../dataset/first.csv')
+    main_data_x = df.iloc[:, 0].values
+    main_data_y = df.iloc[:, 1].values
+    main_data_z = df.iloc[:, 2].values
+    filtered_data_x = main_data_x.copy()
+    filtered_data_y = main_data_y.copy()
+    filtered_data_z = main_data_z.copy()
+    iteration = 0
+    max_iteration = 3
+
+    while iteration < max_iteration:
+        average_x = adv.statistics.descriptive.mean(filtered_data_x)
+        average_y = adv.statistics.descriptive.mean(filtered_data_y)
+        average_z = adv.statistics.descriptive.mean(filtered_data_z)
+        indices_x = spherical_phasespace_thresholding(filtered_data_x - average_x, iteration, average_x)
+        indices_y = spherical_phasespace_thresholding(filtered_data_y - average_y, iteration, average_y)
+        indices_z = spherical_phasespace_thresholding(filtered_data_z - average_z, iteration, average_z)
+
+        indices = np.sort(np.unique(np.concatenate((indices_x, indices_y, indices_z))))
+        if not indices.size:
+            break
+        filtered_data_x = linear_interpolation(filtered_data_x, indices, decimals=3)
+        filtered_data_y = linear_interpolation(filtered_data_y, indices, decimals=3)
+        filtered_data_z = linear_interpolation(filtered_data_z, indices, decimals=3)
+
+        iteration += 1
+
+    sampling_frequency = 100  # Hz
+    delta_time = 1 / sampling_frequency
+    time = np.arange(0, main_data_x.size * delta_time, delta_time)
+    plt.plot(time, main_data_x, color='crimson', label='Unfiltered')
+    plt.plot(time, filtered_data_x, color='black', label='Filtered')
+    plt.title('Three-Dimensional Phase-Space Thresholding')
+    plt.legend(loc='upper right')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Velocity (cm/s)')
+    plt.show()
+
+
+if __name__ == '__main__':
+    main()
