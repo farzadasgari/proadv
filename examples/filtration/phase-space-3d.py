@@ -7,6 +7,14 @@ import matplotlib.pyplot as plt
 
 
 def main():
+    """
+    Example function demonstrating the use of three-dimensional phase-space thresholding
+        and linear interpolation for data filtration.
+
+    Reads a CSV file containing velocity data, applies filtration methods iteratively, and plots the results.
+    """
+
+    # Read velocity data from CSV file
     df = read_csv('../../dataset/first.csv')
     main_data_x = df.iloc[:, 0].values
     main_data_y = df.iloc[:, 1].values
@@ -14,20 +22,30 @@ def main():
     filtered_data_x = main_data_x.copy()
     filtered_data_y = main_data_y.copy()
     filtered_data_z = main_data_z.copy()
+
+    # Iterative filtration process
     iteration = 0
     max_iteration = 3
 
     while iteration < max_iteration:
+
+        # Calculate average value for the current filtered data
         average_x = adv.statistics.descriptive.mean(filtered_data_x)
         average_y = adv.statistics.descriptive.mean(filtered_data_y)
         average_z = adv.statistics.descriptive.mean(filtered_data_z)
+
+        # Apply phase-space thresholding to detect outliers
         indices_x = spherical_phasespace_thresholding(filtered_data_x - average_x, iteration, average_x)
         indices_y = spherical_phasespace_thresholding(filtered_data_y - average_y, iteration, average_y)
         indices_z = spherical_phasespace_thresholding(filtered_data_z - average_z, iteration, average_z)
 
         indices = np.sort(np.unique(np.concatenate((indices_x, indices_y, indices_z))))
+
+        # Break loop if no outliers are detected
         if not indices.size:
             break
+
+        # Replace outliers with interpolated values
         filtered_data_x = linear_interpolation(filtered_data_x, indices, decimals=3)
         filtered_data_y = linear_interpolation(filtered_data_y, indices, decimals=3)
         filtered_data_z = linear_interpolation(filtered_data_z, indices, decimals=3)
