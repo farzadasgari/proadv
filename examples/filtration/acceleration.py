@@ -1,3 +1,4 @@
+import proadv as adv
 from proadv.filtration.detection.acceleration import acceleration_thresholding
 from proadv.filtration.replacement.replacements import linear_interpolation
 import numpy as np
@@ -27,8 +28,11 @@ def main():
         # Toggle tag between 1 and 2 for acceleration thresholding
         tag = 2 if tag == 1 else 1
 
+        # Calculate average value for the current filtered data
+        average = adv.statistics.descriptive.mean(filtered_data)
+
         # Apply acceleration thresholding to detect outliers
-        indices = acceleration_thresholding(filtered_data, frequency=100, tag=tag, gravity=980, k_gravity=1.5,
+        indices = acceleration_thresholding(filtered_data - average, frequency=100, tag=tag, gravity=980, k_gravity=1.5,
                                             k_sigma=1)
 
         # Break loop if no outliers are detected

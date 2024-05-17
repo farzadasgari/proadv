@@ -7,16 +7,36 @@ import matplotlib.pyplot as plt
 
 
 def main():
+    """
+    Example function demonstrating the use of phase-space thresholding and linear interpolation for data filtration.
+
+    Reads a CSV file containing velocity data, applies filtration methods iteratively, and plots the results.
+    """
+
+    # Read velocity data from CSV file
     df = read_csv('../../dataset/second.csv')
     main_data = df.iloc[:, 0].values
     filtered_data = main_data.copy()
+
+    # Iterative filtration process
     iteration = 0
     max_iteration = 3
+
     while iteration < max_iteration:
-        indices = phasespace_thresholding(filtered_data - adv.statistics.descriptive.mean(filtered_data))
+
+        # Calculate average value for the current filtered data
+        average = adv.statistics.descriptive.mean(filtered_data)
+
+        # Apply phase-space thresholding to detect outliers
+        indices = phasespace_thresholding(filtered_data - average)
+
+        # Break loop if no outliers are detected
         if not indices.size:
             break
+
+        # Replace outliers with interpolated values
         filtered_data = linear_interpolation(filtered_data, indices, decimals=2)
+
         iteration += 1
 
     sampling_frequency = 100  # Hz
