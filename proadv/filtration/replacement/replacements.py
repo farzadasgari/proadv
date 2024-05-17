@@ -66,22 +66,18 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
 
     Parameters
     ------
-    velocities : (array_like)
-        An array-like object containing velocity values. It should be a one-dimensional
+    velocities (array_like):  An array-like object containing velocity values. It should be a one-dimensional
         array of numerical data representing velocities.
-    spike_indices : (array_like)
-        An array-like object containing the indices of detected spike events. It should
+    spike_indices (array_like): An array-like object containing the indices of detected spike events. It should
         be a one-dimensional array of integers where each integer represents the index
         in 'velocities' that corresponds to a spike.
-    decimals : int, optional
-        The number of decimal places to round the interpolated values to. This allows
+    decimals (int, optional): The number of decimal places to round the interpolated values to. This allows
         the output data to be presented with a consistent level of precision. The default
         value is 4, but this can be adjusted as needed.
 
     Returns
     ------
-    modified_data (array_like):
-        An array containing the modified velocity data with spikes replaced by
+    modified_data (array_like): An array containing the modified velocity data with spikes replaced by
         interpolated values. The shape and type of the array are the same as the
         input 'velocities' array.
 
