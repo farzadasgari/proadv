@@ -1,6 +1,6 @@
-# Kinetic Turbulent Energy Function
+# Kinetic Turbulent Energy
 
-This function compute the `kinetic turbulent energy` based on velocity components.
+This function compute the `kinetic Turbulent Energy` based on velocity components.
 
 There are three parameters in this function:
 
@@ -9,9 +9,9 @@ There are three parameters in this function:
 - **w (array_like)**: Array containing vertical velocity component. 
 
 
-# Reynolds Stresses Function
+# Reynolds Stresses 
 
-This function compute the Reynolds stresses based on velocity components.
+This function compute the `Reynolds Stresses` based on velocity components.
 Also, it returns Tuple containing the Reynolds stresses (uu, vv, ww, uv, uw, vw).
 
 There are three parameters in this function:
