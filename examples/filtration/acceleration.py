@@ -47,6 +47,7 @@ def main():
     time = np.arange(0, main_data.size * delta_time, delta_time)
     plt.plot(time, main_data, color='crimson', label='Unfiltered')
     plt.plot(time, filtered_data, color='black', label='Filtered')
+    plt.title('Acceleration Thresholding')
     plt.legend(loc='upper right')
     plt.xlabel('Time (s)')
     plt.ylabel('Velocity (cm/s)')
