@@ -15,12 +15,12 @@ def main():
 
     # Read velocity data from CSV file
     df = read_csv('../../dataset/second.csv')
-    main_data = df.iloc[:, 0].values
+    main_data = df.iloc[:, 1].values
     filtered_data = main_data.copy()
 
     # Iterative filtration process
     iteration = 0
-    max_iteration = 3
+    max_iteration = 10
 
     while iteration < max_iteration:
 
