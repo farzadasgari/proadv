@@ -6,7 +6,7 @@ def acceleration_thresholding(velocities, frequency, tag, gravity=980, k_gravity
     """
     Detects acceleration events based on velocity data.
 
-    This function calculates acceleration events based on velocity data, considering thresholds
+    Calculate acceleration events based on velocity data, considering thresholds
         for acceleration magnitude and velocity deviation from mean.
 
     Parameters
