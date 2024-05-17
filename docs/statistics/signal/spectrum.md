@@ -1,6 +1,6 @@
-# Power Spectra Function
+# Power Spectra 
 
-This function compute the power spectra of the input data and it returns two matters:
+This function compute the `Power Spectra` of the input data and it returns two matters:
 
 - **fxu (array_like)**: Array of frequencies.
 - **fyu (array_like)**: Power spectral density of the input data.

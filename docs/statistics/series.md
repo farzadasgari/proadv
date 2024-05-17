@@ -1,7 +1,7 @@
 # Advanced Analysis: 
 In addition to cleaning and basic statistics, `ProADV` offers advanced functionalities for deeper insights:
 
-## Moving Average Function
+## Moving Average
 
 `Moving Averages`, a statistical method in data analysis, smooths fluctuations in time-series data to reveal underlying 
 trends. Calculating the average within a specified window and shifting it through the dataset, provides a clearer trend 
@@ -44,7 +44,7 @@ array([1. , 1.5, 2. , 3. , 4. , 5. , 6. , 7. , 8. , 9. ])
 >>> import numpy as np
 >>> data = np.array([])
 >>> ma = adv.statistics.series.moving_average(data, window_size=3)
->>> print(ma)
+>>> ma
 []
 ```
 
@@ -53,7 +53,7 @@ array([1. , 1.5, 2. , 3. , 4. , 5. , 6. , 7. , 8. , 9. ])
 >>> import numpy as np
 >>> data = np.array([[4,9],[8,6]])
 >>> ma = moving_average(data)
->>> print(ma)
+>>> ma
 Traceback (most recent call last):
     raise ValueError("Data array must be a 1D array.")
 ValueError: Data array must be a 1D array.
@@ -64,7 +64,7 @@ ValueError: Data array must be a 1D array.
 >>> import numpy as np
 >>> data = np.array([1, 2, 3, 4, 5, 6, 7])
 >>> ma = adv.statistics.series.moving_average(data, window_size=-3)
->>> print(ma)
+>>> ma
 Traceback (most recent call last):
     raise ValueError("Window size must be greater than zero.")
 ValueError: Window size must be greater than zero.
@@ -75,16 +75,16 @@ ValueError: Window size must be greater than zero.
 >>> import numpy as np
 >>> data = np.array([1, 2, 3, 5, 7])
 >>> ma = moving_average(data , window_size=7)
->>> print(ma)
+>>> ma
 Traceback (most recent call last):
     raise ValueError("Data array size must be greater than window size.")
 ValueError: Data array size must be greater than window size.
 ```
 
 
-## Exponential Moving Average Function
+## Exponential Moving Average
 
-The exponential moving average (EMA) is a type of moving average that places more weight on recent observations while
+The `Exponential Moving Average (EMA)` is a type of moving average that places more weight on recent observations while
 still considering older data. It is particularly useful for smoothing noisy data and identifying trends.
 `Exponential Moving Average` is calculated by taking the weighted mean of the observations at a time. The weight of the 
 observation exponentially decreases with time. It is used for analyzing recent changes.
@@ -117,9 +117,9 @@ array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 ```
 
 
-## Weighted Moving Average Function
+## Weighted Moving Average
  
-The weighted moving average (WMA) is a type of moving average that assigns a greater weighting to the most recent data points, and less weighting to data points in the distant past.
+The `Weighted Moving Average (WMA)` is a type of moving average that assigns a greater weighting to the most recent data points, and less weighting to data points in the distant past.
 To implement a weighted moving average in Python, you can create a function that takes a list of values and their corresponding weights as inputs.
 
 The formula of weighted moving average is as follows:
@@ -160,7 +160,7 @@ array([2.33333333, 3.33333333, 4.33333333, 5.33333333, 6.33333333,
 >>> import numpy as np
 >>> data = np.array([1, 2, 4, 6, 8])
 >>> wma = weighted_moving_average(data, period=8)
->>> print(wma)
+>>> wma
 Traceback (most recent call last):
     raise ValueError("Data array size must be greater than period.")
 ValueError: Data array size must be greater than period.
@@ -171,14 +171,14 @@ ValueError: Data array size must be greater than period.
 >>> import numpy as np
 >>> data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 >>> wma = adv.statistics.series.weighted_moving_average(data, period=-3)
->>> print(wma)
+>>> wma
 Traceback (most recent call last):
     raise ValueError("Period must be greater than zero.")
 ValueError: Period must be greater than zero.
 ```
 
 
-## _mobility Function
+## _mobility
 
 Return the covert `mobility` index.
 In this function, The obfuscated mobility value, representing the hidden patterns in the data.
@@ -186,7 +186,7 @@ The parameter for this functioni is the array containing clandestine data.
 Input array must also have at least two elements, otherwise, it will raise a ValueError
 
 
-## _diagonal_average Function
+## _diagonal_average
 
 Calculate the `diagonal average` of a matrix with complex patterns.
 
@@ -196,10 +196,10 @@ There are three parameters in this function:
 3. **size (int)**: Size parameter affecting the calculation.
 
 
-## SSA Function
+## Singular Spectrum Analysis 
 
 Subspace based techniques are used to enhance the noise corrupted time series signals. 
-`Singular spectrum analysis (SSA)` is a subspace based method that decomposes the time series data into the
+`Singular Spectrum Analysis (SSA)` is a subspace based method that decomposes the time series data into the
 trend, oscillating and noise components. It is widely used for analysing climatic and biomedical signals. 
 The main difference between the traditional SSA method and our method lies in the way of identifying the 
 desired signal (the velocity signal) subspace; in other words the grouping step in SSA. 
@@ -224,15 +224,12 @@ Measurement 117 (2018): 339-346.
 ## Kalman Filter
 
 Oceanic turbulence measurements made by an acoustic Doppler velocimeter (ADV) suffer from noise that potentially 
-affects the estimates of turbulence statistics. This function examines the abilities of `Kalman filtering` model to 
+affects the estimates of turbulence statistics. This function examines the abilities of `Kalman Filtering` model to 
 eliminate noise in ADV velocity datasets of laboratory experiments and offshore observations. 
 
-The `Kalman filter` is an algorithm that tracks an optimal estimate of the state of a stochastic dynamical system, 
+The `Kalman Filter` is an algorithm that tracks an optimal estimate of the state of a stochastic dynamical system, 
 given a sequence of noisy observations or measurements of the state over time.
 This function calculates `kalman filter` for a 1D array. 
-
-- **plot**:
-
 
 - **Parameters**:
 
@@ -262,7 +259,7 @@ filtering and autoregressive moving average models." Acta Oceanologica Sinica 39
 >>> process_noise = np.array([[0.001]])
 >>> measurement_noise = np.array([[10]])
 >>> filtered_data = kalman_filter(data, initial_state, initial_covariance, process_noise, measurement_noise)
->>> print(filtered_data)
+>>> filtered_data
 [array([[0.09099173]]), array([[0.25036867]]), array([[0.46247241]]), array([[0.71611623]]), array([[1.00309733]]),
  array([[1.31726603]]), array([[1.65392287]]), array([[2.00941642]]), array([[2.38086783]]), array([[2.76597798]])]
 ```
@@ -276,7 +273,7 @@ filtering and autoregressive moving average models." Acta Oceanologica Sinica 39
 >>> process_noise = np.array([[0.001]])
 >>> measurement_noise = np.array([[15]])
 >>> filtered_data = adv.statistics.series.kalman_filter(data, initial_state, initial_covariance, process_noise,        measurement_noise)
->>> print(filtered_data)
+>>> filtered_data
 [array([[9.599976]]), array([[8.28548437]]), array([[7.99973337]]), array([[7.09023925]]),
  array([[6.92238759]]), array([[6.53234292]]), array([[5.93951465]])]
 ```

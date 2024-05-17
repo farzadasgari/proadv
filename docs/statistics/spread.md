@@ -1,11 +1,11 @@
-# Variance Function
+# Variance 
 
-Compute the `variance` along the specified axis of a 1D array. 
+Compute the `Variance` along the specified axis of a 1D array. 
 In this function:
 1. If the element of array is a string, it raises a TypeError.
 2. If the array is empty, it raises a ValueError.
 
-- Examples:
+- **Examples**:
 
 ```python
 >>> import proadv as adv
@@ -37,7 +37,7 @@ In this function:
 >>> import numpy as np
 >>> data = np.array([])
 >>> var = adv.statistics.spread.variance(data)
->>> print(var)
+>>> var
 Traceback (most recent call last):
     raise ValueError("cannot calculate variance with empty array")
 ValueError: cannot calculate variance with empty array
@@ -48,7 +48,7 @@ ValueError: cannot calculate variance with empty array
 >>> import numpy as np
 >>> data = np.array([[1,2],[9,3]])
 >>> var = variance(data)
->>> print(var)
+>>> var
 Traceback (most recent call last):
     raise ValueError("Data array must be a 1D array.")
 ValueError: Data array must be a 1D array.
@@ -59,22 +59,22 @@ ValueError: Data array must be a 1D array.
 >>> import numpy as np
 >>> data = np.array(["proadv"])
 >>> var = variance(data)
->>> print(var)
+>>> var
 Traceback (most recent call last):
     raise TypeError("String cannot be placed as an element of an array")
 TypeError: String cannot be placed as an element of an array
 ```
 
 
-# STD Function
+# Standard Deviation
 
-Compute the `standard deviation` along the specified axis of a 1D array. 
+Compute the `Standard Deviation` along the specified axis of a 1D array. 
 If out is None, return a new array containing the standard deviation, otherwise return a reference to the output array. 
 In this function:
 1. If the element of array is a string, it raises a TypeError.
 2. If the array is empty, it raises a ValueError.
 
-- Examples:
+- **Examples**:
 
 ```python
 >>> from proadv.statistics.spread import std
@@ -106,7 +106,7 @@ In this function:
 >>> import numpy as np  
 >>> data = np.array([])
 >>> stdev = adv.statistics.spread.std(data)
->>> print(stdev)
+>>> stdev
 Traceback (most recent call last):
     raise ValueError("cannot calculate standard deviation with empty array")
 ValueError: cannot calculate standard deviation with empty array
@@ -117,7 +117,7 @@ ValueError: cannot calculate standard deviation with empty array
 >>> import numpy as np  
 >>> data = np.array(["proadv"])
 >>> stdev = adv.statistics.spread.std(data)
->>> print(stdev)
+>>> stdev
 Traceback (most recent call last):
     raise TypeError("String cannot be placed as an element of an array")
 TypeError: String cannot be placed as an element of an array
@@ -128,7 +128,7 @@ TypeError: String cannot be placed as an element of an array
 >>> import numpy as np
 >>> data = np.array([[14, 8, 11],[4, 6, 8]])
 >>> stdev = adv.statistics.spread.std(data)
->>> print(stdev)
+>>> stdev
 Traceback (most recent call last):
     raise ValueError("Data array must be a 1D array.")
 ValueError: Data array must be a 1D array.
