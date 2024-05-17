@@ -6,22 +6,42 @@ import matplotlib.pyplot as plt
 
 
 def main():
+    """
+    Example function demonstrating the use of acceleration thresholding and linear interpolation for data filtration.
+
+    Reads a CSV file containing velocity data, applies filtration methods iteratively, and plots the results.
+    """
+
+    # Read velocity data from CSV file
     df = read_csv('../../dataset/second.csv')
     main_data = df.iloc[:, 0].values
     filtered_data = main_data.copy()
+
+    # Iterative filtration process
     iteration = 0
     max_iteration = 10
     tag = 1
 
     while iteration < max_iteration:
+
+        # Toggle tag between 1 and 2 for acceleration thresholding
         tag = 2 if tag == 1 else 1
+
+        # Apply acceleration thresholding to detect outliers
         indices = acceleration_thresholding(filtered_data, frequency=100, tag=tag, gravity=980, k_gravity=1.5,
                                             k_sigma=1)
+
+        # Break loop if no outliers are detected
         if not indices.size:
             break
+
+        # Replace outliers with interpolated values
         filtered_data = linear_interpolation(filtered_data, indices)
 
         iteration += 1
+
+    # Plotting the filtered and unfiltered data
+
     sampling_frequency = 100  # Hz
     delta_time = 1 / sampling_frequency
     time = np.arange(0, main_data.size * delta_time, delta_time)
