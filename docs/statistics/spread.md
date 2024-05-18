@@ -5,7 +5,7 @@ In this function:
 1. If the element of array is a string, it raises a TypeError.
 2. If the array is empty, it raises a ValueError.
 
-- **Examples**:
+- **Examples**
 
 ```python
 >>> import proadv as adv
@@ -15,6 +15,7 @@ In this function:
 >>> var
 4.6875
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.spread import variance
@@ -22,6 +23,7 @@ In this function:
 >>> data = np.random.randn(20)
 >>> var = variance(data)
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -31,6 +33,7 @@ In this function:
 >>> var
 18.666666666666668
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -42,6 +45,7 @@ Traceback (most recent call last):
     raise ValueError("cannot calculate variance with empty array")
 ValueError: cannot calculate variance with empty array
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.spread import variance
@@ -53,6 +57,7 @@ Traceback (most recent call last):
     raise ValueError("Data array must be a 1D array.")
 ValueError: Data array must be a 1D array.
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.spread import variance
@@ -74,7 +79,7 @@ In this function:
 1. If the element of array is a string, it raises a TypeError.
 2. If the array is empty, it raises a ValueError.
 
-- **Examples**:
+- **Examples**
 
 ```python
 >>> from proadv.statistics.spread import std
@@ -82,6 +87,7 @@ In this function:
 >>> data = np.random.rand(25)
 >>> stdev = std(data)
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -91,6 +97,7 @@ In this function:
 >>> stdev
 2.9107081994288304
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -100,6 +107,7 @@ In this function:
 >>> stdev
 2.0
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -111,6 +119,7 @@ Traceback (most recent call last):
     raise ValueError("cannot calculate standard deviation with empty array")
 ValueError: cannot calculate standard deviation with empty array
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -122,6 +131,7 @@ Traceback (most recent call last):
     raise TypeError("String cannot be placed as an element of an array")
 TypeError: String cannot be placed as an element of an array
 ```
+<br>
 
 ```python
 >>> import proadv as adv

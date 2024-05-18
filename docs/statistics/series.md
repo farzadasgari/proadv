@@ -16,12 +16,9 @@ efficient than calculating a simple moving average for each element.
 There are two parameters in this function:
 1. **data (array_like)**: The 1D array of data for which to calculate the moving average.
 2. **window_size (int, optional)**: The size of the window for the moving average. Defaults to 20. Must be less than or equal to the size of the data array.
-If the window size is larger than the size of the data array, it raises a ValueError. 
+If the window size is larger than the size of the data array, it raises a ValueError.
 
-- **plot**:
-
-
-- **Examples**:
+- **Examples**
 
 ```python
 >>> from proadv.statistics.series import moving_average
@@ -29,6 +26,7 @@ If the window size is larger than the size of the data array, it raises a ValueE
 >>> data = np.random.rand(300)
 >>> ma = moving_average(data)
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -38,6 +36,7 @@ If the window size is larger than the size of the data array, it raises a ValueE
 >>> ma
 array([1. , 1.5, 2. , 3. , 4. , 5. , 6. , 7. , 8. , 9. ])
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -47,6 +46,7 @@ array([1. , 1.5, 2. , 3. , 4. , 5. , 6. , 7. , 8. , 9. ])
 >>> ma
 []
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.series import moving_average
@@ -58,6 +58,7 @@ Traceback (most recent call last):
     raise ValueError("Data array must be a 1D array.")
 ValueError: Data array must be a 1D array.
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -69,6 +70,7 @@ Traceback (most recent call last):
     raise ValueError("Window size must be greater than zero.")
 ValueError: Window size must be greater than zero.
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.series import moving_average
@@ -103,10 +105,8 @@ There are two parameters in this function:
 2. **alpha (float, optional)**: Smoothing factor between 0 and 1. Higher alpha discounts older observations faster. Default is 0.2.
 If alpha is not between 0 and 1 (inclusive), It raises a ValueError. 
 
-- **plot**:
 
-
-- **Example**:
+- **Example**
 
 ```python
 >>> import numpy as np
@@ -133,10 +133,8 @@ There are two parameters in this function:
 2. **period (int, optional)**: The period for the weighted moving average. Defaults to 20. Must be less than or equal to the size of the data array.
 If the period is larger than the size of the data array, it raises a ValueError. 
 
-- **plot**:
 
-
-- **Examples**:
+- **Examples**
 
 ```python
 >>> import proadv as adv  
@@ -147,6 +145,7 @@ If the period is larger than the size of the data array, it raises a ValueError.
 array([2.33333333, 3.33333333, 4.33333333, 5.33333333, 6.33333333,
        7.33333333, 8.33333333])
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.series import weighted_moving_average  
@@ -154,6 +153,7 @@ array([2.33333333, 3.33333333, 4.33333333, 5.33333333, 6.33333333,
 >>> data = np.random.rand(300)
 >>> wma = weighted_moving_average(data)
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.series import weighted_moving_average  
@@ -165,6 +165,7 @@ Traceback (most recent call last):
     raise ValueError("Data array size must be greater than period.")
 ValueError: Data array size must be greater than period.
 ```
+<br>
 
 ```python
 >>> import proadv as adv  
@@ -176,24 +177,7 @@ Traceback (most recent call last):
     raise ValueError("Period must be greater than zero.")
 ValueError: Period must be greater than zero.
 ```
-
-
-## _mobility
-
-Return the covert `mobility` index.
-In this function, The obfuscated mobility value, representing the hidden patterns in the data.
-The parameter for this functioni is the array containing clandestine data. 
-Input array must also have at least two elements, otherwise, it will raise a ValueError
-
-
-## _diagonal_average
-
-Calculate the `diagonal average` of a matrix with complex patterns.
-
-There are three parameters in this function:
-1. **matrix (array_like)**: Input matrix with hidden patterns.
-2. **length (int)**: Length parameter affecting the calculation.
-3. **size (int)**: Size parameter affecting the calculation.
+<br>
 
 
 ## Singular Spectrum Analysis 
@@ -216,9 +200,9 @@ There are three parameters in this function:
 
 - **Reference**:
 
-Sharma, Anurag, Ajay Kumar Maddirala, and Bimlesh Kumar.
+[Sharma, Anurag, Ajay Kumar Maddirala, and Bimlesh Kumar.
 "Modified singular spectrum analysis for despiking acoustic Doppler velocimeter (ADV) data."
-Measurement 117 (2018): 339-346.
+Measurement 117 (2018): 339-346.](https://doi.org/10.1016/j.measurement.2017.12.025)
 
 
 ## Kalman Filter
@@ -231,24 +215,24 @@ The `Kalman Filter` is an algorithm that tracks an optimal estimate of the state
 given a sequence of noisy observations or measurements of the state over time.
 This function calculates `kalman filter` for a 1D array. 
 
-- **Parameters**:
+- **Parameters**
 
-There are five parameters in the Kalman Filter function:
+    There are five parameters in the Kalman Filter function:
 
-- **data (array_like)**: The 1D array of data for which to calculate the kalman filter.
-- **initial_state (array_like)**: An initial estimate for the state variable.
-- **initial_covariance (array_like)**: An initial estimate for the covariance.
-- **process_noise (array_like)**: Process noise that occurs in the process of changing a state variable.
-- **measurement_noise (array_like)**: Measurement noise present in the input data.
+  - **data (array_like)**: The 1D array of data for which to calculate the kalman filter.
+  - **initial_state (array_like)**: An initial estimate for the state variable.
+  - **initial_covariance (array_like)**: An initial estimate for the covariance.
+  - **process_noise (array_like)**: Process noise that occurs in the process of changing a state variable.
+  - **measurement_noise (array_like)**: Measurement noise present in the input data.
 
-- **Reference**:
 
-Huang, Chuanjiang, Fangli Qiao, and Hongyu Ma. "Noise reduction of acoustic Doppler velocimeter data based on Kalman
+- **Reference**
+
+[Huang, Chuanjiang, Fangli Qiao, and Hongyu Ma. "Noise reduction of acoustic Doppler velocimeter data based on Kalman
 filtering and autoregressive moving average models." Acta Oceanologica Sinica 39 (2020): 106-113.
+](https://doi.org/10.1007/s13131-020-1641-x)
 
-- **plot**:
-
-- **Examples**:
+- **Examples**
 
 ```python
 >>> from proadv.statistics.series import kalman_filter  
@@ -263,6 +247,7 @@ filtering and autoregressive moving average models." Acta Oceanologica Sinica 39
 [array([[0.09099173]]), array([[0.25036867]]), array([[0.46247241]]), array([[0.71611623]]), array([[1.00309733]]),
  array([[1.31726603]]), array([[1.65392287]]), array([[2.00941642]]), array([[2.38086783]]), array([[2.76597798]])]
 ```
+<br>
 
 ```python
 >>> import proadv as adv

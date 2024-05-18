@@ -7,7 +7,7 @@ Compute the sample `skewness` of a data set.
 - For normally distributed data, the skewness should be about zero. 
 - For unimodal continuous distributions, a skewness value greater than zero. It means that there is more weight in the right tail of the distribution. 
 
-- **Examples**:
+- **Examples**
 
 ```python
 >>> import proadv as adv # Option 1: Full import path
@@ -17,6 +17,7 @@ Compute the sample `skewness` of a data set.
 >>> skew
 0.2650554122698573
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.moment import skewness # Option 2: Direct import
@@ -24,6 +25,7 @@ Compute the sample `skewness` of a data set.
 >>> data = np.random.rand(20)
 >>> skew = skewness(data) 
 ```
+<br>
 
 ```python
 >>> import proadv as adv # Option 1: Full import path
@@ -33,7 +35,6 @@ Compute the sample `skewness` of a data set.
 >>> skew
 0.0
 ```
-
 
 ## Kurtosis
 
@@ -45,7 +46,7 @@ This function:
 3. computes the fourth central moment
 4. and then standardizes it to find the kurtosis
 
-- **Examples**:
+- **Examples**
 
 ```python
 >>> from proadv.statistics.moment import kurtosis  # Option 2: Direct import
@@ -55,6 +56,7 @@ This function:
 >>> kurt
 2.2
 ```
+<br>
 
 ```python
 >>> import proadv as adv  # Option 1: Full import path
