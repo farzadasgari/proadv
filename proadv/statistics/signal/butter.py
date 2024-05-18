@@ -409,3 +409,51 @@ def xyz_to_sop(x, y, z, pg=None, *, ag=False):
     # put gain in first sop
     sop[0][:3] *= z
     return sop
+
+def xyz_to_ptf(x, y, z):
+    """
+    Parameters
+    ----------
+    x(array_like): Zeros of the transfer function.
+    y(array_like): Poles of the transfer function.
+    z(float): System gain.
+
+    Returns
+    -------
+    g(array_like): Numerator polynomial coefficients.
+    h(array_like): Denominator polynomial coefficients.
+    """
+    x = atleast_1d(x)
+    z = atleast_1d(z)
+    if len(x.shape) > 1:
+        temporary = poly(x[0])
+        g = np.empty((x.shape[0], x.shape[1] + 1), temporary.dtype.char)
+        if len(z) == 1:
+            z = [z[0]] * x.shape[0]
+        for i in range(x.shape[0]):
+            g[i] = z[i] * poly(x[i])
+    else:
+        g = z * poly(x)
+    h = atleast_1d(poly(y))
+
+    if issubclass(g.dtype.type, numpy.complexfloating):
+        # if complex roots are all complex conjugates, the roots are real.
+        r = numpy.asarray(x, complex)
+        pr = numpy.compress(r.imag > 0, r)
+        nr = numpy.conjugate(numpy.compress(r.imag < 0, r))
+        if len(pr) == len(nr):
+            if numpy.all(numpy.sort_complex(nr) ==
+                         numpy.sort_complex(pr)):
+                g = g.real.copy()
+
+    if issubclass(h.dtype.type, numpy.complexfloating):
+        # if complex roots are all complex conjugates, the roots are real.
+        r = numpy.asarray(y, complex)
+        pr = numpy.compress(r.imag > 0, r)
+        nr = numpy.conjugate(numpy.compress(r.imag < 0, r))
+        if len(pr) == len(nr):
+            if numpy.all(numpy.sort_complex(nr) ==
+                         numpy.sort_complex(pr)):
+                h = h.real.copy()
+
+    return g, h
