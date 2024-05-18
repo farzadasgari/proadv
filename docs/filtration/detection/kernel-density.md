@@ -8,7 +8,7 @@ By calculating the kernel density estimation of *u-Δu*, KDE identifies peaks, f
 
 Using these profiles, the algorithm determines cutoff points and a criteria ellipse. Points outside this ellipse are considered spikes. The algorithm was developed to handle datasets with significant contamination, exceeding 40%.
 
-# Kernel Density Estimation (KDE)
+## Kernel Density Estimation (KDE)
 Kernel Density Estimation (KDE) is a robust statistical method used to estimate the density of a probability distribution, especially when the underlying model is unknown. KDE involves placing a kernel function at each data point and summing their contributions to obtain a continuous estimate of the Probability Density Function (PDF). The choice of kernel function and bandwidth parameter significantly influences the accuracy of the estimate.
 
 ## Applications of KDE
@@ -130,7 +130,7 @@ This example demonstrates the use of the `bivariate kernel` function to iterativ
 
 For improved accuracy and robustness in bivariate kernel density estimation, the `proadv.kernel.bivariate.bivariate_kernel` function can be employed. This function leverages advanced algorithms, such as those proposed by [Botev et al. (2010)](https://projecteuclid.org/journals/annals-of-statistics/volume-38/issue-5/Kernel-density-estimation-via-diffusion/10.1214/10-AOS799.full), to calculate the kernel density with enhanced precision and reliability. By utilizing state-of-the-art methodologies, researchers can achieve more accurate results, especially in challenging datasets with complex velocity distributions and high levels of noise or spikes.
 
-# Bivariate Kernel Density Estimation
+## Bivariate Kernel Density Estimation
 
 ## Introduction
 
