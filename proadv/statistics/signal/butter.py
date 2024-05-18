@@ -128,3 +128,40 @@ def low_to_band(zero, poles, system, pc=1.0, pw=1.0):
     systemb = system * fpw ** scale
 
     return zerob, polesb, systemb
+
+def low_to_high(zero, poles, system, dc=1.0):
+    """
+    This function converts a low pass filter prototype to another frequency.
+
+    Parameters
+    ------
+    zero (array_like) : Zeros of the analog filter transfer function.
+    poles (array_like) : Poles of the analog filter transfer function.
+    system (float) : System gain of the analog filter transfer function.
+    dc (float) : Desired cutoff, as angular frequency.
+
+    Returns
+    ------
+    zeroh (array_like): Zeros of the transformed LP(low-pass) filter transfer function.
+    polesh (array_like): Poles of the transformed LP(low-pass) filter transfer function.
+    systemh (float) : System gain of the transformed LP(low-pass) filter.
+
+    """
+    zero = atleast_1d(zero)
+    poles = atleast_1d(poles)
+    fdc = float(dc)
+
+    scale = _relative_scale(zero, poles)
+
+    # Invert positions radially about unit circle to convert LPF to HPF
+    # Scale all points radially from origin to shift cutoff frequency
+    zeroh = fdc / zero
+    polesh = fdc / poles
+
+    # If lowpass had zeros at infinity, inverting moves them to origin.
+    zeroh = append(zeroh, zeros(scale))
+
+    # Cancel out gain change caused by inversion
+    systemh = system * real(prod(-zero) / prod(-poles))
+
+    return zeroh, polesh, systemh
