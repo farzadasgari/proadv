@@ -1,8 +1,8 @@
-# Replacement Methods: 
+# Replacement Methods
 `ProADV` offers several options to replace detected spikes with more reliable values:
 
 
-## LVD (Last Valid Data) Function
+## LVD (Last Valid Data)
 
 Replace spike values in velocities array with the `last valid data` before each. 
 It returns modified data with spikes replaced by last valid values. An array containing the modified data.
@@ -12,7 +12,7 @@ This function has two parameters:
 2. **spike_indices (array_like)**: Indices of spikes. An array-like object containing the indices of detected spikes.
 
 
-## MV (Mean Value) Function
+## MV (Mean Value)
 
 Replace spike values in velocities array with the `mean value` of velocity component. 
 It returns modified data with spikes replaced by mean value of velocity component. An array containing the modified data.
@@ -22,7 +22,7 @@ This function has two parameters:
 2. **spike_indices (array_like)**: Indices of spikes. An array-like object containing the indices of detected spikes.
 
 
-## LI (Linear Interpolation) Function
+## LI (Linear Interpolation)
 
 This function identifies spikes in the velocity data and replaces them with `linearly interpolated values` based on the nearest valid data points before and after each spike. 
 If a spike occurs at the end of the data, it is replaced with the mean of the entire dataset. 
@@ -44,7 +44,7 @@ This function has three parameters:
     the output data to be presented with a consistent level of precision. The default
     value is 4, but this can be adjusted as needed.
 
-**Notes**:
+**Notes**
 The function uses linear interpolation to estimate the values of spikes based on the
 surrounding non-spike data. For spikes at the beginning or end of the data where a
 neighboring non-spike value is not available, the function uses the mean of the entire
@@ -52,7 +52,7 @@ dataset as a replacement value. This approach ensures that the data remains as a
 and representative of the original dataset as possible.
 
 
-## 12PP (12 Points Cubic Polynomial) Function
+## 12PP (12 Points Cubic Polynomial)
 
 Interpolates missing data points in a velocity array using `cubic polynomial interpolation`. 
 
