@@ -127,6 +127,7 @@ them to floats and calculates the mean of the numeric values. If the input is in
 >>> mean_array
 2.0
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.descriptive import mean 
@@ -136,6 +137,7 @@ them to floats and calculates the mean of the numeric values. If the input is in
 >>> mean_array
 3.0
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.descriptive import mean 
@@ -145,6 +147,7 @@ them to floats and calculates the mean of the numeric values. If the input is in
 >>> mean_array
 2.1666666666666665
 ```
+<br>
 
 ```python
 >>> import proadv as adv 
@@ -258,4 +261,3 @@ It returns:
 >>> counts
 3
 ```
-q
