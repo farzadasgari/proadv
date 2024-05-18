@@ -457,3 +457,18 @@ def xyz_to_ptf(x, y, z):
                 h = h.real.copy()
 
     return g, h
+
+
+def _closest_real_complex_i(x, y, z):
+    """
+    Get the next real or complex element based on distance.
+    """
+    assert z in ('real', 'complex', 'any')
+    g = np.argsort(np.abs(x - y))
+    if z == 'any':
+        return g[0]
+    else:
+        h = np.isreal(x[g])
+        if z == 'complex':
+            h = ~h
+        return g[np.nonzero(h)[0][0]]
