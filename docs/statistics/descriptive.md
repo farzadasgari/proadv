@@ -9,7 +9,7 @@ The input data which should be an array or any array-like structure.
 If the array contains NaN values, the function will not return a value and will raise a ValueError instead.
 On the other hand, this function will raise a TypeError if the type of array is something other than integer.
 
-- **Examples**:
+- **Examples**
 
 ```python
 >>> import proadv as adv 
@@ -19,6 +19,7 @@ On the other hand, this function will raise a TypeError if the type of array is 
 >>> minimum
 1
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.descriptive import min
@@ -29,6 +30,7 @@ Traceback (most recent call last):
     raise ValueError("The array contains NaN values. The min function cannot be applied to arrays with NaN values.")
 ValueError: The array contains NaN values. The min function cannot be applied to arrays with NaN values.
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.descriptive import min 
@@ -36,7 +38,7 @@ ValueError: The array contains NaN values. The min function cannot be applied to
 >>> data = np.random.rand(20) 
 >>> minimum = min(data)
 ```
-
+<br>
 
 ## Maximum
 
@@ -46,7 +48,7 @@ The input data which should be an array or any array-like structure.
 If the array contains NaN values, the function will not return a value and will raise a ValueError instead.
 On the other hand, this function will raise a TypeError if the type of array is something other than integer.
 
-- **Examples**:
+- **Examples**
 
 ```python
 >>> from proadv.statistics.descriptive import max
@@ -57,6 +59,7 @@ Traceback (most recent call last):
     raise ValueError("The array contains NaN values. The max function cannot be applied to arrays with NaN values.")
 ValueError: The array contains NaN values. The max function cannot be applied to arrays with NaN values.
 ```
+<br>
 
 ```python
 >>> import proadv as adv 
@@ -66,6 +69,7 @@ ValueError: The array contains NaN values. The max function cannot be applied to
 >>> maximum
 5
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.descriptive import max 
@@ -75,6 +79,7 @@ ValueError: The array contains NaN values. The max function cannot be applied to
 >>> maximum
 9
 ```
+<br>
 
 ```python
 >>> import proadv as adv 
@@ -86,6 +91,7 @@ Traceback (most recent call last):
     raise TypeError("String cannot be placed as an element of an array")
 TypeError: String cannot be placed as an element of an array
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.descriptive import max 
@@ -97,7 +103,7 @@ Traceback (most recent call last):
     raise ValueError("cannot calculate maximum with empty array")
 ValueError: cannot calculate maximum with empty array
 ```
-
+<br>
 
 ## Mean
 
@@ -105,13 +111,13 @@ Return the `mean` of a dataset, handling non-numeric and numeric data. Dataset c
 or a list containing both numbers and strings. Non-numeric strings are converted to floats if possible, and ignored if 
 not. 
 
-- **Notes**:
+- **Notes**
 
 The function first checks if the input is a single number and returns it if so. If the input is a list,the function
 checks if all elements are numeric and calculates the mean. If there are strings in the list, it attempts to convert
 them to floats and calculates the mean of the numeric values. If the input is invalid or empty, it returns an error message.
 
-- **Examples**:
+- **Examples**
 
 ```python
 >>> import proadv as adv 
@@ -148,14 +154,14 @@ them to floats and calculates the mean of the numeric values. If the input is in
 >>> mean_array
 Invalid input
 ```
-
+<br>
 
 ## Median
 
 Returnn the `median` along the specified axis. If the element of array is a string, it raises a TypeError. 
 Also, If the array is empty, it raises a ValueError.
 
-- **Examples**:
+- **Examples**
 
 ```python
 >>> import proadv as adv
@@ -165,6 +171,7 @@ Also, If the array is empty, it raises a ValueError.
 >>> med
 9.0
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.descriptive import median
@@ -172,6 +179,7 @@ Also, If the array is empty, it raises a ValueError.
 >>> data = np.random.rand(15)
 >>> med = median(data) 
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -181,6 +189,7 @@ Also, If the array is empty, it raises a ValueError.
 >>> med
 29.0
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -192,6 +201,7 @@ Traceback (most recent call last):
     raise ValueError("cannot calculate median with empty array")
 ValueError: cannot calculate median with empty array
 ```
+<br>
 
 ```python
 >>> import proadv as adv
@@ -203,6 +213,7 @@ Traceback (most recent call last):
     raise ValueError("Data array must be a 1D array.")
 ValueError: Data array must be a 1D array.
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.descriptive import median
@@ -214,16 +225,16 @@ Traceback (most recent call last):
     raise TypeError("String cannot be placed as an element of an array")
 TypeError: String cannot be placed as an element of an array
 ```
+<br>
 
-
-## Mod
+## Mode
 
 This function computes an array of the modal (most common) value in the passed array. 
 It returns:
 1. **mode_value (int)**: The mode of the data
 2. **frequency (int)**: The number of repetitions of the mode
 
-- **Examples**:
+- **Examples**
 
 ```python
 >>> import proadv as adv
@@ -235,6 +246,7 @@ It returns:
 >>> counts
 2
 ```
+<br>
 
 ```python
 >>> from proadv.statistics.descriptive import mode
