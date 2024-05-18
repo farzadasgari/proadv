@@ -472,3 +472,58 @@ def _closest_real_complex_i(x, y, z):
         if z == 'complex':
             h = ~h
         return g[np.nonzero(h)[0][0]]
+
+
+def _cxr(x, me=None):
+    x = atleast_1d(x)
+    if x.size == 0:
+        return x, x
+    elif x.ndim != 1:
+        raise ValueError('_cxr only accepts 1-D input')
+
+    if me is None:
+        # Get tolerance from dtype of input
+        me = 100 * np.finfo((1.0 * x).dtype).eps
+
+    # Sort by real part, magnitude of imaginary part (speed up further sorting)
+    x = x[np.lexsort((abs(x.imag), x.real))]
+
+    # Split reals from conjugate pairs
+    ri = np.abs(x.imag) <= me * np.abs(x)
+    xr = x[ri].real
+
+    if np.array(xr).shape[0] == np.array(x).shape[0]:
+        # Input is entirely real
+        return array([]), xr
+
+    # Split positive and negative halves of conjugates
+    x = x[~ri]
+    xp = x[x.imag > 0]
+    xn = x[x.imag < 0]
+
+    if np.array(xp).shape[0] != np.array(xn).shape[0]:
+        raise ValueError('Array contains complex value with no matching '
+                         'conjugate.')
+
+    # Find runs of (approximately) the same real part
+    sr = np.diff(xp.real) <= me * abs(xp[:-1])
+    variety = numpy.diff(concatenate(([0], sr, [0])))
+    rst = numpy.nonzero(variety > 0)[0]
+    rss = numpy.nonzero(variety < 0)[0]
+
+    # Sort each run by their imaginary parts
+    for i in range(np.array(rst).shape[0]):
+        st = rst[i]
+        sp = rss[i] + 1
+        for chunk in (xp[st:sp], xn[st:sp]):
+            chunk[...] = chunk[np.lexsort([np.abs(chunk.imag)])]
+
+    # Check that negatives match positives
+    if any(abs(xp - xn.conj()) > me * abs(xn)):
+        raise ValueError('Array contains complex value with no matching '
+                         'conjugate.')
+
+    # Average out numerical inaccuracy in real vs imag parts of pairs
+    xc = (xp + xn.conj()) / 2
+
+    return xc, xr
