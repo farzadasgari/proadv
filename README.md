@@ -33,6 +33,14 @@
         * **LI (Linear Interpolation):** Uses linear interpolation between surrounding points to estimate the missing value.
         * **12PP (12 Points Cubic Polynomial):** Employs a 12-point cubic polynomial to fit a smoother curve and replace spikes.
 
+
+<div>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/trivariate-kernel.png" alt="trivariate-kernel" style="width:300px;"/>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/spectrum.png" alt="trivariate-kernel" style="width:300px;"/>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/phase-space.png" alt="trivariate-kernel" style="width:300px;"/>
+</div>
+
+
 * **Statistical Analysis:** ProADV equips you with essential statistical tools to characterize your ADV data:
     * **Minimum, Maximum:** Provides the range of measured velocities.
     * **Mean, Median, Mode:** Calculates central tendency measures.
