@@ -51,6 +51,7 @@ setup(
         "Changelog": "https://github.com/farzadasgari/proadv/releases",
         "Support": "mailto:std_farzad.asgari@alumni.khu.ac.ir",
         "Related Projects": "https://github.com/farzadasgari",
-        "Website": "https://proadv.app"
+        "Website": "https://proadv.app",
+        "Demo": "https://github.com/farzadasgari/proadv/tree/main/examples"
     },
 )
