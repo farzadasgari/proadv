@@ -59,7 +59,7 @@
 
 ### Installation
 
-There are three convenient ways to install ProADV:
+There are two convenient ways to install ProADV:
 
 1. **Using pip (recommended):**
    ```bash
