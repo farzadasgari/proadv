@@ -14,7 +14,6 @@ def _random_index(data_size, percent):
     Returns
     ------
     randoms (np.ndarray): An array containing randomly selected indexes.
-
     """
 
     randoms = []
