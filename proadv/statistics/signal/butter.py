@@ -165,3 +165,43 @@ def low_to_high(zero, poles, system, dc=1.0):
     systemh = system * real(prod(-zero) / prod(-poles))
 
     return zeroh, polesh, systemh
+
+def bilinear(zero, poles, system, sr):
+    """
+    This function returns a digital IIR filter using a bilinear conversion from an analog one.
+
+    Parameters
+    ----------
+    zero (array_like): Zeros of the analog filter transfer function.
+    poles (array_like): Poles of the analog filter transfer function.
+    system (float) : System gain of the analog filter transfer function.
+    sr (float) : Sample rate, as ordinary frequency.
+
+    Returns
+    -------
+    zerob (array_like): Zeros of the transformed digital filter transfer function.
+    polesb (array_like): Poles of the transformed digital filter transfer function.
+    systemb (float) : System gain of the transformed digital filter.
+
+    """
+    zero = atleast_1d(zero)
+    poles = atleast_1d(poles)
+
+    fsr = _valid_g(sr, an=False)
+
+    scale = _relative_scale(zero, poles)
+
+    fsr2 = 2.0 * fsr
+
+    # Bilinear transform the poles and zeros
+    lf = lambda x, y: (x + y) / (x - y)
+    zerob = lf(fsr2, zero)
+    polesb = lf(fsr2, poles)
+
+    # Any zeros that were at infinity get moved to the Nyquist frequency
+    zerob = append(zerob, -ones(scale))
+
+    # Compensate for gain change
+    systemb = system * real(prod(fsr2 - zero) / prod(fsr2 - poles))
+
+    return zerob, polesb, systemb
