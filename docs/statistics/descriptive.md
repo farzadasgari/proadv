@@ -258,3 +258,4 @@ It returns:
 >>> counts
 3
 ```
+q
