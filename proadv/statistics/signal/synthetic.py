@@ -18,13 +18,14 @@ def _random_index(data_size, percent):
     """
 
     randoms = []
-    for i in range(int(data_size * percent)):
+    iteration = 0
+    while iteration < len(range(int(data_size * percent / 100))):
         rn = np.random.randint(0, data_size)  # random number
         if rn in randoms:
-            rn = np.random.randint(0, data_size)
-            randoms.append(rn)
+            continue
         else:
             randoms.append(rn)
+            iteration += 1
     return np.array(sorted(randoms))  # Random Indexes
 
 
@@ -48,11 +49,11 @@ def synthetic_noise(data, percent):
 
     s = np.zeros(data.size)  # Artificial Spike
 
-    for k in range(data.size):
+    for k in range(synthetic_data.size):
         if k % 2 == 0:
-            s[synthetic_data[k]] = (abs(r[k]) + 0.8) * mean(data)
+            s[synthetic_data[k]] = (abs(r[k]) + percent) * mean(data)
         else:
-            s[synthetic_data[k]] = (-abs(r[k]) - 0.8) * mean(data)
+            s[synthetic_data[k]] = (-abs(r[k]) - percent) * mean(data)
 
-    synthetic_polluted_data = data + synthetic_data
+    synthetic_polluted_data = data + s
     return synthetic_polluted_data
