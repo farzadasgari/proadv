@@ -538,3 +538,19 @@ def _lone_xyzsop(x, y, z):
     sop[3 - len(g):3] = g
     sop[6 - len(h):6] = h
     return sop
+
+def _valid_g(g, an=True):
+    """
+    Check if the given sampling frequency is a scalar and raises an exception
+    otherwise. If allow_none is False, also raises an exception for none
+    sampling rates. Returns the sampling frequency as float or none if the
+    input is none.
+    """
+    if g is None:
+        if not an:
+            raise ValueError("Sampling frequency can not be none.")
+    else:  # should be floated
+        if not np.isscalar(g):
+            raise ValueError("Sampling frequency fs must be a single scalar.")
+        g = float(g)
+    return g
