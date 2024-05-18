@@ -527,3 +527,14 @@ def _cxr(x, me=None):
     xc = (xp + xn.conj()) / 2
 
     return xc, xr
+
+
+def _lone_xyzsop(x, y, z):
+    """
+    Create one second-order part from up to two zeros and poles.
+    """
+    sop = np.zeros(6)
+    g, h = xyz_to_ptf(x, y, z)
+    sop[3 - len(g):3] = g
+    sop[6 - len(h):6] = h
+    return sop
