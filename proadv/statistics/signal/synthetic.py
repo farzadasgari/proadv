@@ -9,7 +9,7 @@ def _random_index(data_size, percent):
     Parameters
     ------
     ndata (int): The size of the data.
-    percent (float): The percentage of pollution to generate.
+    percent (float): The percentage of artificial pollution to generate.
 
     Returns
     ------
@@ -29,6 +29,19 @@ def _random_index(data_size, percent):
 
 
 def synthetic_noise(data, percent):
+    """
+    Generate synthetic noisy data based on the input data.
+
+    Parameters
+    ------
+    data (array_like): The original data.
+    percent (float): The percentage of data points to perturb.
+
+    Returns
+    ------
+    synthetic_polluted_data (np.ndarray): Synthetic data with added noise.
+    """
+
     synthetic_data = _random_index(data.size, percent)
 
     r = np.random.normal(0, 0.05, data.size)  # Nosie Vector
