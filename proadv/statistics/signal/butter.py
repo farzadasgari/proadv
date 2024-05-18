@@ -7,3 +7,11 @@ def _relative_scale(z_array, p_array):
         raise ValueError("Improper transfer function. Must have at least as many poles as zeros.")
     else:
         return scale
+
+
+def _catenate(array, fpc):
+    # To join multiple presentations
+
+    catenate_array = np.concatenate((array + sqrt(array ** 2 - fpc ** 2),
+                                     array - sqrt(array ** 2 - fpc ** 2)))
+    return catenate_array
