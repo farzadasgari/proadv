@@ -1,3 +1,8 @@
+import numpy as np
+from numpy import asarray, pi, tan, atleast_1d, sqrt, concatenate, append, full, real, prod, zeros, ones, poly, array
+import numpy
+
+
 def _relative_scale(z_array, p_array):
     """
     Return the relative scale of the transfer function from zero and pole
@@ -10,8 +15,9 @@ def _relative_scale(z_array, p_array):
 
 
 def _catenate(array, fpc):
-    # To join multiple presentations
-
+    """
+     To join multiple presentations.
+    """
     catenate_array = np.concatenate((array + sqrt(array ** 2 - fpc ** 2),
                                      array - sqrt(array ** 2 - fpc ** 2)))
     return catenate_array
@@ -37,6 +43,7 @@ def low_to_stop(zero, poles, system, pc=1.0, pw=1.0):
 
     Examples
     ------
+    >>> from proadv.statistics.signal.butter import low_to_stop
     >>> zero = [6 + 3j, 6 - 3j]
     >>> poles = [8, -20]
     >>> system = 0.5
@@ -72,6 +79,7 @@ def low_to_stop(zero, poles, system, pc=1.0, pw=1.0):
 
     return zerob, polesb, systemb
 
+
 def low_to_band(zero, poles, system, pc=1.0, pw=1.0):
     """
     This function converts a LP(low-pass) filter prototype to a BP(band-pass) filter.
@@ -93,6 +101,7 @@ def low_to_band(zero, poles, system, pc=1.0, pw=1.0):
 
     Examples
     ------
+    >>> from proadv.statistics.signal.butter import low_to_band
     >>> zero = [6 + 3j, 6 - 3j]
     >>> poles = [8, -20]
     >>> system = 0.5
@@ -128,6 +137,7 @@ def low_to_band(zero, poles, system, pc=1.0, pw=1.0):
     systemb = system * fpw ** scale
 
     return zerob, polesb, systemb
+
 
 def low_to_high(zero, poles, system, dc=1.0):
     """
@@ -165,6 +175,7 @@ def low_to_high(zero, poles, system, dc=1.0):
     systemh = system * real(prod(-zero) / prod(-poles))
 
     return zeroh, polesh, systemh
+
 
 def bilinear(zero, poles, system, sr):
     """
@@ -206,6 +217,7 @@ def bilinear(zero, poles, system, sr):
 
     return zerob, polesb, systemb
 
+
 def low_to_low(zero, poles, system, dc=1.0):
     """
     This function converts a LP(low-pass) filter prototype to another frequency.
@@ -225,6 +237,7 @@ def low_to_low(zero, poles, system, dc=1.0):
 
     Examples
     ------
+    >>> from proadv.statistics.signal.butter import low_to_low
     >>> zero = [8, 3]
     >>> poles = [6, 14]
     >>> system = 0.7
@@ -249,6 +262,7 @@ def low_to_low(zero, poles, system, dc=1.0):
 
     return zerol, polesl, systeml
 
+
 def buttap(number):
     """
     Return (x, z, g) for analog prototype of Nth-order Butterworth filter.
@@ -261,6 +275,7 @@ def buttap(number):
     z = -numpy.exp(1j * pi * y / (2 * number))
     g = 1
     return x, z, g
+
 
 def xyz_to_sop(x, y, z, pg=None, *, ag=False):
     """
@@ -410,6 +425,7 @@ def xyz_to_sop(x, y, z, pg=None, *, ag=False):
     sop[0][:3] *= z
     return sop
 
+
 def xyz_to_ptf(x, y, z):
     """
     Parameters
@@ -539,6 +555,7 @@ def _lone_xyzsop(x, y, z):
     sop[6 - len(h):6] = h
     return sop
 
+
 def _valid_g(g, an=True):
     """
     Check if the given sampling frequency is a scalar and raises an exception
@@ -554,3 +571,100 @@ def _valid_g(g, an=True):
             raise ValueError("Sampling frequency fs must be a single scalar.")
         g = float(g)
     return g
+
+
+def butter(q, w, btype='bp', ag=False, output='nd', sr=None):
+    """
+    Butterworth digital and analog filter design.
+
+    Parameters
+    ----------
+    q(int) :The order of the filter.
+    w(array_like): The critical frequency or frequencies.
+    btype(optional): The type of filter.
+        btype types:
+        - lp(lowpass)
+        - hp(highpass)
+        - bp(bandpass)
+        - bs(bandstop)
+    ag(bool, optional): When False, return a digital filter, otherwise return an analog filter.
+    output(str,optional): Specifies the output type of the code.
+        output types:
+        - nd
+        - zps
+        - sop
+    sr(float, optional): The sampling frequency of the digital system.
+
+    Returns
+    -------
+
+    """
+    sr = _valid_g(sr, an=True)
+    btype, output = (x.lower() for x in (btype, output))
+    w = asarray(w)
+    if sr is not None:
+        if ag:
+            raise ValueError("fs cannot be specified for an analog filter")
+        w = 2 * w / sr
+
+    if numpy.any(w <= 0):
+        raise ValueError("filter critical frequencies must be greater than 0")
+
+    if w.size > 1 and not w[0] < w[1]:
+        raise ValueError("w[0] must be less than w[1]")
+
+    if output not in ['nd', 'zps', 'sop']:
+        raise ValueError("'%s' is not a valid output form." % output)
+
+    # Get analog lowpass prototype
+    zero, poles, system = buttap(q)
+
+    # Pre-warp frequencies for digital filter design
+    if not ag:
+        if numpy.any(w <= 0) or numpy.any(w >= 1):
+            if sr is not None:
+                raise ValueError("Digital filter critical frequencies must "
+                                 f"be 0 < w < sr/2 (sr={sr} -> sr/2={sr / 2})")
+            raise ValueError("Digital filter critical frequencies "
+                             "must be 0 < w < 1")
+        sr = 2.0
+        dc = 2 * sr * tan(pi * w / sr)
+    else:
+        dc = w
+
+    # transform to lowpass, bandpass, highpass, or bandstop
+    if btype in ('lp', 'hp'):
+        if numpy.size(w) != 1:
+            raise ValueError('Must specify a single critical frequency w '
+                             'for lowpass or highpass filter')
+
+        if btype == 'lp':
+            zero, poles, system = low_to_low(zero, poles, system, dc=dc)
+        elif btype == 'hp':
+            zero, poles, system = low_to_high(zero, poles, system, dc=dc)
+    elif btype in ('bp', 'bs'):
+        try:
+            pw = dc[1] - dc[0]
+            g = sqrt(dc[0] * dc[1])
+        except IndexError as e:
+            raise ValueError('w must specify start and stop frequencies for '
+                             'bandpass or bandstop filter') from e
+
+        if btype == 'bp':
+            zero, poles, system = low_to_band(zero, poles, system, pc=g, pw=pw)
+        elif btype == 'bs':
+            zero, poles, system = low_to_stop(zero, poles, system, pc=g, pw=pw)
+    else:
+        raise NotImplementedError("'%s' not implemented in iirfilter." % btype)
+
+    # Find discrete equivalent if necessary
+    if not ag:
+        zero, poles, system = bilinear(zero, poles, system, sr=sr)
+
+    # Transform to proper out type (pole-zero, state-space, numer-denom)
+    if output == 'zps':
+        return zero, poles, system
+    elif output == 'nd':
+        return xyz_to_ptf(zero, poles, system)
+    elif output == 'sop':
+        return xyz_to_sop(zero, poles, system, ag=ag)
