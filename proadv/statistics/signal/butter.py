@@ -205,3 +205,46 @@ def bilinear(zero, poles, system, sr):
     systemb = system * real(prod(fsr2 - zero) / prod(fsr2 - poles))
 
     return zerob, polesb, systemb
+
+def low_to_low(zero, poles, system, dc=1.0):
+    """
+    This function converts a LP(low-pass) filter prototype to another frequency.
+
+    Parameters
+    ----------
+    zero (array_like): Zeros of the analog filter transfer function.
+    poles (array_like): Poles of the analog filter transfer function.
+    system (float) : System gain of the analog filter transfer function.
+    dc (float) : Desired cutoff, as angular frequency.
+
+    Returns
+    -------
+    zerol (array_like): Zeros of the transformed LP(low-pass) filter transfer function.
+    polesl (array_like): Poles of the transformed LP(low-pass) filter transfer function.
+    systeml (float) : System gain of the transformed LP(low-pass) filter.
+
+    Examples
+    ------
+    >>> zero = [8, 3]
+    >>> poles = [6, 14]
+    >>> system = 0.7
+    >>> dc = 0.5
+    >>> low_to_low(zero, poles, system, dc)
+    (array([4. , 1.5]), array([3., 7.]), 0.7)
+
+    """
+    zero = atleast_1d(zero)
+    poles = atleast_1d(poles)
+    fdc = float(dc)  # Avoid int wraparound
+
+    scale = _relative_scale(zero, poles)
+
+    # Scale all points radially from origin to shift cutoff frequency
+    zerol = fdc * zero
+    polesl = fdc * poles
+
+    # Each shifted pole decreases gain by wo, each shifted zero increases it.
+    # Cancel out the net change to keep overall gain the same
+    systeml = system * fdc ** scale
+
+    return zerol, polesl, systeml
