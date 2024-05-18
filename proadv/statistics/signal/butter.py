@@ -261,3 +261,151 @@ def buttap(number):
     z = -numpy.exp(1j * pi * y / (2 * number))
     g = 1
     return x, z, g
+
+def xyz_to_sop(x, y, z, pg=None, *, ag=False):
+    """
+    This function returns the second-order parts of the zero, pole, and gain of a system.
+
+    Parameters
+    ----------
+    x (array-like): Zeros of the transfer function.
+    y (array-like): Poles of the transfer function.
+    z (float): System gain.
+    pg: The method to use to combine pairs of poles and zeros into sections.
+        The values it can have:
+        - None(default)
+        - nr(nearest)
+        - kd(keep_odd)
+        - ml(minimal)
+    ag(bool): If False, the system is discrete, otherwise it is analog.
+
+    Returns
+    -------
+    sop(array-like): Array of second-order filter coefficients, with shape (n_parts, 6).
+
+    """
+    if pg is None:
+        pg = 'ml' if ag else 'nr'
+
+    vp = ['nr', 'kd', 'ml']
+    if pg not in vp:
+        raise ValueError(f'pairing must be one of {vp}, not {pg}')
+
+    if ag and pg != 'ml':
+        raise ValueError('for analog xyz_to_sop conversion, '
+                         'pairing must be "ml"')
+
+    if len(x) == len(y) == 0:
+        if not ag:
+            return np.array([[z, 0., 0., 1., 0., 0.]])
+        else:
+            return np.array([[0., 0., z, 0., 0., 1.]])
+
+    if pg != 'ml':
+        # ensure we have the same number of poles and zeros, and make copies
+        y = np.concatenate((y, np.zeros(max(len(x) - len(y), 0))))
+        x = np.concatenate((x, np.zeros(max(len(y) - len(x), 0))))
+        c_parts = (max(len(y), len(x)) + 1) // 2
+
+        if len(y) % 2 == 1 and pg == 'nr':
+            y = np.concatenate((y, [0.]))
+            x = np.concatenate((x, [0.]))
+        assert len(y) == len(x)
+    else:
+        if len(y) < len(x):
+            raise ValueError('for analog xyz_to_sop conversion, '
+                             'must have len(y)>=len(x)')
+
+        c_parts = (len(y) + 1) // 2
+
+    # Ensure we have complex conjugate pairs
+    # (note that _cplxreal only gives us one element of each complex pair):
+    x = np.concatenate(_cxr(x))
+    y = np.concatenate(_cxr(y))
+    if not np.isreal(z):
+        raise ValueError('z must be real')
+    z = z.real
+
+    if not ag:
+        # digital: "worst" is the closest to the unit circle
+        iw = lambda a: np.argmin(np.abs(1 - np.abs(a)))
+    else:
+        # analog: "worst" is the closest to the imaginary axis
+        iw = lambda a: np.argmin(np.abs(np.real(a)))
+
+    sop = np.zeros((c_parts, 6))
+
+    # Construct the system, reversing order so the "worst" are last
+    for ci in range(c_parts - 1, -1, -1):
+        # Select the next "worst" pole
+        y1_i = iw(y)
+        y1 = y[y1_i]
+        y = np.delete(y, y1_i)
+
+        # Pair that pole with a zero
+
+        if np.isreal(y1) and np.isreal(y).sum() == 0:
+            # Special case (1): last remaining real pole
+            if pg != 'ml':
+                x1_i = _closest_real_complex_i(x, y1, 'real')
+                x1 = x[x1_i]
+                x = np.delete(x, x1_i)
+                sop[ci] = _lone_xyzsop([x1, 0], [y1, 0], 1)
+            elif len(x) > 0:
+                x1_i = _closest_real_complex_i(x, y1, 'real')
+                x1 = x[x1_i]
+                x = np.delete(x, x1_i)
+                sop[ci] = _lone_xyzsop([x1], [y1], 1)
+            else:
+                sop[ci] = _lone_xyzsop([], [y1], 1)
+
+        elif (len(y) + 1 == len(x)
+              and not np.isreal(y1)
+              and np.isreal(y).sum() == 1
+              and np.isreal(x).sum() == 1):
+
+            # Special case (2): there's one real pole and one real zero
+            # left, and an equal number of poles and zeros to pair up.
+            # We *must* pair with a complex zero
+
+            x1_i = _closest_real_complex_i(x, y1, 'complex')
+            x1 = x[x1_i]
+            x = np.delete(x, x1_i)
+            sop[ci] = _lone_xyzsop([x1, x1.conj()], [y1, y1.conj()], 1)
+
+        else:
+            if np.isreal(y1):
+                prealidx = np.flatnonzero(np.isreal(y))
+                y2_i = prealidx[iw(y[prealidx])]
+                y2 = y[y2_i]
+                y = np.delete(y, y2_i)
+            else:
+                y2 = y1.conj()
+
+            # find closest zero
+            if len(x) > 0:
+                x1_i = _closest_real_complex_i(x, y1, 'any')
+                x1 = x[x1_i]
+                x = np.delete(x, x1_i)
+
+                if not np.isreal(x1):
+                    sop[ci] = _lone_xyzsop([x1, x1.conj()], [y1, y2], 1)
+                else:
+                    if len(x) > 0:
+                        x2_i = _closest_real_complex_i(x, y1, 'real')
+                        x2 = x[x2_i]
+                        assert np.isreal(x2)
+                        x = np.delete(x, x2_i)
+                        sop[ci] = _lone_xyzsop([x1, x2], [y1, y2], 1)
+                    else:
+                        sop[ci] = _lone_xyzsop([x1], [y1, y2], 1)
+            else:
+                # no more zeros
+                sop[ci] = _lone_xyzsop([], [y1, y2], 1)
+
+    assert len(y) == len(x) == 0  # we've consumed all poles and zeros
+    del y, x
+
+    # put gain in first sop
+    sop[0][:3] *= z
+    return sop
