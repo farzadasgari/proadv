@@ -2,16 +2,30 @@ from proadv.statistics.descriptive import mean
 import numpy as np
 
 
-def _random_index(ndata, percent):
-    r = []
-    for i in range(int(ndata * percent)):
-        rn = np.random.randint(0, ndata)  # random number
-        if rn in r:
-            rn = np.random.randint(0, ndata)
-            r.append(rn)
+def _random_index(data_size, percent):
+    """
+    Generate random indexes based on the percentage of data size.
+
+    Parameters
+    ------
+    ndata (int): The size of the data.
+    percent (float): The percentage of pollution to generate.
+
+    Returns
+    ------
+    randoms (np.ndarray): An array containing randomly selected indexes.
+
+    """
+
+    randoms = []
+    for i in range(int(data_size * percent)):
+        rn = np.random.randint(0, data_size)  # random number
+        if rn in randoms:
+            rn = np.random.randint(0, data_size)
+            randoms.append(rn)
         else:
-            r.append(rn)
-    return np.array(sorted(r))  # Random Indexes
+            randoms.append(rn)
+    return np.array(sorted(randoms))  # Random Indexes
 
 
 def synthetic_noise(data, percent):
