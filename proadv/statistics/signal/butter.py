@@ -248,3 +248,16 @@ def low_to_low(zero, poles, system, dc=1.0):
     systeml = system * fdc ** scale
 
     return zerol, polesl, systeml
+
+def buttap(number):
+    """
+    Return (x, z, g) for analog prototype of Nth-order Butterworth filter.
+    """
+    if np.abs(int(number)) != number:
+        raise ValueError("Filter order must be a nonnegative integer")
+    x = numpy.array([])
+    y = numpy.arange(-number + 1, number, 2)
+    # Middle value is 0 to ensure an exactly real pole
+    z = -numpy.exp(1j * pi * y / (2 * number))
+    g = 1
+    return x, z, g
