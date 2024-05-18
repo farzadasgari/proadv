@@ -1,1 +1,1 @@
-from . import fluid, spectrum
+from . import fluid, spectrum, synthetic
