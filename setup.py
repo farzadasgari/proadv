@@ -47,10 +47,5 @@ setup(
         "Download URL": "https://pypi.org/project/proadv/",
         "Source Code": "https://github.com/farzadasgari/proadv",
         "Documentation": "https://proadv.readthedocs.io/en/latest/",
-        "Bug Tracker": "https://github.com/farzadasgari/proadv/issues",
-        "Changelog": "https://github.com/farzadasgari/proadv/releases",
-        "Support": "mailto:std_farzad.asgari@alumni.khu.ac.ir",
-        "Related Projects": "https://github.com/farzadasgari",
-        "Demo": "https://github.com/farzadasgari/proadv/tree/main/examples"
     },
 )

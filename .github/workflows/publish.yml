@@ -1,4 +1,4 @@
-name: Upload ProADv to PyPI while new Release
+name: Upload ProADV to PyPI while new Release
 
 on:
   release:
