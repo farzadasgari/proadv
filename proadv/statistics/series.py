@@ -364,6 +364,10 @@ def kalman_filter(data, initial_state, initial_covariance, process_noise, measur
     >>> from proadv.statistics.series import kalman_filter  
     >>> import numpy as np
     >>> data = np.random.rand(300)
+    >>> initial_state = np.array([[10]])
+    >>> initial_covariance = np.array([[10]])
+    >>> process_noise = np.array([[0.001]])
+    >>> measurement_noise = np.array([[15]])
     >>> filtered_data = kalman_filter(data, initial_state, initial_covariance, process_noise, measurement_noise)
     """
     filtered_data = []
