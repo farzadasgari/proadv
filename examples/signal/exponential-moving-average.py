@@ -13,7 +13,7 @@ def main():
     # Calculate exponential moving average with a alpha value of 0.08
     exponential_moving_average = adv.statistics.series.exponential_moving_average(main_data, alpha=0.08)
 
-    # Plot main data and simple moving average
+    # Plot main data and exponential moving average
     plt.plot(main_data, color='crimson', label='Main Data')
     plt.plot(exponential_moving_average, color='blue', label='Exponential Moving Average')
     plt.legend(loc='upper right')
