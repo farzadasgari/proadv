@@ -1,5 +1,4 @@
 import proadv as adv
-import numpy as np
 import matplotlib.pyplot as plt
 from pandas import read_csv
 
