@@ -184,17 +184,17 @@ def weighted_moving_average(data, period=20):
 
     if period > data.size:
         raise ValueError("Data array size must be greater than period.")
-    
+
     wma = []
-    
+
     for i in range(period, data.size):
         """
         We obtain weighted moving average by multiplying each number in the data set by a predetermined weight 
             and summing up the resulting values. Finally, the result value is divided to the total weights. 
         """
-        weight = np.arange(1, period+1) # Weight matrix
-        weighted_sum = (weight * data[i - period : i]).sum() / (weight.sum()) # Calculate the weighted moving average
-        wma = np.append(wma, weighted_sum) # Add to array
+        weight = np.arange(1, period + 1)  # Weight matrix
+        weighted_sum = (weight * data[i - period: i]).sum() / (weight.sum())  # Calculate the weighted moving average
+        wma = np.append(wma, weighted_sum)  # Add to array
     return wma
 
 
@@ -364,6 +364,10 @@ def kalman_filter(data, initial_state, initial_covariance, process_noise, measur
     >>> from proadv.statistics.series import kalman_filter  
     >>> import numpy as np
     >>> data = np.random.rand(300)
+    >>> initial_state = np.array([[10]])
+    >>> initial_covariance = np.array([[10]])
+    >>> process_noise = np.array([[0.001]])
+    >>> measurement_noise = np.array([[15]])
     >>> filtered_data = kalman_filter(data, initial_state, initial_covariance, process_noise, measurement_noise)
     """
     filtered_data = []
@@ -371,18 +375,18 @@ def kalman_filter(data, initial_state, initial_covariance, process_noise, measur
     covariance_estimate = initial_covariance
     Q = process_noise
     R = measurement_noise
-    A = np.array([[1]]) # A matrix for Prediction step 
-    H = np.array([[1]]) # A matrix for Measurement update
+    A = np.array([[1]])  # A matrix for Prediction step
+    H = np.array([[1]])  # A matrix for Measurement update
     for measurement in data:
         # Prediction step
         predicted_state = np.dot(A, state_estimate)
         predicted_covariance = np.dot(np.dot(A, covariance_estimate), A.T) + Q
         # Measurement update
-        kalman_gain = np.dot(np.dot(predicted_covariance, H.T) , np.linalg.inv(np.dot(np.dot(H, predicted_covariance), H.T) + R))
+        kalman_gain = np.dot(np.dot(predicted_covariance, H.T),
+                             np.linalg.inv(np.dot(np.dot(H, predicted_covariance), H.T) + R))
         state_estimate = predicted_state + np.dot(kalman_gain, (measurement - np.dot(H, predicted_state)))
         covariance_estimate = np.dot((np.eye(len(state_estimate)) - np.dot(kalman_gain, H)), predicted_covariance)
-                                 
+
         filtered_data.append(state_estimate)
 
     return filtered_data
-    
