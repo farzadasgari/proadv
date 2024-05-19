@@ -1,6 +1,5 @@
 import numpy as np
 from numpy import asarray, pi, tan, atleast_1d, sqrt, concatenate, append, full, real, prod, zeros, ones, poly, array
-import numpy
 
 
 def _relative_scale(z_array, p_array):
@@ -269,10 +268,10 @@ def buttap(number):
     """
     if np.abs(int(number)) != number:
         raise ValueError("Filter order must be a nonnegative integer")
-    x = numpy.array([])
-    y = numpy.arange(-number + 1, number, 2)
+    x = np.array([])
+    y = np.arange(-number + 1, number, 2)
     # Middle value is 0 to ensure an exactly real pole
-    z = -numpy.exp(1j * pi * y / (2 * number))
+    z = -np.exp(1j * pi * y / (2 * number))
     g = 1
     return x, z, g
 
@@ -452,24 +451,24 @@ def xyz_to_ptf(x, y, z):
         g = z * poly(x)
     h = atleast_1d(poly(y))
 
-    if issubclass(g.dtype.type, numpy.complexfloating):
+    if issubclass(g.dtype.type, np.complexfloating):
         # if complex roots are all complex conjugates, the roots are real.
-        r = numpy.asarray(x, complex)
-        pr = numpy.compress(r.imag > 0, r)
-        nr = numpy.conjugate(numpy.compress(r.imag < 0, r))
+        r = np.asarray(x, complex)
+        pr = np.compress(r.imag > 0, r)
+        nr = np.conjugate(np.compress(r.imag < 0, r))
         if len(pr) == len(nr):
-            if numpy.all(numpy.sort_complex(nr) ==
-                         numpy.sort_complex(pr)):
+            if np.all(np.sort_complex(nr) ==
+                         np.sort_complex(pr)):
                 g = g.real.copy()
 
-    if issubclass(h.dtype.type, numpy.complexfloating):
+    if issubclass(h.dtype.type, np.complexfloating):
         # if complex roots are all complex conjugates, the roots are real.
-        r = numpy.asarray(y, complex)
-        pr = numpy.compress(r.imag > 0, r)
-        nr = numpy.conjugate(numpy.compress(r.imag < 0, r))
+        r = np.asarray(y, complex)
+        pr = np.compress(r.imag > 0, r)
+        nr = np.conjugate(np.compress(r.imag < 0, r))
         if len(pr) == len(nr):
-            if numpy.all(numpy.sort_complex(nr) ==
-                         numpy.sort_complex(pr)):
+            if np.all(np.sort_complex(nr) ==
+                         np.sort_complex(pr)):
                 h = h.real.copy()
 
     return g, h
@@ -523,9 +522,9 @@ def _cxr(x, me=None):
 
     # Find runs of (approximately) the same real part
     sr = np.diff(xp.real) <= me * abs(xp[:-1])
-    variety = numpy.diff(concatenate(([0], sr, [0])))
-    rst = numpy.nonzero(variety > 0)[0]
-    rss = numpy.nonzero(variety < 0)[0]
+    variety = np.diff(concatenate(([0], sr, [0])))
+    rst = np.nonzero(variety > 0)[0]
+    rss = np.nonzero(variety < 0)[0]
 
     # Sort each run by their imaginary parts
     for i in range(np.array(rst).shape[0]):
@@ -607,7 +606,7 @@ def butter(q, w, btype='bp', ag=False, output='nd', sr=None):
             raise ValueError("fs cannot be specified for an analog filter")
         w = 2 * w / sr
 
-    if numpy.any(w <= 0):
+    if np.any(w <= 0):
         raise ValueError("filter critical frequencies must be greater than 0")
 
     if w.size > 1 and not w[0] < w[1]:
@@ -621,7 +620,7 @@ def butter(q, w, btype='bp', ag=False, output='nd', sr=None):
 
     # Pre-warp frequencies for digital filter design
     if not ag:
-        if numpy.any(w <= 0) or numpy.any(w >= 1):
+        if np.any(w <= 0) or np.any(w >= 1):
             if sr is not None:
                 raise ValueError("Digital filter critical frequencies must "
                                  f"be 0 < w < sr/2 (sr={sr} -> sr/2={sr / 2})")
@@ -634,7 +633,7 @@ def butter(q, w, btype='bp', ag=False, output='nd', sr=None):
 
     # transform to lowpass, bandpass, highpass, or bandstop
     if btype in ('lp', 'hp'):
-        if numpy.size(w) != 1:
+        if np.size(w) != 1:
             raise ValueError('Must specify a single critical frequency w '
                              'for lowpass or highpass filter')
 
