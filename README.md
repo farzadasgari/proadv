@@ -57,6 +57,11 @@
     * **Normality Test:** Evaluates whether your data follows a normal distribution.
     * **Normalization:** Scales data to a common range for further analysis or visualization.
 
+<div>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/singular-spectrum.png" alt="singular-spectrum" style="width:300px;"/>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/kalman.png" alt="kalman-filter" style="width:300px;"/>
+</div>
+
 ### Installation
 
 There are two convenient ways to install ProADV:
@@ -110,6 +115,7 @@ For further information and in-depth understanding of the algorithms employed in
 For any inquiries, please contact:
 - std_farzad.asgari@alumni.khu.ac.ir
 - khufarzadasgari@gmail.com
+
 
 ### Links
 
