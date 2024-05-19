@@ -1,4 +1,4 @@
-# ProADV
+# ProADV - Process Acoustic Doppler Velocimeter
 
 [![GitHub stars](https://img.shields.io/github/stars/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/network)
@@ -33,6 +33,14 @@
         * **LI (Linear Interpolation):** Uses linear interpolation between surrounding points to estimate the missing value.
         * **12PP (12 Points Cubic Polynomial):** Employs a 12-point cubic polynomial to fit a smoother curve and replace spikes.
 
+
+<div>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/trivariate-kernel.png" alt="trivariate-kernel" style="width:300px;"/>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/spectrum.png" alt="trivariate-kernel" style="width:300px;"/>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/phase-space.png" alt="trivariate-kernel" style="width:300px;"/>
+</div>
+
+
 * **Statistical Analysis:** ProADV equips you with essential statistical tools to characterize your ADV data:
     * **Minimum, Maximum:** Provides the range of measured velocities.
     * **Mean, Median, Mode:** Calculates central tendency measures.
@@ -49,9 +57,14 @@
     * **Normality Test:** Evaluates whether your data follows a normal distribution.
     * **Normalization:** Scales data to a common range for further analysis or visualization.
 
+<div>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/singular-spectrum.png" alt="singular-spectrum" style="width:300px;"/>
+   <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/kalman.png" alt="kalman-filter" style="width:300px;"/>
+</div>
+
 ### Installation
 
-There are three convenient ways to install ProADV:
+There are two convenient ways to install ProADV:
 
 1. **Using pip (recommended):**
    ```bash
@@ -94,6 +107,7 @@ For further information and in-depth understanding of the algorithms employed in
 
 ### Acknowledgment
 - This project was developed under the supervision of **[Dr. Seyed Hossein Mohaeri](https://khu.ac.ir/cv/1139/Seyed-Hossein-Mohajeri)** and **[Dr. Mojtaba Mehraein](https://khu.ac.ir/cv/279/Mojtaba-Mehraein)**.
+- We extend our deepest gratitude to **[Dr. Bimlesh Kumar](https://www.researchgate.net/profile/Bimlesh-Kumar)** and **[Dr. Luis Cea](https://www.researchgate.net/profile/Luis-Cea)** for their invaluable guidance and unwavering support throughout our journey.
 - Special thanks to [Parvaneh Yaghoubi](https://github.com/parvanehyaghoubi), [Hossein Abazari](https://github.com/HossA12), [Narges Yaghoubi](https://github.com/nargesyaghoubi), [Mojtaba Karimi](https://github.com/mojikarimi), and [Hiva Yarandi](https://github.com/Hivayrn) for their valuable contributions to this project.
 
 
@@ -101,6 +115,7 @@ For further information and in-depth understanding of the algorithms employed in
 For any inquiries, please contact:
 - std_farzad.asgari@alumni.khu.ac.ir
 - khufarzadasgari@gmail.com
+
 
 ### Links
 
