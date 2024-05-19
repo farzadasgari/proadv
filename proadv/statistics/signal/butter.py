@@ -1,12 +1,11 @@
 import numpy as np
-from numpy import asarray, pi, tan, atleast_1d, sqrt, concatenate, append, full, real, prod, zeros, ones, poly, array
 
 
-def _relative_scale(z_array, p_array):
+def _relative_scale(zero, poles):
     """
     Return the relative scale of the transfer function from zero and pole
     """
-    scale = np.copy(p_array).shape[0] - np.copy(z_array).shape[0]
+    scale = np.copy(poles).shape[0] - np.copy(zero).shape[0]
     if scale < 0:
         raise ValueError("Improper transfer function. Must have at least as many poles as zeros.")
     else:
@@ -17,8 +16,8 @@ def _catenate(array, fpc):
     """
      To join multiple presentations.
     """
-    catenate_array = np.concatenate((array + sqrt(array ** 2 - fpc ** 2),
-                                     array - sqrt(array ** 2 - fpc ** 2)))
+    catenate_array = np.concatenate((array + np.sqrt(array ** 2 - fpc ** 2),
+                                     array - np.sqrt(array ** 2 - fpc ** 2)))
     return catenate_array
 
 
@@ -28,17 +27,17 @@ def low_to_stop(zero, poles, system, pc=1.0, pw=1.0):
 
     Parameters
     ------
-    zero (array_like) : Zeros of the analog filter transfer function.
-    poles (array_like) : Poles of the analog filter transfer function.
-    system (float) : System gain of the analog filter transfer function.
-    pc (float) : Desired stopband center, as angular frequency.
-    pw (float) : Desired stopband width, as angular frequency.
+    zero (array_like): Zeros of the analog filter transfer function.
+    poles (array_like): Poles of the analog filter transfer function.
+    system (float): System gain of the analog filter transfer function.
+    pc (float): Desired stopband center, as angular frequency.
+    pw (float): Desired stopband width, as angular frequency.
 
     Returns
     ------
     zerob (array_like): Zeros of the transformed BS(band-stop) filter transfer function.
     polesb (array_like): Poles of the transformed BS(band-stop) filter transfer function.
-    systemb (float) : System gain of the transformed BS(band-stop) filter.
+    systemb (float): System gain of the transformed BS(band-stop) filter.
 
     Examples
     ------
@@ -54,8 +53,8 @@ def low_to_stop(zero, poles, system, pc=1.0, pw=1.0):
             0.17877805+0.j        , -0.35      +0.39799497j]), -0.140625)
 
     """
-    zero = atleast_1d(zero)
-    poles = atleast_1d(poles)
+    zero = np.atleast_1d(zero)
+    poles = np.atleast_1d(poles)
     fpc = float(pc)
     fpw = float(pw)
 
@@ -71,10 +70,10 @@ def low_to_stop(zero, poles, system, pc=1.0, pw=1.0):
     zerob = _catenate(zerol, fpc)
     polesb = _catenate(polesl, fpc)
 
-    zerob = append(zerob, full(scale, +1j * fpc))
-    zerob = append(zerob, full(scale, -1j * fpc))
+    zerob = np.append(zerob, np.full(scale, +1j * fpc))
+    zerob = np.append(zerob, np.full(scale, -1j * fpc))
 
-    systemb = system * real(prod(-zero) / prod(-poles))
+    systemb = system * np.real(np.prod(-zero) / np.prod(-poles))
 
     return zerob, polesb, systemb
 
@@ -85,17 +84,17 @@ def low_to_band(zero, poles, system, pc=1.0, pw=1.0):
 
     Parameters
     ------
-    zero (array_like) : Zeros of the analog filter transfer function.
-    poles (array_like) : Poles of the analog filter transfer function.
-    system (float) : System gain of the analog filter transfer function.
-    pc (float) : Desired passband center, as angular frequency.
-    pw (float) : Desired passband width, as angular frequency.
+    zero (array_like): Zeros of the analog filter transfer function.
+    poles (array_like): Poles of the analog filter transfer function.
+    system (float): System gain of the analog filter transfer function.
+    pc (float): Desired passband center, as angular frequency.
+    pw (float): Desired passband width, as angular frequency.
 
     Returns
 
     zerob (array_like): Zeros of the transformed BP(band-pass) filter transfer function.
     polesb (array_like): Poles of the transformed BP(band-pass) filter transfer function.
-    systemb (float) : System gain of the transformed BP(band-pass) filter.
+    systemb (float): System gain of the transformed BP(band-pass) filter.
     ------
 
     Examples
@@ -111,8 +110,8 @@ def low_to_band(zero, poles, system, pc=1.0, pw=1.0):
            2.67525513e-03-1.33771277e-03j, 2.67525513e-03+1.33771277e-03j]), array([ 1.11997492e+02+0.j, -1.00321788e-03+0.j,  2.50809188e-03+0.j,
            -2.79998997e+02+0.j]), 0.5)
     """
-    zero = atleast_1d(zero)
-    poles = atleast_1d(poles)
+    zero = np.atleast_1d(zero)
+    poles = np.atleast_1d(poles)
     fpc = float(pc)
     fpw = float(pw)
 
@@ -130,7 +129,7 @@ def low_to_band(zero, poles, system, pc=1.0, pw=1.0):
     zerob = _catenate(zerol, fpc)
     polesb = _catenate(polesl, fpc)
 
-    zerob = append(zerob, zeros(scale))
+    zerob = np.append(zerob, np.zeros(scale))
 
     # Cancel out gain change from frequency scaling
     systemb = system * fpw ** scale
@@ -144,20 +143,20 @@ def low_to_high(zero, poles, system, dc=1.0):
 
     Parameters
     ------
-    zero (array_like) : Zeros of the analog filter transfer function.
-    poles (array_like) : Poles of the analog filter transfer function.
-    system (float) : System gain of the analog filter transfer function.
-    dc (float) : Desired cutoff, as angular frequency.
+    zero (array_like): Zeros of the analog filter transfer function.
+    poles (array_like): Poles of the analog filter transfer function.
+    system (float): System gain of the analog filter transfer function.
+    dc (float): Desired cutoff, as angular frequency.
 
     Returns
     ------
     zeroh (array_like): Zeros of the transformed LP(low-pass) filter transfer function.
     polesh (array_like): Poles of the transformed LP(low-pass) filter transfer function.
-    systemh (float) : System gain of the transformed LP(low-pass) filter.
+    systemh (float): System gain of the transformed LP(low-pass) filter.
 
     """
-    zero = atleast_1d(zero)
-    poles = atleast_1d(poles)
+    zero = np.atleast_1d(zero)
+    poles = np.atleast_1d(poles)
     fdc = float(dc)
 
     scale = _relative_scale(zero, poles)
@@ -168,10 +167,10 @@ def low_to_high(zero, poles, system, dc=1.0):
     polesh = fdc / poles
 
     # If lowpass had zeros at infinity, inverting moves them to origin.
-    zeroh = append(zeroh, zeros(scale))
+    zeroh = np.append(zeroh, np.zeros(scale))
 
     # Cancel out gain change caused by inversion
-    systemh = system * real(prod(-zero) / prod(-poles))
+    systemh = system * np.real(np.prod(-zero) / np.prod(-poles))
 
     return zeroh, polesh, systemh
 
@@ -184,18 +183,18 @@ def bilinear(zero, poles, system, sr):
     ----------
     zero (array_like): Zeros of the analog filter transfer function.
     poles (array_like): Poles of the analog filter transfer function.
-    system (float) : System gain of the analog filter transfer function.
-    sr (float) : Sample rate, as ordinary frequency.
+    system (float): System gain of the analog filter transfer function.
+    sr (float): Sample rate, as ordinary frequency.
 
     Returns
     -------
     zerob (array_like): Zeros of the transformed digital filter transfer function.
     polesb (array_like): Poles of the transformed digital filter transfer function.
-    systemb (float) : System gain of the transformed digital filter.
+    systemb (float): System gain of the transformed digital filter.
 
     """
-    zero = atleast_1d(zero)
-    poles = atleast_1d(poles)
+    zero = np.atleast_1d(zero)
+    poles = np.atleast_1d(poles)
 
     fsr = _valid_g(sr, an=False)
 
@@ -209,10 +208,10 @@ def bilinear(zero, poles, system, sr):
     polesb = lf(fsr2, poles)
 
     # Any zeros that were at infinity get moved to the Nyquist frequency
-    zerob = append(zerob, -ones(scale))
+    zerob = np.append(zerob, -np.ones(scale))
 
     # Compensate for gain change
-    systemb = system * real(prod(fsr2 - zero) / prod(fsr2 - poles))
+    systemb = system * np.real(np.prod(fsr2 - zero) / np.prod(fsr2 - poles))
 
     return zerob, polesb, systemb
 
@@ -225,14 +224,14 @@ def low_to_low(zero, poles, system, dc=1.0):
     ----------
     zero (array_like): Zeros of the analog filter transfer function.
     poles (array_like): Poles of the analog filter transfer function.
-    system (float) : System gain of the analog filter transfer function.
-    dc (float) : Desired cutoff, as angular frequency.
+    system (float): System gain of the analog filter transfer function.
+    dc (float): Desired cutoff, as angular frequency.
 
     Returns
     -------
     zerol (array_like): Zeros of the transformed LP(low-pass) filter transfer function.
     polesl (array_like): Poles of the transformed LP(low-pass) filter transfer function.
-    systeml (float) : System gain of the transformed LP(low-pass) filter.
+    systeml (float): System gain of the transformed LP(low-pass) filter.
 
     Examples
     ------
@@ -245,8 +244,8 @@ def low_to_low(zero, poles, system, dc=1.0):
     (array([4. , 1.5]), array([3., 7.]), 0.7)
 
     """
-    zero = atleast_1d(zero)
-    poles = atleast_1d(poles)
+    zero = np.atleast_1d(zero)
+    poles = np.atleast_1d(poles)
     fdc = float(dc)  # Avoid int wraparound
 
     scale = _relative_scale(zero, poles)
@@ -271,7 +270,7 @@ def buttap(number):
     x = np.array([])
     y = np.arange(-number + 1, number, 2)
     # Middle value is 0 to ensure an exactly real pole
-    z = -np.exp(1j * pi * y / (2 * number))
+    z = -np.exp(1j * np.pi * y / (2 * number))
     g = 1
     return x, z, g
 
@@ -438,18 +437,18 @@ def xyz_to_ptf(x, y, z):
     g(array_like): Numerator polynomial coefficients.
     h(array_like): Denominator polynomial coefficients.
     """
-    x = atleast_1d(x)
-    z = atleast_1d(z)
+    x = np.atleast_1d(x)
+    z = np.atleast_1d(z)
     if len(x.shape) > 1:
-        temporary = poly(x[0])
+        temporary = np.poly(x[0])
         g = np.empty((x.shape[0], x.shape[1] + 1), temporary.dtype.char)
         if len(z) == 1:
             z = [z[0]] * x.shape[0]
         for i in range(x.shape[0]):
-            g[i] = z[i] * poly(x[i])
+            g[i] = z[i] * np.poly(x[i])
     else:
-        g = z * poly(x)
-    h = atleast_1d(poly(y))
+        g = z * np.poly(x)
+    h = np.atleast_1d(np.poly(y))
 
     if issubclass(g.dtype.type, np.complexfloating):
         # if complex roots are all complex conjugates, the roots are real.
@@ -458,7 +457,7 @@ def xyz_to_ptf(x, y, z):
         nr = np.conjugate(np.compress(r.imag < 0, r))
         if len(pr) == len(nr):
             if np.all(np.sort_complex(nr) ==
-                         np.sort_complex(pr)):
+                      np.sort_complex(pr)):
                 g = g.real.copy()
 
     if issubclass(h.dtype.type, np.complexfloating):
@@ -468,7 +467,7 @@ def xyz_to_ptf(x, y, z):
         nr = np.conjugate(np.compress(r.imag < 0, r))
         if len(pr) == len(nr):
             if np.all(np.sort_complex(nr) ==
-                         np.sort_complex(pr)):
+                      np.sort_complex(pr)):
                 h = h.real.copy()
 
     return g, h
@@ -490,7 +489,7 @@ def _closest_real_complex_i(x, y, z):
 
 
 def _cxr(x, me=None):
-    x = atleast_1d(x)
+    x = np.atleast_1d(x)
     if x.size == 0:
         return x, x
     elif x.ndim != 1:
@@ -509,7 +508,7 @@ def _cxr(x, me=None):
 
     if np.array(xr).shape[0] == np.array(x).shape[0]:
         # Input is entirely real
-        return array([]), xr
+        return np.array([]), xr
 
     # Split positive and negative halves of conjugates
     x = x[~ri]
@@ -522,7 +521,7 @@ def _cxr(x, me=None):
 
     # Find runs of (approximately) the same real part
     sr = np.diff(xp.real) <= me * abs(xp[:-1])
-    variety = np.diff(concatenate(([0], sr, [0])))
+    variety = np.diff(np.concatenate(([0], sr, [0])))
     rst = np.nonzero(variety > 0)[0]
     rss = np.nonzero(variety < 0)[0]
 
@@ -572,7 +571,7 @@ def _valid_g(g, an=True):
     return g
 
 
-def butter(q, w, btype='bp', ag=False, output='nd', sr=None):
+def butterworth(q, w, btype='bp', ag=False, output='nd', sr=None):
     """
     Butterworth digital and analog filter design.
 
@@ -600,7 +599,7 @@ def butter(q, w, btype='bp', ag=False, output='nd', sr=None):
     """
     sr = _valid_g(sr, an=True)
     btype, output = (x.lower() for x in (btype, output))
-    w = asarray(w)
+    w = np.asarray(w)
     if sr is not None:
         if ag:
             raise ValueError("fs cannot be specified for an analog filter")
@@ -627,7 +626,7 @@ def butter(q, w, btype='bp', ag=False, output='nd', sr=None):
             raise ValueError("Digital filter critical frequencies "
                              "must be 0 < w < 1")
         sr = 2.0
-        dc = 2 * sr * tan(pi * w / sr)
+        dc = 2 * sr * np.tan(np.pi * w / sr)
     else:
         dc = w
 
@@ -644,7 +643,7 @@ def butter(q, w, btype='bp', ag=False, output='nd', sr=None):
     elif btype in ('bp', 'bs'):
         try:
             pw = dc[1] - dc[0]
-            g = sqrt(dc[0] * dc[1])
+            g = np.sqrt(dc[0] * dc[1])
         except IndexError as e:
             raise ValueError('w must specify start and stop frequencies for '
                              'bandpass or bandstop filter') from e
