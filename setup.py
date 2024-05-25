@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 # Setting up
 setup(
     name="proadv",
-    version="2.1.2",
+    version="2.1.3",
     author="Farzad Asgari",
     author_email="std_farzad.asgari@alumni.khu.ac.ir",
     description="Process Acoustic Doppler Velocimeter data with advanced despiking and analysis tools",
@@ -46,6 +46,6 @@ setup(
     project_urls={
         "Download URL": "https://pypi.org/project/proadv/",
         "Source Code": "https://github.com/farzadasgari/proadv",
-        "Documentation": "https://proadv.readthedocs.io/en/latest/",
+        "Documentation": "https://proadv.readthedocs.io/en/stable/",
     },
 )
