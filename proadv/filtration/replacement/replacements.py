@@ -2,6 +2,8 @@ import numpy as np
 from proadv.statistics.descriptive import mean
 from scipy.interpolate import interp1d
 
+from proadv.statistics.series import moving_average
+
 
 def last_valid_data(velocities, spike_indices):
     """
@@ -174,10 +176,39 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
         # Check if index is near the boundaries
         if i <= 30 or i >= (len(velocities) - 30):
             # Use linear interpolation near the boundaries
-            modified_data[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2, 4)
+            modified_data[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2,
+                                         4)
         else:
             # Use cubic polynomial interpolation
             yint = np.delete(np.append(velocities[i - 13:i], modified_data[i:][~np.isnan(modified_data[i:])][0:12]), 12)
             f = interp1d(x, yint, 3)
             modified_data[i] = f(13)
     return np.around(modified_data, decimals=decimals)
+
+
+def simple_movingaverage(velocities, spike_indices, window_size=20):
+    """
+        Parameters
+        ------
+            velocities (array_like): Array of velocity data.
+                An array-like object containing velocity values.
+            spike_indices (array_like): Indices of spikes.
+                An array-like object containing the indices of detected spikes.
+            window_size (int, optional): The size of the window for the moving average.
+               Defaults to 20. Must be less than or equal to the size of the data array.
+
+        Returns
+        ------
+            modified_data (array_like): Modified data with spikes replaced by simple_movingaverage of
+                velocity component.
+               An array containing the modified data.
+    """
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use moving_average function
+    sma = moving_average(modified_data, window_size)
+
+    # Replace values at spikes indices with the simple_movingaverage values.
+    modified_data[spike_indices] = sma[spike_indices]
+    return modified_data
