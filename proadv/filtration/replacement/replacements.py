@@ -2,7 +2,8 @@ import numpy as np
 from proadv.statistics.descriptive import mean
 from scipy.interpolate import interp1d
 
-from proadv.statistics.series import moving_average, exponential_moving_average, weighted_moving_average, ssa
+from proadv.statistics.series import moving_average, exponential_moving_average, weighted_moving_average, ssa, \
+    kalman_filter
 
 
 def last_valid_data(velocities, spike_indices):
@@ -296,4 +297,34 @@ def ssa_(velocities, spike_indices, fs, f):
 
     # Replace values at spikes indices with the ssa values.
     modified_data[spike_indices] = xf[spike_indices]
+    return modified_data
+
+
+def kalman__filter(velocities, spike_indices, initial_state, initial_covariance, process_noise, measurement_noise):
+    """
+        parameters
+                ------
+                    velocities (array_like): Array of velocity data.
+                        An array-like object containing velocity values.
+                    spike_indices (array_like): Indices of spikes.
+                        An array-like object containing the indices of detected spikes.
+                    initial_state (array_like): An initial estimate for the state variable.
+                    initial_covariance (array_like): An initial estimate for the covariance.
+                    process_noise (array_like): Process noise that occurs in the process of changing a state variable.
+                    measurement_noise (array_like): Measurement noise present in the input data.
+                Returns
+                ------
+                    modified_data (array_like): Modified data with spikes replaced by kalman_filter
+                       of velocity component.
+                       An array containing the modified data.
+    """
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use kalman_filter function
+    filtered_data = kalman_filter(modified_data, initial_state, initial_covariance, process_noise, measurement_noise)
+
+    # Replace values at spikes indices with the ssa values.
+    modified_data[spike_indices] = filtered_data[spike_indices]
     return modified_data
