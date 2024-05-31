@@ -2,7 +2,7 @@ import numpy as np
 from proadv.statistics.descriptive import mean
 from scipy.interpolate import interp1d
 
-from proadv.statistics.series import moving_average, exponential_moving_average
+from proadv.statistics.series import moving_average, exponential_moving_average, weighted_moving_average
 
 
 def last_valid_data(velocities, spike_indices):
@@ -240,4 +240,32 @@ def expo_moving_average(velocities, spike_indices, alpha=0.2):
 
     # Replace values at spikes indices with the exponential_moving_average values.
     modified_data[spike_indices] = ema[spike_indices]
+    return modified_data
+
+
+def weighted_movingaverage(velocities, spike_indices, period=20):
+    """
+                Parameters
+                ------
+                    velocities (array_like): Array of velocity data.
+                        An array-like object containing velocity values.
+                    spike_indices (array_like): Indices of spikes.
+                        An array-like object containing the indices of detected spikes.
+                    period (int, optional): The period for the weighted moving average. Defaults to 20.
+                       Must be less than or equal to the size of the data array.
+                Returns
+                ------
+                    modified_data (array_like): Modified data with spikes replaced by weighted_moving_average
+                       of velocity component.
+                       An array containing the modified data.
+            """
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use weighted_moving_average function
+    wma = weighted_moving_average(modified_data, period)
+
+    # Replace values at spikes indices with the weighted_moving_average values.
+    modified_data[spike_indices] = wma[spike_indices]
     return modified_data
