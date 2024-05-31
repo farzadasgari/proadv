@@ -1,7 +1,7 @@
 import numpy as np
 from proadv.statistics.descriptive import mean
 from scipy.interpolate import interp1d
-from proadv.statistics.series import moving_average
+from proadv.statistics.series import moving_average, exponential_moving_average
 
 
 def last_valid_data(velocities, spike_indices):
@@ -196,7 +196,8 @@ def simple_movingaverage(velocities, spike_indices, window_size=20):
 
         Returns
         ------
-            modified_data (array_like): Modified data with spikes replaced by simple_movingaverage of velocity component.
+            modified_data (array_like): Modified data with spikes replaced by simple_movingaverage of
+                velocity component.
                An array containing the modified data.
     """
     # Create a copy of the original data
@@ -207,4 +208,33 @@ def simple_movingaverage(velocities, spike_indices, window_size=20):
 
     # Replace values at spikes indices with the simple_movingaverage values.
     modified_data[spike_indices] = sma[spike_indices]
+    return modified_data
+
+
+def expo_moving_average(velocities, spike_indices, alpha=0.2):
+    """
+            Parameters
+            ------
+                velocities (array_like): Array of velocity data.
+                    An array-like object containing velocity values.
+                spike_indices (array_like): Indices of spikes.
+                    An array-like object containing the indices of detected spikes.
+                alpha (float, optional): Smoothing factor between 0 and 1.
+                    Higher alpha discounts older observations faster. Default is 0.2.
+
+            Returns
+            ------
+                modified_data (array_like): Modified data with spikes replaced by exponential_moving_average
+                   of velocity component.
+                   An array containing the modified data.
+        """
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use exponential_moving_average function
+    ema = exponential_moving_average(modified_data, alpha)
+
+    # Replace values at spikes indices with the exponential_moving_average values.
+    modified_data[spike_indices] = ema[spike_indices]
     return modified_data
