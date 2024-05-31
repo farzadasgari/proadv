@@ -2,7 +2,7 @@ import numpy as np
 from proadv.statistics.descriptive import mean
 from scipy.interpolate import interp1d
 
-from proadv.statistics.series import moving_average, exponential_moving_average, weighted_moving_average
+from proadv.statistics.series import moving_average, exponential_moving_average, weighted_moving_average, ssa
 
 
 def last_valid_data(velocities, spike_indices):
@@ -268,4 +268,32 @@ def weighted_movingaverage(velocities, spike_indices, period=20):
 
     # Replace values at spikes indices with the weighted_moving_average values.
     modified_data[spike_indices] = wma[spike_indices]
+    return modified_data
+
+
+def ssa_(velocities, spike_indices, fs, f):
+    """
+        parameters
+                ------
+                    velocities (array_like): Array of velocity data.
+                        An array-like object containing velocity values.
+                    spike_indices (array_like): Indices of spikes.
+                        An array-like object containing the indices of detected spikes.
+                    fs (float/int): Sampling frequency of the signal.
+                    f (float/int): maximum frequency of the signal of interest.
+                Returns
+                ------
+                    modified_data (array_like): Modified data with spikes replaced by ssa
+                       of velocity component.
+                       An array containing the modified data.
+    """
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use ssa function
+    xf = ssa(modified_data, fs, f)
+
+    # Replace values at spikes indices with the ssa values.
+    modified_data[spike_indices] = xf[spike_indices]
     return modified_data
