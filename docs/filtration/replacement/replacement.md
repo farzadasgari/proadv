@@ -24,7 +24,7 @@ This function has two parameters:
 
 ## LI (Linear Interpolation)
 
-This function identifies spikes in the velocity data and replaces them with `linearly interpolated values` based on the nearest valid data points before and after each spike. 
+This function replaces detected spikes with `linearly interpolated values` based on the nearest valid data points before and after each spike. 
 If a spike occurs at the end of the data, it is replaced with the mean of the entire dataset. 
 The function is robust to handle individual spikes as well as sequences of consecutive spikes.
 
@@ -73,3 +73,44 @@ This function has three parameters:
 - This function uses cubic polynomial interpolation to estimate missing data points based on neighboring values.
 - If a missing data point (spike) occurs near the boundaries of the velocities array, linear interpolation is used instead of cubic polynomial interpolation.
 - The input velocities array is modified in-place to replace missing data points with interpolated values.
+
+
+## Simple Moving Average
+
+Replace spike values in velocities array with the `Moving Average` of main data. 
+It returns modified data with spikes replaced by moving average of main data. An array containing the modified data.
+
+This function has three parameters:
+1. **velocities (array_like)**: Array of velocity data. An array-like object containing velocity values.
+2. **spike_indices (array_like)**: Indices of spikes. An array-like object containing the indices of detected spikes.
+3. **window_size (int, optional)**: The size of the window for the moving average. This is a desired value. Defaults to 20. Must be less than or equal to the         size of the data array. If the window size is larger than the size of the data array, it raises a ValueError.
+
+
+## Exponential Moving Average
+
+This function replaces the spike values in velocities array with the `Exponential Moving Average` values of the main data.
+It returns modified data with spikes replaced by exponential moving average of main data. An array containing the modified data.
+
+This function has three parameters:
+1. **velocities (array_like)**: Array of velocity data. An array-like object containing velocity values.
+2. **spike_indices (array_like)**: Indices of spikes. An array-like object containing the indices of detected spikes.
+3. **alpha (float, optional)**: Smoothing factor between 0 and 1. Higher alpha discounts older observations faster. Default is 0.2. If alpha is not between 0        and 1 (inclusive), It raises a ValueError.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
