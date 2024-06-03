@@ -328,8 +328,7 @@ Measurement 117 (2018): 339-346.](https://doi.org/10.1016/j.measurement.2017.12.
 
 ## Kalman
 
-Oceanic turbulence measurements made by an acoustic Doppler velocimeter (ADV) suffer from noise that potentially 
-affects the estimates of turbulence statistics. This function examines the abilities of `Kalman Filtering` model to 
+This function examines the abilities of `Kalman Filtering` model to 
 eliminate noise in ADV velocity datasets of laboratory experiments and offshore observations. 
 
 The `Kalman Filter` is an algorithm that tracks an optimal estimate of the state of a stochastic dynamical system, 
