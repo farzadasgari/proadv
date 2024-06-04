@@ -209,7 +209,7 @@ def simple_moving_average(velocities, spike_indices, window_size=20):
     # Use moving_average function
     sma = ma(modified_data, window_size)
 
-    # Replace values at spikes indices with the simple_moving_average values.
+    # Replace values at spikes indices with the simple_moving_average values
     modified_data[spike_indices] = sma[spike_indices]
     return modified_data
 
@@ -239,12 +239,12 @@ def exponential_moving_average(velocities, spike_indices, alpha=0.2):
     # Use exponential_moving_average function
     ema = expo(modified_data, alpha)
 
-    # Replace values at spikes indices with the exponential_moving_average values.
+    # Replace values at spikes indices with the exponential_moving_average values
     modified_data[spike_indices] = ema[spike_indices]
     return modified_data
 
 
-def weighted_movingaverage(velocities, spike_indices, period=20):
+def weighted_moving_average(velocities, spike_indices, period=20):
     """
     Parameters
     ------
@@ -269,7 +269,7 @@ def weighted_movingaverage(velocities, spike_indices, period=20):
     # Use weighted_moving_average function
     wma = wm(modified_data, period)
 
-    # Replace values at spikes indices with the weighted_moving_average values.
+    # Replace values at spikes indices with the weighted_moving_average values
     modified_data[spike_indices] = wma[spike_indices]
     return modified_data
 
@@ -287,7 +287,7 @@ def ssa(velocities, spike_indices, fs, f):
 
     Returns
     ------
-    modified_data (array_like): Modified data with spikes replaced by ssa of velocity component.
+    modified_data (array_like): Modified data with spikes replaced by singular spectrum analysis of velocity component.
        An array containing the modified data.
     """
 
@@ -299,7 +299,7 @@ def ssa(velocities, spike_indices, fs, f):
     # Use ssa function
     xf = sa(modified_data, fs, f)
 
-    # Replace values at spikes indices with the ssa values.
+    # Replace values at spikes indices with the singular spectrum analysis values
     modified_data[spike_indices] = xf[spike_indices]
     return modified_data
 
@@ -331,6 +331,6 @@ def kalman_filter(velocities, spike_indices, initial_state, initial_covariance, 
     # Use kalman_filter function
     filtered_data = kl(modified_data, initial_state, initial_covariance, process_noise, measurement_noise)
 
-    # Replace values at spikes indices with the kalman_filter values.
+    # Replace values at spikes indices with the kalman_filter values
     modified_data[spike_indices] = filtered_data[spike_indices]
     return modified_data

@@ -97,14 +97,41 @@ This function has three parameters:
 3. **alpha (float, optional)**: Smoothing factor between 0 and 1. Higher alpha discounts older observations faster. Default is 0.2. If alpha is not between 0        and 1 (inclusive), It raises a ValueError.
 
 
+## Weighted Moving Average
+
+Replace spike values in velocities array with the `Weighted Moving Average` of main data. 
+It returns modified data with spikes replaced by weighted moving average of main data. An array containing the modified data.
+
+This function has three parameters:
+1. **velocities (array_like)**: Array of velocity data. An array-like object containing velocity values.
+2. **spike_indices (array_like)**: Indices of spikes. An array-like object containing the indices of detected spikes.
+3. **period (int, optional)**: The period for the weighted moving average. Defaults to 20. Must be less than or equal to the size of the data array. If the         period is larger than the size of the data array, it raises a ValueError.
 
 
+## Singular Spectrum Analysis
+
+This function replaces detected spikes with `Singular Spectrum Analysis` values. 
+It returns modified data with spikes replaced by singular spectrum analysis. An array containing the modified data.
+
+This function has four parameters:
+1. **velocities (array_like)**: Array of velocity data. An array-like object containing velocity values.
+2. **spike_indices (array_like)**: Indices of spikes. An array-like object containing the indices of detected spikes.
+3. **fs (float/int)**: Sampling frequency of the signal.
+4. **f (float/int)**: maximum frequency of the signal of interest.
 
 
+## Kalman
 
+Replace spike values in velocities array with the `Kalman` values. 
+It returns modified data with spikes replaced by kalman values. An array containing the modified data.
 
-
-
+This function has six parameters:
+1. **velocities (array_like)**: Array of velocity data. An array-like object containing velocity values.
+2. **spike_indices (array_like)**: Indices of spikes. An array-like object containing the indices of detected spikes.
+3. **initial_state (array_like)**: An initial estimate for the state variable.
+4. **initial_covariance (array_like)**: An initial estimate for the covariance.
+5. **process_noise (array_like)**: Process noise that occurs in the process of changing a state variable.
+6. **measurement_noise (array_like)**: Measurement noise present in the input data.
 
 
 
