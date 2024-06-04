@@ -195,7 +195,14 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
     return np.around(modified_data, decimals=decimals)
 
 
-
+def _creat_model(velocities, velocities_indices, spike_indices, degree):
+    poly = PolynomialFeatures(degree=degree)
+    poly_data = poly.fit_transform(velocities_indices.reshape(-1, 1))
+    model = LinearRegression()
+    model.fit(poly_data, velocities)
+    x_poly = poly.fit_transform(spike_indices.reshape(-1, 1))
+    y_pred = model.predict(x_poly)
+    return y_pred
 def polynomial_replacement(velocities, spike_indices, window=100, degree=2, decimals=4):
 
     # Make a copy of velocities to preserve original data
