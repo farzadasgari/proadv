@@ -221,7 +221,19 @@ def polynomial_replacement(velocities, spike_indices, window=100, degree=2, deci
                     decimals,
                 )
                 a += 1  # "a" is to run this algorithm only once.
-
+        elif 11 <= i <= window - 1:
+            # Predicting the appropriate spike value for indexes less than window
+            modified_data[i] = _creat_model(
+                modified_data[:i], np.arange(i), i, degree=degree
+            ).squeeze()
+        else:
+            # Predicting the appropriate spike value for indexes whose size is larger than the window
+            modified_data[i] = _creat_model(
+                modified_data[i - window: i],
+                np.arange(i - window, i),
+                i,
+                degree,
+            ).squeeze()
     modified_data = np.around(modified_data, decimals=decimals)
     return modified_data
 
