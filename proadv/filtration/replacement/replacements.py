@@ -1,6 +1,9 @@
 import numpy as np
-from proadv.statistics.descriptive import mean
+
+# from proadv.statistics.descriptive import mean
 from scipy.interpolate import interp1d
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 
 
 def last_valid_data(velocities, spike_indices):
@@ -103,7 +106,6 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
     spike_starts = spike_indices[np.insert(spike_diff > 1, 0, True)]
     # Identify the end index of each spike sequence
     spike_ends = spike_indices[np.append(spike_diff > 1, True)]
-
     # Iterate over each spike sequence for interpolation
     for start, end in zip(spike_starts, spike_ends):
         # Find the valid data point immediately before the spike sequence
@@ -120,11 +122,11 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
                 modified_data[idx] = valid_start + step * (i + 1)
         elif np.isnan(valid_end):  # Handle spike sequences at the end of the data
             # Replace end spikes with the mean of non-NaN values in the dataset
-            modified_data[start:end + 1] = mean(velocities[~np.isnan(velocities)])
+            modified_data[start: end + 1] = mean(velocities[~np.isnan(velocities)])
         else:
             # Use the mean of valid start and end points as a fallback
             fallback_value = np.nanmean([valid_start, valid_end])
-            modified_data[start:end + 1] = fallback_value
+            modified_data[start: end + 1] = fallback_value
 
     # Round the interpolated values to the specified number of decimal places
     return np.around(modified_data, decimals=decimals)
@@ -174,10 +176,45 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
         # Check if index is near the boundaries
         if i <= 30 or i >= (len(velocities) - 30):
             # Use linear interpolation near the boundaries
-            modified_data[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2, 4)
+            modified_data[i] = np.around(
+                (velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0])
+                / 2,
+                4,
+            )
         else:
             # Use cubic polynomial interpolation
-            yint = np.delete(np.append(velocities[i - 13:i], modified_data[i:][~np.isnan(modified_data[i:])][0:12]), 12)
+            yint = np.delete(
+                np.append(
+                    velocities[i - 13: i],
+                    modified_data[i:][~np.isnan(modified_data[i:])][0:12],
+                ),
+                12,
+            )
             f = interp1d(x, yint, 3)
             modified_data[i] = f(13)
     return np.around(modified_data, decimals=decimals)
+
+
+
+def polynomial_replacement(velocities, spike_indices, window=100, degree=2, decimals=4):
+
+    # Make a copy of velocities to preserve original data
+    modified_data = velocities.copy()
+    a = 0
+    for i in spike_indices.squeeze():
+        if i == 0:
+            # If the first index of the data set is a spike, it will be replaced with the value of the mean of the data.
+            modified_data[i] = np.around(np.mean(modified_data), 4)
+        elif 1 <= i <= 10:
+            # Spikes 1 to 10 are replaced using linear interpolation algorithm
+            if a == 0:
+                modified_data = linear_interpolation(
+                    modified_data,
+                    spike_indices[np.where(spike_indices < 10)[0]].squeeze(),
+                    decimals,
+                )
+                a += 1  # "a" is to run this algorithm only once.
+
+    modified_data = np.around(modified_data, decimals=decimals)
+    return modified_data
+
