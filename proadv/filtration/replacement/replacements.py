@@ -1,6 +1,8 @@
 import numpy as np
 from proadv.statistics.descriptive import mean
 from scipy.interpolate import interp1d
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 
 
 def last_valid_data(velocities, spike_indices):
@@ -104,7 +106,6 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
     spike_starts = spike_indices[np.insert(spike_diff > 1, 0, True)]
     # Identify the end index of each spike sequence
     spike_ends = spike_indices[np.append(spike_diff > 1, True)]
-
     # Iterate over each spike sequence for interpolation
     for start, end in zip(spike_starts, spike_ends):
         # Find the valid data point immediately before the spike sequence
@@ -121,11 +122,11 @@ def linear_interpolation(velocities, spike_indices, decimals=4):
                 modified_data[idx] = valid_start + step * (i + 1)
         elif np.isnan(valid_end):  # Handle spike sequences at the end of the data
             # Replace end spikes with the mean of non-NaN values in the dataset
-            modified_data[start:end + 1] = mean(velocities[~np.isnan(velocities)])
+            modified_data[start: end + 1] = mean(velocities[~np.isnan(velocities)])
         else:
             # Use the mean of valid start and end points as a fallback
             fallback_value = np.nanmean([valid_start, valid_end])
-            modified_data[start:end + 1] = fallback_value
+            modified_data[start: end + 1] = fallback_value
 
     # Round the interpolated values to the specified number of decimal places
     return np.around(modified_data, decimals=decimals)
@@ -175,10 +176,12 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
         # Check if index is near the boundaries
         if i <= 30 or i >= (len(velocities) - 30):
             # Use linear interpolation near the boundaries
-            modified_data[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2,4)
+            modified_data[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2,
+                                         4)
         else:
             # Use cubic polynomial interpolation
-            yint = np.delete(np.append(velocities[i - 13:i], modified_data[i:][~np.isnan(modified_data[i:])][0:12]), 12)
+            yint = np.delete(np.append(velocities[i - 13: i], modified_data[i:][~np.isnan(modified_data[i:])][0:12]),
+                             12)
             f = interp1d(x, yint, 3)
             modified_data[i] = f(13)
     return np.around(modified_data, decimals=decimals)
@@ -333,4 +336,74 @@ def kalman_filter(velocities, spike_indices, initial_state, initial_covariance, 
 
     # Replace values at spikes indices with the kalman_filter values
     modified_data[spike_indices] = filtered_data[spike_indices]
+
+
+def _create_model(velocities, velocities_indices, spike_indices, degree):
+    """
+        This function is used to build a prediction model and find the next possible fit value
+
+        Parameters
+        ------
+        velocities(array_like): The values we want to use to build the model.
+        velocities_indices(array_like): The limit that we want our model to be made from.
+        spike_indices(int): The amount we want to predict.
+        degree(int): It specifies that our function should be polynomial
+
+        Returns
+        ------
+        y_pred(float): The value is predicted
+
+    """
+
+    poly = PolynomialFeatures(degree=degree)
+    poly_data = poly.fit_transform(velocities_indices.reshape(-1, 1))
+    model = LinearRegression()
+    model.fit(poly_data, velocities)
+    x_poly = poly.fit_transform(spike_indices.reshape(-1, 1))
+    y_pred = model.predict(x_poly)
+    return y_pred
+
+
+def polynomial_replacement(velocities, spike_indices, window=100, degree=2, decimals=4):
+    """
+        This function is used to predict appropriate values and replace them with inappropriate values.
+        Using this function, you can use simple linear regression and functions of degree nth to replace
+            and find the next optimal value.
+        Note:
+            - The optimal value for window and degree is 100 and 2, respectively.
+
+        Parameters
+        ------
+        velocities(array_like): The original data has inappropriate values.
+        spike_indices(array_like): Inappropriate data index in the main data.
+        window(int,optional): The size we want to find the right model in that range.
+        degree(int,optional): Specifies the degree of the function.
+        decimals(float,optional): Specifies the number of digits to round.
+
+        Returns
+        ------
+        modified_data(array_like): The final data after running the algorithm and replacement.
+    """
+
+    # Make a copy of velocities to preserve original data
+    modified_data = velocities.copy()
+    a = 0
+    for i in spike_indices.squeeze():
+        if i == 0:
+            # If the first index of the data set is a spike, it will be replaced with the value of the mean of the data.
+            modified_data[i] = np.mean(modified_data)
+        elif 1 <= i <= 10:
+            # Spikes 1 to 10 are replaced using linear interpolation algorithm
+            if a == 0:
+                modified_data = linear_interpolation(modified_data,
+                                                     spike_indices[np.where(spike_indices < 10)[0]].squeeze(), decimals)
+                a += 1  # "a" is to run this algorithm only once.
+        elif 11 <= i <= window - 1:
+            # Predicting the appropriate spike value for indexes less than window
+            modified_data[i] = _create_model(modified_data[:i], np.arange(i), i, degree=degree).squeeze()
+        else:
+            # Predicting the appropriate spike value for indexes whose size is larger than the window
+            modified_data[i] = _create_model(modified_data[i - window: i], np.arange(i - window, i), i,
+                                             degree).squeeze()
+    modified_data = np.around(modified_data, decimals=decimals)
     return modified_data
