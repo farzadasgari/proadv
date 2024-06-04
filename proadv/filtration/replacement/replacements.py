@@ -181,12 +181,7 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
         else:
             # Use cubic polynomial interpolation
             yint = np.delete(
-                np.append(
-                    velocities[i - 13: i],
-                    modified_data[i:][~np.isnan(modified_data[i:])][0:12],
-                ),
-                12,
-            )
+                np.append(velocities[i - 13: i],modified_data[i:][~np.isnan(modified_data[i:])][0:12],),12,)
             f = interp1d(x, yint, 3)
             modified_data[i] = f(13)
     return np.around(modified_data, decimals=decimals)
