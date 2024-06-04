@@ -19,6 +19,7 @@ setup(
     install_requires=[
         "numpy>=1.0",
         "scipy>=1.0",
+        "scikit-learn",
         "fastkde",
     ],
     keywords=[
