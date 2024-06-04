@@ -204,6 +204,25 @@ def _creat_model(velocities, velocities_indices, spike_indices, degree):
     y_pred = model.predict(x_poly)
     return y_pred
 def polynomial_replacement(velocities, spike_indices, window=100, degree=2, decimals=4):
+    """
+        This function is used to predict appropriate values and replace them with inappropriate values.
+        Using this function, you can use simple linear regression and functions of degree nth to replace
+            and find the next optimal value.
+        Note:
+            - The optimal value for window and degree is 100 and 2, respectively.
+
+        Parameters
+        ------
+        velocities(array_like): The original data has inappropriate values.
+        spike_indices(array_like): Inappropriate data index in the main data.
+        window(array_like): The size we want to find the right model in that range.
+        degree(array_like): Specifies the degree of the function.
+        decimals(array_like): Specifies the number of digits to round.
+
+        Returns
+        ------
+        modified_data(array_like): The final data after running the algorithm and replacement.
+    """
 
     # Make a copy of velocities to preserve original data
     modified_data = velocities.copy()
