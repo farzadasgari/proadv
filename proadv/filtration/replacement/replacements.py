@@ -195,7 +195,23 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
     return np.around(modified_data, decimals=decimals)
 
 
-def _creat_model(velocities, velocities_indices, spike_indices, degree):
+def _create_model(velocities, velocities_indices, spike_indices, degree):
+    """
+        This function is used to build a prediction model and find the next possible fit value
+
+        Parameters
+        ------
+        velocities(array_like): The values we want to use to build the model.
+        velocities_indices(array_like): The limit that we want our model to be made from.
+        spike_indices(int):  The amount we want to predict.
+        degree(int): It specifies that our function should be polynomial
+
+        Returns
+        ------
+        y_pred(float): The value is predicted
+
+    """
+
     poly = PolynomialFeatures(degree=degree)
     poly_data = poly.fit_transform(velocities_indices.reshape(-1, 1))
     model = LinearRegression()
@@ -242,17 +258,11 @@ def polynomial_replacement(velocities, spike_indices, window=100, degree=2, deci
                 a += 1  # "a" is to run this algorithm only once.
         elif 11 <= i <= window - 1:
             # Predicting the appropriate spike value for indexes less than window
-            modified_data[i] = _creat_model(
-                modified_data[:i], np.arange(i), i, degree=degree
-            ).squeeze()
+            modified_data[i] = _create_model(modified_data[:i], np.arange(i), i, degree=degree).squeeze()
         else:
             # Predicting the appropriate spike value for indexes whose size is larger than the window
-            modified_data[i] = _creat_model(
-                modified_data[i - window: i],
-                np.arange(i - window, i),
-                i,
-                degree,
-            ).squeeze()
+            modified_data[i] = _create_model(modified_data[i - window: i], np.arange(i - window, i), i,
+                                             degree).squeeze()
     modified_data = np.around(modified_data, decimals=decimals)
     return modified_data
 
