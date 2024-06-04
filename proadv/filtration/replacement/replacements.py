@@ -1,5 +1,4 @@
 import numpy as np
-
 from proadv.statistics.descriptive import mean
 from scipy.interpolate import interp1d
 from sklearn.preprocessing import PolynomialFeatures
