@@ -1,6 +1,6 @@
 import numpy as np
 
-# from proadv.statistics.descriptive import mean
+from proadv.statistics.descriptive import mean
 from scipy.interpolate import interp1d
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
@@ -203,7 +203,7 @@ def _create_model(velocities, velocities_indices, spike_indices, degree):
         ------
         velocities(array_like): The values we want to use to build the model.
         velocities_indices(array_like): The limit that we want our model to be made from.
-        spike_indices(int):  The amount we want to predict.
+        spike_indices(int): The amount we want to predict.
         degree(int): It specifies that our function should be polynomial
 
         Returns
@@ -219,6 +219,8 @@ def _create_model(velocities, velocities_indices, spike_indices, degree):
     x_poly = poly.fit_transform(spike_indices.reshape(-1, 1))
     y_pred = model.predict(x_poly)
     return y_pred
+
+
 def polynomial_replacement(velocities, spike_indices, window=100, degree=2, decimals=4):
     """
         This function is used to predict appropriate values and replace them with inappropriate values.
@@ -231,9 +233,9 @@ def polynomial_replacement(velocities, spike_indices, window=100, degree=2, deci
         ------
         velocities(array_like): The original data has inappropriate values.
         spike_indices(array_like): Inappropriate data index in the main data.
-        window(array_like): The size we want to find the right model in that range.
-        degree(array_like): Specifies the degree of the function.
-        decimals(array_like): Specifies the number of digits to round.
+        window(int,optional): The size we want to find the right model in that range.
+        degree(int,optional): Specifies the degree of the function.
+        decimals(float,optional): Specifies the number of digits to round.
 
         Returns
         ------
@@ -265,4 +267,3 @@ def polynomial_replacement(velocities, spike_indices, window=100, degree=2, deci
                                              degree).squeeze()
     modified_data = np.around(modified_data, decimals=decimals)
     return modified_data
-
