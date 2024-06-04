@@ -176,11 +176,12 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
         # Check if index is near the boundaries
         if i <= 30 or i >= (len(velocities) - 30):
             # Use linear interpolation near the boundaries
-            modified_data[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2,4)
+            modified_data[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2,
+                                         4)
         else:
             # Use cubic polynomial interpolation
-            yint = np.delete(
-                np.append(velocities[i - 13: i],modified_data[i:][~np.isnan(modified_data[i:])][0:12],),12,)
+            yint = np.delete(np.append(velocities[i - 13: i], modified_data[i:][~np.isnan(modified_data[i:])][0:12]),
+                             12)
             f = interp1d(x, yint, 3)
             modified_data[i] = f(13)
     return np.around(modified_data, decimals=decimals)
@@ -390,15 +391,12 @@ def polynomial_replacement(velocities, spike_indices, window=100, degree=2, deci
     for i in spike_indices.squeeze():
         if i == 0:
             # If the first index of the data set is a spike, it will be replaced with the value of the mean of the data.
-            modified_data[i] = np.around(np.mean(modified_data), 4)
+            modified_data[i] = np.mean(modified_data)
         elif 1 <= i <= 10:
             # Spikes 1 to 10 are replaced using linear interpolation algorithm
             if a == 0:
-                modified_data = linear_interpolation(
-                    modified_data,
-                    spike_indices[np.where(spike_indices < 10)[0]].squeeze(),
-                    decimals,
-                )
+                modified_data = linear_interpolation(modified_data,
+                                                     spike_indices[np.where(spike_indices < 10)[0]].squeeze(), decimals)
                 a += 1  # "a" is to run this algorithm only once.
         elif 11 <= i <= window - 1:
             # Predicting the appropriate spike value for indexes less than window
