@@ -108,7 +108,7 @@ For further information and in-depth understanding of the algorithms employed in
 ### Acknowledgment
 - This project was developed under the supervision of **[Dr. Seyed Hossein Mohaeri](https://khu.ac.ir/cv/1139/Seyed-Hossein-Mohajeri)** and **[Dr. Mojtaba Mehraein](https://khu.ac.ir/cv/279/Mojtaba-Mehraein)**.
 - We extend our deepest gratitude to **[Dr. Bimlesh Kumar](https://www.researchgate.net/profile/Bimlesh-Kumar)** and **[Dr. Luis Cea](https://www.researchgate.net/profile/Luis-Cea)** for their invaluable guidance and unwavering support throughout our journey.
-- Special thanks to [Parvaneh Yaghoubi](https://github.com/parvanehyaghoubi), [Hossein Abazari](https://github.com/HossA12), [Narges Yaghoubi](https://github.com/nargesyaghoubi), [Mojtaba Karimi](https://github.com/mojikarimi), and [Hiva Yarandi](https://github.com/Hivayrn) for their valuable contributions to this project.
+- Special thanks to [Parvaneh Yaghoubi](https://github.com/parvanehyaghoubi), [Hossein Abazari](https://github.com/HossA12), [Narges Yaghoubi](https://github.com/nargesyaghoubi), [Mojtaba Karimi](https://github.com/mojikarimi), [Hiva Yarandi](https://github.com/Hivayrn), and [Zahra Rezaei](https://github.com/ZahraRezaei672) for their valuable contributions to this project.
 
 
 ### Contact

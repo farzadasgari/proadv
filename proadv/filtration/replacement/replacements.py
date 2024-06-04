@@ -12,15 +12,15 @@ def last_valid_data(velocities, spike_indices):
 
     Parameters
     ------
-        velocities (array_like): Array of velocity data.
-            An array-like object containing velocity values.
-        spike_indices (array_like): Indices of spikes.
-            An array-like object containing the indices of detected spikes.
+    velocities (array_like): Array of velocity data.
+        An array-like object containing velocity values.
+    spike_indices (array_like): Indices of spikes.
+        An array-like object containing the indices of detected spikes.
 
     Returns
     ------
-        modified_data (array_like): Modified data with spikes replaced by last valid values.
-            An array containing the modified data.
+    modified_data (array_like): Modified data with spikes replaced by last valid values.
+        An array containing the modified data.
     """
     # Create a copy of the original data
     modified_data = np.copy(velocities)
@@ -38,16 +38,17 @@ def mean_value(velocities, spike_indices):
 
     Parameters
     ------
-        velocities (array_like): Array of velocity data.
-            An array-like object containing velocity values.
-        spike_indices (array_like): Indices of spikes.
-            An array-like object containing the indices of detected spikes.
+    velocities (array_like): Array of velocity data.
+        An array-like object containing velocity values.
+    spike_indices (array_like): Indices of spikes.
+        An array-like object containing the indices of detected spikes.
 
     Returns
     ------
-        modified_data (array_like): Modified data with spikes replaced by mean value of velocity component.
-            An array containing the modified data.
+    modified_data (array_like): Modified data with spikes replaced by mean value of velocity component.
+        An array containing the modified data.
     """
+
     # Create a copy of the original data
     modified_data = np.copy(velocities)
 
@@ -176,11 +177,7 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
         # Check if index is near the boundaries
         if i <= 30 or i >= (len(velocities) - 30):
             # Use linear interpolation near the boundaries
-            modified_data[i] = np.around(
-                (velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0])
-                / 2,
-                4,
-            )
+            modified_data[i] = np.around((velocities[i - 1] + modified_data[i:][~np.isnan(modified_data[i:])][0]) / 2,4)
         else:
             # Use cubic polynomial interpolation
             yint = np.delete(
@@ -193,6 +190,157 @@ def cubic_12points_polynomial(velocities, spike_indices, decimals=4):
             f = interp1d(x, yint, 3)
             modified_data[i] = f(13)
     return np.around(modified_data, decimals=decimals)
+
+
+def simple_moving_average(velocities, spike_indices, window_size=20):
+    """
+    Parameters
+    ------
+    velocities (array_like): Array of velocity data.
+        An array-like object containing velocity values.
+    spike_indices (array_like): Indices of spikes.
+        An array-like object containing the indices of detected spikes.
+    window_size (int, optional): The size of the window for the moving average.
+       Defaults to 20. Must be less than or equal to the size of the data array.
+
+    Returns
+    ------
+    modified_data (array_like): Modified data with spikes replaced by simple_movingaverage of velocity component.
+       An array containing the modified data.
+    """
+
+    from proadv.statistics.series import moving_average as ma
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use moving_average function
+    sma = ma(modified_data, window_size)
+
+    # Replace values at spikes indices with the simple_moving_average values.
+    modified_data[spike_indices] = sma[spike_indices]
+    return modified_data
+
+
+def exponential_moving_average(velocities, spike_indices, alpha=0.2):
+    """
+    Parameters
+    ------
+    velocities (array_like): Array of velocity data.
+        An array-like object containing velocity values.
+    spike_indices (array_like): Indices of spikes.
+        An array-like object containing the indices of detected spikes.
+    alpha (float, optional): Smoothing factor between 0 and 1.
+        Higher alpha discounts older observations faster. Default is 0.2.
+
+    Returns
+    ------
+    modified_data (array_like): Modified data with spikes replaced by exponential_moving_average of velocity component.
+       An array containing the modified data.
+    """
+
+    from proadv.statistics.series import exponential_moving_average as expo
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use exponential_moving_average function
+    ema = expo(modified_data, alpha)
+
+    # Replace values at spikes indices with the exponential_moving_average values.
+    modified_data[spike_indices] = ema[spike_indices]
+    return modified_data
+
+
+def weighted_movingaverage(velocities, spike_indices, period=20):
+    """
+    Parameters
+    ------
+    velocities (array_like): Array of velocity data.
+        An array-like object containing velocity values.
+    spike_indices (array_like): Indices of spikes.
+        An array-like object containing the indices of detected spikes.
+    period (int, optional): The period for the weighted moving average. Defaults to 20.
+       Must be less than or equal to the size of the data array.
+
+    Returns
+    ------
+    modified_data (array_like): Modified data with spikes replaced by weighted_moving_average of velocity component.
+       An array containing the modified data.
+    """
+
+    from proadv.statistics.series import weighted_moving_average as wm
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use weighted_moving_average function
+    wma = wm(modified_data, period)
+
+    # Replace values at spikes indices with the weighted_moving_average values.
+    modified_data[spike_indices] = wma[spike_indices]
+    return modified_data
+
+
+def ssa(velocities, spike_indices, fs, f):
+    """
+    parameters
+    ------
+    velocities (array_like): Array of velocity data.
+        An array-like object containing velocity values.
+    spike_indices (array_like): Indices of spikes.
+        An array-like object containing the indices of detected spikes.
+    fs (float/int): Sampling frequency of the signal.
+    f (float/int): maximum frequency of the signal of interest.
+
+    Returns
+    ------
+    modified_data (array_like): Modified data with spikes replaced by ssa of velocity component.
+       An array containing the modified data.
+    """
+
+    from proadv.statistics.series import ssa as sa
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use ssa function
+    xf = sa(modified_data, fs, f)
+
+    # Replace values at spikes indices with the ssa values.
+    modified_data[spike_indices] = xf[spike_indices]
+    return modified_data
+
+
+def kalman_filter(velocities, spike_indices, initial_state, initial_covariance, process_noise, measurement_noise):
+    """
+    parameters
+    ------
+    velocities (array_like): Array of velocity data.
+        An array-like object containing velocity values.
+    spike_indices (array_like): Indices of spikes.
+        An array-like object containing the indices of detected spikes.
+    initial_state (array_like): An initial estimate for the state variable.
+    initial_covariance (array_like): An initial estimate for the covariance.
+    process_noise (array_like): Process noise that occurs in the process of changing a state variable.
+    measurement_noise (array_like): Measurement noise present in the input data.
+
+    Returns
+    ------
+    modified_data (array_like): Modified data with spikes replaced by kalman_filter of velocity component.
+       An array containing the modified data.
+    """
+
+    from proadv.statistics.series import kalman_filter as kl
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Use kalman_filter function
+    filtered_data = kl(modified_data, initial_state, initial_covariance, process_noise, measurement_noise)
+
+    # Replace values at spikes indices with the kalman_filter values.
+    modified_data[spike_indices] = filtered_data[spike_indices]
 
 
 def _create_model(velocities, velocities_indices, spike_indices, degree):

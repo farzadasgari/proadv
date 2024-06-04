@@ -273,10 +273,7 @@ if __name__ == '__main__':
 Subspace based techniques are used to enhance the noise corrupted time series signals. 
 `Singular Spectrum Analysis (SSA)` is a subspace based method that decomposes the time series data into the
 trend, oscillating and noise components. It is widely used for analysing climatic and biomedical signals. 
-The main difference between the traditional SSA method and our method lies in the way of identifying the 
-desired signal (the velocity signal) subspace; in other words the grouping step in SSA. 
-In traditional SSA, the desired signal subspace is estimated by based on the magnitude of the eigenvalues. However, in
-our technique, the desired signal subspace is estimated based on the local mobility of the eigenvectors. 
+In this technique, the desired signal subspace is estimated based on the local mobility of the eigenvectors. 
 SSA includes four basic steps: embedding, decomposition, grouping and reconstruction.
 
 Perform `Singular Spectrum Analysis (SSA)` on a given signal. It returns filtered signal after SSA.
@@ -331,8 +328,7 @@ Measurement 117 (2018): 339-346.](https://doi.org/10.1016/j.measurement.2017.12.
 
 ## Kalman
 
-Oceanic turbulence measurements made by an acoustic Doppler velocimeter (ADV) suffer from noise that potentially 
-affects the estimates of turbulence statistics. This function examines the abilities of `Kalman Filtering` model to 
+This function examines the abilities of `Kalman Filtering` model to 
 eliminate noise in ADV velocity datasets of laboratory experiments and offshore observations. 
 
 The `Kalman Filter` is an algorithm that tracks an optimal estimate of the state of a stochastic dynamical system, 
