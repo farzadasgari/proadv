@@ -1,5 +1,5 @@
 import numpy as np
-from proadv.statistics.descriptive import mean
+from proadv.statistics.descriptive import mean, median
 from scipy.interpolate import interp1d
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
@@ -53,6 +53,32 @@ def mean_value(velocities, spike_indices):
 
     # Replace values at spikes indices with the mean value
     modified_data[spike_indices] = mean(velocities)
+
+    return modified_data
+
+
+def median_value(velocities, spike_indices):
+    """
+    Replace spike values in velocities array with the median value of velocity component.
+
+    Parameters
+    ------
+    velocities (array_like): Array of velocity data.
+        An array-like object containing velocity values.
+    spike_indices (array_like): Indices of spikes.
+        An array-like object containing the indices of detected spikes.
+
+    Returns
+    ------
+    modified_data (array_like): Modified data with spikes replaced by median value of velocity component.
+        An array containing the modified data.
+    """
+
+    # Create a copy of the original data
+    modified_data = np.copy(velocities)
+
+    # Replace values at spikes indices with the median value
+    modified_data[spike_indices] = median(velocities)
 
     return modified_data
 
