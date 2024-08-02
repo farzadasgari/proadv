@@ -1,4 +1,8 @@
-# ProADV - Process Acoustic Doppler Velocimeter
+<div align="center">
+   <h1>ProADV - Process Acoustic Doppler Velocimeter</h1>
+</div>
+
+![readmeimage](https://raw.githubusercontent.com/farzadasgari/proadv/2919aa78fe5d02b540bc8386f7d1af10b5182d4e/examples/plots/readme.jpg)
 
 [![GitHub stars](https://img.shields.io/github/stars/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/network)
@@ -34,7 +38,7 @@
         * **12PP (12 Points Cubic Polynomial):** Employs a 12-point cubic polynomial to fit a smoother curve and replace spikes.
 
 
-<div>
+<div align="center">
    <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/trivariate-kernel.png" alt="trivariate-kernel" style="width:300px;"/>
    <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/spectrum.png" alt="trivariate-kernel" style="width:300px;"/>
    <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/phase-space.png" alt="trivariate-kernel" style="width:300px;"/>
@@ -57,7 +61,7 @@
     * **Normality Test:** Evaluates whether your data follows a normal distribution.
     * **Normalization:** Scales data to a common range for further analysis or visualization.
 
-<div>
+<div align="center">
    <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/singular-spectrum.png" alt="singular-spectrum" style="width:300px;"/>
    <img src="https://raw.githubusercontent.com/farzadasgari/proadv/main/examples/plots/kalman.png" alt="kalman-filter" style="width:300px;"/>
 </div>
@@ -108,7 +112,7 @@ For further information and in-depth understanding of the algorithms employed in
 ### Acknowledgment
 - This project was developed under the supervision of **[Dr. Seyed Hossein Mohaeri](https://khu.ac.ir/cv/1139/Seyed-Hossein-Mohajeri)** and **[Dr. Mojtaba Mehraein](https://khu.ac.ir/cv/279/Mojtaba-Mehraein)**.
 - We extend our deepest gratitude to **[Dr. Bimlesh Kumar](https://www.researchgate.net/profile/Bimlesh-Kumar)** and **[Dr. Luis Cea](https://www.researchgate.net/profile/Luis-Cea)** for their invaluable guidance and unwavering support throughout our journey.
-- Special thanks to [Parvaneh Yaghoubi](https://github.com/parvanehyaghoubi), [Hossein Abazari](https://github.com/HossA12), [Narges Yaghoubi](https://github.com/nargesyaghoubi), [Mojtaba Karimi](https://github.com/mojikarimi), [Hiva Yarandi](https://github.com/Hivayrn), and [Zahra Rezaei](https://github.com/ZahraRezaei672) for their valuable contributions to this project.
+- Special thanks to [Narges Yaghoubi](https://github.com/nargesyaghoubi), [Hiva Yarandi](https://github.com/Hivayrn), [Mojtaba Karimi](https://github.com/mojikarimi), [Parvaneh Yaghoubi](https://github.com/parvanehyaghoubi), [Hossein Abazari](https://github.com/HossA12), and [Zahra Rezaei](https://github.com/ZahraRezaei672) for their valuable contributions to this project.
 
 
 ### Contact
