@@ -58,7 +58,7 @@
     * **Spectral Analysis:**
         * **PSD (Power Spectral Density):** Analyzes the distribution of energy across different frequencies within the data.
         * **PDF (Probability Density Function):** Provides the probability of encountering specific velocity values.
-    * **Normality Test:** Evaluates whether your data follows a normal distribution.
+    * **Normality Test:** Evaluate whether your data follows a normal distribution.
     * **Normalization:** Scales data to a common range for further analysis or visualization.
 
 <div align="center">
@@ -101,9 +101,16 @@ We encourage collaboration and contributions from the community to improve ProAD
 5. Push your changes to your forked repository.
 6. Submit a pull request for review and merging.
 
+
+### Paper
+See ProADV open access paper online:
+
+**[ProADV: A toolkit for enhancing water dynamics research using acoustic doppler velocimeter devices](https://www.sciencedirect.com/science/article/pii/S2352711024002383)**
+
+
 ### References
 
-For further information and in-depth understanding of the algorithms employed in ProADV, refer to the following resources:
+For further information and an in-depth understanding of the algorithms employed in ProADV, refer to the following resources:
 
 1. [Exploring the role of signal pollution rate on the performance of despiking velocity time-series algorithms](https://doi.org/10.1016/j.flowmeasinst.2023.102485)
 2. [Unleashing the power of three-dimensional kernel density estimation for Doppler Velocimeter data despiking](https://doi.org/10.1016/j.measurement.2023.114053)
