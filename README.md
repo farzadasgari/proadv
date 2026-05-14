@@ -14,6 +14,7 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/pulls)
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/pulls?q=is%3Apr+is%3Aclosed)
 [![GitHub last commit](https://img.shields.io/github/last-commit/farzadasgari/proadv)](https://github.com/farzadasgari/proadv/commits/main)
+[![DOI](https://img.shields.io/badge/DOI-10.1016%2Fj.softx.2024.101868-blue)](https://doi.org/10.1016/j.softx.2024.101868)
 
 
 ## Streamline Your ADV Data Analysis
@@ -124,7 +125,7 @@ For further information and an in-depth understanding of the algorithms employed
 
 ### Contact
 For any inquiries, please contact:
-- std_farzad.asgari@alumni.khu.ac.ir
+- std_farzad.asgari@khu.ac.ir
 - khufarzadasgari@gmail.com
 
 
@@ -139,6 +140,7 @@ For any inquiries, please contact:
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/farzad-asgari-5a90942b2/)
 
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0008--3800--0408-A6CE39?logo=orcid&logoColor=fff&style=for-the-badge)](https://orcid.org/0009-0008-3800-0408)
 
 ##### Seyed Hossein Mohajeri
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://khu.ac.ir/cv/1139/Seyed-Hossein-Mohajeri)
@@ -150,6 +152,7 @@ For any inquiries, please contact:
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](
 https://ir.linkedin.com/in/hossein-mohajeri)
 
+[![ORCID](https://img.shields.io/badge/ORCID-0000--0002--8056--293X-A6CE39?logo=orcid&logoColor=fff&style=for-the-badge)](https://orcid.org/0000-0002-8056-293X)
 
 ##### Mojtaba Mehraein
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://khu.ac.ir/cv/279/Mojtaba-Mehraein)
@@ -160,3 +163,5 @@ https://ir.linkedin.com/in/hossein-mohajeri)
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](
 https://ir.linkedin.com/in/mojtaba-mehraein-002a03238)
+
+[![ORCID](https://img.shields.io/badge/ORCID-0000--0002--2819--253X-A6CE39?logo=orcid&logoColor=fff&style=for-the-badge)](https://orcid.org/0000-0002-2819-253X)
