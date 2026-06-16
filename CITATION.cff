@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: "ProADV"
+message: "If you use ProADV in your research, please cite the associated SoftwareX publication."
+type: software
+
+authors:
+
+- family-names: "Asgari"
+  given-names: "Farzad"
+  orcid: "https://orcid.org/0009-0008-3800-0408"
+
+repository-code: "https://github.com/farzadasgari/proadv"
+url: "https://github.com/farzadasgari/proadv"
+
+preferred-citation:
+type: article
+authors:
+- family-names: "Asgari"
+given-names: "Farzad"
+- family-names: "Mohajeri"
+given-names: "Seyed Hossein"
+- family-names: "Mehraein"
+given-names: "Mojtaba"
+
+title: "ProADV: A toolkit for enhancing water dynamics research using acoustic doppler velocimeter devices"
+
+journal: "SoftwareX"
+volume: 27
+year: 2024
+start: 101868
+
+doi: "10.1016/j.softx.2024.101868"
+url: "https://doi.org/10.1016/j.softx.2024.101868"
