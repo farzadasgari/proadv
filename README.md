@@ -123,6 +123,13 @@ For further information and an in-depth understanding of the algorithms employed
 - Special thanks to [Narges Yaghoubi](https://github.com/nargesyaghoubi), [Hiva Yarandi](https://github.com/Hivayrn), [Mojtaba Karimi](https://github.com/mojikarimi), [Parvaneh Yaghoubi](https://github.com/parvanehyaghoubi), [Hossein Abazari](https://github.com/HossA12), and [Zahra Rezaei](https://github.com/ZahraRezaei672) for their valuable contributions to this project.
 
 
+### Citation
+
+If you use ProADV in your research, please cite:
+
+> Asgari, F., Mohajeri, S. H., & Mehraein, M. (2024). ProADV: A toolkit for enhancing water dynamics research using acoustic doppler velocimeter devices. SoftwareX, 27, 101868. https://doi.org/10.1016/j.softx.2024.101868
+
+
 ### Contact
 For any inquiries, please contact:
 - std_farzad.asgari@khu.ac.ir
