@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 # Setting up
 setup(
     name="proadv",
-    version="2.1.7",
+    version="2.1.8",
     author="Farzad Asgari",
     author_email="std_farzad.asgari@khu.ac.ir",
     description="Process Acoustic Doppler Velocimeter data with advanced despiking and analysis tools",
